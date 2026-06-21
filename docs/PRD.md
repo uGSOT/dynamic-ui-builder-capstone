@@ -212,7 +212,7 @@ Users collect one JSON block per section in the gallery, then paste each into `p
 
 ## 8. Component Catalog
 
-The catalog ships with **12 component types** and **39 total variations** (minimum 3 per type). Together they cover the standard anatomy of a startup marketing website.
+The catalog ships with **12 component types** and **37 total variations** (minimum 3 per type; hero has 4). Together they cover the standard anatomy of a startup marketing website.
 
 ### 8.1 Component Model
 
@@ -225,6 +225,8 @@ Each catalog entry defines:
 - **`responsive`** — Optional per-breakpoint overrides (see §9)
 
 Users **must** pick `type` + `variant` from the catalog. They **may** override `props`, `styles`, and allowed responsive keys.
+
+Each variant includes a **reference image** at `public/assets/references/<type>/<variant-id>.png`. These serve as visual targets for implementation and gallery thumbnails.
 
 ### 8.2 Full Component Catalog
 
@@ -239,6 +241,14 @@ Top navigation present on virtually every startup site. Controls brand identity,
 | Centered Logo | `centered-logo` | Logo centered, links split left/right, CTA on far right | Minimal, design-forward brands |
 
 **Props:** logo (text or image), navLinks[], ctaButton, sticky (boolean)
+
+**Reference images**
+
+| Variant ID | Reference |
+|------------|-----------|
+| `classic-sticky` | ![classic-sticky](../public/assets/references/navbar/classic-sticky.png) |
+| `transparent-hero` | ![transparent-hero](../public/assets/references/navbar/transparent-hero.png) |
+| `centered-logo` | ![centered-logo](../public/assets/references/navbar/centered-logo.png) |
 
 ---
 
@@ -255,6 +265,15 @@ Above-the-fold section—the highest-impact block on any startup site.
 
 **Props:** headline, subtext, primaryAction, secondaryAction, image, badge (optional)
 
+**Reference images**
+
+| Variant ID | Reference |
+|------------|-----------|
+| `centered` | ![centered](../public/assets/references/hero/centered.png) |
+| `split-image-right` | ![split-image-right](../public/assets/references/hero/split-image-right.png) |
+| `split-image-left` | ![split-image-left](../public/assets/references/hero/split-image-left.png) |
+| `with-social-proof` | ![with-social-proof](../public/assets/references/hero/with-social-proof.png) |
+
 ---
 
 #### 3. Logo Cloud (`logo-cloud`)
@@ -268,6 +287,14 @@ Above-the-fold section—the highest-impact block on any startup site.
 | Logo Grid | `logo-grid` | Logos in a 3×2 or 4×2 grid with equal spacing | Many partner logos |
 
 **Props:** heading (optional), logos[] (image + alt), grayscale (boolean)
+
+**Reference images**
+
+| Variant ID | Reference |
+|------------|-----------|
+| `simple-row` | ![simple-row](../public/assets/references/logo-cloud/simple-row.png) |
+| `with-heading` | ![with-heading](../public/assets/references/logo-cloud/with-heading.png) |
+| `logo-grid` | ![logo-grid](../public/assets/references/logo-cloud/logo-grid.png) |
 
 ---
 
@@ -283,6 +310,14 @@ Product benefits and capabilities—the core "what we do" section.
 
 **Props:** heading, subheading (optional), features[] (icon, title, description, image optional)
 
+**Reference images**
+
+| Variant ID | Reference |
+|------------|-----------|
+| `icon-grid` | ![icon-grid](../public/assets/references/features/icon-grid.png) |
+| `alternating-rows` | ![alternating-rows](../public/assets/references/features/alternating-rows.png) |
+| `bento-grid` | ![bento-grid](../public/assets/references/features/bento-grid.png) |
+
 ---
 
 #### 5. How It Works (`how-it-works`)
@@ -296,6 +331,14 @@ Step-by-step explanation of product flow—common on onboarding-focused startups
 | Icon Cards | `icon-cards` | Steps as elevated cards with icon, no numbers | Friendly consumer products |
 
 **Props:** heading, subheading (optional), steps[] (number optional, icon, title, description)
+
+**Reference images**
+
+| Variant ID | Reference |
+|------------|-----------|
+| `steps-horizontal` | ![steps-horizontal](../public/assets/references/how-it-works/steps-horizontal.png) |
+| `steps-vertical` | ![steps-vertical](../public/assets/references/how-it-works/steps-vertical.png) |
+| `icon-cards` | ![icon-cards](../public/assets/references/how-it-works/icon-cards.png) |
 
 ---
 
@@ -311,6 +354,14 @@ Big numbers that convey traction—"10K+ users", "99.9% uptime", etc.
 
 **Props:** heading (optional), stats[] (value, label, suffix optional), body (optional, split variant only)
 
+**Reference images**
+
+| Variant ID | Reference |
+|------------|-----------|
+| `inline-row` | ![inline-row](../public/assets/references/stats/inline-row.png) |
+| `stat-cards` | ![stat-cards](../public/assets/references/stats/stat-cards.png) |
+| `split-with-copy` | ![split-with-copy](../public/assets/references/stats/split-with-copy.png) |
+
 ---
 
 #### 7. Pricing (`pricing`)
@@ -324,6 +375,14 @@ Pricing tables—essential for SaaS and subscription startups.
 | Single Plan Focus | `single-plan-focus` | One plan centered with feature checklist | Simple product, one price |
 
 **Props:** heading, subheading (optional), plans[] (name, price, period, description, features[], cta, highlighted boolean), billingToggle (optional, display-only)
+
+**Reference images**
+
+| Variant ID | Reference |
+|------------|-----------|
+| `three-tier` | ![three-tier](../public/assets/references/pricing/three-tier.png) |
+| `two-tier-highlight` | ![two-tier-highlight](../public/assets/references/pricing/two-tier-highlight.png) |
+| `single-plan-focus` | ![single-plan-focus](../public/assets/references/pricing/single-plan-focus.png) |
 
 ---
 
@@ -339,6 +398,14 @@ Customer quotes and social proof from real users.
 
 **Props:** heading (optional), testimonials[] (quote, name, role, company, avatar, logo optional)
 
+**Reference images**
+
+| Variant ID | Reference |
+|------------|-----------|
+| `card-grid` | ![card-grid](../public/assets/references/testimonials/card-grid.png) |
+| `featured-single` | ![featured-single](../public/assets/references/testimonials/featured-single.png) |
+| `carousel` | ![carousel](../public/assets/references/testimonials/carousel.png) |
+
 ---
 
 #### 9. FAQ (`faq`)
@@ -352,6 +419,14 @@ Frequently asked questions—reduces support load and handles objections.
 | Grouped By Category | `grouped-category` | FAQs organized under category headings (Pricing, Product, Security) | Enterprise / compliance-heavy products |
 
 **Props:** heading, subheading (optional), items[] (question, answer) or categories[] (name, items[])
+
+**Reference images**
+
+| Variant ID | Reference |
+|------------|-----------|
+| `accordion-single` | ![accordion-single](../public/assets/references/faq/accordion-single.png) |
+| `accordion-two-column` | ![accordion-two-column](../public/assets/references/faq/accordion-two-column.png) |
+| `grouped-category` | ![grouped-category](../public/assets/references/faq/grouped-category.png) |
 
 ---
 
@@ -367,6 +442,14 @@ Final conversion push before the footer—"Start free trial", "Book a demo", etc
 
 **Props:** headline, subtext (optional), primaryAction, image (optional), placeholder (newsletter variant)
 
+**Reference images**
+
+| Variant ID | Reference |
+|------------|-----------|
+| `full-width-centered` | ![full-width-centered](../public/assets/references/cta/full-width-centered.png) |
+| `split-with-image` | ![split-with-image](../public/assets/references/cta/split-with-image.png) |
+| `newsletter-signup` | ![newsletter-signup](../public/assets/references/cta/newsletter-signup.png) |
+
 ---
 
 #### 11. Team (`team`)
@@ -381,6 +464,14 @@ Founders and team section—common on About pages and early-stage sites building
 
 **Props:** heading, subheading (optional), members[] (name, role, bio optional, avatar, links[] optional)
 
+**Reference images**
+
+| Variant ID | Reference |
+|------------|-----------|
+| `grid-simple` | ![grid-simple](../public/assets/references/team/grid-simple.png) |
+| `grid-with-bio` | ![grid-with-bio](../public/assets/references/team/grid-with-bio.png) |
+| `compact-row` | ![compact-row](../public/assets/references/team/compact-row.png) |
+
 ---
 
 #### 12. Footer (`footer`)
@@ -394,6 +485,14 @@ Site footer with links, legal, and optional newsletter—closes every page.
 | With Newsletter | `with-newsletter` | Multi-column links plus email signup row (display-only) | Growth-focused products |
 
 **Props:** logo, tagline (optional), columns[] (title, links[]), socialLinks[], copyright, newsletter (optional)
+
+**Reference images**
+
+| Variant ID | Reference |
+|------------|-----------|
+| `multi-column` | ![multi-column](../public/assets/references/footer/multi-column.png) |
+| `minimal-centered` | ![minimal-centered](../public/assets/references/footer/minimal-centered.png) |
+| `with-newsletter` | ![with-newsletter](../public/assets/references/footer/with-newsletter.png) |
 
 ---
 
@@ -413,7 +512,7 @@ Site footer with links, legal, and optional newsletter—closes every page.
 | 10 | cta | full-width-centered, split-with-image, newsletter-signup | 3 |
 | 11 | team | grid-simple, grid-with-bio, compact-row | 3 |
 | 12 | footer | multi-column, minimal-centered, with-newsletter | 3 |
-| | **Total** | | **39 variants across 12 types** |
+| | **Total** | | **37 variants across 12 types** |
 
 ### 8.4 Typical Startup Page Assembly
 
@@ -592,7 +691,7 @@ Three ready-made configs ship with the product:
 | Accessibility | Semantic HTML, focus states, WCAG 2.1 AA on all 12 component types |
 | Browser support | Last 2 versions of Chrome, Firefox, Safari, Edge |
 | Error handling | Graceful fallback UI for unknown type/variant with actionable message |
-| Gallery coverage | 100% of 39 variants previewable in gallery |
+| Gallery coverage | 100% of 37 variants previewable in gallery with reference images |
 
 ---
 
@@ -600,7 +699,7 @@ Three ready-made configs ship with the product:
 
 The product is complete when:
 
-1. All **12 component types** and **39 variants** are implemented and playable in the gallery
+1. All **12 component types** and **37 variants** are implemented and playable in the gallery
 2. Users can configure any component in the gallery playground and copy valid JSON with one click
 3. JSON copied from the gallery pastes into the builder and renders identically
 4. A user can build a full startup landing page by collecting section JSON from the gallery and assembling it in the builder
