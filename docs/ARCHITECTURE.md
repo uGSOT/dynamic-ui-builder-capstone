@@ -162,7 +162,8 @@ dynamic-ui-builder/
 │       └── logos/                   # Partner logo placeholders
 ├── docs/
 │   ├── PRD.md
-│   └── ARCHITECTURE.md
+│   ├── ARCHITECTURE.md
+│   └── COMPONENTS.md
 ├── src/
 │   ├── app/                         # Application shell — bootstrap only
 │   │   ├── main.jsx
@@ -371,7 +372,7 @@ dynamic-ui-builder/
 
 ## 5. Component Registry
 
-Single source of truth for all **12 types** and **39 variants** (see PRD §8).
+Single source of truth for all **12 types** and **37 variants** (see [COMPONENTS.md](./COMPONENTS.md)).
 
 ### 5.1 Registration API
 
