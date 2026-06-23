@@ -282,7 +282,6 @@ Errors shown in builder `ValidationPanel`.
 | `uibuilder:preferences` | Viewport, editor settings |
 
 Import/export `.json` files for manual backup.
-
 ---
 
 ## 12. Dependencies
