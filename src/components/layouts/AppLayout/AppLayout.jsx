@@ -3,7 +3,7 @@ import AppHeader from "../AppHeader";
 
 export default function AppLayout() {
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50">
+    <div className="flex min-h-screen flex-col bg-surface">
       <AppHeader />
 
       <main className="flex-1 pt-14">
