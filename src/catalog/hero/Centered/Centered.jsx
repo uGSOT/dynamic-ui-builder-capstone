@@ -5,7 +5,7 @@ function Centered({
   subtext = 'The all-in-one platform for modern teams to plan, build, and scale software that drives real impact.',
   primaryAction = { label: 'Start free trial', href: '#' },
   secondaryAction = { label: 'Book a demo', href: '#' },
-  image,
+  imageUrl,
   badge = 'No credit card required • Cancel anytime',
 }) {
   return (

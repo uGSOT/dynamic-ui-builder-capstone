@@ -4,8 +4,6 @@ import HomePage from "./pages/HomePage";
 import GalleryPage from "./pages/GalleryPage";
 import BuilderPage from "./pages/BuilderPage";
 
-
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,7 +12,6 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "gallery", element: <GalleryPage /> },
       { path: "builder", element: <BuilderPage /> },
-     
     ],
   },
 ]);
