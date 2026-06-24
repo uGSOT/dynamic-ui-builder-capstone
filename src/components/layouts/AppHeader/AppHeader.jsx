@@ -10,27 +10,25 @@ const NAV_LINKS = [
 const baseNavClass =
   "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-all";
 
-const activeClass = "bg-indigo-100 text-indigo-600";
+const activeClass = "bg-brand-muted text-brand";
 
 const inactiveClass =
-  "text-gray-500 hover:bg-gray-100 hover:text-gray-900";
+  "text-ink-muted hover:bg-surface-muted hover:text-ink";
 
 export default function AppHeader() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-14 border-b border-gray-200 bg-white/80 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 h-14 border-b border-border bg-surface/90 backdrop-blur-md">
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6">
-        {/* Logo */}
-        <NavLink to="/" className="flex items-center gap-2 group">
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-indigo-500 group-hover:bg-indigo-600 transition-colors">
-            <Layers size={15} className="text-white" />
+        <NavLink to="/" className="group flex items-center gap-2">
+          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-brand transition-colors group-hover:bg-brand-dark">
+            <Layers size={15} className="text-ink-inverse" />
           </div>
 
-          <span className="text-sm font-semibold tracking-tight text-gray-900">
+          <span className="text-sm font-semibold tracking-tight text-ink">
             UI Builder
           </span>
         </NavLink>
 
-        {/* Nav */}
         <nav className="flex items-center gap-1">
           {NAV_LINKS.map(({ to, label, icon: Icon, end }) => (
             <NavLink
@@ -38,9 +36,7 @@ export default function AppHeader() {
               to={to}
               end={end}
               className={({ isActive }) =>
-                `${baseNavClass} ${
-                  isActive ? activeClass : inactiveClass
-                }`
+                `${baseNavClass} ${isActive ? activeClass : inactiveClass}`
               }
             >
               <Icon size={14} />
