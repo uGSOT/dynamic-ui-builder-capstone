@@ -1,1 +1,29 @@
 @import "tailwindcss";
+
+.gallery-shell {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+.gallery-preview-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+  .gallery-shell {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 800px) {
+  .gallery-shell {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
+
+  .gallery-preview-grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  }
+}
