@@ -1,0 +1,14 @@
+.gitignore
+  h_6064492a2e059b 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.11",
+  "base_commit_sha": "5d423ba5398f27837f4c14264c412ef16509195d",
+  "prompts": {},
+  "humans": {
+    "h_6064492a2e059b": {
+      "author": "misriniv <misriniv@cisco.com>"
+    }
+  }
+}
