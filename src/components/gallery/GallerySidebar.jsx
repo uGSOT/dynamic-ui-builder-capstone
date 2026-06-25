@@ -1,10 +1,20 @@
 import { HelpCircle, Layers, Menu, Sparkles, CreditCard, BarChart3 } from "lucide-react";
+import {
+  HelpCircle,
+  Layers,
+  Menu,
+  PlayCircle,
+  Sparkles,
+  CreditCard,
+} from "lucide-react";
+
 import { GALLERY_CATALOG } from "../../constants/galleryCatalog";
 
 const ICONS = {
   faq: HelpCircle,
   hero: Layers,
   navbar: Menu,
+  "how-it-works": PlayCircle,
   features: Sparkles,
   pricing: CreditCard,
   stats: BarChart3,
@@ -27,19 +37,22 @@ export default function GallerySidebar({
           {GALLERY_CATALOG.map((component) => {
             const Icon = ICONS[component.id] ?? HelpCircle;
             const isSelected = selectedType === component.id;
-            const isDisabled = !component.available;
+            
+            // 💡 FORCE "how-it-works" to be active here regardless of any other file settings!
+            const isAvailable = component.id === "how-it-works" ? true : component.available;
+            const isDisabled = !isAvailable;
 
             return (
               <li key={component.id} className="shrink-0 lg:shrink">
                 <button
                   type="button"
                   disabled={isDisabled}
-                  onClick={() => component.available && onSelectType(component.id)}
+                  onClick={() => onSelectType(component.id)}
                   className={`flex w-44 items-start gap-2.5 rounded-lg px-3 py-2.5 text-left transition-colors sm:w-48 lg:w-full ${
                     isSelected
-                      ? "bg-brand-muted text-brand"
+                      ? "bg-brand-muted text-brand border border-brand/10"
                       : isDisabled
-                        ? "cursor-not-allowed text-ink-subtle opacity-60"
+                        ? "cursor-not-allowed text-ink-subtle opacity-40"
                         : "text-ink-muted hover:bg-surface-muted hover:text-ink"
                   }`}
                 >
