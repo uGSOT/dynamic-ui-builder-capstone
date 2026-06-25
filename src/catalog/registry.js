@@ -49,11 +49,42 @@ import BentoGrid, {
   defaultStyles as bentoGridStyles,
   propSchema as bentoGridPropSchema,
 } from "./features/BentoGrid/BentoGrid.jsx";
+
 import LogoGrid, {
   defaultProps as logoGridProps,
   defaultStyles as logoGridStyles,
   propSchema as logoGridPropSchema,
 } from "./logo-cloud/LogoGrid/LogoGrid.jsx";
+
+import ThreeTier, {
+  defaultProps as threeTierProps,
+  defaultStyles as threeTierStyles,
+  propSchema as threeTierPropSchema,
+} from "./pricing/ThreeTier/ThreeTier.jsx";
+
+import TwoTierHighlight, {
+  defaultProps as twoTierHighlightProps,
+  defaultStyles as twoTierHighlightStyles,
+  propSchema as twoTierHighlightPropSchema,
+} from "./pricing/TwoTierHighlight/TwoTierHighlight.jsx";
+
+import SinglePlanFocus, {
+  defaultProps as singlePlanFocusProps,
+  defaultStyles as singlePlanFocusStyles,
+  propSchema as singlePlanFocusPropSchema,
+} from "./pricing/SinglePlanFocus/SinglePlanFocus.jsx";
+
+import ClassicSticky, {
+  defaultProps as classicStickyProps,
+  defaultStyles as classicStickyStyles,
+  propSchema as classicStickyPropSchema,
+} from "./navbar/ClassicSticky/ClassicSticky.jsx";
+
+import TransparentHero, {
+  defaultProps as transparentHeroProps,
+  defaultStyles as transparentHeroStyles,
+  propSchema as transparentHeroPropSchema,
+} from "./navbar/TransparentHero/TransparentHero.jsx";
 
 import CardGrid, {
   defaultProps as cardGridProps,
@@ -72,20 +103,6 @@ import Carousel, {
   defaultStyles as carouselStyles,
   propSchema as carouselPropSchema,
 } from "./testimonials/Carousel/Carousel.jsx";
-
-import ClassicSticky, {
-  defaultProps as classicStickyProps,
-  defaultStyles as classicStickyStyles,
-  propSchema as classicStickyPropSchema,
-} from "./navbar/ClassicSticky/ClassicSticky.jsx";
-
-import TransparentHero, {
-  defaultProps as transparentHeroProps,
-  defaultStyles as transparentHeroStyles,
-  propSchema as transparentHeroPropSchema,
-} from "./navbar/TransparentHero/TransparentHero.jsx";
-
-
 
 export const FAQ_VARIANTS = {
   "accordion-single": {
@@ -131,8 +148,7 @@ export const NAVBAR_VARIANTS = {
   "transparent-hero": {
     id: "transparent-hero",
     name: "Transparent Hero",
-    description:
-      "Transparent background over hero, becomes solid on scroll",
+    description: "Transparent background over hero, becomes solid on scroll",
     component: TransparentHero,
     defaultProps: transparentHeroProps,
     defaultStyles: transparentHeroStyles,
@@ -141,15 +157,13 @@ export const NAVBAR_VARIANTS = {
   "centered-logo": {
     id: "centered-logo",
     name: "Centered Logo",
-    description:
-      "Logo centered, links split left/right, CTA on far right",
+    description: "Logo centered, links split left/right, CTA on far right",
     component: CenteredLogo,
     defaultProps: centeredLogoProps,
     defaultStyles: centeredLogoStyles,
     propSchema: centeredLogoPropSchema,
   },
 };
-
 
 export const LOGO_CLOUD_VARIANTS = {
   "simple-row": {
@@ -178,36 +192,6 @@ export const LOGO_CLOUD_VARIANTS = {
     defaultProps: logoGridProps,
     defaultStyles: logoGridStyles,
     propSchema: logoGridPropSchema,
-  },
-};
-
-export const TESTIMONIAL_VARIANTS = {
-  "card-grid": {
-    id: "card-grid",
-    name: "Card Grid",
-    description: "3 testimonial cards with quote, name, role, avatar",
-    component: CardGrid,
-    defaultProps: cardGridProps,
-    defaultStyles: cardGridStyles,
-    propSchema: cardGridPropSchema,
-  },
-  "featured-single": {
-    id: "featured-single",
-    name: "Featured Single",
-    description: "One large quote with photo, name, company logo",
-    component: FeaturedSingle,
-    defaultProps: featuredSingleProps,
-    defaultStyles: featuredSingleStyles,
-    propSchema: featuredSinglePropSchema,
-  },
-  carousel: {
-    id: "carousel",
-    name: "Carousel",
-    description: "Horizontally scrollable testimonial cards with dot navigation",
-    component: Carousel,
-    defaultProps: carouselProps,
-    defaultStyles: carouselStyles,
-    propSchema: carouselPropSchema,
   },
 };
 
@@ -271,6 +255,36 @@ export const FEATURES_VARIANTS = {
   },
 };
 
+export const TESTIMONIAL_VARIANTS = {
+  "card-grid": {
+    id: "card-grid",
+    name: "Card Grid",
+    description: "3 testimonial cards with quote, name, role, avatar",
+    component: CardGrid,
+    defaultProps: cardGridProps,
+    defaultStyles: cardGridStyles,
+    propSchema: cardGridPropSchema,
+  },
+  "featured-single": {
+    id: "featured-single",
+    name: "Featured Single",
+    description: "One large quote with photo, name, company logo",
+    component: FeaturedSingle,
+    defaultProps: featuredSingleProps,
+    defaultStyles: featuredSingleStyles,
+    propSchema: featuredSinglePropSchema,
+  },
+  carousel: {
+    id: "carousel",
+    name: "Carousel",
+    description: "Horizontally scrollable testimonial cards with dot navigation",
+    component: Carousel,
+    defaultProps: carouselProps,
+    defaultStyles: carouselStyles,
+    propSchema: carouselPropSchema,
+  },
+};
+
 export const COMPONENT_REGISTRY = {
   faq: {
     type: "faq",
@@ -283,6 +297,24 @@ export const COMPONENT_REGISTRY = {
     label: "Logo Cloud",
     description: "Trusted-by social proof with company logos",
     variants: LOGO_CLOUD_VARIANTS,
+  },
+  pricing: {
+    type: "pricing",
+    label: "Pricing",
+    description: "Pricing tables and plans subscription options",
+    variants: PRICING_VARIANTS,
+  },
+  features: {
+    type: "features",
+    label: "Features",
+    description: "Product benefits and capabilities—the core what we do section.",
+    variants: FEATURES_VARIANTS,
+  },
+  navbar: {
+    type: "navbar",
+    label: "Navbar",
+    description: "Top navigation on every Website",
+    variants: NAVBAR_VARIANTS,
   },
   testimonials: {
     type: "testimonials",
