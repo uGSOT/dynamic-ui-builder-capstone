@@ -1,7 +1,3 @@
-// ─── Shared sample features ───────────────────────────────────────────────────
-// Used as default data across all three variants.
-// Each variant picks what it needs.
-
 export const SAMPLE_FEATURES = [
   {
     id: "f1",
@@ -64,9 +60,6 @@ export const SAMPLE_FEATURES = [
     image: null,
   },
 ];
-
-// ─── Bento-specific extras ────────────────────────────────────────────────────
-// Bento needs slot + highlight fields on each feature.
 
 export const SAMPLE_BENTO_FEATURES = [
   { ...SAMPLE_FEATURES[0], slot: "hero",   highlight: true  },

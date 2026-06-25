@@ -1,101 +1,91 @@
-# BentoGrid
+# Bento Grid
+Asymmetric card grid with one large hero card, two medium cards, and four small cards. The modern layout pattern for dev-tool and AI product pages.
 
-**Type:** `features` · **Variant:** `bento-grid`
+## When to use
+- Modern dev-tool, AI product, or platform landing pages
+- When features have different levels of importance and you want visual hierarchy
+- As an alternative to a uniform grid when you want the layout itself to feel like a product
 
-Asymmetric card grid in a "bento box" layout. One large hero card, two medium cards, and four small cards. Best for modern dev-tool and AI product pages.
+## Usage
+```jsx
+import BentoGrid from "@/catalog/features/BentoGrid";
 
----
-
-## File structure
+<BentoGrid
+  heading="The platform built for what's next"
+  subheading="Every capability you need — assembled into a single coherent product."
+  features={[
+    { id: "f1", slot: "hero",   icon: "Zap",      tag: "Performance",  title: "Blazing fast",     description: "Optimised from day one.",              highlight: true  },
+    { id: "f2", slot: "medium", icon: "Shield",   tag: "Security",     title: "Secure by default", description: "Encryption and access control built in.", highlight: false },
+    { id: "f3", slot: "medium", icon: "BarChart2", tag: "Observability", title: "See everything",  description: "Real-time traces out of the box.",      highlight: false },
+    { id: "f4", slot: "small",  icon: "Plug",     tag: "Integrations", title: "100+ integrations", description: "One-click setup.",                     highlight: false },
+    { id: "f5", slot: "small",  icon: "Globe",    tag: "Infrastructure", title: "Global CDN",      description: "30+ regions instantly.",               highlight: false },
+    { id: "f6", slot: "small",  icon: "Layers",   tag: "Platform",     title: "Composable APIs",  description: "Mix and match building blocks.",        highlight: false },
+    { id: "f7", slot: "small",  icon: "RefreshCw", tag: "Reliability", title: "Auto rollbacks",   description: "Bad deploy? Rolled back in seconds.",   highlight: false },
+  ]}
+  styles={{ background: "surface", accentColor: "violet" }}
+/>
 ```
-BentoGrid/
-├── index.js
-├── BentoGrid.jsx
-├── BentoGrid.test.jsx
-└── BentoGrid.doc.md
-```
-
----
 
 ## Props
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| `heading` | `string` | `"The platform built for what's next"` | No | Section title displayed above the grid |
+| `subheading` | `string` | `"Every capability you need..."` | No | Supporting text below the heading. Pass `""` to hide |
+| `features` | `Array<{ id, slot, icon, tag, title, description, highlight }>` | 7 sample features | No | Feature cards with `slot` controlling size. Recommended: 1 hero + 2 medium + 4 small |
+| `styles` | `object` | see Styles | No | Token-based style overrides (see Styles) |
 
-| Prop | Type | Default | Allowed values | Description |
-|------|------|---------|----------------|-------------|
-| `heading` | string | `"The platform built for what's next"` | Any string | Section title |
-| `subheading` | string | `"Every capability you need…"` | Any string, `""` to hide | Supporting paragraph |
-| `features` | array | 7 samples | See schema below | Feature cards. Slot controls size. |
-
-### Feature object
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | string | ✅ | Unique key |
-| `slot` | string | ✅ | `"hero"` = large (top-left), `"medium"` = tall (top-right stack), `"small"` = compact (bottom row) |
-| `icon` | string | ✅ | Lucide icon name |
-| `tag` | string \| null | ❌ | Short pill label |
-| `title` | string | ✅ | Card heading |
-| `description` | string | ✅ | Card body text |
-| `highlight` | boolean | ❌ | Applies accent background to the card. Best used on the hero card only. |
-
----
-
-## Recommended slot layout
-
-```
-1 hero  →  slot: "hero"    (top-left large card)
-2 medium → slot: "medium"  (stacked right of hero)
-4 small →  slot: "small"   (bottom row, 4 columns)
-Total: 7 features
-```
-
-You can use fewer features but the layout works best at 7.
-
----
+## Feature object — slot values
+| Slot | Grid size | Best for |
+|------|-----------|----------|
+| `"hero"` | 2 cols × 2 rows | Most important feature — use `highlight: true` for accent background |
+| `"medium"` | 1 col × 1 row | Secondary features — stacks next to the hero |
+| `"small"` | 1 of 4 in bottom row | Supporting features — keep descriptions short |
 
 ## Styles
-
-| Prop | Type | Default | Allowed values | Description |
-|------|------|---------|----------------|-------------|
-| `paddingY` | number | `6` | `1`–`12` | Vertical section padding |
-| `background` | string | `"white"` | `"white"` \| `"gray"` \| `"dark"` | Section background |
-| `headingAlign` | string | `"left"` | `"left"` \| `"center"` | Heading alignment |
-| `accentColor` | string | `"indigo"` | `"indigo"` \| `"violet"` \| `"emerald"` \| `"rose"` \| `"blue"` | Icon and tag colour, and hero highlight tint |
-
----
-
-## What each change does
-
-- **`features[].slot: "hero"`** — Makes that card large (2 cols × 2 rows on desktop)
-- **`features[].highlight: true`** — Gives that card a coloured accent background (use on hero card)
-- **`features[].tag`** — Small pill label on the card
-- **`styles.accentColor`** — Changes icon colours, tag pills, and the highlight card tint all at once
-- **`styles.background: "gray"`** — Entire section background becomes gray-50
-
----
+| Key | Type | Default | Possible values | Description |
+|-----|------|---------|-----------------|-------------|
+| `paddingY` | `number` | `6` | `1` – `12` | Vertical section padding (maps to Tailwind `py-*`) |
+| `background` | `string` | `"surface"` | `"surface"`, `"muted"`, `"navy"`, `"transparent"`, `"blur"` | Section background token |
+| `headingAlign` | `string` | `"left"` | `"left"`, `"center"` | Heading and subheading alignment |
+| `headingSize` | `string` | `"4xl"` | `"3xl"`, `"4xl"`, `"5xl"` | Heading font size |
+| `headingColor` | `string` | `""` | Any CSS color e.g. `"#ffffff"`, or `""` for auto | Heading color override |
+| `subheadingSize` | `string` | `"lg"` | `"base"`, `"lg"`, `"xl"` | Subheading font size |
+| `subheadingColor` | `string` | `""` | Any CSS color or `""` for auto | Subheading color override |
+| `cardBg` | `string` | `"default"` | `"default"`, `"transparent"`, `"custom"` | Card background preset |
+| `customCardBgColor` | `string` | `""` | Any CSS color e.g. `"#18181c"` | Custom card color — only used when `cardBg` is `"custom"` |
+| `cardBorder` | `boolean` | `true` | `true`, `false` | Show or hide card border |
+| `cardShadow` | `string` | `"sm"` | `"none"`, `"sm"`, `"md"`, `"lg"` | Card drop shadow size |
+| `titleSize` | `string` | `"base"` | `"sm"`, `"base"`, `"lg"` | Card title font size |
+| `titleColor` | `string` | `""` | Any CSS color or `""` for auto | Card title color override |
+| `descSize` | `string` | `"sm"` | `"xs"`, `"sm"`, `"base"` | Card description font size |
+| `descColor` | `string` | `""` | Any CSS color or `""` for auto | Card description color override |
+| `accentColor` | `string` | `"indigo"` | `"indigo"`, `"violet"`, `"emerald"`, `"rose"`, `"blue"` | Accent color for icons, tags, and hero highlight |
 
 ## JSON example
-
 ```json
 {
+  "id": "features-bento-grid",
   "type": "features",
   "variant": "bento-grid",
   "props": {
     "heading": "The platform built for what's next",
-    "subheading": "Every capability you need in one product.",
+    "subheading": "Every capability you need — assembled into a single coherent product.",
     "features": [
-      { "id": "f1", "slot": "hero",   "icon": "Zap",      "tag": "Core",    "title": "Instant deploys",      "description": "Ship to 30 regions in 10 seconds.",       "highlight": true  },
-      { "id": "f2", "slot": "medium", "icon": "Shield",   "tag": null,      "title": "Zero-trust security",  "description": "Every request verified.",                  "highlight": false },
-      { "id": "f3", "slot": "medium", "icon": "BarChart2","tag": null,      "title": "Real-time metrics",    "description": "Traces and logs in one pane.",             "highlight": false },
-      { "id": "f4", "slot": "small",  "icon": "Plug",     "tag": null,      "title": "100+ integrations",   "description": "Connects to your stack.",                  "highlight": false },
-      { "id": "f5", "slot": "small",  "icon": "Globe",    "tag": null,      "title": "Global CDN",          "description": "Sub-100ms anywhere.",                      "highlight": false },
-      { "id": "f6", "slot": "small",  "icon": "Layers",   "tag": null,      "title": "Composable APIs",     "description": "Build your stack, your way.",              "highlight": false },
-      { "id": "f7", "slot": "small",  "icon": "RefreshCw","tag": null,      "title": "Auto rollbacks",      "description": "Bad deploy? Fixed in seconds.",            "highlight": false }
+      { "id": "f1", "slot": "hero",   "icon": "Zap",     "tag": "Performance",  "title": "Blazing fast",      "description": "Optimised from day one.",    "highlight": true  },
+      { "id": "f2", "slot": "medium", "icon": "Shield",  "tag": "Security",     "title": "Secure by default", "description": "Built-in encryption.",        "highlight": false },
+      { "id": "f3", "slot": "medium", "icon": "BarChart2","tag": "Observability","title": "See everything",    "description": "Real-time traces.",           "highlight": false },
+      { "id": "f4", "slot": "small",  "icon": "Plug",    "tag": "Integrations", "title": "100+ integrations", "description": "One-click setup.",            "highlight": false },
+      { "id": "f5", "slot": "small",  "icon": "Globe",   "tag": "Infrastructure","title": "Global CDN",        "description": "30+ regions instantly.",      "highlight": false },
+      { "id": "f6", "slot": "small",  "icon": "Layers",  "tag": "Platform",     "title": "Composable APIs",   "description": "Mix and match.",              "highlight": false },
+      { "id": "f7", "slot": "small",  "icon": "RefreshCw","tag": "Reliability", "title": "Auto rollbacks",    "description": "Bad deploy? Fixed instantly.", "highlight": false }
     ]
   },
   "styles": {
-    "paddingY": 8,
-    "background": "white",
-    "headingAlign": "left",
-    "accentColor": "indigo"
+    "paddingY": 6,
+    "background": "surface",
+    "accentColor": "violet",
+    "cardShadow": "sm",
+    "cardBorder": true
   }
 }
 ```

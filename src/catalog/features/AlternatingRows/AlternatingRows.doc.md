@@ -1,78 +1,81 @@
-# AlternatingRows
+# Alternating Rows
+Feature rows where the image and copy alternate sides with each row. Best for a deep-dive on 2–4 key capabilities where each deserves its own visual.
 
-**Type:** `features` · **Variant:** `alternating-rows`
+## When to use
+- Deep-dive on 2–4 key product features
+- When each feature has a distinct visual or screenshot
+- Sections below the hero where you want to build narrative momentum
 
-Feature rows where the image/illustration and copy alternate sides on each row.
-Best for a deep-dive on 2–4 key capabilities.
+## Usage
+```jsx
+import AlternatingRows from "@/catalog/features/AlternatingRows";
 
----
-
-## File structure
+<AlternatingRows
+  heading="A deeper look at what we built"
+  subheading="Every feature is designed around real workflows — not checkboxes."
+  imagePosition="right-first"
+  showBullets={true}
+  showTags={true}
+  features={[
+    {
+      id: "f1",
+      icon: "Zap",
+      tag: "Performance",
+      title: "Blazing fast by default",
+      description: "Optimised for performance from day one. No bloat, no config.",
+      bullets: ["Zero cold starts", "Edge-optimised delivery", "Automatic rollbacks"],
+      image: null,
+    },
+    {
+      id: "f2",
+      icon: "Shield",
+      tag: "Security",
+      title: "Secure by default",
+      description: "End-to-end encryption and audit logs included on every plan.",
+      bullets: ["SOC 2 Type II certified", "SAML & OIDC SSO", "Fine-grained permissions"],
+      image: null,
+    },
+  ]}
+  styles={{ background: "surface", accentColor: "indigo", showBullets: true }}
+/>
 ```
-AlternatingRows/
-├── index.js
-├── AlternatingRows.jsx
-├── AlternatingRows.test.jsx
-└── AlternatingRows.doc.md
-```
-
----
 
 ## Props
-
-| Prop | Type | Default | Allowed values | Description |
-|------|------|---------|----------------|-------------|
-| `heading` | string | `"A deeper look at what we built"` | Any string | Section title |
-| `subheading` | string | `"Every feature is designed…"` | Any string, `""` to hide | Supporting paragraph |
-| `imagePosition` | string | `"right-first"` | `"right-first"` \| `"left-first"` | Which side the image goes on for row 1. All rows alternate from there. |
-| `showBullets` | boolean | `true` | `true` \| `false` | Show/hide the bullet checklist below each row's description |
-| `showTags` | boolean | `true` | `true` \| `false` | Show/hide the tag pill above each row title |
-| `features` | array | 3 samples | See schema below | Feature rows. Recommend 2–4 items. |
-
-### Feature object
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | string | ✅ | Unique key |
-| `icon` | string | ✅ | Lucide icon name. Used in the image fallback illustration |
-| `tag` | string | ❌ | Short label e.g. `"Performance"`. Shown when `showTags` is `true` |
-| `title` | string | ✅ | Row heading |
-| `description` | string | ✅ | 2–3 sentence body paragraph |
-| `bullets` | string[] | ❌ | Checklist items. Shown when `showBullets` is `true` |
-| `image` | string \| null | ❌ | Image URL. Pass `null` to show the gradient fallback illustration |
-
----
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| `heading` | `string` | `"A deeper look at what we built"` | No | Section title displayed above the rows |
+| `subheading` | `string` | `"Every feature is designed around real workflows..."` | No | Supporting text below the heading. Pass `""` to hide |
+| `imagePosition` | `string` | `"right-first"` | No | Image side for the first row. Alternates automatically after that |
+| `showBullets` | `boolean` | `true` | No | Show or hide the bullet checklist on each row |
+| `showTags` | `boolean` | `true` | No | Show or hide the tag pill above each row title |
+| `features` | `Array<{ id, icon, tag, title, description, bullets, image }>` | 3 sample features | No | Feature rows. `image` accepts a URL or `null` for the icon placeholder |
+| `styles` | `object` | see Styles | No | Token-based style overrides (see Styles) |
 
 ## Styles
-
-| Prop | Type | Default | Allowed values | Description |
-|------|------|---------|----------------|-------------|
-| `paddingY` | number | `6` | `1`–`12` | Vertical section padding |
-| `background` | string | `"white"` | `"white"` \| `"gray"` \| `"dark"` | Section background |
-| `headingAlign` | string | `"left"` | `"left"` \| `"center"` | Heading alignment |
-| `accentColor` | string | `"indigo"` | `"indigo"` \| `"violet"` \| `"emerald"` \| `"rose"` \| `"blue"` | Bullet check and tag colour |
-
----
-
-## What each change does
-
-- **`imagePosition: "left-first"`** — Flips the layout so the first row has image on left, copy on right. All rows keep alternating.
-- **`showBullets: false`** — Hides the checklist on all rows
-- **`showTags: false`** — Hides the tag pill on all rows
-- **`features[].image`** — Add a real URL to replace the gradient placeholder with a screenshot
-- **`features[].bullets`** — Add strings to show a checklist. An empty array hides the list for that row
-- **`styles.accentColor: "emerald"`** — Switches bullet icons and tag pills to emerald green
-
----
+| Key | Type | Default | Possible values | Description |
+|-----|------|---------|-----------------|-------------|
+| `paddingY` | `number` | `6` | `1` – `12` | Vertical section padding (maps to Tailwind `py-*`) |
+| `background` | `string` | `"surface"` | `"surface"`, `"muted"`, `"navy"`, `"transparent"`, `"blur"` | Section background token |
+| `headingAlign` | `string` | `"left"` | `"left"`, `"center"` | Heading and subheading alignment |
+| `headingSize` | `string` | `"4xl"` | `"3xl"`, `"4xl"`, `"5xl"` | Heading font size |
+| `headingColor` | `string` | `""` | Any CSS color e.g. `"#ffffff"`, or `""` for auto | Heading color override |
+| `subheadingSize` | `string` | `"lg"` | `"base"`, `"lg"`, `"xl"` | Subheading font size |
+| `subheadingColor` | `string` | `""` | Any CSS color or `""` for auto | Subheading color override |
+| `titleSize` | `string` | `"base"` | `"sm"`, `"base"`, `"lg"` | Row title font size |
+| `titleColor` | `string` | `""` | Any CSS color or `""` for auto | Row title color override |
+| `descSize` | `string` | `"sm"` | `"xs"`, `"sm"`, `"base"` | Row description font size |
+| `descColor` | `string` | `""` | Any CSS color or `""` for auto | Row description and bullet color override |
+| `accentColor` | `string` | `"indigo"` | `"indigo"`, `"violet"`, `"emerald"`, `"rose"`, `"blue"` | Accent color for tags, icons, and bullet checkmarks |
 
 ## JSON example
-
 ```json
 {
+  "id": "features-alternating-rows",
   "type": "features",
   "variant": "alternating-rows",
   "props": {
-    "heading": "Built for serious teams",
-    "subheading": "Everything you need, nothing you don't.",
+    "heading": "A deeper look at what we built",
+    "subheading": "Every feature is designed around real workflows — not checkboxes.",
     "imagePosition": "right-first",
     "showBullets": true,
     "showTags": true,
@@ -80,28 +83,19 @@ AlternatingRows/
       {
         "id": "f1",
         "icon": "Zap",
-        "tag": "Speed",
-        "title": "Deploy in under 30 seconds",
-        "description": "From git push to globally distributed in a single step.",
-        "bullets": ["Zero config", "Automatic rollbacks", "Edge delivery"],
-        "image": null
-      },
-      {
-        "id": "f2",
-        "icon": "Shield",
-        "tag": "Security",
-        "title": "Security built in, not bolted on",
-        "description": "SOC 2 certified with fine-grained access controls.",
-        "bullets": ["SAML SSO", "Audit logs", "Role-based access"],
+        "tag": "Performance",
+        "title": "Blazing fast by default",
+        "description": "Optimised for performance from day one.",
+        "bullets": ["Zero cold starts", "Edge-optimised delivery"],
         "image": null
       }
     ]
   },
   "styles": {
-    "paddingY": 8,
-    "background": "white",
-    "headingAlign": "left",
-    "accentColor": "indigo"
+    "paddingY": 6,
+    "background": "surface",
+    "accentColor": "indigo",
+    "headingAlign": "left"
   }
 }
 ```
