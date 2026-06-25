@@ -1,7 +1,8 @@
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, Sparkles } from "lucide-react";
 import { GALLERY_CATALOG } from "../../constants/galleryCatalog";
 
 const ICONS = {
+  hero: Sparkles,
   faq: HelpCircle,
 };
 

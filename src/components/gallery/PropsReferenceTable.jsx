@@ -16,6 +16,9 @@ function formatDefaultValue(value) {
     if (first && typeof first === "object" && "name" in first) {
       return `[${value.length} categories]`;
     }
+    if (first && typeof first === "object" && "initials" in first) {
+      return `[${value.length} avatars]`;
+    }
     return `Array(${value.length})`;
   }
   if (typeof value === "object") return "Object";

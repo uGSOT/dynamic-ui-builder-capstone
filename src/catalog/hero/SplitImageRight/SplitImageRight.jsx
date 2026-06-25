@@ -1,25 +1,27 @@
 import HeroSectionHeader from "../HeroSectionHeader";
 import HeroActionButtons from "../HeroActionButtons";
+import HeroImage from "../HeroImage";
 import {
-  HERO_STYLE_DEFAULTS,
-  HERO_STYLE_PROP_SCHEMA,
+  HERO_SPLIT_STYLE_DEFAULTS,
+  HERO_SPLIT_STYLE_PROP_SCHEMA,
   resolveHeroStyles,
 } from "../heroStyles";
 import {
   SAMPLE_PRIMARY_ACTION,
   SAMPLE_SECONDARY_ACTION,
+  SAMPLE_HERO_IMAGE,
 } from "../defaultProps";
 
 export const defaultProps = {
-  headline: "Ship faster. Grow smarter.",
+  headline: "Build your startup site in minutes",
   subtext:
-    "The all-in-one platform for modern teams to plan, build, and scale software that drives real impact.",
+    "Pick proven components, customize with JSON, and preview your landing page instantly — no design system required.",
   primaryAction: SAMPLE_PRIMARY_ACTION,
   secondaryAction: SAMPLE_SECONDARY_ACTION,
-  badge: "No credit card required • Cancel anytime",
+  image: SAMPLE_HERO_IMAGE,
 };
 
-export const defaultStyles = { ...HERO_STYLE_DEFAULTS };
+export const defaultStyles = { ...HERO_SPLIT_STYLE_DEFAULTS };
 
 export const propSchema = {
   props: [
@@ -28,7 +30,7 @@ export const propSchema = {
       type: "string",
       default: defaultProps.headline,
       allowedValues: "Any string",
-      description: "Main headline displayed above the CTAs",
+      description: "Main headline displayed beside the image",
     },
     {
       name: "subtext",
@@ -52,32 +54,30 @@ export const propSchema = {
       description: "Secondary call-to-action button",
     },
     {
-      name: "badge",
-      type: "string",
-      default: defaultProps.badge,
-      allowedValues: 'Any string (use "" to hide)',
-      description: "Small trust line displayed below the CTAs",
+      name: "image",
+      type: "{ src?: string, alt?: string }",
+      default: defaultProps.image,
+      allowedValues: "Image object; renders a placeholder when src is omitted",
+      description: "Product screenshot or mockup displayed on the right",
     },
   ],
-  styles: HERO_STYLE_PROP_SCHEMA,
+  styles: HERO_SPLIT_STYLE_PROP_SCHEMA,
 };
 
-export default function Centered({
+export default function SplitImageRight({
   headline = defaultProps.headline,
   subtext = defaultProps.subtext,
   primaryAction = defaultProps.primaryAction,
   secondaryAction = defaultProps.secondaryAction,
-  badge = defaultProps.badge,
+  image = defaultProps.image,
   styles = defaultStyles,
 }) {
   const { className, textAlign, inverted } = resolveHeroStyles(styles);
-  const badgeClass = inverted ? "text-ink-inverse-muted" : "text-ink-subtle";
-  const badgeAlign = textAlign === "left" ? "text-left" : "text-center";
 
   return (
     <section className={className}>
-      <div className="mx-auto flex h-full w-full max-w-3xl items-center px-4 sm:px-6">
-        <div className="w-full">
+      <div className="mx-auto grid h-full w-full max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
+        <div>
           <HeroSectionHeader
             headline={headline}
             subtext={subtext}
@@ -92,12 +92,8 @@ export default function Centered({
               inverted={inverted}
             />
           </div>
-          {badge && (
-            <p className={`mt-4 text-sm ${badgeClass} ${badgeAlign}`}>
-              {badge}
-            </p>
-          )}
         </div>
+        <HeroImage image={image} />
       </div>
     </section>
   );

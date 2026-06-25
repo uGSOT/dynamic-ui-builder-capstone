@@ -1,3 +1,23 @@
+import Centered, {
+  defaultProps as centeredProps,
+  defaultStyles as centeredStyles,
+  propSchema as centeredPropSchema,
+} from "./hero/Centered/Centered.jsx";
+import SplitImageRight, {
+  defaultProps as splitImageRightProps,
+  defaultStyles as splitImageRightStyles,
+  propSchema as splitImageRightPropSchema,
+} from "./hero/SplitImageRight/SplitImageRight.jsx";
+import SplitImageLeft, {
+  defaultProps as splitImageLeftProps,
+  defaultStyles as splitImageLeftStyles,
+  propSchema as splitImageLeftPropSchema,
+} from "./hero/SplitImageLeft/SplitImageLeft.jsx";
+import WithSocialProof, {
+  defaultProps as withSocialProofProps,
+  defaultStyles as withSocialProofStyles,
+  propSchema as withSocialProofPropSchema,
+} from "./hero/WithSocialProof/WithSocialProof.jsx";
 import AccordionSingle, {
   defaultProps as accordionSingleProps,
   defaultStyles as accordionSingleStyles,
@@ -13,6 +33,45 @@ import GroupedByCategory, {
   defaultStyles as groupedByCategoryStyles,
   propSchema as groupedByCategoryPropSchema,
 } from "./faq/GroupedByCategory/GroupedByCategory.jsx";
+
+export const HERO_VARIANTS = {
+  centered: {
+    id: "centered",
+    name: "Centered",
+    description: "Headline, subtext, and dual CTAs centered with optional badge",
+    component: Centered,
+    defaultProps: centeredProps,
+    defaultStyles: centeredStyles,
+    propSchema: centeredPropSchema,
+  },
+  "split-image-right": {
+    id: "split-image-right",
+    name: "Split Image Right",
+    description: "Copy left, product screenshot or mockup right",
+    component: SplitImageRight,
+    defaultProps: splitImageRightProps,
+    defaultStyles: splitImageRightStyles,
+    propSchema: splitImageRightPropSchema,
+  },
+  "split-image-left": {
+    id: "split-image-left",
+    name: "Split Image Left",
+    description: "Image left, copy and CTAs right",
+    component: SplitImageLeft,
+    defaultProps: splitImageLeftProps,
+    defaultStyles: splitImageLeftStyles,
+    propSchema: splitImageLeftPropSchema,
+  },
+  "with-social-proof": {
+    id: "with-social-proof",
+    name: "With Social Proof",
+    description: "Centered hero with avatar stack and trust label below CTAs",
+    component: WithSocialProof,
+    defaultProps: withSocialProofProps,
+    defaultStyles: withSocialProofStyles,
+    propSchema: withSocialProofPropSchema,
+  },
+};
 
 export const FAQ_VARIANTS = {
   "accordion-single": {
@@ -45,6 +104,12 @@ export const FAQ_VARIANTS = {
 };
 
 export const COMPONENT_REGISTRY = {
+  hero: {
+    type: "hero",
+    label: "Hero",
+    description: "Above-the-fold headline section — highest-impact block",
+    variants: HERO_VARIANTS,
+  },
   faq: {
     type: "faq",
     label: "FAQ",

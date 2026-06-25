@@ -1,25 +1,27 @@
 import HeroSectionHeader from "../HeroSectionHeader";
 import HeroActionButtons from "../HeroActionButtons";
+import HeroSocialProof from "../HeroSocialProof";
 import {
-  HERO_STYLE_DEFAULTS,
-  HERO_STYLE_PROP_SCHEMA,
+  HERO_SOCIAL_PROOF_STYLE_DEFAULTS,
+  HERO_SOCIAL_PROOF_STYLE_PROP_SCHEMA,
   resolveHeroStyles,
 } from "../heroStyles";
 import {
   SAMPLE_PRIMARY_ACTION,
   SAMPLE_SECONDARY_ACTION,
+  SAMPLE_SOCIAL_PROOF,
 } from "../defaultProps";
 
 export const defaultProps = {
-  headline: "Ship faster. Grow smarter.",
+  headline: "Loved by teams shipping at scale",
   subtext:
-    "The all-in-one platform for modern teams to plan, build, and scale software that drives real impact.",
-  primaryAction: SAMPLE_PRIMARY_ACTION,
+    "Join thousands of startups using our platform to launch faster, iterate confidently, and grow without friction.",
+  primaryAction: { ...SAMPLE_PRIMARY_ACTION, label: "Get started free" },
   secondaryAction: SAMPLE_SECONDARY_ACTION,
-  badge: "No credit card required • Cancel anytime",
+  socialProof: SAMPLE_SOCIAL_PROOF,
 };
 
-export const defaultStyles = { ...HERO_STYLE_DEFAULTS };
+export const defaultStyles = { ...HERO_SOCIAL_PROOF_STYLE_DEFAULTS };
 
 export const propSchema = {
   props: [
@@ -52,27 +54,25 @@ export const propSchema = {
       description: "Secondary call-to-action button",
     },
     {
-      name: "badge",
-      type: "string",
-      default: defaultProps.badge,
-      allowedValues: 'Any string (use "" to hide)',
-      description: "Small trust line displayed below the CTAs",
+      name: "socialProof",
+      type: "{ label: string, avatars: Array<{ initials: string, color?: string }> }",
+      default: defaultProps.socialProof,
+      allowedValues: "Trust badge with label and avatar initials stack",
+      description: "Social proof row displayed below the CTAs",
     },
   ],
-  styles: HERO_STYLE_PROP_SCHEMA,
+  styles: HERO_SOCIAL_PROOF_STYLE_PROP_SCHEMA,
 };
 
-export default function Centered({
+export default function WithSocialProof({
   headline = defaultProps.headline,
   subtext = defaultProps.subtext,
   primaryAction = defaultProps.primaryAction,
   secondaryAction = defaultProps.secondaryAction,
-  badge = defaultProps.badge,
+  socialProof = defaultProps.socialProof,
   styles = defaultStyles,
 }) {
   const { className, textAlign, inverted } = resolveHeroStyles(styles);
-  const badgeClass = inverted ? "text-ink-inverse-muted" : "text-ink-subtle";
-  const badgeAlign = textAlign === "left" ? "text-left" : "text-center";
 
   return (
     <section className={className}>
@@ -92,11 +92,7 @@ export default function Centered({
               inverted={inverted}
             />
           </div>
-          {badge && (
-            <p className={`mt-4 text-sm ${badgeClass} ${badgeAlign}`}>
-              {badge}
-            </p>
-          )}
+          <HeroSocialProof socialProof={socialProof} inverted={inverted} />
         </div>
       </div>
     </section>
