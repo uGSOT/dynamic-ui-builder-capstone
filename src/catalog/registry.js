@@ -14,6 +14,27 @@ import GroupedByCategory, {
   propSchema as groupedByCategoryPropSchema,
 } from "./faq/GroupedByCategory/GroupedByCategory.jsx";
 
+import Centered, {
+  defaultProps as centeredProps,
+  defaultStyles as centeredStyles,
+  propSchema as centeredPropSchema,
+} from "./hero/Centered/Centered.jsx";
+import SplitImageRight, {
+  defaultProps as splitImageRightProps,
+  defaultStyles as splitImageRightStyles,
+  propSchema as splitImageRightPropSchema,
+} from "./hero/SplitImageRight/SplitImageRight.jsx";
+import SplitImageLeft, {
+  defaultProps as splitImageLeftProps,
+  defaultStyles as splitImageLeftStyles,
+  propSchema as splitImageLeftPropSchema,
+} from "./hero/SplitImageLeft/SplitImageLeft.jsx";
+import WithSocialProof, {
+  defaultProps as withSocialProofProps,
+  defaultStyles as withSocialProofStyles,
+  propSchema as withSocialProofPropSchema,
+} from "./hero/WithSocialProof/WithSocialProof.jsx";
+
 import ClassicSticky, {
   defaultProps as classicStickyProps,
   defaultStyles as classicStickyStyles,
@@ -76,6 +97,45 @@ export const FAQ_VARIANTS = {
     defaultProps: groupedByCategoryProps,
     defaultStyles: groupedByCategoryStyles,
     propSchema: groupedByCategoryPropSchema,
+  },
+};
+
+export const HERO_VARIANTS = {
+  centered: {
+    id: "centered",
+    name: "Centered Hero",
+    description: "A hero section with centered content, actions, and optional image support",
+    component: Centered,
+    defaultProps: centeredProps,
+    defaultStyles: centeredStyles,
+    propSchema: centeredPropSchema,
+  },
+  "split-image-right": {
+    id: "split-image-right",
+    name: "Split Image Right",
+    description: "Copy left, product screenshot/mockup right",
+    component: SplitImageRight,
+    defaultProps: splitImageRightProps,
+    defaultStyles: splitImageRightStyles,
+    propSchema: splitImageRightPropSchema,
+  },
+  "split-image-left": {
+    id: "split-image-left",
+    name: "Split Image Left",
+    description: "Image left, copy right",
+    component: SplitImageLeft,
+    defaultProps: splitImageLeftProps,
+    defaultStyles: splitImageLeftStyles,
+    propSchema: splitImageLeftPropSchema,
+  },
+  "with-social-proof": {
+    id: "with-social-proof",
+    name: "With Social Proof",
+    description: "Centered hero with customer avatar stack and proof copy below CTAs",
+    component: WithSocialProof,
+    defaultProps: withSocialProofProps,
+    defaultStyles: withSocialProofStyles,
+    propSchema: withSocialProofPropSchema,
   },
 };
 
@@ -149,10 +209,16 @@ export const COMPONENT_REGISTRY = {
     description: "Frequently asked questions — reduces support load",
     variants: FAQ_VARIANTS,
   },
+  hero: {
+    type: "hero",
+    label: "Hero",
+    description: "Above-the-fold headline section",
+    variants: HERO_VARIANTS,
+  },
   navbar: {
     type: "navbar",
     label: "Navbar",
-    description: "Top navigation on every  Website",
+    description: "Top navigation on every Website",
     variants: NAVBAR_VARIANTS,
   },
   features: {
