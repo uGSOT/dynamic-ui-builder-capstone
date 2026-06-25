@@ -32,6 +32,22 @@ import CenteredLogo, {
   propSchema as centeredLogoPropSchema,
 } from "./navbar/CenteredLogo/CenteredLogo.jsx";
 
+import InlineRow, {
+  defaultProps as inlineRowProps,
+  defaultStyles as inlineRowStyles,
+  propSchema as inlineRowPropSchema,
+} from "./stats/InlineRow/InlineRow.jsx";
+import StatCards, {
+  defaultProps as statCardsProps,
+  defaultStyles as statCardsStyles,
+  propSchema as statCardsPropSchema,
+} from "./stats/StatCards/StatCards.jsx";
+import SplitWithCopy, {
+  defaultProps as splitWithCopyProps,
+  defaultStyles as splitWithCopyStyles,
+  propSchema as splitWithCopyPropSchema,
+} from "./stats/SplitWithCopy/SplitWithCopy.jsx";
+
 export const FAQ_VARIANTS = {
   "accordion-single": {
     id: "accordion-single",
@@ -95,6 +111,36 @@ export const NAVBAR_VARIANTS = {
   },
 };
 
+export const STATS_VARIANTS = {
+  "inline-row": {
+    id: "inline-row",
+    name: "Inline Row",
+    description: "Horizontal strip of 3–4 stats for quick traction display",
+    component: InlineRow,
+    defaultProps: inlineRowProps,
+    defaultStyles: inlineRowStyles,
+    propSchema: inlineRowPropSchema,
+  },
+  "stat-cards": {
+    id: "stat-cards",
+    name: "Stat Cards",
+    description: "Each stat in its own card with label and optional suffix",
+    component: StatCards,
+    defaultProps: statCardsProps,
+    defaultStyles: statCardsStyles,
+    propSchema: statCardsPropSchema,
+  },
+  "split-with-copy": {
+    id: "split-with-copy",
+    name: "Split With Copy",
+    description: "Stats on one side and supporting copy on the other",
+    component: SplitWithCopy,
+    defaultProps: splitWithCopyProps,
+    defaultStyles: splitWithCopyStyles,
+    propSchema: splitWithCopyPropSchema,
+  },
+};
+
 export const COMPONENT_REGISTRY = {
   faq: {
     type: "faq",
@@ -105,8 +151,14 @@ export const COMPONENT_REGISTRY = {
   navbar: {
     type: "navbar",
     label: "Navbar",
-    description: "Top navigation on every  Website",
+    description: "Top navigation on every Website",
     variants: NAVBAR_VARIANTS,
+  },
+  stats: {
+    type: "stats",
+    label: "Stats",
+    description: "Traction metrics and big numbers",
+    variants: STATS_VARIANTS,
   },
 };
 

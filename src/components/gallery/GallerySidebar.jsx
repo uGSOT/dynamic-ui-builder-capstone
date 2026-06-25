@@ -1,9 +1,10 @@
-import { HelpCircle, Menu } from "lucide-react";
+import { BarChart3, HelpCircle, Menu } from "lucide-react";
 import { GALLERY_CATALOG } from "../../constants/galleryCatalog";
 
 const ICONS = {
   faq: HelpCircle,
   navbar: Menu,
+  stats: BarChart3,
 };
 
 export default function GallerySidebar({
