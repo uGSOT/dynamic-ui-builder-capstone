@@ -33,6 +33,24 @@ import LogoGrid, {
   propSchema as logoGridPropSchema,
 } from "./logo-cloud/LogoGrid/LogoGrid.jsx";
 
+import CardGrid, {
+  defaultProps as cardGridProps,
+  defaultStyles as cardGridStyles,
+  propSchema as cardGridPropSchema,
+} from "./testimonials/CardGrid/CardGrid.jsx";
+
+import FeaturedSingle, {
+  defaultProps as featuredSingleProps,
+  defaultStyles as featuredSingleStyles,
+  propSchema as featuredSinglePropSchema,
+} from "./testimonials/FeaturedSingle/FeaturedSingle.jsx";
+
+import Carousel, {
+  defaultProps as carouselProps,
+  defaultStyles as carouselStyles,
+  propSchema as carouselPropSchema,
+} from "./testimonials/Carousel/Carousel.jsx";
+
 export const FAQ_VARIANTS = {
   "accordion-single": {
     id: "accordion-single",
@@ -93,7 +111,35 @@ export const LOGO_CLOUD_VARIANTS = {
   },
 };
 
-
+export const TESTIMONIAL_VARIANTS = {
+  "card-grid": {
+    id: "card-grid",
+    name: "Card Grid",
+    description: "3 testimonial cards with quote, name, role, avatar",
+    component: CardGrid,
+    defaultProps: cardGridProps,
+    defaultStyles: cardGridStyles,
+    propSchema: cardGridPropSchema,
+  },
+  "featured-single": {
+    id: "featured-single",
+    name: "Featured Single",
+    description: "One large quote with photo, name, company logo",
+    component: FeaturedSingle,
+    defaultProps: featuredSingleProps,
+    defaultStyles: featuredSingleStyles,
+    propSchema: featuredSinglePropSchema,
+  },
+  carousel: {
+    id: "carousel",
+    name: "Carousel",
+    description: "Horizontally scrollable testimonial cards with dot navigation",
+    component: Carousel,
+    defaultProps: carouselProps,
+    defaultStyles: carouselStyles,
+    propSchema: carouselPropSchema,
+  },
+};
 
 export const COMPONENT_REGISTRY = {
   faq: {
@@ -108,6 +154,12 @@ export const COMPONENT_REGISTRY = {
     label: "Logo Cloud",
     description: "Trusted-by social proof with company logos",
     variants: LOGO_CLOUD_VARIANTS,
+  },
+  testimonials: {
+    type: "testimonials",
+    label: "Testimonials",
+    description: "Customer quotes and social proof from real users",
+    variants: TESTIMONIAL_VARIANTS,
   },
 };
 
