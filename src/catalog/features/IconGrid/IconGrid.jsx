@@ -7,7 +7,6 @@ import {
 } from "../featureStyles";
 import { SAMPLE_FEATURES } from "../defaultProps";
 
-
 export const defaultProps = {
   heading: "Everything you need to ship faster",
   subheading:
@@ -70,7 +69,15 @@ export default function IconGrid({
   features   = defaultProps.features,
   styles     = defaultStyles,
 }) {
-  const { sectionClass, inverted, accent, headingAlign } = resolveFeatureStyles(styles);
+  const {
+    sectionClass,
+    inverted, accent, headingAlign,
+    headingClass, headingStyle,
+    subheadingClass, subheadingStyle,
+    cardClass, cardStyle,
+    titleClass, titleStyle,
+    descClass, descStyle,
+  } = resolveFeatureStyles(styles);
 
   const colClass =
     columns === 2
@@ -84,8 +91,11 @@ export default function IconGrid({
         <FeatureSectionHeader
           heading={heading}
           subheading={subheading}
-          inverted={inverted}
           align={headingAlign}
+          headingClass={headingClass}
+          headingStyle={headingStyle}
+          subheadingClass={subheadingClass}
+          subheadingStyle={subheadingStyle}
         />
 
         <div className={`grid ${colClass} gap-6`}>
@@ -98,6 +108,12 @@ export default function IconGrid({
               tag={showTags ? feature.tag : null}
               accent={accent}
               inverted={inverted}
+              cardClass={cardClass}
+              cardStyle={cardStyle}
+              titleClass={titleClass}
+              titleStyle={titleStyle}
+              descClass={descClass}
+              descStyle={descStyle}
             />
           ))}
         </div>

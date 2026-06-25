@@ -8,12 +8,9 @@ import {
 } from "../featureStyles";
 import { SAMPLE_FEATURES } from "../defaultProps";
 
-// ─── Default props ────────────────────────────────────────────────────────────
-
 export const defaultProps = {
   heading: "A deeper look at what we built",
-  subheading:
-    "Every feature is designed around real workflows — not checkboxes.",
+  subheading: "Every feature is designed around real workflows — not checkboxes.",
   imagePosition: "right-first",
   showBullets: true,
   showTags: true,
@@ -21,8 +18,6 @@ export const defaultProps = {
 };
 
 export const defaultStyles = { ...FEATURE_STYLE_DEFAULTS };
-
-// ─── Prop schema ──────────────────────────────────────────────────────────────
 
 export const propSchema = {
   props: [
@@ -45,8 +40,7 @@ export const propSchema = {
       type: "string",
       default: defaultProps.imagePosition,
       allowedValues: '"right-first" | "left-first"',
-      description:
-        "Which side the image appears on for the first row. Rows alternate automatically after that.",
+      description: "Which side the image appears on for the first row. Rows alternate automatically after that.",
     },
     {
       name: "showBullets",
@@ -73,7 +67,6 @@ export const propSchema = {
   styles: FEATURE_STYLE_PROP_SCHEMA,
 };
 
-// ─── Sub-component: one alternating row ───────────────────────────────────────
 
 function FeatureRow({
   feature,
@@ -81,40 +74,39 @@ function FeatureRow({
   showBullets,
   showTags,
   accent,
-  inverted,
+  titleClass,
+  titleStyle,
+  descClass,
+  descStyle,
 }) {
-  const titleColor = inverted ? "text-white" : "text-gray-900";
-  const descColor  = inverted ? "text-gray-300" : "text-gray-500";
-  const bulletColor = inverted ? "text-gray-300" : "text-gray-600";
-
   return (
     <div
       className={`flex flex-col gap-10 lg:items-center ${
         imageOnRight ? "lg:flex-row" : "lg:flex-row-reverse"
       }`}
     >
-      {/* Copy side */}
       <div className="flex-1">
-        {/* Tag */}
+
         {showTags && feature.tag && (
-          <span
-            className={`mb-4 inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${accent.tagBg} ${accent.tagText}`}
-          >
+          <span className={`mb-4 inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${accent.tagBg} ${accent.tagText}`}>
             {feature.tag}
           </span>
         )}
 
-        {/* Title */}
-        <h3 className={`text-2xl font-bold tracking-tight sm:text-3xl ${titleColor}`}>
+        <h3
+          className={`tracking-tight sm:text-3xl ${titleClass}`}
+          style={titleStyle}
+        >
           {feature.title}
         </h3>
 
-        {/* Description */}
-        <p className={`mt-4 text-base leading-relaxed ${descColor}`}>
+        <p
+          className={`mt-4 ${descClass}`}
+          style={descStyle}
+        >
           {feature.description}
         </p>
 
-        {/* Bullets */}
         {showBullets && Array.isArray(feature.bullets) && feature.bullets.length > 0 && (
           <ul className="mt-6 space-y-2">
             {feature.bullets.map((bullet, i) => (
@@ -123,14 +115,15 @@ function FeatureRow({
                   size={16}
                   className={`shrink-0 ${accent.iconText}`}
                 />
-                <span className={`text-sm ${bulletColor}`}>{bullet}</span>
+                <span className={`text-sm ${descClass}`} style={descStyle}>
+                  {bullet}
+                </span>
               </li>
             ))}
           </ul>
         )}
       </div>
 
-      {/* Image side */}
       <div className="flex-1">
         <FeatureImageSlot
           src={feature.image}
@@ -144,22 +137,6 @@ function FeatureRow({
   );
 }
 
-// ─── Component ────────────────────────────────────────────────────────────────
-
-/**
- * AlternatingRows
- *
- * Feature rows where the image and copy alternate sides with each row.
- * Best for a deep-dive on 2–4 key capabilities.
- *
- * @param {string}  heading                          - Section heading
- * @param {string}  [subheading]                     - Optional subheading
- * @param {"right-first"|"left-first"} [imagePosition] - Image side for first row
- * @param {boolean} [showBullets=true]               - Show bullet lists
- * @param {boolean} [showTags=true]                  - Show tag pills
- * @param {Array}   features                         - Feature row objects
- * @param {object}  [styles]                         - Style overrides
- */
 export default function AlternatingRows({
   heading       = defaultProps.heading,
   subheading    = defaultProps.subheading,
@@ -169,7 +146,14 @@ export default function AlternatingRows({
   features      = defaultProps.features,
   styles        = defaultStyles,
 }) {
-  const { sectionClass, inverted, accent, headingAlign } = resolveFeatureStyles(styles);
+  const {
+    sectionClass,
+    inverted, accent, headingAlign,
+    headingClass, headingStyle,
+    subheadingClass, subheadingStyle,
+    titleClass, titleStyle,
+    descClass, descStyle,
+  } = resolveFeatureStyles(styles);
 
   return (
     <section className={`w-full ${sectionClass}`}>
@@ -178,8 +162,11 @@ export default function AlternatingRows({
         <FeatureSectionHeader
           heading={heading}
           subheading={subheading}
-          inverted={inverted}
           align={headingAlign}
+          headingClass={headingClass}
+          headingStyle={headingStyle}
+          subheadingClass={subheadingClass}
+          subheadingStyle={subheadingStyle}
         />
 
         <div className="flex flex-col gap-20">
@@ -198,6 +185,10 @@ export default function AlternatingRows({
                 showTags={showTags}
                 accent={accent}
                 inverted={inverted}
+                titleClass={titleClass}
+                titleStyle={titleStyle}
+                descClass={descClass}
+                descStyle={descStyle}
               />
             );
           })}
