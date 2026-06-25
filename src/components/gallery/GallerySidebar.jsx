@@ -1,4 +1,12 @@
-import { HelpCircle, Layers, Menu, PlayCircle } from "lucide-react";
+import {
+  HelpCircle,
+  Layers,
+  Menu,
+  PlayCircle,
+  Sparkles,
+  CreditCard,
+} from "lucide-react";
+
 import { GALLERY_CATALOG } from "../../constants/galleryCatalog";
 
 const ICONS = {
@@ -6,6 +14,8 @@ const ICONS = {
   hero: Layers,
   navbar: Menu,
   "how-it-works": PlayCircle,
+  features: Sparkles,
+  pricing: CreditCard,
 };
 
 export default function GallerySidebar({

@@ -24,14 +24,14 @@ export const GALLERY_CATALOG = [
     id: "logo-cloud",
     label: "Logo Cloud",
     description: "Trusted-by social proof",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {
     id: "features",
     label: "Features",
     description: "Product benefits and capabilities",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {
@@ -52,7 +52,7 @@ export const GALLERY_CATALOG = [
     id: "pricing",
     label: "Pricing",
     description: "Plans and pricing tables",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {

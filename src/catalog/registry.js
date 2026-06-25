@@ -37,7 +37,26 @@ import TransparentHero, {
 } from "./navbar/TransparentHero/TransparentHero.jsx";
 
 // ==========================================
-// 3. Hero Variant Imports
+// 3. Logo Cloud Variant Imports
+// ==========================================
+import SimpleRow, {
+  defaultProps as simpleRowProps,
+  defaultStyles as simpleRowStyles,
+  propSchema as simpleRowPropSchema,
+} from "./logo-cloud/SimpleRow/SimpleRow.jsx";
+import WithHeading, {
+  defaultProps as withHeadingProps,
+  defaultStyles as withHeadingStyles,
+  propSchema as withHeadingPropSchema,
+} from "./logo-cloud/WithHeading/WithHeading.jsx";
+import LogoGrid, {
+  defaultProps as logoGridProps,
+  defaultStyles as logoGridStyles,
+  propSchema as logoGridPropSchema,
+} from "./logo-cloud/LogoGrid/LogoGrid.jsx";
+
+// ==========================================
+// 4. Hero Variant Imports
 // ==========================================
 import CenteredHero, {
   defaultProps as centeredHeroProps,
@@ -61,7 +80,7 @@ import WithSocialProof, {
 } from "./hero/WithSocialProof/WithSocialProof.jsx";
 
 // ==========================================
-// 4. How It Works Variant Imports (New Code Added)
+// 5. How It Works Variant Imports
 // ==========================================
 import StepsHorizontal, {
   defaultProps as horizontalProps,
@@ -80,7 +99,45 @@ import IconCards, {
 } from "./how-it-works/IconCards/IconCards.jsx";
 
 // ==========================================
-// 5. Variant Maps Definition
+// 6. Features Variant Imports
+// ==========================================
+import IconGrid, {
+  defaultProps as iconGridProps,
+  defaultStyles as iconGridStyles,
+  propSchema as iconGridPropSchema,
+} from "./features/IconGrid/IconGrid.jsx";
+import AlternatingRows, {
+  defaultProps as alternatingRowsProps,
+  defaultStyles as alternatingRowsStyles,
+  propSchema as alternatingRowsPropSchema,
+} from "./features/AlternatingRows/AlternatingRows.jsx";
+import BentoGrid, {
+  defaultProps as bentoGridProps,
+  defaultStyles as bentoGridStyles,
+  propSchema as bentoGridPropSchema,
+} from "./features/BentoGrid/BentoGrid.jsx";
+
+// ==========================================
+// 7. Pricing Variant Imports
+// ==========================================
+import ThreeTier, {
+  defaultProps as threeTierProps,
+  defaultStyles as threeTierStyles,
+  propSchema as threeTierPropSchema,
+} from "./pricing/ThreeTier/ThreeTier.jsx";
+import TwoTierHighlight, {
+  defaultProps as twoTierHighlightProps,
+  defaultStyles as twoTierHighlightStyles,
+  propSchema as twoTierHighlightPropSchema,
+} from "./pricing/TwoTierHighlight/TwoTierHighlight.jsx";
+import SinglePlanFocus, {
+  defaultProps as singlePlanFocusProps,
+  defaultStyles as singlePlanFocusStyles,
+  propSchema as singlePlanFocusPropSchema,
+} from "./pricing/SinglePlanFocus/SinglePlanFocus.jsx";
+
+// ==========================================
+// 8. Variant Maps Definition
 // ==========================================
 export const FAQ_VARIANTS = {
   "accordion-single": {
@@ -139,6 +196,36 @@ export const NAVBAR_VARIANTS = {
     defaultProps: transparentHeroProps,
     defaultStyles: transparentHeroStyles,
     propSchema: transparentHeroPropSchema,
+  },
+};
+
+export const LOGO_CLOUD_VARIANTS = {
+  "simple-row": {
+    id: "simple-row",
+    name: "Simple Row",
+    description: "Grayscale logos in a horizontal row, no heading",
+    component: SimpleRow,
+    defaultProps: simpleRowProps,
+    defaultStyles: simpleRowStyles,
+    propSchema: simpleRowPropSchema,
+  },
+  "with-heading": {
+    id: "with-heading",
+    name: "With Heading",
+    description: "Short heading above logo row",
+    component: WithHeading,
+    defaultProps: withHeadingProps,
+    defaultStyles: withHeadingStyles,
+    propSchema: withHeadingPropSchema,
+  },
+  "logo-grid": {
+    id: "logo-grid",
+    name: "Logo Grid",
+    description: "Logos in a 3×2 or 4×2 grid with equal spacing",
+    component: LogoGrid,
+    defaultProps: logoGridProps,
+    defaultStyles: logoGridStyles,
+    propSchema: logoGridPropSchema,
   },
 };
 
@@ -211,8 +298,68 @@ export const HOW_IT_WORKS_VARIANTS = {
   },
 };
 
+export const FEATURES_VARIANTS = {
+  "icon-grid": {
+    id: "icon-grid",
+    name: "Icon Grid",
+    description: "3 or 6 features in equal columns with icon, title, description",
+    component: IconGrid,
+    defaultProps: iconGridProps,
+    defaultStyles: iconGridStyles,
+    propSchema: iconGridPropSchema,
+  },
+  "alternating-rows": {
+    id: "alternating-rows",
+    name: "Alternating Rows",
+    description: "Feature rows alternating image left/right with copy",
+    component: AlternatingRows,
+    defaultProps: alternatingRowsProps,
+    defaultStyles: alternatingRowsStyles,
+    propSchema: alternatingRowsPropSchema,
+  },
+  "bento-grid": {
+    id: "bento-grid",
+    name: "Bento Grid",
+    description: "Asymmetric card grid with varied cell sizes",
+    component: BentoGrid,
+    defaultProps: bentoGridProps,
+    defaultStyles: bentoGridStyles,
+    propSchema: bentoGridPropSchema,
+  },
+};
+
+export const PRICING_VARIANTS = {
+  "three-tier": {
+    id: "three-tier",
+    name: "Three Tier Cards",
+    description: "Free / Pro / Enterprise cards side by side",
+    component: ThreeTier,
+    defaultProps: threeTierProps,
+    defaultStyles: threeTierStyles,
+    propSchema: threeTierPropSchema,
+  },
+  "two-tier-highlight": {
+    id: "two-tier-highlight",
+    name: "Two Tier Highlight",
+    description: "Two plans with one visually emphasized (most popular)",
+    component: TwoTierHighlight,
+    defaultProps: twoTierHighlightProps,
+    defaultStyles: twoTierHighlightStyles,
+    propSchema: twoTierHighlightPropSchema,
+  },
+  "single-plan-focus": {
+    id: "single-plan-focus",
+    name: "Single Plan Focus",
+    description: "One plan centered with feature checklist",
+    component: SinglePlanFocus,
+    defaultProps: singlePlanFocusProps,
+    defaultStyles: singlePlanFocusStyles,
+    propSchema: singlePlanFocusPropSchema,
+  },
+};
+
 // ==========================================
-// 6. Centralized Component Registry Map
+// 9. Centralized Component Registry Map
 // ==========================================
 export const COMPONENT_REGISTRY = {
   faq: {
@@ -227,6 +374,12 @@ export const COMPONENT_REGISTRY = {
     description: "Top navigation section with branding, links, and CTA",
     variants: NAVBAR_VARIANTS,
   },
+  "logo-cloud": {
+    type: "logo-cloud",
+    label: "Logo Cloud",
+    description: "Trusted-by social proof with company logos",
+    variants: LOGO_CLOUD_VARIANTS,
+  },
   hero: {
     type: "hero",
     label: "Hero",
@@ -239,10 +392,22 @@ export const COMPONENT_REGISTRY = {
     description: "Step-by-step product workflows and structural instructions",
     variants: HOW_IT_WORKS_VARIANTS,
   },
+  features: {
+    type: "features",
+    label: "Features",
+    description: "Product benefits and capabilities—the core what we do section.",
+    variants: FEATURES_VARIANTS,
+  },
+  pricing: {
+    type: "pricing",
+    label: "Pricing",
+    description: "Pricing tables and plans subscription options",
+    variants: PRICING_VARIANTS,
+  },
 };
 
 // ==========================================
-// 7. Schema Helper Builders
+// 10. Schema Helper Builders
 // ==========================================
 export function buildSectionConfig(type, variantId, sectionId) {
   const component = COMPONENT_REGISTRY[type];
