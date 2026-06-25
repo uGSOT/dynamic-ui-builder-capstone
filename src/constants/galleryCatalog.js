@@ -10,7 +10,7 @@ export const GALLERY_CATALOG = [
     id: "navbar",
     label: "Navbar",
     description: "Top navigation and CTAs",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {
