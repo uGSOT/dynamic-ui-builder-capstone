@@ -26,11 +26,41 @@ import WithHeading, {
   propSchema as withHeadingPropSchema,
 } from "./logo-cloud/WithHeading/WithHeading.jsx";
 
+import ClassicSticky, {
+  defaultProps as classicStickyProps,
+  defaultStyles as classicStickyStyles,
+  propSchema as classicStickyPropSchema,
+} from "./navbar/ClassicSticky/ClassicSticky.jsx";
+
+import TransparentHero, {
+  defaultProps as transparentHeroProps,
+  defaultStyles as transparentHeroStyles,
+  propSchema as transparentHeroPropSchema,
+} from "./navbar/TransparentHero/TransparentHero.jsx";
+
 import CenteredLogo, {
   defaultProps as centeredLogoProps,
   defaultStyles as centeredLogoStyles,
   propSchema as centeredLogoPropSchema,
 } from "./navbar/CenteredLogo/CenteredLogo.jsx";
+
+import InlineRow, {
+  defaultProps as inlineRowProps,
+  defaultStyles as inlineRowStyles,
+  propSchema as inlineRowPropSchema,
+} from "./stats/InlineRow/InlineRow.jsx";
+
+import StatCards, {
+  defaultProps as statCardsProps,
+  defaultStyles as statCardsStyles,
+  propSchema as statCardsPropSchema,
+} from "./stats/StatCards/StatCards.jsx";
+
+import SplitWithCopy, {
+  defaultProps as splitWithCopyProps,
+  defaultStyles as splitWithCopyStyles,
+  propSchema as splitWithCopyPropSchema,
+} from "./stats/SplitWithCopy/SplitWithCopy.jsx";
 
 import IconGrid, {
   defaultProps as iconGridProps,
@@ -101,6 +131,36 @@ export const FAQ_VARIANTS = {
   },
 };
 
+export const NAVBAR_VARIANTS = {
+  "classic-sticky": {
+    id: "classic-sticky",
+    name: "Classic Sticky",
+    description: "Traditional navbar that sticks to top with solid background",
+    component: ClassicSticky,
+    defaultProps: classicStickyProps,
+    defaultStyles: classicStickyStyles,
+    propSchema: classicStickyPropSchema,
+  },
+  "transparent-hero": {
+    id: "transparent-hero",
+    name: "Transparent Hero",
+    description: "Transparent navbar over hero, becomes opaque on scroll",
+    component: TransparentHero,
+    defaultProps: transparentHeroProps,
+    defaultStyles: transparentHeroStyles,
+    propSchema: transparentHeroPropSchema,
+  },
+  "centered-logo": {
+    id: "centered-logo",
+    name: "Centered Logo",
+    description: "Logo centered at top with nav links below on mobile",
+    component: CenteredLogo,
+    defaultProps: centeredLogoProps,
+    defaultStyles: centeredLogoStyles,
+    propSchema: centeredLogoPropSchema,
+  },
+};
+
 export const LOGO_CLOUD_VARIANTS = {
   "simple-row": {
     id: "simple-row",
@@ -128,6 +188,36 @@ export const LOGO_CLOUD_VARIANTS = {
     defaultProps: logoGridProps,
     defaultStyles: logoGridStyles,
     propSchema: logoGridPropSchema,
+  },
+};
+
+export const STATS_VARIANTS = {
+  "inline-row": {
+    id: "inline-row",
+    name: "Inline Row",
+    description: "Stats displayed in a horizontal row layout",
+    component: InlineRow,
+    defaultProps: inlineRowProps,
+    defaultStyles: inlineRowStyles,
+    propSchema: inlineRowPropSchema,
+  },
+  "stat-cards": {
+    id: "stat-cards",
+    name: "Stat Cards",
+    description: "Stats in a grid of individual cards",
+    component: StatCards,
+    defaultProps: statCardsProps,
+    defaultStyles: statCardsStyles,
+    propSchema: statCardsPropSchema,
+  },
+  "split-with-copy": {
+    id: "split-with-copy",
+    name: "Split With Copy",
+    description: "Stats alongside descriptive copy in a split layout",
+    component: SplitWithCopy,
+    defaultProps: splitWithCopyProps,
+    defaultStyles: splitWithCopyStyles,
+    propSchema: splitWithCopyPropSchema,
   },
 };
 
@@ -200,12 +290,23 @@ export const COMPONENT_REGISTRY = {
     description: "Frequently asked questions — reduces support load",
     variants: FAQ_VARIANTS,
   },
-
+  navbar: {
+    type: "navbar",
+    label: "Navbar",
+    description: "Top navigation and call-to-action",
+    variants: NAVBAR_VARIANTS,
+  },
   "logo-cloud": {
     type: "logo-cloud",
     label: "Logo Cloud",
     description: "Trusted-by social proof with company logos",
     variants: LOGO_CLOUD_VARIANTS,
+  },
+  stats: {
+    type: "stats",
+    label: "Stats",
+    description: "Key metrics and statistics to build credibility",
+    variants: STATS_VARIANTS,
   },
   pricing: {
     type: "pricing",
