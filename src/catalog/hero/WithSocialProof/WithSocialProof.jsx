@@ -1,5 +1,5 @@
 import React from "react";
-import { DEFAULT_CENTERED_HERO_PROPS } from "../defaultProps";
+import { DEFAULT_SOCIAL_PROOF_HERO_PROPS } from "../defaultProps";
 import {
   HERO_STYLE_DEFAULTS,
   HERO_STYLE_PROP_SCHEMA,
@@ -7,7 +7,7 @@ import {
 } from "../heroStyles";
 
 export const defaultProps = {
-  ...DEFAULT_CENTERED_HERO_PROPS,
+  ...DEFAULT_SOCIAL_PROOF_HERO_PROPS,
 };
 
 export const defaultStyles = { ...HERO_STYLE_DEFAULTS };
@@ -33,7 +33,7 @@ export const propSchema = {
       type: "object",
       default: defaultProps.primaryAction,
       allowedValues: "Object with label and href",
-      description: "Main Call-to-Action",
+      description: "Primary Call-to-Action",
     },
     {
       name: "secondaryAction",
@@ -47,7 +47,7 @@ export const propSchema = {
       type: "string",
       default: defaultProps.badge,
       allowedValues: "Any string (optional)",
-      description: "Small supporting text above or below the content",
+      description: "Small supporting text above the content",
     },
     {
       name: "imageUrl",
@@ -56,17 +56,33 @@ export const propSchema = {
       allowedValues: "Valid image URL (optional)",
       description: "Optional product screenshot or feature image",
     },
+    {
+      name: "socialProofText",
+      type: "string",
+      default: defaultProps.socialProofText,
+      allowedValues: "Any string",
+      description: "Supporting text displayed next to the avatar stack",
+    },
+    {
+      name: "socialProofAvatars",
+      type: "Array<string>",
+      default: defaultProps.socialProofAvatars,
+      allowedValues: "Array of image URLs",
+      description: "Overlapping user avatars to show social proof",
+    },
   ],
   styles: HERO_STYLE_PROP_SCHEMA,
 };
 
-function Centered({
+function WithSocialProof({
   headline = defaultProps.headline,
   subtext = defaultProps.subtext,
   primaryAction = defaultProps.primaryAction,
   secondaryAction = defaultProps.secondaryAction,
   imageUrl = defaultProps.imageUrl,
   badge = defaultProps.badge,
+  socialProofText = defaultProps.socialProofText,
+  socialProofAvatars = defaultProps.socialProofAvatars,
   styles = defaultStyles,
 }) {
   const { className, inverted } = resolveHeroStyles(styles);
@@ -74,6 +90,7 @@ function Centered({
   const titleClass = inverted ? "text-ink-inverse" : "text-ink";
   const subtitleClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
   const badgeClass = inverted ? "text-ink-inverse-muted" : "text-ink-subtle";
+  const ringClass = inverted ? "ring-navy" : "ring-surface";
 
   const primaryBtnClass = inverted
     ? "bg-brand text-ink-inverse hover:bg-brand-light"
@@ -116,6 +133,29 @@ function Centered({
             </div>
           )}
 
+          {/* Social Proof Row */}
+          {(socialProofText || (socialProofAvatars && socialProofAvatars.length > 0)) && (
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+              {socialProofAvatars && socialProofAvatars.length > 0 && (
+                <div className="flex -space-x-2 overflow-hidden">
+                  {socialProofAvatars.map((url, i) => (
+                    <img
+                      key={i}
+                      className={`inline-block h-9 w-9 rounded-full ring-2 ${ringClass}`}
+                      src={url}
+                      alt=""
+                    />
+                  ))}
+                </div>
+              )}
+              {socialProofText && (
+                <p className={`text-sm font-medium ${subtitleClass}`}>
+                  {socialProofText}
+                </p>
+              )}
+            </div>
+          )}
+
           {badge && (
             <p className={`mt-5 text-xs font-medium tracking-wide sm:text-sm ${badgeClass}`}>
               {badge}
@@ -137,4 +177,4 @@ function Centered({
   );
 }
 
-export default Centered;
+export default WithSocialProof;

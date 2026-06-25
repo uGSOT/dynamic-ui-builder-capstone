@@ -10,14 +10,14 @@ export const GALLERY_CATALOG = [
     id: "navbar",
     label: "Navbar",
     description: "Top navigation and CTAs",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {
     id: "hero",
     label: "Hero",
     description: "Above-the-fold headline section",
-    available: false,
+    available: true,
     variantCount: 4,
   },
   {
