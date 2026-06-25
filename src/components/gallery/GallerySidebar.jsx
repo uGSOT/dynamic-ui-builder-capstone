@@ -1,10 +1,12 @@
-import { BarChart3, HelpCircle, Menu } from "lucide-react";
+import { HelpCircle,BarChart3, Layers, Menu, CreditCard } from "lucide-react";
 import { GALLERY_CATALOG } from "../../constants/galleryCatalog";
 
 const ICONS = {
   faq: HelpCircle,
+  hero: Layers,
   navbar: Menu,
   stats: BarChart3,
+  pricing: CreditCard,
 };
 
 export default function GallerySidebar({

@@ -14,23 +14,40 @@ import GroupedByCategory, {
   propSchema as groupedByCategoryPropSchema,
 } from "./faq/GroupedByCategory/GroupedByCategory.jsx";
 
-import ClassicSticky, {
-  defaultProps as classicStickyProps,
-  defaultStyles as classicStickyStyles,
-  propSchema as classicStickyPropSchema,
-} from "./navbar/ClassicSticky/ClassicSticky.jsx";
 
-import TransparentHero, {
-  defaultProps as transparentHeroProps,
-  defaultStyles as transparentHeroStyles,
-  propSchema as transparentHeroPropSchema,
-} from "./navbar/TransparentHero/TransparentHero.jsx";
+import SimpleRow, {
+  defaultProps as simpleRowProps,
+  defaultStyles as simpleRowStyles,
+  propSchema as simpleRowPropSchema,
+} from "./logo-cloud/SimpleRow/SimpleRow.jsx";
 
-import CenteredLogo, {
-  defaultProps as centeredLogoProps,
-  defaultStyles as centeredLogoStyles,
-  propSchema as centeredLogoPropSchema,
-} from "./navbar/CenteredLogo/CenteredLogo.jsx";
+import WithHeading, {
+  defaultProps as withHeadingProps,
+  defaultStyles as withHeadingStyles,
+  propSchema as withHeadingPropSchema,
+} from "./logo-cloud/WithHeading/WithHeading.jsx";
+
+import LogoGrid, {
+  defaultProps as logoGridProps,
+  defaultStyles as logoGridStyles,
+  propSchema as logoGridPropSchema,
+} from "./logo-cloud/LogoGrid/LogoGrid.jsx";
+
+import ThreeTier, {
+  defaultProps as threeTierProps,
+  defaultStyles as threeTierStyles,
+  propSchema as threeTierPropSchema,
+} from "./pricing/ThreeTier/ThreeTier.jsx";
+import TwoTierHighlight, {
+  defaultProps as twoTierHighlightProps,
+  defaultStyles as twoTierHighlightStyles,
+  propSchema as twoTierHighlightPropSchema,
+} from "./pricing/TwoTierHighlight/TwoTierHighlight.jsx";
+import SinglePlanFocus, {
+  defaultProps as singlePlanFocusProps,
+  defaultStyles as singlePlanFocusStyles,
+  propSchema as singlePlanFocusPropSchema,
+} from "./pricing/SinglePlanFocus/SinglePlanFocus.jsx";
 
 import InlineRow, {
   defaultProps as inlineRowProps,
@@ -78,36 +95,65 @@ export const FAQ_VARIANTS = {
   },
 };
 
-export const NAVBAR_VARIANTS = {
-  "classic-sticky": {
-    id: "classic-sticky",
-    name: "Classic Sticky",
-    description:
-      "Logo left, links center/right, CTA button, solid background, sticks on scroll",
-    component: ClassicSticky,
-    defaultProps: classicStickyProps,
-    defaultStyles: classicStickyStyles,
-    propSchema: classicStickyPropSchema,
+export const LOGO_CLOUD_VARIANTS = {
+  "simple-row": {
+    id: "simple-row",
+    name: "Simple Row",
+    description: "Grayscale logos in a horizontal row, no heading",
+    component: SimpleRow,
+    defaultProps: simpleRowProps,
+    defaultStyles: simpleRowStyles,
+    propSchema: simpleRowPropSchema,
   },
-  "transparent-hero": {
-    id: "transparent-hero",
-    name: "Transparent Hero",
-    description:
-      "Transparent background over hero, becomes solid on scroll",
-    component: TransparentHero,
-    defaultProps: transparentHeroProps,
-    defaultStyles: transparentHeroStyles,
-    propSchema: transparentHeroPropSchema,
+  "with-heading": {
+    id: "with-heading",
+    name: "With Heading",
+    description: "Short heading above logo row",
+    component: WithHeading,
+    defaultProps: withHeadingProps,
+    defaultStyles: withHeadingStyles,
+    propSchema: withHeadingPropSchema,
   },
-  "centered-logo": {
-    id: "centered-logo",
-    name: "Centered Logo",
-    description:
-      "Logo centered, links split left/right, CTA on far right",
-    component: CenteredLogo,
-    defaultProps: centeredLogoProps,
-    defaultStyles: centeredLogoStyles,
-    propSchema: centeredLogoPropSchema,
+  "logo-grid": {
+    id: "logo-grid",
+    name: "Logo Grid",
+    description: "Logos in a 3×2 or 4×2 grid with equal spacing",
+    component: LogoGrid,
+    defaultProps: logoGridProps,
+    defaultStyles: logoGridStyles,
+    propSchema: logoGridPropSchema,
+  },
+};
+
+
+
+export const PRICING_VARIANTS = {
+  "three-tier": {
+    id: "three-tier",
+    name: "Three Tier Cards",
+    description: "Free / Pro / Enterprise cards side by side",
+    component: ThreeTier,
+    defaultProps: threeTierProps,
+    defaultStyles: threeTierStyles,
+    propSchema: threeTierPropSchema,
+  },
+  "two-tier-highlight": {
+    id: "two-tier-highlight",
+    name: "Two Tier Highlight",
+    description: "Two plans with one visually emphasized (most popular)",
+    component: TwoTierHighlight,
+    defaultProps: twoTierHighlightProps,
+    defaultStyles: twoTierHighlightStyles,
+    propSchema: twoTierHighlightPropSchema,
+  },
+  "single-plan-focus": {
+    id: "single-plan-focus",
+    name: "Single Plan Focus",
+    description: "One plan centered with feature checklist",
+    component: SinglePlanFocus,
+    defaultProps: singlePlanFocusProps,
+    defaultStyles: singlePlanFocusStyles,
+    propSchema: singlePlanFocusPropSchema,
   },
 };
 
@@ -153,6 +199,18 @@ export const COMPONENT_REGISTRY = {
     label: "Navbar",
     description: "Top navigation on every Website",
     variants: NAVBAR_VARIANTS,
+
+  "logo-cloud": {
+    type: "logo-cloud",
+    label: "Logo Cloud",
+    description: "Trusted-by social proof with company logos",
+    variants: LOGO_CLOUD_VARIANTS,
+  },
+  pricing: {
+    type: "pricing",
+    label: "Pricing",
+    description: "Pricing tables and plans subscription options",
+    variants: PRICING_VARIANTS,
   },
   stats: {
     type: "stats",
