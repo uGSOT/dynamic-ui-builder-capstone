@@ -6,7 +6,7 @@ const NAVBAR_ICONS = {
   Wrench,
 };
 
-function resolveNavbarIcon(name) {
+export function resolveNavbarIcon(name) {
   return NAVBAR_ICONS[name] ?? Layers;
 }
 
