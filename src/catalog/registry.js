@@ -54,25 +54,6 @@ import LogoGrid, {
   defaultStyles as logoGridStyles,
   propSchema as logoGridPropSchema,
 } from "./logo-cloud/LogoGrid/LogoGrid.jsx";
-//=========================================
-//5. stats Variants
-//==========================================
-import InlineRow, {
-  defaultProps as inlineRowProps,
-  defaultStyles as inlineRowStyles,
-  propSchema as inlineRowPropSchema,
-} from "./stats/InlineRow/InlineRow.jsx";
-import StatCards, {
-  defaultProps as statCardsProps,
-  defaultStyles as statCardsStyles,
-  propSchema as statCardsPropSchema,
-} from "./stats/StatCards/StatCards.jsx";
-import SplitWithCopy, {
-  defaultProps as splitWithCopyProps,
-  defaultStyles as splitWithCopyStyles,
-  propSchema as splitWithCopyPropSchema,
-} from "./stats/SplitWithCopy/SplitWithCopy.jsx";
-
 // ==========================================
 // 4. Hero Variant Imports
 // ==========================================
@@ -283,36 +264,6 @@ export const LOGO_CLOUD_VARIANTS = {
     defaultProps: logoGridProps,
     defaultStyles: logoGridStyles,
     propSchema: logoGridPropSchema,
-  },
-};
-
-export const STATS_VARIANTS = {
-  "inline-row": {
-    id: "inline-row",
-    name: "Inline Row",
-    description: "Stats displayed in a horizontal row layout",
-    component: InlineRow,
-    defaultProps: inlineRowProps,
-    defaultStyles: inlineRowStyles,
-    propSchema: inlineRowPropSchema,
-  },
-  "stat-cards": {
-    id: "stat-cards",
-    name: "Stat Cards",
-    description: "Stats in a grid of individual cards",
-    component: StatCards,
-    defaultProps: statCardsProps,
-    defaultStyles: statCardsStyles,
-    propSchema: statCardsPropSchema,
-  },
-  "split-with-copy": {
-    id: "split-with-copy",
-    name: "Split With Copy",
-    description: "Stats alongside descriptive copy in a split layout",
-    component: SplitWithCopy,
-    defaultProps: splitWithCopyProps,
-    defaultStyles: splitWithCopyStyles,
-    propSchema: splitWithCopyPropSchema,
   },
 };
 
