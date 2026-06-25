@@ -14,7 +14,6 @@ import GroupedByCategory, {
   propSchema as groupedByCategoryPropSchema,
 } from "./faq/GroupedByCategory/GroupedByCategory.jsx";
 
-
 import SimpleRow, {
   defaultProps as simpleRowProps,
   defaultStyles as simpleRowStyles,
@@ -27,6 +26,29 @@ import WithHeading, {
   propSchema as withHeadingPropSchema,
 } from "./logo-cloud/WithHeading/WithHeading.jsx";
 
+import CenteredLogo, {
+  defaultProps as centeredLogoProps,
+  defaultStyles as centeredLogoStyles,
+  propSchema as centeredLogoPropSchema,
+} from "./navbar/CenteredLogo/CenteredLogo.jsx";
+
+import IconGrid, {
+  defaultProps as iconGridProps,
+  defaultStyles as iconGridStyles,
+  propSchema as iconGridPropSchema,
+} from "./features/IconGrid/IconGrid.jsx";
+
+import AlternatingRows, {
+  defaultProps as alternatingRowsProps,
+  defaultStyles as alternatingRowsStyles,
+  propSchema as alternatingRowsPropSchema,
+} from "./features/AlternatingRows/AlternatingRows.jsx";
+
+import BentoGrid, {
+  defaultProps as bentoGridProps,
+  defaultStyles as bentoGridStyles,
+  propSchema as bentoGridPropSchema,
+} from "./features/BentoGrid/BentoGrid.jsx";
 import LogoGrid, {
   defaultProps as logoGridProps,
   defaultStyles as logoGridStyles,
@@ -138,6 +160,66 @@ export const TESTIMONIAL_VARIANTS = {
     defaultProps: carouselProps,
     defaultStyles: carouselStyles,
     propSchema: carouselPropSchema,
+  },
+};
+
+export const PRICING_VARIANTS = {
+  "three-tier": {
+    id: "three-tier",
+    name: "Three Tier Cards",
+    description: "Free / Pro / Enterprise cards side by side",
+    component: ThreeTier,
+    defaultProps: threeTierProps,
+    defaultStyles: threeTierStyles,
+    propSchema: threeTierPropSchema,
+  },
+  "two-tier-highlight": {
+    id: "two-tier-highlight",
+    name: "Two Tier Highlight",
+    description: "Two plans with one visually emphasized (most popular)",
+    component: TwoTierHighlight,
+    defaultProps: twoTierHighlightProps,
+    defaultStyles: twoTierHighlightStyles,
+    propSchema: twoTierHighlightPropSchema,
+  },
+  "single-plan-focus": {
+    id: "single-plan-focus",
+    name: "Single Plan Focus",
+    description: "One plan centered with feature checklist",
+    component: SinglePlanFocus,
+    defaultProps: singlePlanFocusProps,
+    defaultStyles: singlePlanFocusStyles,
+    propSchema: singlePlanFocusPropSchema,
+  },
+};
+
+export const FEATURES_VARIANTS = {
+  "icon-grid": {
+    id: "icon-grid",
+    name: "Icon Grid",
+    description: "3 or 6 features in equal columns with icon, title, description",
+    component: IconGrid,
+    defaultProps: iconGridProps,
+    defaultStyles: iconGridStyles,
+    propSchema: iconGridPropSchema,
+  },
+  "alternating-rows": {
+    id: "alternating-rows",
+    name: "Alternating Rows",
+    description: "Feature rows alternating image left/right with copy",
+    component: AlternatingRows,
+    defaultProps: alternatingRowsProps,
+    defaultStyles: alternatingRowsStyles,
+    propSchema: alternatingRowsPropSchema,
+  },
+  "bento-grid": {
+    id: "bento-grid",
+    name: "Bento Grid",
+    description: "Asymmetric card grid with varied cell sizes",
+    component: BentoGrid,
+    defaultProps: bentoGridProps,
+    defaultStyles: bentoGridStyles,
+    propSchema: bentoGridPropSchema,
   },
 };
 
