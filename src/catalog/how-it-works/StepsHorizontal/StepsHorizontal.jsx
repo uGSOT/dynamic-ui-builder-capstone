@@ -25,24 +25,25 @@ export const defaultStyles = {
 };
 
 export const propSchema = {
-  props: {
-    heading: { type: "string", default: defaultProps.heading },
-    subheading: { type: "string", default: defaultProps.subheading },
-    items: { type: "array", default: defaultProps.items }
-  },
-  styles: {
-    background: { type: "string", default: "surface", allowedValues: ["surface", "muted", "navy"] },
-    paddingY: { type: "number", default: 16, allowedValues: [8, 12, 16, 20] },
-    headingColor: { type: "string", default: "text-ink" },
-    headingSize: { type: "string", default: "text-3xl" },
-    headingWeight: { type: "string", default: "font-bold" },
-    subheadingColor: { type: "string", default: "text-ink-muted" },
-    subheadingSize: { type: "string", default: "text-base" },
-    subheadingWeight: { type: "string", default: "font-normal" },
-    cardBg: { type: "string", default: "bg-surface-muted" },
-    cardTextColor: { type: "string", default: "text-ink" },
-    cardTitleWeight: { type: "string", default: "font-bold" }
-  }
+  // 💡 Mapped to exact array of schema objects layout
+  props: [
+    { name: "heading", type: "string", default: defaultProps.heading, allowedValues: "Any string", description: "Main section title text" },
+    { name: "subheading", type: "string", default: defaultProps.subheading, allowedValues: "Any string (optional)", description: "Supporting structural description subtext" },
+    { name: "items", type: "Array", default: "[3 steps layout]", allowedValues: "Array of step data objects containing step, title, and description", description: "Workflow process steps to map across columns" }
+  ],
+  styles: [
+    { name: "background", type: "string", default: defaultStyles.background, allowedValues: "surface | muted | navy", description: "Outer frame background design token selector" },
+    { name: "paddingY", type: "number", default: defaultStyles.paddingY, allowedValues: "8 | 12 | 16 | 20", description: "Vertical section height spacing scale" },
+    { name: "headingColor", type: "string", default: defaultStyles.headingColor, allowedValues: "Tailwind text class name", description: "Color assignment class rule for the heading" },
+    { name: "headingSize", type: "string", default: defaultStyles.headingSize, allowedValues: "text-2xl | text-3xl | text-4xl | text-5xl", description: "Font size scale for main title element" },
+    { name: "headingWeight", type: "string", default: defaultStyles.headingWeight, allowedValues: "font-normal | font-medium | font-bold", description: "Font weight class config assignment" },
+    { name: "subheadingColor", type: "string", default: defaultStyles.subheadingColor, allowedValues: "Tailwind text class name", description: "Color utility class for description paragraph" },
+    { name: "subheadingSize", type: "string", default: defaultStyles.subheadingSize, allowedValues: "text-xs | text-sm | text-base | text-lg", description: "Font size token layout descriptor for subtext" },
+    { name: "subheadingWeight", type: "string", default: defaultStyles.subheadingWeight, allowedValues: "font-light | font-normal | font-medium", description: "Font structural weight configuration alignment" },
+    { name: "cardBg", type: "string", default: defaultStyles.cardBg, allowedValues: "Tailwind background class name", description: "Background theme container background utility token for step blocks" },
+    { name: "cardTextColor", type: "string", default: defaultStyles.cardTextColor, allowedValues: "Tailwind text color utility", description: "Text color variable selector inside step block nodes" },
+    { name: "cardTitleWeight", type: "string", default: defaultStyles.cardTitleWeight, allowedValues: "font-medium | font-semibold | font-bold", description: "Weight design rule applied onto step titles" }
+  ]
 };
 
 export default function StepsHorizontal(componentData) {
