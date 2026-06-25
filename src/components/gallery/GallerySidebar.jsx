@@ -1,8 +1,9 @@
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, Layers } from "lucide-react";
 import { GALLERY_CATALOG } from "../../constants/galleryCatalog";
 
 const ICONS = {
   faq: HelpCircle,
+  hero: Layers,
 };
 
 export default function GallerySidebar({

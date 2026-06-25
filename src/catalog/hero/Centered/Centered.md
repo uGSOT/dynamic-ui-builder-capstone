@@ -1,49 +1,66 @@
 # Centered Hero
 
-A hero section with centered content, actions, and optional image support.
+A hero section with centered content, actions, and optional image support. Located at the very top of a landing page to capture visitor attention and drive core actions.
 
-| Prop | Type | Description |
-|---|---|---|
-| `headline` | `string` | Main title text. |
-| `subtext` | `string` | Supporting description text. |
-| `primaryAction` | `object` | `{ label, href }` for the main CTA. |
-| `secondaryAction` | `object` | `{ label, href }` for the secondary CTA. |
-| `imageUrl` | `string` (optional) | Optional image URL. |
-| `badge` | `string` (optional) | Optional supporting badge text. |
+## When to use
+
+- Above-the-fold landing page content for pre-launch, SaaS, or marketing sites
+- Clean, focused layouts where a single column flow works best
+- Pages designed to guide the user toward a single primary call to action (with optional secondary option)
 
 ## Usage
 
-
-### With default props
-
 ```jsx
-import Centered from './catalog/hero/Centered'
+import Centered from "@/catalog/hero/Centered";
 
-function Example() {
-  return <Centered />
-}
+<Centered
+  headline="Ship faster. Grow smarter."
+  subtext="The all-in-one platform for modern teams to plan, build, and scale software."
+  primaryAction={{ label: "Start free trial", href: "/signup" }}
+  secondaryAction={{ label: "Book a demo", href: "/demo" }}
+  badge="No credit card required • Cancel anytime"
+  imageUrl="/assets/screenshot.png"
+  styles={{ paddingY: 10, background: "surface" }}
+/>
 ```
 
-Renders with all fallback values: default headline, subtext, CTAs ("Start free trial" / "Book a demo"), and badge text. No image is rendered since `imageUrl` has no default.
+## Props
 
-### With props passed
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| `headline` | `string` | `"Ship faster. Grow smarter."` | No | Main heading title text |
+| `subtext` | `string` | `"The all-in-one platform..."` | No | Supporting description paragraphs |
+| `primaryAction` | `object` | `{ label: "Start free trial", href: "#" }` | No | Primary conversion button configuration |
+| `secondaryAction` | `object` | `{ label: "Book a demo", href: "#" }` | No | Secondary button configuration |
+| `badge` | `string` | `"No credit card required..."` | No | Sub-CTA supporting text badge |
+| `imageUrl` | `string` | `""` | No | Optional hero mockup/screenshot image URL |
+| `styles` | `object` | `{ paddingY: 10, background: "surface" }` | No | Token-based style overrides (see Styles) |
 
-```jsx
-import Centered from './catalog/hero/Centered'
+## Styles
 
-function Example() {
-  return (
-    <Centered
-      headline="Build faster. Launch sooner."
-      subtext="A faster way to ship your product."
-      primaryAction={{ label: 'Get started', href: '/signup' }}
-      secondaryAction={{ label: 'Learn more', href: '/about' }}
-      imageUrl="/assets/screenshot.png"
-      badge="14-day free trial"
-    />
-  )
+| Key | Type | Default | Possible values | Description |
+|-----|------|---------|-----------------|-------------|
+| `paddingY` | `number` | `10` | `4`, `6`, `8`, `10` | Vertical section padding scale |
+| `background` | `string` | `"surface"` | `"surface"`, `"muted"`, `"navy"` | Section background token |
+
+## JSON example
+
+```json
+{
+  "id": "hero-1",
+  "type": "hero",
+  "variant": "centered",
+  "props": {
+    "headline": "Ship faster. Grow smarter.",
+    "subtext": "The all-in-one platform for modern teams to plan, build, and scale software.",
+    "primaryAction": { "label": "Start free trial", "href": "/signup" },
+    "secondaryAction": { "label": "Book a demo", "href": "/demo" },
+    "badge": "No credit card required • Cancel anytime",
+    "imageUrl": "/assets/screenshot.png"
+  },
+  "styles": {
+    "paddingY": 10,
+    "background": "surface"
+  }
 }
-```
-
-All six props are overridden — custom headline, subtext, both CTAs, an image, and a custom badge.
 ```
