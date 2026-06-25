@@ -173,29 +173,29 @@ export const NAVBAR_VARIANTS = {
   "classic-sticky": {
     id: "classic-sticky",
     name: "Classic Sticky Navbar",
-    description: "Sticky navbar with a centered brand and right-side CTA",
+    description: "Logo left, links center/right, CTA button, solid background, sticks on scroll",
     component: ClassicSticky,
     defaultProps: classicStickyProps,
     defaultStyles: classicStickyStyles,
     propSchema: classicStickyPropSchema,
   },
-  "centered-logo": {
-    id: "centered-logo",
-    name: "Centered Logo Navbar",
-    description: "Centered logo with navigation links split on either side",
-    component: CenteredLogo,
-    defaultProps: centeredLogoProps,
-    defaultStyles: centeredLogoStyles,
-    propSchema: centeredLogoPropSchema,
-  },
   "transparent-hero": {
     id: "transparent-hero",
     name: "Transparent Hero Navbar",
-    description: "Hero-style transparent navbar with blur background on scroll",
+    description: "Transparent background over hero, becomes solid on scroll",
     component: TransparentHero,
     defaultProps: transparentHeroProps,
     defaultStyles: transparentHeroStyles,
     propSchema: transparentHeroPropSchema,
+  },
+  "centered-logo": {
+    id: "centered-logo",
+    name: "Centered Logo Navbar",
+    description: "Logo centered, links split left/right, CTA on far right",
+    component: CenteredLogo,
+    defaultProps: centeredLogoProps,
+    defaultStyles: centeredLogoStyles,
+    propSchema: centeredLogoPropSchema,
   },
 };
 
@@ -371,7 +371,7 @@ export const COMPONENT_REGISTRY = {
   navbar: {
     type: "navbar",
     label: "Navbar",
-    description: "Top navigation section with branding, links, and CTA",
+    description: "Top navigation on every Website",
     variants: NAVBAR_VARIANTS,
   },
   "logo-cloud": {
