@@ -11,21 +11,14 @@ export const defaultProps = {
 };
 
 export const defaultStyles = {
-  // Global Section Styles
   background: "surface",
   paddingY: 16,
-  
-  // Heading Customization
   headingColor: "text-ink",
   headingSize: "text-3xl",
   headingWeight: "font-bold",
-  
-  // Subheading Customization
   subheadingColor: "text-ink-muted",
   subheadingSize: "text-base",
   subheadingWeight: "font-normal",
-  
-  // Card Customization
   cardBg: "bg-surface-muted",
   cardTextColor: "text-ink",
   cardTitleWeight: "font-bold"
@@ -41,14 +34,14 @@ export const propSchema = {
     background: { type: "string", default: "surface", allowedValues: ["surface", "muted", "navy"] },
     paddingY: { type: "number", default: 16, allowedValues: [8, 12, 16, 20] },
     headingColor: { type: "string", default: "text-ink" },
-    headingSize: { type: "string", default: "text-3xl", allowedValues: ["text-2xl", "text-3xl", "text-4xl", "text-5xl"] },
-    headingWeight: { type: "string", default: "font-bold", allowedValues: ["font-normal", "font-medium", "font-semibold", "font-bold", "font-extrabold"] },
+    headingSize: { type: "string", default: "text-3xl" },
+    headingWeight: { type: "string", default: "font-bold" },
     subheadingColor: { type: "string", default: "text-ink-muted" },
-    subheadingSize: { type: "string", default: "text-base", allowedValues: ["text-xs", "text-sm", "text-base", "text-lg"] },
-    subheadingWeight: { type: "string", default: "font-normal", allowedValues: ["font-light", "font-normal", "font-medium"] },
+    subheadingSize: { type: "string", default: "text-base" },
+    subheadingWeight: { type: "string", default: "font-normal" },
     cardBg: { type: "string", default: "bg-surface-muted" },
     cardTextColor: { type: "string", default: "text-ink" },
-    cardTitleWeight: { type: "string", default: "font-bold", allowedValues: ["font-medium", "font-semibold", "font-bold"] }
+    cardTitleWeight: { type: "string", default: "font-bold" }
   }
 };
 
@@ -57,8 +50,6 @@ export default function StepsHorizontal(componentData) {
   const activeStyles = componentData?.styles || {};
 
   const { heading = "", subheading = "", items = [] } = activeProps || {};
-  
-  // Destructure expanded style properties with fallbacks
   const {
     background = "surface",
     paddingY = 16,
@@ -78,16 +69,8 @@ export default function StepsHorizontal(componentData) {
   return (
     <div className={`px-6 py-${paddingY} ${bgSectionClass} transition-all`}>
       <div className="mx-auto max-w-5xl text-center">
-        {heading && (
-          <h2 className={`${headingSize} ${headingWeight} ${background === "navy" && headingColor === "text-ink" ? "text-white" : headingColor} tracking-tight`}>
-            {heading}
-          </h2>
-        )}
-        {subheading && (
-          <p className={`mt-4 max-w-xl mx-auto ${subheadingSize} ${subheadingWeight} ${background === "navy" && subheadingColor === "text-ink-muted" ? "text-slate-3xl" : subheadingColor}`}>
-            {subheading}
-          </p>
-        )}
+        {heading && <h2 className={`${headingSize} ${headingWeight} ${headingColor} tracking-tight`}>{heading}</h2>}
+        {subheading && <p className={`mt-4 max-w-xl mx-auto ${subheadingSize} ${subheadingWeight} ${subheadingColor}`}>{subheading}</p>}
         
         <div className="grid gap-8 sm:grid-cols-3 mt-14 relative">
           {items.map((item, idx) => (
@@ -99,7 +82,7 @@ export default function StepsHorizontal(componentData) {
                 {item.step || `0${idx + 1}`}
               </div>
               <h3 className={`text-lg ${cardTitleWeight} ${background === "navy" ? "text-white" : cardTextColor}`}>{item.title}</h3>
-              <p className={`mt-2 text-sm ${background === "navy" ? "text-slate-400" : "text-ink-muted"}`}>{item.description}</p>
+              <p className="mt-2 text-sm opacity-80">{item.description}</p>
             </div>
           ))}
         </div>
