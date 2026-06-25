@@ -1,10 +1,11 @@
-import { HelpCircle, Layers, Menu } from "lucide-react";
+import { HelpCircle, Layers, Menu,Sparkles } from "lucide-react";
 import { GALLERY_CATALOG } from "../../constants/galleryCatalog";
 
 const ICONS = {
   faq: HelpCircle,
   hero: Layers,
   navbar: Menu,
+  features: Sparkles,
 };
 
 export default function GallerySidebar({
