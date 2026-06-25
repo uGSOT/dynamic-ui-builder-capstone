@@ -24,7 +24,7 @@ export const GALLERY_CATALOG = [
     id: "logo-cloud",
     label: "Logo Cloud",
     description: "Trusted-by social proof",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {

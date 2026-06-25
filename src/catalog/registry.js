@@ -14,44 +14,24 @@ import GroupedByCategory, {
   propSchema as groupedByCategoryPropSchema,
 } from "./faq/GroupedByCategory/GroupedByCategory.jsx";
 
-import Centered, {
-  defaultProps as centeredProps,
-  defaultStyles as centeredStyles,
-  propSchema as centeredPropSchema,
-} from "./hero/Centered/Centered.jsx";
-import SplitImageRight, {
-  defaultProps as splitImageRightProps,
-  defaultStyles as splitImageRightStyles,
-  propSchema as splitImageRightPropSchema,
-} from "./hero/SplitImageRight/SplitImageRight.jsx";
-import SplitImageLeft, {
-  defaultProps as splitImageLeftProps,
-  defaultStyles as splitImageLeftStyles,
-  propSchema as splitImageLeftPropSchema,
-} from "./hero/SplitImageLeft/SplitImageLeft.jsx";
-import WithSocialProof, {
-  defaultProps as withSocialProofProps,
-  defaultStyles as withSocialProofStyles,
-  propSchema as withSocialProofPropSchema,
-} from "./hero/WithSocialProof/WithSocialProof.jsx";
 
-import ClassicSticky, {
-  defaultProps as classicStickyProps,
-  defaultStyles as classicStickyStyles,
-  propSchema as classicStickyPropSchema,
-} from "./navbar/ClassicSticky/ClassicSticky.jsx";
+import SimpleRow, {
+  defaultProps as simpleRowProps,
+  defaultStyles as simpleRowStyles,
+  propSchema as simpleRowPropSchema,
+} from "./logo-cloud/SimpleRow/SimpleRow.jsx";
 
-import TransparentHero, {
-  defaultProps as transparentHeroProps,
-  defaultStyles as transparentHeroStyles,
-  propSchema as transparentHeroPropSchema,
-} from "./navbar/TransparentHero/TransparentHero.jsx";
+import WithHeading, {
+  defaultProps as withHeadingProps,
+  defaultStyles as withHeadingStyles,
+  propSchema as withHeadingPropSchema,
+} from "./logo-cloud/WithHeading/WithHeading.jsx";
 
-import CenteredLogo, {
-  defaultProps as centeredLogoProps,
-  defaultStyles as centeredLogoStyles,
-  propSchema as centeredLogoPropSchema,
-} from "./navbar/CenteredLogo/CenteredLogo.jsx";
+import LogoGrid, {
+  defaultProps as logoGridProps,
+  defaultStyles as logoGridStyles,
+  propSchema as logoGridPropSchema,
+} from "./logo-cloud/LogoGrid/LogoGrid.jsx";
 
 export const FAQ_VARIANTS = {
   "accordion-single": {
@@ -83,77 +63,37 @@ export const FAQ_VARIANTS = {
   },
 };
 
-export const HERO_VARIANTS = {
-  centered: {
-    id: "centered",
-    name: "Centered Hero",
-    description: "A hero section with centered content, actions, and optional image support",
-    component: Centered,
-    defaultProps: centeredProps,
-    defaultStyles: centeredStyles,
-    propSchema: centeredPropSchema,
+export const LOGO_CLOUD_VARIANTS = {
+  "simple-row": {
+    id: "simple-row",
+    name: "Simple Row",
+    description: "Grayscale logos in a horizontal row, no heading",
+    component: SimpleRow,
+    defaultProps: simpleRowProps,
+    defaultStyles: simpleRowStyles,
+    propSchema: simpleRowPropSchema,
   },
-  "split-image-right": {
-    id: "split-image-right",
-    name: "Split Image Right",
-    description: "Copy left, product screenshot/mockup right",
-    component: SplitImageRight,
-    defaultProps: splitImageRightProps,
-    defaultStyles: splitImageRightStyles,
-    propSchema: splitImageRightPropSchema,
+  "with-heading": {
+    id: "with-heading",
+    name: "With Heading",
+    description: "Short heading above logo row",
+    component: WithHeading,
+    defaultProps: withHeadingProps,
+    defaultStyles: withHeadingStyles,
+    propSchema: withHeadingPropSchema,
   },
-  "split-image-left": {
-    id: "split-image-left",
-    name: "Split Image Left",
-    description: "Image left, copy right",
-    component: SplitImageLeft,
-    defaultProps: splitImageLeftProps,
-    defaultStyles: splitImageLeftStyles,
-    propSchema: splitImageLeftPropSchema,
-  },
-  "with-social-proof": {
-    id: "with-social-proof",
-    name: "With Social Proof",
-    description: "Centered hero with customer avatar stack and proof copy below CTAs",
-    component: WithSocialProof,
-    defaultProps: withSocialProofProps,
-    defaultStyles: withSocialProofStyles,
-    propSchema: withSocialProofPropSchema,
+  "logo-grid": {
+    id: "logo-grid",
+    name: "Logo Grid",
+    description: "Logos in a 3×2 or 4×2 grid with equal spacing",
+    component: LogoGrid,
+    defaultProps: logoGridProps,
+    defaultStyles: logoGridStyles,
+    propSchema: logoGridPropSchema,
   },
 };
 
-export const NAVBAR_VARIANTS = {
-  "classic-sticky": {
-    id: "classic-sticky",
-    name: "Classic Sticky",
-    description:
-      "Logo left, links center/right, CTA button, solid background, sticks on scroll",
-    component: ClassicSticky,
-    defaultProps: classicStickyProps,
-    defaultStyles: classicStickyStyles,
-    propSchema: classicStickyPropSchema,
-  },
-  "transparent-hero": {
-    id: "transparent-hero",
-    name: "Transparent Hero",
-    description:
-      "Transparent background over hero, becomes solid on scroll",
-    component: TransparentHero,
-    defaultProps: transparentHeroProps,
-    defaultStyles: transparentHeroStyles,
-    propSchema: transparentHeroPropSchema,
-  },
-  "centered-logo": {
-    id: "centered-logo",
-    name: "Centered Logo",
-    description:
-      "Logo centered, links split left/right, CTA on far right",
-    component: CenteredLogo,
-    defaultProps: centeredLogoProps,
-    defaultStyles: centeredLogoStyles,
-    propSchema: centeredLogoPropSchema,
-  },
-};
+
 
 export const COMPONENT_REGISTRY = {
   faq: {
@@ -162,17 +102,12 @@ export const COMPONENT_REGISTRY = {
     description: "Frequently asked questions — reduces support load",
     variants: FAQ_VARIANTS,
   },
-  hero: {
-    type: "hero",
-    label: "Hero",
-    description: "Above-the-fold headline section",
-    variants: HERO_VARIANTS,
-  },
-  navbar: {
-    type: "navbar",
-    label: "Navbar",
-    description: "Top navigation on every Website",
-    variants: NAVBAR_VARIANTS,
+
+  "logo-cloud": {
+    type: "logo-cloud",
+    label: "Logo Cloud",
+    description: "Trusted-by social proof with company logos",
+    variants: LOGO_CLOUD_VARIANTS,
   },
 };
 
