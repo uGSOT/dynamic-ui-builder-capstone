@@ -38,7 +38,7 @@ export const GALLERY_CATALOG = [
     id: "how-it-works",
     label: "How It Works",
     description: "Step-by-step product flow",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {
