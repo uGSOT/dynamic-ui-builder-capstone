@@ -59,7 +59,7 @@ export const GALLERY_CATALOG = [
     id: "testimonials",
     label: "Testimonials",
     description: "Customer quotes and social proof",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {

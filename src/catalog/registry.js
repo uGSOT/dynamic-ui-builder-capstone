@@ -137,7 +137,26 @@ import SinglePlanFocus, {
 } from "./pricing/SinglePlanFocus/SinglePlanFocus.jsx";
 
 // ==========================================
-// 8. Variant Maps Definition
+// 8. Testimonials Variant Imports
+// ==========================================
+import CardGrid, {
+  defaultProps as cardGridProps,
+  defaultStyles as cardGridStyles,
+  propSchema as cardGridPropSchema,
+} from "./testimonials/CardGrid/CardGrid.jsx";
+import FeaturedSingle, {
+  defaultProps as featuredSingleProps,
+  defaultStyles as featuredSingleStyles,
+  propSchema as featuredSinglePropSchema,
+} from "./testimonials/FeaturedSingle/FeaturedSingle.jsx";
+import Carousel, {
+  defaultProps as carouselProps,
+  defaultStyles as carouselStyles,
+  propSchema as carouselPropSchema,
+} from "./testimonials/Carousel/Carousel.jsx";
+
+// ==========================================
+// 9. Variant Maps Definition
 // ==========================================
 export const FAQ_VARIANTS = {
   "accordion-single": {
@@ -358,8 +377,38 @@ export const PRICING_VARIANTS = {
   },
 };
 
+export const TESTIMONIAL_VARIANTS = {
+  "card-grid": {
+    id: "card-grid",
+    name: "Card Grid",
+    description: "3 testimonial cards with quote, name, role, avatar",
+    component: CardGrid,
+    defaultProps: cardGridProps,
+    defaultStyles: cardGridStyles,
+    propSchema: cardGridPropSchema,
+  },
+  "featured-single": {
+    id: "featured-single",
+    name: "Featured Single",
+    description: "One large quote with photo, name, company logo",
+    component: FeaturedSingle,
+    defaultProps: featuredSingleProps,
+    defaultStyles: featuredSingleStyles,
+    propSchema: featuredSinglePropSchema,
+  },
+  carousel: {
+    id: "carousel",
+    name: "Carousel",
+    description: "Horizontally scrollable testimonial cards with dot navigation",
+    component: Carousel,
+    defaultProps: carouselProps,
+    defaultStyles: carouselStyles,
+    propSchema: carouselPropSchema,
+  },
+};
+
 // ==========================================
-// 9. Centralized Component Registry Map
+// 10. Centralized Component Registry Map
 // ==========================================
 export const COMPONENT_REGISTRY = {
   faq: {
@@ -404,10 +453,16 @@ export const COMPONENT_REGISTRY = {
     description: "Pricing tables and plans subscription options",
     variants: PRICING_VARIANTS,
   },
+  testimonials: {
+    type: "testimonials",
+    label: "Testimonials",
+    description: "Customer quotes and social proof from real users",
+    variants: TESTIMONIAL_VARIANTS,
+  },
 };
 
 // ==========================================
-// 10. Schema Helper Builders
+// 11. Schema Helper Builders
 // ==========================================
 export function buildSectionConfig(type, variantId, sectionId) {
   const component = COMPONENT_REGISTRY[type];
