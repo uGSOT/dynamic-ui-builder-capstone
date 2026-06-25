@@ -1,1 +1,1 @@
-// delete this folder
+export { PRICING_VARIANTS, COMPONENT_REGISTRY, buildSectionConfig, getVariantEntry } from "../registry.js";

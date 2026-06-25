@@ -52,7 +52,7 @@ export const GALLERY_CATALOG = [
     id: "pricing",
     label: "Pricing",
     description: "Plans and pricing tables",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {

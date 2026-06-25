@@ -53,6 +53,22 @@ import CenteredLogo, {
   propSchema as centeredLogoPropSchema,
 } from "./navbar/CenteredLogo/CenteredLogo.jsx";
 
+import ThreeTier, {
+  defaultProps as threeTierProps,
+  defaultStyles as threeTierStyles,
+  propSchema as threeTierPropSchema,
+} from "./pricing/ThreeTier/ThreeTier.jsx";
+import TwoTierHighlight, {
+  defaultProps as twoTierHighlightProps,
+  defaultStyles as twoTierHighlightStyles,
+  propSchema as twoTierHighlightPropSchema,
+} from "./pricing/TwoTierHighlight/TwoTierHighlight.jsx";
+import SinglePlanFocus, {
+  defaultProps as singlePlanFocusProps,
+  defaultStyles as singlePlanFocusStyles,
+  propSchema as singlePlanFocusPropSchema,
+} from "./pricing/SinglePlanFocus/SinglePlanFocus.jsx";
+
 export const FAQ_VARIANTS = {
   "accordion-single": {
     id: "accordion-single",
@@ -155,6 +171,36 @@ export const NAVBAR_VARIANTS = {
   },
 };
 
+export const PRICING_VARIANTS = {
+  "three-tier": {
+    id: "three-tier",
+    name: "Three Tier Cards",
+    description: "Free / Pro / Enterprise cards side by side",
+    component: ThreeTier,
+    defaultProps: threeTierProps,
+    defaultStyles: threeTierStyles,
+    propSchema: threeTierPropSchema,
+  },
+  "two-tier-highlight": {
+    id: "two-tier-highlight",
+    name: "Two Tier Highlight",
+    description: "Two plans with one visually emphasized (most popular)",
+    component: TwoTierHighlight,
+    defaultProps: twoTierHighlightProps,
+    defaultStyles: twoTierHighlightStyles,
+    propSchema: twoTierHighlightPropSchema,
+  },
+  "single-plan-focus": {
+    id: "single-plan-focus",
+    name: "Single Plan Focus",
+    description: "One plan centered with feature checklist",
+    component: SinglePlanFocus,
+    defaultProps: singlePlanFocusProps,
+    defaultStyles: singlePlanFocusStyles,
+    propSchema: singlePlanFocusPropSchema,
+  },
+};
+
 export const COMPONENT_REGISTRY = {
   faq: {
     type: "faq",
@@ -173,6 +219,12 @@ export const COMPONENT_REGISTRY = {
     label: "Navbar",
     description: "Top navigation on every Website",
     variants: NAVBAR_VARIANTS,
+  },
+  pricing: {
+    type: "pricing",
+    label: "Pricing",
+    description: "Pricing tables and plans subscription options",
+    variants: PRICING_VARIANTS,
   },
 };
 
