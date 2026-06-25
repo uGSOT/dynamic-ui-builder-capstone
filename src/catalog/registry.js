@@ -71,6 +71,20 @@ import SinglePlanFocus, {
   propSchema as singlePlanFocusPropSchema,
 } from "./pricing/SinglePlanFocus/SinglePlanFocus.jsx";
 
+import ClassicSticky, {
+  defaultProps as classicStickyProps,
+  defaultStyles as classicStickyStyles,
+  propSchema as classicStickyPropSchema,
+} from "./navbar/ClassicSticky/ClassicSticky.jsx";
+
+import TransparentHero, {
+  defaultProps as transparentHeroProps,
+  defaultStyles as transparentHeroStyles,
+  propSchema as transparentHeroPropSchema,
+} from "./navbar/TransparentHero/TransparentHero.jsx";
+
+
+
 export const FAQ_VARIANTS = {
   "accordion-single": {
     id: "accordion-single",
@@ -101,6 +115,40 @@ export const FAQ_VARIANTS = {
   },
 };
 
+export const NAVBAR_VARIANTS = {
+  "classic-sticky": {
+    id: "classic-sticky",
+    name: "Classic Sticky",
+    description:
+      "Logo left, links center/right, CTA button, solid background, sticks on scroll",
+    component: ClassicSticky,
+    defaultProps: classicStickyProps,
+    defaultStyles: classicStickyStyles,
+    propSchema: classicStickyPropSchema,
+  },
+  "transparent-hero": {
+    id: "transparent-hero",
+    name: "Transparent Hero",
+    description:
+      "Transparent background over hero, becomes solid on scroll",
+    component: TransparentHero,
+    defaultProps: transparentHeroProps,
+    defaultStyles: transparentHeroStyles,
+    propSchema: transparentHeroPropSchema,
+  },
+  "centered-logo": {
+    id: "centered-logo",
+    name: "Centered Logo",
+    description:
+      "Logo centered, links split left/right, CTA on far right",
+    component: CenteredLogo,
+    defaultProps: centeredLogoProps,
+    defaultStyles: centeredLogoStyles,
+    propSchema: centeredLogoPropSchema,
+  },
+};
+
+
 export const LOGO_CLOUD_VARIANTS = {
   "simple-row": {
     id: "simple-row",
@@ -130,8 +178,6 @@ export const LOGO_CLOUD_VARIANTS = {
     propSchema: logoGridPropSchema,
   },
 };
-
-
 
 export const PRICING_VARIANTS = {
   "three-tier": {
@@ -200,7 +246,6 @@ export const COMPONENT_REGISTRY = {
     description: "Frequently asked questions — reduces support load",
     variants: FAQ_VARIANTS,
   },
-
   "logo-cloud": {
     type: "logo-cloud",
     label: "Logo Cloud",
@@ -218,7 +263,13 @@ export const COMPONENT_REGISTRY = {
     label: "Features",
     description: "Product benefits and capabilities—the core what we do section.",
     variants: FEATURES_VARIANTS
-  }
+  },
+   navbar: {
+    type: "navbar",
+    label: "Navbar",
+    description: "Top navigation on every  Website",
+    variants: NAVBAR_VARIANTS,
+  },
 };
 
 export function buildSectionConfig(type, variantId, sectionId) {
