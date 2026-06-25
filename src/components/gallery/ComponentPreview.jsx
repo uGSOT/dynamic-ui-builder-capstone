@@ -1,5 +1,6 @@
 import { Eye } from "lucide-react";
 import { getVariantEntry } from "../../catalog/registry";
+import NavbarGalleryPreview from "./NavbarGalleryPreview";
 
 export default function ComponentPreview({ sectionConfig }) {
   const variantEntry = getVariantEntry(
@@ -16,6 +17,13 @@ export default function ComponentPreview({ sectionConfig }) {
   }
 
   const PreviewComponent = variantEntry.component;
+  const componentKey = `${sectionConfig.variant}-${sectionConfig.id}`;
+  const componentProps = {
+    ...(sectionConfig.props ?? {}),
+    styles: sectionConfig.styles ?? {},
+  };
+
+  const isNavbar = sectionConfig.type === "navbar";
 
   return (
     <section className="border-b border-border">
@@ -25,15 +33,25 @@ export default function ComponentPreview({ sectionConfig }) {
         <span className="rounded bg-surface-muted px-2 py-0.5 text-xs font-medium text-ink-muted">
           {sectionConfig.type} / {sectionConfig.variant}
         </span>
+        {isNavbar && (
+          <span className="text-xs text-ink-subtle">
+            click nav links to switch hero section
+          </span>
+        )}
       </div>
 
       <div className="bg-surface-subtle py-2">
-        <div className="mx-auto w-full max-w-5xl">
-          <PreviewComponent
-            key={`${sectionConfig.variant}-${sectionConfig.id}`}
-            {...(sectionConfig.props ?? {})}
-            styles={sectionConfig.styles ?? {}}
-          />
+        <div className={`mx-auto w-full ${isNavbar ? "" : "max-w-5xl"}`}>
+          {isNavbar ? (
+            <NavbarGalleryPreview
+              PreviewComponent={PreviewComponent}
+              componentProps={componentProps}
+              variant={sectionConfig.variant}
+              componentKey={componentKey}
+            />
+          ) : (
+            <PreviewComponent key={componentKey} {...componentProps} />
+          )}
         </div>
       </div>
     </section>
