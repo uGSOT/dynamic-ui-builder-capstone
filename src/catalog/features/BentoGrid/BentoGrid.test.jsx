@@ -1,108 +1,79 @@
 import { render, screen } from "@testing-library/react";
-import BentoGrid, { defaultProps } from "./BentoGrid";
+import BentoGrid, { defaultProps, defaultStyles } from "./BentoGrid";
 
-function renderComponent(props = {}) {
-  return render(<BentoGrid {...defaultProps} {...props} />);
+function renderComponent(props = {}, styles = {}) {
+  return render(
+    <BentoGrid
+      {...defaultProps}
+      {...props}
+      styles={{ ...defaultStyles, ...styles }}
+    />
+  );
 }
 
 describe("BentoGrid", () => {
-  // ── Rendering ──────────────────────────────────────────────────────────────
-
   it("renders the heading", () => {
     renderComponent();
     expect(screen.getByText(defaultProps.heading)).toBeInTheDocument();
   });
 
-  it("renders the subheading when provided", () => {
-    renderComponent({ subheading: "Custom sub" });
-    expect(screen.getByText("Custom sub")).toBeInTheDocument();
+  it("renders the subheading", () => {
+    renderComponent();
+    expect(screen.getByText(defaultProps.subheading)).toBeInTheDocument();
   });
 
-  it("does not render subheading when omitted", () => {
-    renderComponent({ subheading: undefined });
+  it("hides subheading when empty string", () => {
+    renderComponent({ subheading: "" });
     expect(screen.queryByText(defaultProps.subheading)).not.toBeInTheDocument();
   });
 
   it("renders all 7 feature titles", () => {
     renderComponent();
-    defaultProps.features.forEach((f) => {
-      expect(screen.getByText(f.title)).toBeInTheDocument();
-    });
+    defaultProps.features.forEach((f) =>
+      expect(screen.getByText(f.title)).toBeInTheDocument()
+    );
   });
 
   it("renders all 7 feature descriptions", () => {
     renderComponent();
-    defaultProps.features.forEach((f) => {
-      expect(screen.getByText(f.description)).toBeInTheDocument();
-    });
+    defaultProps.features.forEach((f) =>
+      expect(screen.getByText(f.description)).toBeInTheDocument()
+    );
   });
 
-  it("renders the hero tag when provided", () => {
-    renderComponent();
-    const heroFeature = defaultProps.features.find((f) => f.slot === "hero" && f.tag);
-    if (heroFeature) {
-      expect(screen.getByText(heroFeature.tag)).toBeInTheDocument();
-    }
+  it("has exactly 1 hero feature in default data", () => {
+    expect(defaultProps.features.filter((f) => f.slot === "hero").length).toBe(1);
   });
 
-  // ── Slots ──────────────────────────────────────────────────────────────────
-
-  it("renders exactly 1 hero feature", () => {
-    renderComponent();
-    const heroes = defaultProps.features.filter((f) => f.slot === "hero");
-    expect(heroes.length).toBe(1);
+  it("has exactly 2 medium features in default data", () => {
+    expect(defaultProps.features.filter((f) => f.slot === "medium").length).toBe(2);
   });
 
-  it("renders exactly 2 medium features", () => {
-    renderComponent();
-    const mediums = defaultProps.features.filter((f) => f.slot === "medium");
-    expect(mediums.length).toBe(2);
+  it("has exactly 4 small features in default data", () => {
+    expect(defaultProps.features.filter((f) => f.slot === "small").length).toBe(4);
   });
 
-  it("renders exactly 4 small features", () => {
-    renderComponent();
-    const smalls = defaultProps.features.filter((f) => f.slot === "small");
-    expect(smalls.length).toBe(4);
+  it("renders without crashing on dark background", () => {
+    expect(() => renderComponent({}, { background: "dark" })).not.toThrow();
   });
-
-  // ── Size ───────────────────────────────────────────────────────────────────
-
-  it("applies sm size classes to section", () => {
-    const { container } = renderComponent({ size: "sm" });
-    expect(container.querySelector("section").className).toContain("py-12");
-  });
-
-  it("applies md size classes to section", () => {
-    const { container } = renderComponent({ size: "md" });
-    expect(container.querySelector("section").className).toContain("py-16");
-  });
-
-  it("applies lg size classes to section", () => {
-    const { container } = renderComponent({ size: "lg" });
-    expect(container.querySelector("section").className).toContain("py-24");
-  });
-
-  // ── Accent colour ──────────────────────────────────────────────────────────
 
   it("renders without crashing for all accent colours", () => {
-    ["indigo", "violet", "emerald", "rose"].forEach((color) => {
-      const { unmount } = renderComponent({ accentColor: color });
+    ["indigo", "violet", "emerald", "rose", "blue"].forEach((color) => {
+      const { unmount } = renderComponent({}, { accentColor: color });
       expect(screen.getByText(defaultProps.heading)).toBeInTheDocument();
       unmount();
     });
   });
 
-  it("falls back to indigo for an unknown accent colour", () => {
-    expect(() => renderComponent({ accentColor: "banana" })).not.toThrow();
+  it("falls back to Star icon for unknown icon names", () => {
+    const features = defaultProps.features.map((f, i) =>
+      i === 0 ? { ...f, icon: "NotReal" } : f
+    );
+    expect(() => renderComponent({ features })).not.toThrow();
   });
 
-  // ── Icon fallback ──────────────────────────────────────────────────────────
-
-  it("falls back to Star icon for unknown icon names", () => {
-    const features = [
-      { ...defaultProps.features[0], icon: "NotARealIcon" },
-      ...defaultProps.features.slice(1),
-    ];
+  it("renders with no small cards without crashing", () => {
+    const features = defaultProps.features.filter((f) => f.slot !== "small");
     expect(() => renderComponent({ features })).not.toThrow();
   });
 });

@@ -1,173 +1,105 @@
-import * as LucideIcons from "lucide-react";
+import FeatureSectionHeader from "../FeatureSectionHeader";
+import FeatureIconCard from "../FeatureIconCard";
+import {
+  FEATURE_STYLE_DEFAULTS,
+  FEATURE_STYLE_PROP_SCHEMA,
+  resolveFeatureStyles,
+} from "../featureStyles";
+import { SAMPLE_FEATURES } from "../defaultProps";
+
 
 export const defaultProps = {
   heading: "Everything you need to ship faster",
-  subheading: "A complete toolkit for modern product teams — from idea to production.",
+  subheading:
+    "A complete toolkit for modern product teams — from idea to production.",
   columns: 3,
-  iconSize: "md",
-  cardStyle: "bordered",
-  align: "left",
-  features: [
+  showTags: false,
+  features: SAMPLE_FEATURES.slice(0, 6),
+};
+
+export const defaultStyles = { ...FEATURE_STYLE_DEFAULTS };
+
+export const propSchema = {
+  props: [
     {
-      id: "f1",
-      icon: "Zap",
-      title: "Blazing Fast",
-      description: "Optimised for performance from day one. No bloat, no compromise.",
+      name: "heading",
+      type: "string",
+      default: defaultProps.heading,
+      allowedValues: "Any string",
+      description: "Section title shown above the grid",
     },
     {
-      id: "f2",
-      icon: "Shield",
-      title: "Secure by Default",
-      description: "End-to-end encryption and role-based access out of the box.",
+      name: "subheading",
+      type: "string",
+      default: defaultProps.subheading,
+      allowedValues: 'Any string (use "" to hide)',
+      description: "Supporting paragraph below the heading",
     },
     {
-      id: "f3",
-      icon: "Layers",
-      title: "Composable",
-      description: "Mix and match components to build exactly what your users need.",
+      name: "columns",
+      type: "number",
+      default: defaultProps.columns,
+      allowedValues: "2 | 3",
+      description:
+        "Number of columns on desktop. Mobile is always 1 col, tablet always 2.",
     },
     {
-      id: "f4",
-      icon: "BarChart2",
-      title: "Deep Analytics",
-      description: "Real-time dashboards with actionable insights built in.",
+      name: "showTags",
+      type: "boolean",
+      default: defaultProps.showTags,
+      allowedValues: "true | false",
+      description: "Show or hide the coloured tag pill on each card",
     },
     {
-      id: "f5",
-      icon: "Globe",
-      title: "Global CDN",
-      description: "Deploy to 30+ regions instantly. Sub-100ms latency worldwide.",
-    },
-    {
-      id: "f6",
-      icon: "Plug",
-      title: "100+ Integrations",
-      description: "Connect to every tool your team already uses in one click.",
+      name: "features",
+      type: "Array<{ id, icon, tag, title, description }>",
+      default: "[6 sample features]",
+      allowedValues: "Array of feature objects",
+      description:
+        "List of feature cards to display. icon must be a valid Lucide icon name.",
     },
   ],
+  styles: FEATURE_STYLE_PROP_SCHEMA,
 };
 
-const SIZE = {
-  sm: {
-    section: "px-4 py-12",
-    heading: "text-2xl",
-    subheading: "text-sm mt-3 mb-8",
-    grid: "gap-4",
-    card: "p-4",
-    iconWrap: "h-8 w-8 mb-3",
-    iconSize: 16,
-    title: "text-sm font-semibold mb-1",
-    description: "text-xs",
-  },
-  md: {
-    section: "px-6 py-16",
-    heading: "text-3xl",
-    subheading: "text-base mt-4 mb-10",
-    grid: "gap-5",
-    card: "p-5",
-    iconWrap: "h-10 w-10 mb-4",
-    iconSize: 20,
-    title: "text-base font-semibold mb-1.5",
-    description: "text-sm",
-  },
-  lg: {
-    section: "px-8 py-24",
-    heading: "text-4xl",
-    subheading: "text-lg mt-4 mb-14",
-    grid: "gap-6",
-    card: "p-6",
-    iconWrap: "h-12 w-12 mb-5",
-    iconSize: 24,
-    title: "text-lg font-semibold mb-2",
-    description: "text-base",
-  },
-};
-
-const CARD_STYLE = {
-  bordered: "rounded-xl border border-[#2a2a3a] bg-[#111118]",
-  filled:   "rounded-xl bg-[#1a1a24]",
-  ghost:    "rounded-xl",
-};
-
-
-const ICON_WRAP_COLOR = "bg-indigo-500/15 text-indigo-400 rounded-lg flex items-center justify-center";
-
-
-function gridColClass(columns) {
-  // Always 1 col on sm, 2 on md, then user-chosen on lg
-  if (columns === 2) return "grid-cols-1 sm:grid-cols-2";
-  if (columns === 3) return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
-  return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"; // 6 treated as 3 cols
-}
-
-// ─── Component ───────────────────────────────────────────────────────────────
-
-/**
- * IconGrid — Features variant
- *
- * @param {object}   props
- * @param {string}   props.heading          - Section heading text
- * @param {string}   [props.subheading]     - Optional subheading below heading
- * @param {number}   [props.columns=3]      - Number of columns: 2 | 3 (6 features auto-wraps)
- * @param {"sm"|"md"|"lg"} [props.size="lg"] - Component size breakpoint
- * @param {"left"|"center"} [props.align="left"] - Text alignment for header and cards
- * @param {"bordered"|"filled"|"ghost"} [props.cardStyle="bordered"] - Visual style of each card
- * @param {"sm"|"md"|"lg"} [props.iconSize="md"] - Size of the icon wrapper
- * @param {Array}    props.features         - Array of feature objects
- * @param {string}   props.features[].id   - Unique key
- * @param {string}   props.features[].icon - Lucide icon name (e.g. "Zap")
- * @param {string}   props.features[].title
- * @param {string}   props.features[].description
- */
 export default function IconGrid({
   heading    = defaultProps.heading,
   subheading = defaultProps.subheading,
   columns    = defaultProps.columns,
-  size       = "lg",
-  align      = defaultProps.align,
-  cardStyle  = defaultProps.cardStyle,
+  showTags   = defaultProps.showTags,
   features   = defaultProps.features,
+  styles     = defaultStyles,
 }) {
-  const t = SIZE[size] ?? SIZE.lg;
-  const alignClass = align === "center" ? "text-center" : "text-left";
-  const alignItems = align === "center" ? "items-center" : "items-start";
+  const { sectionClass, inverted, accent, headingAlign } = resolveFeatureStyles(styles);
+
+  const colClass =
+    columns === 2
+      ? "grid-cols-1 sm:grid-cols-2"
+      : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
 
   return (
-    <section className={`w-full bg-[#0a0a0f] ${t.section}`}>
-      <div className="mx-auto max-w-7xl">
+    <section className={`w-full ${sectionClass}`}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        {/* Header */}
-        <div className={`max-w-2xl ${align === "center" ? "mx-auto" : ""} ${alignClass}`}>
-          <h2 className={`font-bold tracking-tight text-[#f1f1f5] ${t.heading}`}>
-            {heading}
-          </h2>
-          {subheading && (
-            <p className={`text-[#9898b0] ${t.subheading}`}>{subheading}</p>
-          )}
-        </div>
+        <FeatureSectionHeader
+          heading={heading}
+          subheading={subheading}
+          inverted={inverted}
+          align={headingAlign}
+        />
 
-        {/* Grid */}
-        <div className={`grid ${gridColClass(columns)} ${t.grid}`}>
-          {features.map((feature) => {
-            const Icon = LucideIcons[feature.icon] ?? LucideIcons.Star;
-            return (
-              <div
-                key={feature.id}
-                className={`flex flex-col ${alignItems} ${CARD_STYLE[cardStyle] ?? CARD_STYLE.bordered} ${t.card}`}
-              >
-                {/* Icon */}
-                <div className={`${ICON_WRAP_COLOR} ${t.iconWrap}`}>
-                  <Icon size={t.iconSize} />
-                </div>
-
-                {/* Text */}
-                <p className={`text-[#f1f1f5] ${t.title}`}>{feature.title}</p>
-                <p className={`text-[#9898b0] leading-relaxed ${t.description}`}>
-                  {feature.description}
-                </p>
-              </div>
-            );
-          })}
+        <div className={`grid ${colClass} gap-6`}>
+          {features.map((feature) => (
+            <FeatureIconCard
+              key={feature.id}
+              icon={feature.icon}
+              title={feature.title}
+              description={feature.description}
+              tag={showTags ? feature.tag : null}
+              accent={accent}
+              inverted={inverted}
+            />
+          ))}
         </div>
 
       </div>

@@ -2,14 +2,12 @@
 
 **Type:** `features` · **Variant:** `alternating-rows`
 
-Displays 3–4 key features as full-width rows where the image/illustration and copy alternate sides with each row. Ideal for deep-diving on a small number of important capabilities.
+Feature rows where the image/illustration and copy alternate sides on each row.
+Best for a deep-dive on 2–4 key capabilities.
 
 ---
 
-## Location
-`src/catalog/features/AlternatingRows/`
-
-## Structure
+## File structure
 ```
 AlternatingRows/
 ├── index.js
@@ -22,99 +20,88 @@ AlternatingRows/
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `heading` | `string` | `"A deeper look at what we built"` | Section heading |
-| `subheading` | `string \| undefined` | `"Every feature is designed…"` | Optional paragraph below heading. Omit to hide. |
-| `imagePosition` | `"right-first" \| "left-first"` | `"right-first"` | Controls which side the image appears on for the **first** row. All subsequent rows alternate automatically. |
-| `showImageFallback` | `boolean` | `true` | When `true` and a feature has no `image` URL, renders a gradient placeholder with the feature's icon centred inside it. Set to `false` to collapse the image column entirely for text-only rows. |
-| `size` | `"sm" \| "md" \| "lg"` | `"lg"` | Controls all spacing, font sizes, and image heights together. |
-| `features` | `Feature[]` | 3 defaults | Array of feature row objects — see schema below. |
+| Prop | Type | Default | Allowed values | Description |
+|------|------|---------|----------------|-------------|
+| `heading` | string | `"A deeper look at what we built"` | Any string | Section title |
+| `subheading` | string | `"Every feature is designed…"` | Any string, `""` to hide | Supporting paragraph |
+| `imagePosition` | string | `"right-first"` | `"right-first"` \| `"left-first"` | Which side the image goes on for row 1. All rows alternate from there. |
+| `showBullets` | boolean | `true` | `true` \| `false` | Show/hide the bullet checklist below each row's description |
+| `showTags` | boolean | `true` | `true` \| `false` | Show/hide the tag pill above each row title |
+| `features` | array | 3 samples | See schema below | Feature rows. Recommend 2–4 items. |
 
-### Feature object schema
-
+### Feature object
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `id` | `string` | ✅ | Unique key for React rendering |
-| `icon` | `string` | ✅ | Lucide icon name — used in the tag badge and as the fallback illustration icon |
-| `tag` | `string` | ❌ | Small pill label above the title (e.g. `"Performance"`, `"Security"`). Omit to hide. |
-| `title` | `string` | ✅ | Row heading |
-| `description` | `string` | ✅ | One to three sentence body paragraph |
-| `bullets` | `string[]` | ❌ | Optional bullet point list rendered below the description with check icons. Omit or pass `[]` to hide. |
-| `image` | `string \| null` | ❌ | URL of a screenshot or illustration. Pass `null` to use the fallback. |
+| `id` | string | ✅ | Unique key |
+| `icon` | string | ✅ | Lucide icon name. Used in the image fallback illustration |
+| `tag` | string | ❌ | Short label e.g. `"Performance"`. Shown when `showTags` is `true` |
+| `title` | string | ✅ | Row heading |
+| `description` | string | ✅ | 2–3 sentence body paragraph |
+| `bullets` | string[] | ❌ | Checklist items. Shown when `showBullets` is `true` |
+| `image` | string \| null | ❌ | Image URL. Pass `null` to show the gradient fallback illustration |
 
 ---
 
-## Size breakpoints
+## Styles
 
-| Size | Section padding | Row gap | Heading | Description | Image height |
-|------|----------------|---------|---------|-------------|--------------|
-| `sm` | `px-4 py-12` | `gap-12` | `text-2xl` | `text-sm` | `h-48` |
-| `md` | `px-6 py-16` | `gap-16` | `text-3xl` | `text-sm` | `h-64` |
-| `lg` | `px-8 py-24` | `gap-24` | `text-4xl` | `text-base` | `h-80` |
-
-On **mobile (390px)** all rows are stacked — copy on top, image below.
-On **desktop (1280px)** rows are side-by-side and alternate automatically.
+| Prop | Type | Default | Allowed values | Description |
+|------|------|---------|----------------|-------------|
+| `paddingY` | number | `6` | `1`–`12` | Vertical section padding |
+| `background` | string | `"white"` | `"white"` \| `"gray"` \| `"dark"` | Section background |
+| `headingAlign` | string | `"left"` | `"left"` \| `"center"` | Heading alignment |
+| `accentColor` | string | `"indigo"` | `"indigo"` \| `"violet"` \| `"emerald"` \| `"rose"` \| `"blue"` | Bullet check and tag colour |
 
 ---
 
-## What each prop changes
+## What each change does
 
-- **`heading`** — The large bold text at the top of the section.
-- **`subheading`** — Muted paragraph under the heading. Remove the prop to collapse it.
-- **`imagePosition`** — Setting `"right-first"` puts the image on the right for row 1 (copy left), then alternates. `"left-first"` does the opposite.
-- **`showImageFallback`** — Controls whether rows without an image URL get a gradient placeholder or render as text-only columns.
-- **`size`** — Scales the entire component uniformly. Use `"sm"` for mobile preview, `"lg"` for full desktop.
-- **`features[].tag`** — The coloured pill badge above the row title. Use short nouns like `"Performance"` or `"Security"`.
-- **`features[].bullets`** — Checklist items rendered below the description. Great for listing specific specs or guarantees.
-- **`features[].image`** — A real URL here replaces the fallback with an `<img>` tag. Use product screenshots or diagrams.
+- **`imagePosition: "left-first"`** — Flips the layout so the first row has image on left, copy on right. All rows keep alternating.
+- **`showBullets: false`** — Hides the checklist on all rows
+- **`showTags: false`** — Hides the tag pill on all rows
+- **`features[].image`** — Add a real URL to replace the gradient placeholder with a screenshot
+- **`features[].bullets`** — Add strings to show a checklist. An empty array hides the list for that row
+- **`styles.accentColor: "emerald"`** — Switches bullet icons and tag pills to emerald green
 
 ---
 
-## Usage example
+## JSON example
 
-```jsx
-import AlternatingRows from "@/catalog/features/AlternatingRows";
-
-<AlternatingRows
-  heading="Built for serious teams"
-  subheading="Everything you need, nothing you don't."
-  imagePosition="right-first"
-  showImageFallback={true}
-  size="lg"
-  features={[
-    {
-      id: "f1",
-      icon: "Zap",
-      tag: "Speed",
-      title: "Deploy in under 30 seconds",
-      description: "From git push to globally distributed in a single step.",
-      bullets: ["Zero config", "Automatic rollbacks", "Edge delivery"],
-      image: "/screenshots/deploy.png",
-    },
-    {
-      id: "f2",
-      icon: "Shield",
-      tag: "Security",
-      title: "Security built in, not bolted on",
-      description: "SOC 2 certified with fine-grained access controls.",
-      bullets: ["SAML SSO", "Audit logs", "Role-based access"],
-      image: null,
-    },
-  ]}
-/>
-```
-
----
-
-## Registry entry
-
-```js
-// catalog/registry.js
-import AlternatingRows, { defaultProps as alternatingRowsDefaults } from "./features/AlternatingRows";
-
-registry.features["alternating-rows"] = {
-  component: AlternatingRows,
-  defaultProps: alternatingRowsDefaults,
-};
+```json
+{
+  "type": "features",
+  "variant": "alternating-rows",
+  "props": {
+    "heading": "Built for serious teams",
+    "subheading": "Everything you need, nothing you don't.",
+    "imagePosition": "right-first",
+    "showBullets": true,
+    "showTags": true,
+    "features": [
+      {
+        "id": "f1",
+        "icon": "Zap",
+        "tag": "Speed",
+        "title": "Deploy in under 30 seconds",
+        "description": "From git push to globally distributed in a single step.",
+        "bullets": ["Zero config", "Automatic rollbacks", "Edge delivery"],
+        "image": null
+      },
+      {
+        "id": "f2",
+        "icon": "Shield",
+        "tag": "Security",
+        "title": "Security built in, not bolted on",
+        "description": "SOC 2 certified with fine-grained access controls.",
+        "bullets": ["SAML SSO", "Audit logs", "Role-based access"],
+        "image": null
+      }
+    ]
+  },
+  "styles": {
+    "paddingY": 8,
+    "background": "white",
+    "headingAlign": "left",
+    "accentColor": "indigo"
+  }
+}
 ```

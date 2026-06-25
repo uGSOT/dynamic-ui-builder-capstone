@@ -31,7 +31,7 @@ export const GALLERY_CATALOG = [
     id: "features",
     label: "Features",
     description: "Product benefits and capabilities",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {

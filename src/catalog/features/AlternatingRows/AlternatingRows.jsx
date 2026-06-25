@@ -1,229 +1,204 @@
 import * as LucideIcons from "lucide-react";
+import FeatureSectionHeader from "../FeatureSectionHeader";
+import FeatureImageSlot from "../FeatureImageSlot";
+import {
+  FEATURE_STYLE_DEFAULTS,
+  FEATURE_STYLE_PROP_SCHEMA,
+  resolveFeatureStyles,
+} from "../featureStyles";
+import { SAMPLE_FEATURES } from "../defaultProps";
 
-// ─── Defaults ────────────────────────────────────────────────────────────────
+// ─── Default props ────────────────────────────────────────────────────────────
 
 export const defaultProps = {
   heading: "A deeper look at what we built",
-  subheading: "Every feature is designed around real workflows — not checkboxes.",
+  subheading:
+    "Every feature is designed around real workflows — not checkboxes.",
   imagePosition: "right-first",
-  showImageFallback: true,
-  size: "lg",
-  features: [
+  showBullets: true,
+  showTags: true,
+  features: SAMPLE_FEATURES.slice(0, 3),
+};
+
+export const defaultStyles = { ...FEATURE_STYLE_DEFAULTS };
+
+// ─── Prop schema ──────────────────────────────────────────────────────────────
+
+export const propSchema = {
+  props: [
     {
-      id: "f1",
-      icon: "Zap",
-      tag: "Performance",
-      title: "Ship in seconds, not hours",
-      description:
-        "Our build pipeline is optimised end-to-end. From a single git push to a globally distributed deploy in under 30 seconds — no config required.",
-      bullets: ["Zero cold starts", "Edge-optimised delivery", "Automatic rollbacks"],
-      image: null,
+      name: "heading",
+      type: "string",
+      default: defaultProps.heading,
+      allowedValues: "Any string",
+      description: "Section title",
     },
     {
-      id: "f2",
-      icon: "Shield",
-      tag: "Security",
-      title: "Enterprise-grade security, zero overhead",
-      description:
-        "Role-based access, audit logs, and SSO come standard. Security isn't a paid add-on — it's baked into every layer of the platform.",
-      bullets: ["SOC 2 Type II certified", "SAML & OIDC SSO", "Fine-grained permissions"],
-      image: null,
+      name: "subheading",
+      type: "string",
+      default: defaultProps.subheading,
+      allowedValues: 'Any string (use "" to hide)',
+      description: "Supporting paragraph below the heading",
     },
     {
-      id: "f3",
-      icon: "BarChart2",
-      tag: "Observability",
-      title: "See everything that matters",
+      name: "imagePosition",
+      type: "string",
+      default: defaultProps.imagePosition,
+      allowedValues: '"right-first" | "left-first"',
       description:
-        "Real-time traces, error tracking, and custom dashboards out of the box. No more grepping logs at 2 AM trying to find a silent failure.",
-      bullets: ["P99 latency tracking", "Custom alert rules", "One-click log tailing"],
-      image: null,
+        "Which side the image appears on for the first row. Rows alternate automatically after that.",
+    },
+    {
+      name: "showBullets",
+      type: "boolean",
+      default: defaultProps.showBullets,
+      allowedValues: "true | false",
+      description: "Show or hide the bullet checklist on each row",
+    },
+    {
+      name: "showTags",
+      type: "boolean",
+      default: defaultProps.showTags,
+      allowedValues: "true | false",
+      description: "Show or hide the tag pill above each row title",
+    },
+    {
+      name: "features",
+      type: "Array<{ id, icon, tag, title, description, bullets, image }>",
+      default: "[3 sample features]",
+      allowedValues: "Array of feature objects",
+      description: "Feature rows to display. Recommend 2–4 items.",
     },
   ],
+  styles: FEATURE_STYLE_PROP_SCHEMA,
 };
 
-// ─── Size tokens ─────────────────────────────────────────────────────────────
+// ─── Sub-component: one alternating row ───────────────────────────────────────
 
-const SIZE = {
-  sm: {
-    section: "px-4 py-12",
-    rowGap: "gap-12",
-    heading: "text-2xl",
-    subheading: "text-sm mt-3 mb-10",
-    tag: "text-xs px-2 py-0.5 mb-3",
-    title: "text-xl font-bold mb-3",
-    description: "text-sm leading-relaxed mb-4",
-    bullet: "text-xs",
-    bulletIcon: 12,
-    iconWrap: "h-7 w-7",
-    iconSize: 14,
-    imageFallback: "h-48 rounded-xl",
-    imageReal: "h-48 w-full rounded-xl object-cover",
-  },
-  md: {
-    section: "px-6 py-16",
-    rowGap: "gap-16",
-    heading: "text-3xl",
-    subheading: "text-base mt-4 mb-12",
-    tag: "text-xs px-2.5 py-1 mb-4",
-    title: "text-2xl font-bold mb-4",
-    description: "text-sm leading-relaxed mb-5",
-    bullet: "text-sm",
-    bulletIcon: 14,
-    iconWrap: "h-8 w-8",
-    iconSize: 16,
-    imageFallback: "h-64 rounded-2xl",
-    imageReal: "h-64 w-full rounded-2xl object-cover",
-  },
-  lg: {
-    section: "px-8 py-24",
-    rowGap: "gap-24",
-    heading: "text-4xl",
-    subheading: "text-lg mt-4 mb-16",
-    tag: "text-xs px-3 py-1 mb-4",
-    title: "text-3xl font-bold mb-5",
-    description: "text-base leading-relaxed mb-6",
-    bullet: "text-sm",
-    bulletIcon: 14,
-    iconWrap: "h-10 w-10",
-    iconSize: 20,
-    imageFallback: "h-80 rounded-2xl",
-    imageReal: "h-80 w-full rounded-2xl object-cover",
-  },
-};
+function FeatureRow({
+  feature,
+  imageOnRight,
+  showBullets,
+  showTags,
+  accent,
+  inverted,
+}) {
+  const titleColor = inverted ? "text-white" : "text-gray-900";
+  const descColor  = inverted ? "text-gray-300" : "text-gray-500";
+  const bulletColor = inverted ? "text-gray-300" : "text-gray-600";
 
-// ─── Fallback illustration ────────────────────────────────────────────────────
-
-function ImageFallback({ icon, sizeClass }) {
-  const Icon = LucideIcons[icon] ?? LucideIcons.Star;
   return (
     <div
-      className={`${sizeClass} w-full flex items-center justify-center bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-[#2a2a3a]`}
+      className={`flex flex-col gap-10 lg:items-center ${
+        imageOnRight ? "lg:flex-row" : "lg:flex-row-reverse"
+      }`}
     >
-      <Icon size={48} className="text-indigo-400/40" />
+      {/* Copy side */}
+      <div className="flex-1">
+        {/* Tag */}
+        {showTags && feature.tag && (
+          <span
+            className={`mb-4 inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${accent.tagBg} ${accent.tagText}`}
+          >
+            {feature.tag}
+          </span>
+        )}
+
+        {/* Title */}
+        <h3 className={`text-2xl font-bold tracking-tight sm:text-3xl ${titleColor}`}>
+          {feature.title}
+        </h3>
+
+        {/* Description */}
+        <p className={`mt-4 text-base leading-relaxed ${descColor}`}>
+          {feature.description}
+        </p>
+
+        {/* Bullets */}
+        {showBullets && Array.isArray(feature.bullets) && feature.bullets.length > 0 && (
+          <ul className="mt-6 space-y-2">
+            {feature.bullets.map((bullet, i) => (
+              <li key={i} className="flex items-center gap-2.5">
+                <LucideIcons.Check
+                  size={16}
+                  className={`shrink-0 ${accent.iconText}`}
+                />
+                <span className={`text-sm ${bulletColor}`}>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      {/* Image side */}
+      <div className="flex-1">
+        <FeatureImageSlot
+          src={feature.image}
+          alt={feature.title}
+          icon={feature.icon}
+          accent={accent}
+          className="h-64 lg:h-80"
+        />
+      </div>
     </div>
   );
 }
 
-// ─── Component ───────────────────────────────────────────────────────────────
+// ─── Component ────────────────────────────────────────────────────────────────
 
 /**
- * AlternatingRows — Features variant
+ * AlternatingRows
  *
- * @param {object}   props
- * @param {string}   props.heading                    - Section heading
- * @param {string}   [props.subheading]               - Optional subheading
- * @param {"right-first"|"left-first"} [props.imagePosition="right-first"]
- *   - Which side the image appears on for the first row. Subsequent rows alternate automatically.
- * @param {boolean}  [props.showImageFallback=true]   - Show a gradient placeholder when no image URL is provided
- * @param {"sm"|"md"|"lg"} [props.size="lg"]          - Component size
- * @param {Array}    props.features                   - Array of feature row objects
- * @param {string}   props.features[].id              - Unique key
- * @param {string}   props.features[].icon            - Lucide icon name used in tag and fallback illustration
- * @param {string}   [props.features[].tag]           - Small label above the title (e.g. "Performance")
- * @param {string}   props.features[].title           - Row heading
- * @param {string}   props.features[].description     - Body paragraph
- * @param {string[]} [props.features[].bullets]       - Optional bullet point list
- * @param {string|null} [props.features[].image]      - Image URL; null shows the fallback illustration
+ * Feature rows where the image and copy alternate sides with each row.
+ * Best for a deep-dive on 2–4 key capabilities.
+ *
+ * @param {string}  heading                          - Section heading
+ * @param {string}  [subheading]                     - Optional subheading
+ * @param {"right-first"|"left-first"} [imagePosition] - Image side for first row
+ * @param {boolean} [showBullets=true]               - Show bullet lists
+ * @param {boolean} [showTags=true]                  - Show tag pills
+ * @param {Array}   features                         - Feature row objects
+ * @param {object}  [styles]                         - Style overrides
  */
 export default function AlternatingRows({
-  heading           = defaultProps.heading,
-  subheading        = defaultProps.subheading,
-  imagePosition     = defaultProps.imagePosition,
-  showImageFallback = defaultProps.showImageFallback,
-  size              = defaultProps.size,
-  features          = defaultProps.features,
+  heading       = defaultProps.heading,
+  subheading    = defaultProps.subheading,
+  imagePosition = defaultProps.imagePosition,
+  showBullets   = defaultProps.showBullets,
+  showTags      = defaultProps.showTags,
+  features      = defaultProps.features,
+  styles        = defaultStyles,
 }) {
-  const t = SIZE[size] ?? SIZE.lg;
+  const { sectionClass, inverted, accent, headingAlign } = resolveFeatureStyles(styles);
 
   return (
-    <section className={`w-full bg-[#0a0a0f] ${t.section}`}>
-      <div className="mx-auto max-w-7xl">
+    <section className={`w-full ${sectionClass}`}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        {/* Header */}
-        <div className="max-w-2xl">
-          <h2 className={`font-bold tracking-tight text-[#f1f1f5] ${t.heading}`}>
-            {heading}
-          </h2>
-          {subheading && (
-            <p className={`text-[#9898b0] ${t.subheading}`}>{subheading}</p>
-          )}
-        </div>
+        <FeatureSectionHeader
+          heading={heading}
+          subheading={subheading}
+          inverted={inverted}
+          align={headingAlign}
+        />
 
-        {/* Rows */}
-        <div className={`flex flex-col ${t.rowGap}`}>
+        <div className="flex flex-col gap-20">
           {features.map((feature, index) => {
-            const Icon = LucideIcons[feature.icon] ?? LucideIcons.Star;
-
-            // Determine image side based on imagePosition + index
             const imageOnRight =
-              imagePosition === "right-first" ? index % 2 === 0 : index % 2 !== 0;
-
-            const showImage = feature.image || showImageFallback;
+              imagePosition === "right-first"
+                ? index % 2 === 0
+                : index % 2 !== 0;
 
             return (
-              <div
+              <FeatureRow
                 key={feature.id}
-                className={`flex flex-col ${
-                  imageOnRight ? "lg:flex-row" : "lg:flex-row-reverse"
-                } items-center gap-10 lg:gap-16`}
-              >
-                {/* Copy side */}
-                <div className="flex-1 w-full">
-                  {/* Tag */}
-                  {feature.tag && (
-                    <div className="inline-flex items-center gap-1.5">
-                      <span
-                        className={`inline-flex items-center gap-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 font-medium ${t.tag}`}
-                      >
-                        <Icon size={10} />
-                        {feature.tag}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Title */}
-                  <h3 className={`text-[#f1f1f5] ${t.title}`}>{feature.title}</h3>
-
-                  {/* Description */}
-                  <p className={`text-[#9898b0] ${t.description}`}>
-                    {feature.description}
-                  </p>
-
-                  {/* Bullets */}
-                  {Array.isArray(feature.bullets) && feature.bullets.length > 0 && (
-                    <ul className="space-y-2">
-                      {feature.bullets.map((bullet, i) => (
-                        <li key={i} className="flex items-center gap-2">
-                          <LucideIcons.Check
-                            size={t.bulletIcon}
-                            className="text-indigo-400 shrink-0"
-                          />
-                          <span className={`text-[#9898b0] ${t.bullet}`}>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-
-                {/* Image side */}
-                {showImage && (
-                  <div className="flex-1 w-full">
-                    {feature.image ? (
-                      <img
-                        src={feature.image}
-                        alt={feature.title}
-                        className={t.imageReal}
-                      />
-                    ) : (
-                      <ImageFallback
-                        icon={feature.icon}
-                        sizeClass={t.imageFallback}
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
+                feature={feature}
+                imageOnRight={imageOnRight}
+                showBullets={showBullets}
+                showTags={showTags}
+                accent={accent}
+                inverted={inverted}
+              />
             );
           })}
         </div>
