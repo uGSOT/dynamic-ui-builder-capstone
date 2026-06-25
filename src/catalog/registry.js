@@ -14,7 +14,6 @@ import GroupedByCategory, {
   propSchema as groupedByCategoryPropSchema,
 } from "./faq/GroupedByCategory/GroupedByCategory.jsx";
 
-
 import SimpleRow, {
   defaultProps as simpleRowProps,
   defaultStyles as simpleRowStyles,
@@ -27,6 +26,29 @@ import WithHeading, {
   propSchema as withHeadingPropSchema,
 } from "./logo-cloud/WithHeading/WithHeading.jsx";
 
+import CenteredLogo, {
+  defaultProps as centeredLogoProps,
+  defaultStyles as centeredLogoStyles,
+  propSchema as centeredLogoPropSchema,
+} from "./navbar/CenteredLogo/CenteredLogo.jsx";
+
+import IconGrid, {
+  defaultProps as iconGridProps,
+  defaultStyles as iconGridStyles,
+  propSchema as iconGridPropSchema,
+} from "./features/IconGrid/IconGrid.jsx";
+
+import AlternatingRows, {
+  defaultProps as alternatingRowsProps,
+  defaultStyles as alternatingRowsStyles,
+  propSchema as alternatingRowsPropSchema,
+} from "./features/AlternatingRows/AlternatingRows.jsx";
+
+import BentoGrid, {
+  defaultProps as bentoGridProps,
+  defaultStyles as bentoGridStyles,
+  propSchema as bentoGridPropSchema,
+} from "./features/BentoGrid/BentoGrid.jsx";
 import LogoGrid, {
   defaultProps as logoGridProps,
   defaultStyles as logoGridStyles,
@@ -141,6 +163,36 @@ export const PRICING_VARIANTS = {
   },
 };
 
+export const FEATURES_VARIANTS = {
+  "icon-grid": {
+    id: "icon-grid",
+    name: "Icon Grid",
+    description: "3 or 6 features in equal columns with icon, title, description",
+    component: IconGrid,
+    defaultProps: iconGridProps,
+    defaultStyles: iconGridStyles,
+    propSchema: iconGridPropSchema,
+  },
+  "alternating-rows": {
+    id: "alternating-rows",
+    name: "Alternating Rows",
+    description: "Feature rows alternating image left/right with copy",
+    component: AlternatingRows,
+    defaultProps: alternatingRowsProps,
+    defaultStyles: alternatingRowsStyles,
+    propSchema: alternatingRowsPropSchema,
+  },
+  "bento-grid": {
+    id: "bento-grid",
+    name: "Bento Grid",
+    description: "Asymmetric card grid with varied cell sizes",
+    component: BentoGrid,
+    defaultProps: bentoGridProps,
+    defaultStyles: bentoGridStyles,
+    propSchema: bentoGridPropSchema,
+  },
+};
+
 export const COMPONENT_REGISTRY = {
   faq: {
     type: "faq",
@@ -161,6 +213,12 @@ export const COMPONENT_REGISTRY = {
     description: "Pricing tables and plans subscription options",
     variants: PRICING_VARIANTS,
   },
+  features: {
+    type: "features",
+    label: "Features",
+    description: "Product benefits and capabilities—the core what we do section.",
+    variants: FEATURES_VARIANTS
+  }
 };
 
 export function buildSectionConfig(type, variantId, sectionId) {
