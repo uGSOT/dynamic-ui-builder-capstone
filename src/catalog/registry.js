@@ -1,3 +1,6 @@
+// ==========================================
+// 1. FAQ Variant Imports
+// ==========================================
 import AccordionSingle, {
   defaultProps as accordionSingleProps,
   defaultStyles as accordionSingleStyles,
@@ -14,47 +17,109 @@ import GroupedByCategory, {
   propSchema as groupedByCategoryPropSchema,
 } from "./faq/GroupedByCategory/GroupedByCategory.jsx";
 
-import SimpleRow, {
-  defaultProps as simpleRowProps,
-  defaultStyles as simpleRowStyles,
-  propSchema as simpleRowPropSchema,
-} from "./logo-cloud/SimpleRow/SimpleRow.jsx";
-
-import WithHeading, {
-  defaultProps as withHeadingProps,
-  defaultStyles as withHeadingStyles,
-  propSchema as withHeadingPropSchema,
-} from "./logo-cloud/WithHeading/WithHeading.jsx";
-
+// ==========================================
+// 2. Navbar Variant Imports
+// ==========================================
+import ClassicSticky, {
+  defaultProps as classicStickyProps,
+  defaultStyles as classicStickyStyles,
+  propSchema as classicStickyPropSchema,
+} from "./navbar/ClassicSticky/ClassicSticky.jsx";
 import CenteredLogo, {
   defaultProps as centeredLogoProps,
   defaultStyles as centeredLogoStyles,
   propSchema as centeredLogoPropSchema,
 } from "./navbar/CenteredLogo/CenteredLogo.jsx";
+import TransparentHero, {
+  defaultProps as transparentHeroProps,
+  defaultStyles as transparentHeroStyles,
+  propSchema as transparentHeroPropSchema,
+} from "./navbar/TransparentHero/TransparentHero.jsx";
 
-import IconGrid, {
-  defaultProps as iconGridProps,
-  defaultStyles as iconGridStyles,
-  propSchema as iconGridPropSchema,
-} from "./features/IconGrid/IconGrid.jsx";
-
-import AlternatingRows, {
-  defaultProps as alternatingRowsProps,
-  defaultStyles as alternatingRowsStyles,
-  propSchema as alternatingRowsPropSchema,
-} from "./features/AlternatingRows/AlternatingRows.jsx";
-
-import BentoGrid, {
-  defaultProps as bentoGridProps,
-  defaultStyles as bentoGridStyles,
-  propSchema as bentoGridPropSchema,
-} from "./features/BentoGrid/BentoGrid.jsx";
+// ==========================================
+// 3. Logo Cloud Variant Imports
+// ==========================================
+import SimpleRow, {
+  defaultProps as simpleRowProps,
+  defaultStyles as simpleRowStyles,
+  propSchema as simpleRowPropSchema,
+} from "./logo-cloud/SimpleRow/SimpleRow.jsx";
+import WithHeading, {
+  defaultProps as withHeadingProps,
+  defaultStyles as withHeadingStyles,
+  propSchema as withHeadingPropSchema,
+} from "./logo-cloud/WithHeading/WithHeading.jsx";
 import LogoGrid, {
   defaultProps as logoGridProps,
   defaultStyles as logoGridStyles,
   propSchema as logoGridPropSchema,
 } from "./logo-cloud/LogoGrid/LogoGrid.jsx";
 
+// ==========================================
+// 4. Hero Variant Imports
+// ==========================================
+import CenteredHero, {
+  defaultProps as centeredHeroProps,
+  defaultStyles as centeredHeroStyles,
+  propSchema as centeredHeroPropSchema,
+} from "./hero/Centered/Centered.jsx";
+import SplitImageLeft, {
+  defaultProps as splitImageLeftProps,
+  defaultStyles as splitImageLeftStyles,
+  propSchema as splitImageLeftPropSchema,
+} from "./hero/SplitImageLeft/SplitImageLeft.jsx";
+import SplitImageRight, {
+  defaultProps as splitImageRightProps,
+  defaultStyles as splitImageRightStyles,
+  propSchema as splitImageRightPropSchema,
+} from "./hero/SplitImageRight/SplitImageRight.jsx";
+import WithSocialProof, {
+  defaultProps as withSocialProofProps,
+  defaultStyles as withSocialProofStyles,
+  propSchema as withSocialProofPropSchema,
+} from "./hero/WithSocialProof/WithSocialProof.jsx";
+
+// ==========================================
+// 5. How It Works Variant Imports
+// ==========================================
+import StepsHorizontal, {
+  defaultProps as horizontalProps,
+  defaultStyles as horizontalStyles,
+  propSchema as horizontalPropSchema,
+} from "./how-it-works/StepsHorizontal/StepsHorizontal.jsx";
+import StepsVertical, {
+  defaultProps as verticalProps,
+  defaultStyles as verticalStyles,
+  propSchema as verticalPropSchema,
+} from "./how-it-works/StepsVertical/StepsVertical.jsx";
+import IconCards, {
+  defaultProps as iconCardsProps,
+  defaultStyles as iconCardsStyles,
+  propSchema as iconCardsPropSchema,
+} from "./how-it-works/IconCards/IconCards.jsx";
+
+// ==========================================
+// 6. Features Variant Imports
+// ==========================================
+import IconGrid, {
+  defaultProps as iconGridProps,
+  defaultStyles as iconGridStyles,
+  propSchema as iconGridPropSchema,
+} from "./features/IconGrid/IconGrid.jsx";
+import AlternatingRows, {
+  defaultProps as alternatingRowsProps,
+  defaultStyles as alternatingRowsStyles,
+  propSchema as alternatingRowsPropSchema,
+} from "./features/AlternatingRows/AlternatingRows.jsx";
+import BentoGrid, {
+  defaultProps as bentoGridProps,
+  defaultStyles as bentoGridStyles,
+  propSchema as bentoGridPropSchema,
+} from "./features/BentoGrid/BentoGrid.jsx";
+
+// ==========================================
+// 7. Pricing Variant Imports
+// ==========================================
 import ThreeTier, {
   defaultProps as threeTierProps,
   defaultStyles as threeTierStyles,
@@ -71,20 +136,9 @@ import SinglePlanFocus, {
   propSchema as singlePlanFocusPropSchema,
 } from "./pricing/SinglePlanFocus/SinglePlanFocus.jsx";
 
-import ClassicSticky, {
-  defaultProps as classicStickyProps,
-  defaultStyles as classicStickyStyles,
-  propSchema as classicStickyPropSchema,
-} from "./navbar/ClassicSticky/ClassicSticky.jsx";
-
-import TransparentHero, {
-  defaultProps as transparentHeroProps,
-  defaultStyles as transparentHeroStyles,
-  propSchema as transparentHeroPropSchema,
-} from "./navbar/TransparentHero/TransparentHero.jsx";
-
-
-
+// ==========================================
+// 8. Variant Maps Definition
+// ==========================================
 export const FAQ_VARIANTS = {
   "accordion-single": {
     id: "accordion-single",
@@ -118,9 +172,8 @@ export const FAQ_VARIANTS = {
 export const NAVBAR_VARIANTS = {
   "classic-sticky": {
     id: "classic-sticky",
-    name: "Classic Sticky",
-    description:
-      "Logo left, links center/right, CTA button, solid background, sticks on scroll",
+    name: "Classic Sticky Navbar",
+    description: "Logo left, links center/right, CTA button, solid background, sticks on scroll",
     component: ClassicSticky,
     defaultProps: classicStickyProps,
     defaultStyles: classicStickyStyles,
@@ -128,9 +181,8 @@ export const NAVBAR_VARIANTS = {
   },
   "transparent-hero": {
     id: "transparent-hero",
-    name: "Transparent Hero",
-    description:
-      "Transparent background over hero, becomes solid on scroll",
+    name: "Transparent Hero Navbar",
+    description: "Transparent background over hero, becomes solid on scroll",
     component: TransparentHero,
     defaultProps: transparentHeroProps,
     defaultStyles: transparentHeroStyles,
@@ -138,16 +190,14 @@ export const NAVBAR_VARIANTS = {
   },
   "centered-logo": {
     id: "centered-logo",
-    name: "Centered Logo",
-    description:
-      "Logo centered, links split left/right, CTA on far right",
+    name: "Centered Logo Navbar",
+    description: "Logo centered, links split left/right, CTA on far right",
     component: CenteredLogo,
     defaultProps: centeredLogoProps,
     defaultStyles: centeredLogoStyles,
     propSchema: centeredLogoPropSchema,
   },
 };
-
 
 export const LOGO_CLOUD_VARIANTS = {
   "simple-row": {
@@ -179,33 +229,72 @@ export const LOGO_CLOUD_VARIANTS = {
   },
 };
 
-export const PRICING_VARIANTS = {
-  "three-tier": {
-    id: "three-tier",
-    name: "Three Tier Cards",
-    description: "Free / Pro / Enterprise cards side by side",
-    component: ThreeTier,
-    defaultProps: threeTierProps,
-    defaultStyles: threeTierStyles,
-    propSchema: threeTierPropSchema,
+export const HERO_VARIANTS = {
+  centered: {
+    id: "centered",
+    name: "Centered Hero",
+    description: "Centered hero section with headline, actions, and badge",
+    component: CenteredHero,
+    defaultProps: centeredHeroProps,
+    defaultStyles: centeredHeroStyles,
+    propSchema: centeredHeroPropSchema,
   },
-  "two-tier-highlight": {
-    id: "two-tier-highlight",
-    name: "Two Tier Highlight",
-    description: "Two plans with one visually emphasized (most popular)",
-    component: TwoTierHighlight,
-    defaultProps: twoTierHighlightProps,
-    defaultStyles: twoTierHighlightStyles,
-    propSchema: twoTierHighlightPropSchema,
+  "split-image-left": {
+    id: "split-image-left",
+    name: "Split Image Left Hero",
+    description: "Hero section with primary content on the right and image on the left",
+    component: SplitImageLeft,
+    defaultProps: splitImageLeftProps,
+    defaultStyles: splitImageLeftStyles,
+    propSchema: splitImageLeftPropSchema,
   },
-  "single-plan-focus": {
-    id: "single-plan-focus",
-    name: "Single Plan Focus",
-    description: "One plan centered with feature checklist",
-    component: SinglePlanFocus,
-    defaultProps: singlePlanFocusProps,
-    defaultStyles: singlePlanFocusStyles,
-    propSchema: singlePlanFocusPropSchema,
+  "split-image-right": {
+    id: "split-image-right",
+    name: "Split Image Right Hero",
+    description: "Hero section with primary content on the left and image on the right",
+    component: SplitImageRight,
+    defaultProps: splitImageRightProps,
+    defaultStyles: splitImageRightStyles,
+    propSchema: splitImageRightPropSchema,
+  },
+  "with-social-proof": {
+    id: "with-social-proof",
+    name: "Hero with Social Proof",
+    description: "Hero section with supporting social proof text and avatars",
+    component: WithSocialProof,
+    defaultProps: withSocialProofProps,
+    defaultStyles: withSocialProofStyles,
+    propSchema: withSocialProofPropSchema,
+  },
+};
+
+export const HOW_IT_WORKS_VARIANTS = {
+  "steps-horizontal": {
+    id: "steps-horizontal",
+    name: "Horizontal Steps",
+    description: "Progressive numeric circles lined up left-to-right",
+    component: StepsHorizontal,
+    defaultProps: horizontalProps,
+    defaultStyles: horizontalStyles,
+    propSchema: horizontalPropSchema,
+  },
+  "steps-vertical": {
+    id: "steps-vertical",
+    name: "Vertical Timeline",
+    description: "Clean stacked vertical process listing with a connecting trail line",
+    component: StepsVertical,
+    defaultProps: verticalProps,
+    defaultStyles: verticalStyles,
+    propSchema: verticalPropSchema,
+  },
+  "icon-cards": {
+    id: "icon-cards",
+    name: "Icon Accent Cards",
+    description: "Grid boxes highlighted with modular icons and modern borders",
+    component: IconCards,
+    defaultProps: iconCardsProps,
+    defaultStyles: iconCardsStyles,
+    propSchema: iconCardsPropSchema,
   },
 };
 
@@ -239,6 +328,39 @@ export const FEATURES_VARIANTS = {
   },
 };
 
+export const PRICING_VARIANTS = {
+  "three-tier": {
+    id: "three-tier",
+    name: "Three Tier Cards",
+    description: "Free / Pro / Enterprise cards side by side",
+    component: ThreeTier,
+    defaultProps: threeTierProps,
+    defaultStyles: threeTierStyles,
+    propSchema: threeTierPropSchema,
+  },
+  "two-tier-highlight": {
+    id: "two-tier-highlight",
+    name: "Two Tier Highlight",
+    description: "Two plans with one visually emphasized (most popular)",
+    component: TwoTierHighlight,
+    defaultProps: twoTierHighlightProps,
+    defaultStyles: twoTierHighlightStyles,
+    propSchema: twoTierHighlightPropSchema,
+  },
+  "single-plan-focus": {
+    id: "single-plan-focus",
+    name: "Single Plan Focus",
+    description: "One plan centered with feature checklist",
+    component: SinglePlanFocus,
+    defaultProps: singlePlanFocusProps,
+    defaultStyles: singlePlanFocusStyles,
+    propSchema: singlePlanFocusPropSchema,
+  },
+};
+
+// ==========================================
+// 9. Centralized Component Registry Map
+// ==========================================
 export const COMPONENT_REGISTRY = {
   faq: {
     type: "faq",
@@ -246,11 +368,35 @@ export const COMPONENT_REGISTRY = {
     description: "Frequently asked questions — reduces support load",
     variants: FAQ_VARIANTS,
   },
+  navbar: {
+    type: "navbar",
+    label: "Navbar",
+    description: "Top navigation on every Website",
+    variants: NAVBAR_VARIANTS,
+  },
   "logo-cloud": {
     type: "logo-cloud",
     label: "Logo Cloud",
     description: "Trusted-by social proof with company logos",
     variants: LOGO_CLOUD_VARIANTS,
+  },
+  hero: {
+    type: "hero",
+    label: "Hero",
+    description: "Hero section for landing pages and promotional content",
+    variants: HERO_VARIANTS,
+  },
+  "how-it-works": {
+    type: "how-it-works",
+    label: "How It Works",
+    description: "Step-by-step product workflows and structural instructions",
+    variants: HOW_IT_WORKS_VARIANTS,
+  },
+  features: {
+    type: "features",
+    label: "Features",
+    description: "Product benefits and capabilities—the core what we do section.",
+    variants: FEATURES_VARIANTS,
   },
   pricing: {
     type: "pricing",
@@ -258,20 +404,11 @@ export const COMPONENT_REGISTRY = {
     description: "Pricing tables and plans subscription options",
     variants: PRICING_VARIANTS,
   },
-  features: {
-    type: "features",
-    label: "Features",
-    description: "Product benefits and capabilities—the core what we do section.",
-    variants: FEATURES_VARIANTS
-  },
-   navbar: {
-    type: "navbar",
-    label: "Navbar",
-    description: "Top navigation on every  Website",
-    variants: NAVBAR_VARIANTS,
-  },
 };
 
+// ==========================================
+// 10. Schema Helper Builders
+// ==========================================
 export function buildSectionConfig(type, variantId, sectionId) {
   const component = COMPONENT_REGISTRY[type];
   if (!component) {
@@ -287,8 +424,8 @@ export function buildSectionConfig(type, variantId, sectionId) {
     id: sectionId ?? `${type}-${variantId}`,
     type,
     variant: variantId,
-    props: structuredClone(variant.defaultProps),
-    styles: structuredClone(variant.defaultStyles),
+    props: structuredClone(variant.defaultProps || {}),
+    styles: structuredClone(variant.defaultStyles || {}),
     responsive: {},
   };
 }
