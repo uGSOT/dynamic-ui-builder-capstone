@@ -173,6 +173,24 @@ import SplitWithCopy, {
   propSchema as splitWithCopyPropSchema,
 } from "./stats/SplitWithCopy/SplitWithCopy.jsx";
 
+// ==========================================
+// 10. Footer Variant Imports
+// ==========================================
+import MultiColumnFooter, {
+  defaultProps as multiColumnFooterProps,
+  defaultStyles as multiColumnFooterStyles,
+  propSchema as multiColumnFooterPropSchema,
+} from "./footer/MultiColumn/MultiColumn.jsx";
+import MinimalCenteredFooter, {
+  defaultProps as minimalCenteredFooterProps,
+  defaultStyles as minimalCenteredFooterStyles,
+  propSchema as minimalCenteredFooterPropSchema,
+} from "./footer/MinimalCentered/MinimalCentered.jsx";
+import WithNewsletterFooter, {
+  defaultProps as withNewsletterFooterProps,
+  defaultStyles as withNewsletterFooterStyles,
+  propSchema as withNewsletterFooterPropSchema,
+} from "./footer/WithNewsletter/WithNewsletter.jsx";
 
 // ==========================================
 // 9. Variant Maps Definition
@@ -456,6 +474,36 @@ export const TESTIMONIAL_VARIANTS = {
   },
 };
 
+export const FOOTER_VARIANTS = {
+  "multi-column": {
+    id: "multi-column",
+    name: "Multi Column",
+    description: "Logo + tagline, 3–4 link columns, social icons, copyright",
+    component: MultiColumnFooter,
+    defaultProps: multiColumnFooterProps,
+    defaultStyles: multiColumnFooterStyles,
+    propSchema: multiColumnFooterPropSchema,
+  },
+  "minimal-centered": {
+    id: "minimal-centered",
+    name: "Minimal Centered",
+    description: "Logo, single row of links, copyright centered",
+    component: MinimalCenteredFooter,
+    defaultProps: minimalCenteredFooterProps,
+    defaultStyles: minimalCenteredFooterStyles,
+    propSchema: minimalCenteredFooterPropSchema,
+  },
+  "with-newsletter": {
+    id: "with-newsletter",
+    name: "With Newsletter",
+    description: "Multi-column links plus email signup row (display-only)",
+    component: WithNewsletterFooter,
+    defaultProps: withNewsletterFooterProps,
+    defaultStyles: withNewsletterFooterStyles,
+    propSchema: withNewsletterFooterPropSchema,
+  },
+};
+
 // ==========================================
 // 10. Centralized Component Registry Map
 // ==========================================
@@ -513,6 +561,12 @@ export const COMPONENT_REGISTRY = {
     label: "Testimonials",
     description: "Customer quotes and social proof from real users",
     variants: TESTIMONIAL_VARIANTS,
+  },
+  footer: {
+    type: "footer",
+    label: "Footer",
+    description: "Site footer with links, legal, and optional newsletter—closes every page",
+    variants: FOOTER_VARIANTS,
   },
 };
 

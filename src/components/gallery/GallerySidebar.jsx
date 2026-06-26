@@ -6,6 +6,7 @@ import {
   Sparkles,
   CreditCard,
   BarChart3,
+  PanelBottom,
 } from "lucide-react";
 
 import { GALLERY_CATALOG } from "../../constants/galleryCatalog";
@@ -18,6 +19,7 @@ const ICONS = {
   features: Sparkles,
   stats: BarChart3,
   pricing: CreditCard,
+  footer: PanelBottom,
 };
 
 export default function GallerySidebar({
