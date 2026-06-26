@@ -45,7 +45,7 @@ export const GALLERY_CATALOG = [
     id: "stats",
     label: "Stats",
     description: "Traction metrics and big numbers",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {

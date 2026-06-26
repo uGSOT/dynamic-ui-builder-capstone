@@ -54,7 +54,6 @@ import LogoGrid, {
   defaultStyles as logoGridStyles,
   propSchema as logoGridPropSchema,
 } from "./logo-cloud/LogoGrid/LogoGrid.jsx";
-
 // ==========================================
 // 4. Hero Variant Imports
 // ==========================================
@@ -154,6 +153,26 @@ import Carousel, {
   defaultStyles as carouselStyles,
   propSchema as carouselPropSchema,
 } from "./testimonials/Carousel/Carousel.jsx";
+
+//==========================================
+// 9. Stats Variants Imports
+//==========================================
+import InlineRow, {
+  defaultProps as inlineRowProps,
+  defaultStyles as inlineRowStyles,
+  propSchema as inlineRowPropSchema,
+} from "./stats/InlineRow/InlineRow.jsx";
+import StatCards, {
+  defaultProps as statCardsProps,
+  defaultStyles as statCardsStyles,
+  propSchema as statCardsPropSchema,
+} from "./stats/StatCards/StatCards.jsx";
+import SplitWithCopy, {
+  defaultProps as splitWithCopyProps,
+  defaultStyles as splitWithCopyStyles,
+  propSchema as splitWithCopyPropSchema,
+} from "./stats/SplitWithCopy/SplitWithCopy.jsx";
+
 
 // ==========================================
 // 9. Variant Maps Definition
@@ -284,6 +303,36 @@ export const HERO_VARIANTS = {
     defaultProps: withSocialProofProps,
     defaultStyles: withSocialProofStyles,
     propSchema: withSocialProofPropSchema,
+  },
+};
+
+export const STATS_VARIANTS = {
+  "inline-row": {
+    id: "inline-row",
+    name: "Inline Row",
+    description: "Horizontal strip of 3–4 stats for quick traction display",
+    component: InlineRow,
+    defaultProps: inlineRowProps,
+    defaultStyles: inlineRowStyles,
+    propSchema: inlineRowPropSchema,
+  },
+  "stat-cards": {
+    id: "stat-cards",
+    name: "Stat Cards",
+    description: "Each stat in its own card with label and optional suffix",
+    component: StatCards,
+    defaultProps: statCardsProps,
+    defaultStyles: statCardsStyles,
+    propSchema: statCardsPropSchema,
+  },
+  "split-with-copy": {
+    id: "split-with-copy",
+    name: "Split With Copy",
+    description: "Stats on one side and supporting copy on the other",
+    component: SplitWithCopy,
+    defaultProps: splitWithCopyProps,
+    defaultStyles: splitWithCopyStyles,
+    propSchema: splitWithCopyPropSchema,
   },
 };
 
@@ -429,6 +478,12 @@ export const COMPONENT_REGISTRY = {
     description: "Trusted-by social proof with company logos",
     variants: LOGO_CLOUD_VARIANTS,
   },
+  stats: {
+  type: "stats",
+  label: "Stats",
+  description: "Key metrics and statistics to build credibility",
+  variants: STATS_VARIANTS,
+},
   hero: {
     type: "hero",
     label: "Hero",
