@@ -173,9 +173,28 @@ import SplitWithCopy, {
   propSchema as splitWithCopyPropSchema,
 } from "./stats/SplitWithCopy/SplitWithCopy.jsx";
 
+// ==========================================
+// 10. Team Variant Imports
+// ==========================================
+import GridLayout, {
+  defaultProps as gridLayoutProps,
+  defaultStyles as gridLayoutStyles,
+  propSchema as gridLayoutPropSchema,
+} from "./team/GridLayout/GridLayout.jsx";
+import GridWithDescription, {
+  defaultProps as gridWithDescProps,
+  defaultStyles as gridWithDescStyles,
+  propSchema as gridWithDescPropSchema,
+} from "./team/GridWithDescription/GridWithDescription.jsx";
+import ShowcaseRow, {
+  defaultProps as showcaseRowProps,
+  defaultStyles as showcaseRowStyles,
+  propSchema as showcaseRowPropSchema,
+} from "./team/ShowcaseRow/ShowcaseRow.jsx";
+
 
 // ==========================================
-// 9. Variant Maps Definition
+// 11. Variant Maps Definition
 // ==========================================
 export const FAQ_VARIANTS = {
   "accordion-single": {
@@ -456,8 +475,38 @@ export const TESTIMONIAL_VARIANTS = {
   },
 };
 
+export const TEAM_VARIANTS = {
+  "grid-simple": {
+    id: "grid-simple",
+    name: "Grid Simple",
+    description: "Simple grid of team members with name and role",
+    component: GridLayout,
+    defaultProps: gridLayoutProps,
+    defaultStyles: gridLayoutStyles,
+    propSchema: gridLayoutPropSchema,
+  },
+  "grid-with-bio": {
+    id: "grid-with-bio",
+    name: "Grid With Bio",
+    description: "Team member cards with image, name, role, and bio",
+    component: GridWithDescription,
+    defaultProps: gridWithDescProps,
+    defaultStyles: gridWithDescStyles,
+    propSchema: gridWithDescPropSchema,
+  },
+  "compact-row": {
+    id: "compact-row",
+    name: "Compact Row",
+    description: "Compacted team member grid showing 6+ members efficiently",
+    component: ShowcaseRow,
+    defaultProps: showcaseRowProps,
+    defaultStyles: showcaseRowStyles,
+    propSchema: showcaseRowPropSchema,
+  },
+};
+
 // ==========================================
-// 10. Centralized Component Registry Map
+// 12. Centralized Component Registry Map
 // ==========================================
 export const COMPONENT_REGISTRY = {
   faq: {
@@ -514,10 +563,16 @@ export const COMPONENT_REGISTRY = {
     description: "Customer quotes and social proof from real users",
     variants: TESTIMONIAL_VARIANTS,
   },
+  team: {
+    type: "team",
+    label: "Team",
+    description: "Team members and leadership showcase",
+    variants: TEAM_VARIANTS,
+  },
 };
 
 // ==========================================
-// 11. Schema Helper Builders
+// 13. Schema Helper Builders
 // ==========================================
 export function buildSectionConfig(type, variantId, sectionId) {
   const component = COMPONENT_REGISTRY[type];

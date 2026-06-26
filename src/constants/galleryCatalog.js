@@ -73,7 +73,7 @@ export const GALLERY_CATALOG = [
     id: "team",
     label: "Team",
     description: "Founders and team members",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {
