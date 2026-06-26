@@ -54,6 +54,7 @@ import LogoGrid, {
   defaultStyles as logoGridStyles,
   propSchema as logoGridPropSchema,
 } from "./logo-cloud/LogoGrid/LogoGrid.jsx";
+
 // ==========================================
 // 4. Hero Variant Imports
 // ==========================================
@@ -136,8 +137,7 @@ import SinglePlanFocus, {
 } from "./pricing/SinglePlanFocus/SinglePlanFocus.jsx";
 
 // ==========================================
-<<<<<<< HEAD
-// 8. CTA Variant Imports (💡 Added Synchronously)
+// 8. CTA Variant Imports
 // ==========================================
 import FullWidthCentered, {
   defaultProps as ctaCenteredProps,
@@ -155,11 +155,8 @@ import NewsletterSignup, {
   propSchema as ctaNewsletterPropSchema,
 } from "./cta/NewsletterSignup/NewsletterSignup.jsx";
 
-
 // ==========================================
-// 9. Variant Maps Definition
-=======
-// 8. Testimonials Variant Imports
+// 9. Testimonials Variant Imports
 // ==========================================
 import CardGrid, {
   defaultProps as cardGridProps,
@@ -177,9 +174,9 @@ import Carousel, {
   propSchema as carouselPropSchema,
 } from "./testimonials/Carousel/Carousel.jsx";
 
-//==========================================
-// 9. Stats Variants Imports
-//==========================================
+// ==========================================
+// 10. Stats Variant Imports
+// ==========================================
 import InlineRow, {
   defaultProps as inlineRowProps,
   defaultStyles as inlineRowStyles,
@@ -197,7 +194,7 @@ import SplitWithCopy, {
 } from "./stats/SplitWithCopy/SplitWithCopy.jsx";
 
 // ==========================================
-// 10. Team Variant Imports
+// 11. Team Variant Imports
 // ==========================================
 import GridLayout, {
   defaultProps as gridLayoutProps,
@@ -215,10 +212,8 @@ import ShowcaseRow, {
   propSchema as showcaseRowPropSchema,
 } from "./team/ShowcaseRow/ShowcaseRow.jsx";
 
-
 // ==========================================
-// 11. Variant Maps Definition
->>>>>>> origin/main
+// 12. Variant Maps Definition
 // ==========================================
 export const FAQ_VARIANTS = {
   "accordion-single": {
@@ -469,8 +464,6 @@ export const PRICING_VARIANTS = {
   },
 };
 
-<<<<<<< HEAD
-// 💡 New synchronized variant lookup object
 export const CTA_VARIANTS = {
   "full-width-centered": {
     id: "full-width-centered",
@@ -498,12 +491,9 @@ export const CTA_VARIANTS = {
     defaultProps: ctaNewsletterProps,
     defaultStyles: ctaNewsletterStyles,
     propSchema: ctaNewsletterPropSchema,
-  }
+  },
 };
 
-// ==========================================
-// 10. Centralized Component Registry Map
-=======
 export const TESTIMONIAL_VARIANTS = {
   "card-grid": {
     id: "card-grid",
@@ -565,8 +555,7 @@ export const TEAM_VARIANTS = {
 };
 
 // ==========================================
-// 12. Centralized Component Registry Map
->>>>>>> origin/main
+// 13. Centralized Component Registry Map
 // ==========================================
 export const COMPONENT_REGISTRY = {
   faq: {
@@ -588,11 +577,11 @@ export const COMPONENT_REGISTRY = {
     variants: LOGO_CLOUD_VARIANTS,
   },
   stats: {
-  type: "stats",
-  label: "Stats",
-  description: "Key metrics and statistics to build credibility",
-  variants: STATS_VARIANTS,
-},
+    type: "stats",
+    label: "Stats",
+    description: "Key metrics and statistics to build credibility",
+    variants: STATS_VARIANTS,
+  },
   hero: {
     type: "hero",
     label: "Hero",
@@ -617,18 +606,12 @@ export const COMPONENT_REGISTRY = {
     description: "Pricing tables and plans subscription options",
     variants: PRICING_VARIANTS,
   },
-<<<<<<< HEAD
   cta: {
     type: "cta",
     label: "CTA Banner",
     description: "Call to Action banners to direct users to specific actions or conversions",
-    variants: CTA_VARIANTS, // 💡 Linked cleanly here!
-  }
-};
-
-// ==========================================
-// 11. Schema Helper Builders
-=======
+    variants: CTA_VARIANTS,
+  },
   testimonials: {
     type: "testimonials",
     label: "Testimonials",
@@ -644,8 +627,7 @@ export const COMPONENT_REGISTRY = {
 };
 
 // ==========================================
-// 13. Schema Helper Builders
->>>>>>> origin/main
+// 14. Schema Helper Builders
 // ==========================================
 export function buildSectionConfig(type, variantId, sectionId) {
   const component = COMPONENT_REGISTRY[type];
