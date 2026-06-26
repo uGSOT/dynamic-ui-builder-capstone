@@ -54,7 +54,6 @@ import LogoGrid, {
   defaultStyles as logoGridStyles,
   propSchema as logoGridPropSchema,
 } from "./logo-cloud/LogoGrid/LogoGrid.jsx";
-
 // ==========================================
 // 4. Hero Variant Imports
 // ==========================================
@@ -137,6 +136,7 @@ import SinglePlanFocus, {
 } from "./pricing/SinglePlanFocus/SinglePlanFocus.jsx";
 
 // ==========================================
+<<<<<<< HEAD
 // 8. CTA Variant Imports (💡 Added Synchronously)
 // ==========================================
 import FullWidthCentered, {
@@ -158,6 +158,67 @@ import NewsletterSignup, {
 
 // ==========================================
 // 9. Variant Maps Definition
+=======
+// 8. Testimonials Variant Imports
+// ==========================================
+import CardGrid, {
+  defaultProps as cardGridProps,
+  defaultStyles as cardGridStyles,
+  propSchema as cardGridPropSchema,
+} from "./testimonials/CardGrid/CardGrid.jsx";
+import FeaturedSingle, {
+  defaultProps as featuredSingleProps,
+  defaultStyles as featuredSingleStyles,
+  propSchema as featuredSinglePropSchema,
+} from "./testimonials/FeaturedSingle/FeaturedSingle.jsx";
+import Carousel, {
+  defaultProps as carouselProps,
+  defaultStyles as carouselStyles,
+  propSchema as carouselPropSchema,
+} from "./testimonials/Carousel/Carousel.jsx";
+
+//==========================================
+// 9. Stats Variants Imports
+//==========================================
+import InlineRow, {
+  defaultProps as inlineRowProps,
+  defaultStyles as inlineRowStyles,
+  propSchema as inlineRowPropSchema,
+} from "./stats/InlineRow/InlineRow.jsx";
+import StatCards, {
+  defaultProps as statCardsProps,
+  defaultStyles as statCardsStyles,
+  propSchema as statCardsPropSchema,
+} from "./stats/StatCards/StatCards.jsx";
+import SplitWithCopy, {
+  defaultProps as splitWithCopyProps,
+  defaultStyles as splitWithCopyStyles,
+  propSchema as splitWithCopyPropSchema,
+} from "./stats/SplitWithCopy/SplitWithCopy.jsx";
+
+// ==========================================
+// 10. Team Variant Imports
+// ==========================================
+import GridLayout, {
+  defaultProps as gridLayoutProps,
+  defaultStyles as gridLayoutStyles,
+  propSchema as gridLayoutPropSchema,
+} from "./team/GridLayout/GridLayout.jsx";
+import GridWithDescription, {
+  defaultProps as gridWithDescProps,
+  defaultStyles as gridWithDescStyles,
+  propSchema as gridWithDescPropSchema,
+} from "./team/GridWithDescription/GridWithDescription.jsx";
+import ShowcaseRow, {
+  defaultProps as showcaseRowProps,
+  defaultStyles as showcaseRowStyles,
+  propSchema as showcaseRowPropSchema,
+} from "./team/ShowcaseRow/ShowcaseRow.jsx";
+
+
+// ==========================================
+// 11. Variant Maps Definition
+>>>>>>> origin/main
 // ==========================================
 export const FAQ_VARIANTS = {
   "accordion-single": {
@@ -288,6 +349,36 @@ export const HERO_VARIANTS = {
   },
 };
 
+export const STATS_VARIANTS = {
+  "inline-row": {
+    id: "inline-row",
+    name: "Inline Row",
+    description: "Horizontal strip of 3–4 stats for quick traction display",
+    component: InlineRow,
+    defaultProps: inlineRowProps,
+    defaultStyles: inlineRowStyles,
+    propSchema: inlineRowPropSchema,
+  },
+  "stat-cards": {
+    id: "stat-cards",
+    name: "Stat Cards",
+    description: "Each stat in its own card with label and optional suffix",
+    component: StatCards,
+    defaultProps: statCardsProps,
+    defaultStyles: statCardsStyles,
+    propSchema: statCardsPropSchema,
+  },
+  "split-with-copy": {
+    id: "split-with-copy",
+    name: "Split With Copy",
+    description: "Stats on one side and supporting copy on the other",
+    component: SplitWithCopy,
+    defaultProps: splitWithCopyProps,
+    defaultStyles: splitWithCopyStyles,
+    propSchema: splitWithCopyPropSchema,
+  },
+};
+
 export const HOW_IT_WORKS_VARIANTS = {
   "steps-horizontal": {
     id: "steps-horizontal",
@@ -378,6 +469,7 @@ export const PRICING_VARIANTS = {
   },
 };
 
+<<<<<<< HEAD
 // 💡 New synchronized variant lookup object
 export const CTA_VARIANTS = {
   "full-width-centered": {
@@ -411,6 +503,70 @@ export const CTA_VARIANTS = {
 
 // ==========================================
 // 10. Centralized Component Registry Map
+=======
+export const TESTIMONIAL_VARIANTS = {
+  "card-grid": {
+    id: "card-grid",
+    name: "Card Grid",
+    description: "3 testimonial cards with quote, name, role, avatar",
+    component: CardGrid,
+    defaultProps: cardGridProps,
+    defaultStyles: cardGridStyles,
+    propSchema: cardGridPropSchema,
+  },
+  "featured-single": {
+    id: "featured-single",
+    name: "Featured Single",
+    description: "One large quote with photo, name, company logo",
+    component: FeaturedSingle,
+    defaultProps: featuredSingleProps,
+    defaultStyles: featuredSingleStyles,
+    propSchema: featuredSinglePropSchema,
+  },
+  carousel: {
+    id: "carousel",
+    name: "Carousel",
+    description: "Horizontally scrollable testimonial cards with dot navigation",
+    component: Carousel,
+    defaultProps: carouselProps,
+    defaultStyles: carouselStyles,
+    propSchema: carouselPropSchema,
+  },
+};
+
+export const TEAM_VARIANTS = {
+  "grid-simple": {
+    id: "grid-simple",
+    name: "Grid Simple",
+    description: "Simple grid of team members with name and role",
+    component: GridLayout,
+    defaultProps: gridLayoutProps,
+    defaultStyles: gridLayoutStyles,
+    propSchema: gridLayoutPropSchema,
+  },
+  "grid-with-bio": {
+    id: "grid-with-bio",
+    name: "Grid With Bio",
+    description: "Team member cards with image, name, role, and bio",
+    component: GridWithDescription,
+    defaultProps: gridWithDescProps,
+    defaultStyles: gridWithDescStyles,
+    propSchema: gridWithDescPropSchema,
+  },
+  "compact-row": {
+    id: "compact-row",
+    name: "Compact Row",
+    description: "Compacted team member grid showing 6+ members efficiently",
+    component: ShowcaseRow,
+    defaultProps: showcaseRowProps,
+    defaultStyles: showcaseRowStyles,
+    propSchema: showcaseRowPropSchema,
+  },
+};
+
+// ==========================================
+// 12. Centralized Component Registry Map
+>>>>>>> origin/main
 // ==========================================
 export const COMPONENT_REGISTRY = {
   faq: {
@@ -431,6 +587,12 @@ export const COMPONENT_REGISTRY = {
     description: "Trusted-by social proof with company logos",
     variants: LOGO_CLOUD_VARIANTS,
   },
+  stats: {
+  type: "stats",
+  label: "Stats",
+  description: "Key metrics and statistics to build credibility",
+  variants: STATS_VARIANTS,
+},
   hero: {
     type: "hero",
     label: "Hero",
@@ -455,6 +617,7 @@ export const COMPONENT_REGISTRY = {
     description: "Pricing tables and plans subscription options",
     variants: PRICING_VARIANTS,
   },
+<<<<<<< HEAD
   cta: {
     type: "cta",
     label: "CTA Banner",
@@ -465,6 +628,24 @@ export const COMPONENT_REGISTRY = {
 
 // ==========================================
 // 11. Schema Helper Builders
+=======
+  testimonials: {
+    type: "testimonials",
+    label: "Testimonials",
+    description: "Customer quotes and social proof from real users",
+    variants: TESTIMONIAL_VARIANTS,
+  },
+  team: {
+    type: "team",
+    label: "Team",
+    description: "Team members and leadership showcase",
+    variants: TEAM_VARIANTS,
+  },
+};
+
+// ==========================================
+// 13. Schema Helper Builders
+>>>>>>> origin/main
 // ==========================================
 export function buildSectionConfig(type, variantId, sectionId) {
   const component = COMPONENT_REGISTRY[type];

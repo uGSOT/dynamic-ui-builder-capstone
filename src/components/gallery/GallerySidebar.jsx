@@ -5,6 +5,8 @@ import {
   PlayCircle,
   Sparkles,
   CreditCard,
+  BarChart3,
+  Users,
 } from "lucide-react";
 
 import { GALLERY_CATALOG } from "../../constants/galleryCatalog";
@@ -15,7 +17,9 @@ const ICONS = {
   navbar: Menu,
   "how-it-works": PlayCircle,
   features: Sparkles,
+  stats: BarChart3,
   pricing: CreditCard,
+  team: Users,
 };
 
 export default function GallerySidebar({

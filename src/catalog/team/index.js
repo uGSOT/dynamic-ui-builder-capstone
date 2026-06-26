@@ -1,1 +1,1 @@
-// delete this folder
+export { TEAM_VARIANTS, COMPONENT_REGISTRY, buildSectionConfig, getVariantEntry } from "../registry.js";

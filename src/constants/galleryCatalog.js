@@ -45,7 +45,7 @@ export const GALLERY_CATALOG = [
     id: "stats",
     label: "Stats",
     description: "Traction metrics and big numbers",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {
@@ -59,7 +59,7 @@ export const GALLERY_CATALOG = [
     id: "testimonials",
     label: "Testimonials",
     description: "Customer quotes and social proof",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {
@@ -73,7 +73,7 @@ export const GALLERY_CATALOG = [
     id: "team",
     label: "Team",
     description: "Founders and team members",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {
