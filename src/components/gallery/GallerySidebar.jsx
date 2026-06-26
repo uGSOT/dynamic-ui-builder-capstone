@@ -7,6 +7,7 @@ import {
   CreditCard,
   BarChart3,
   PanelBottom,
+  Users,
 } from "lucide-react";
 
 import { GALLERY_CATALOG } from "../../constants/galleryCatalog";
@@ -20,6 +21,7 @@ const ICONS = {
   stats: BarChart3,
   pricing: CreditCard,
   footer: PanelBottom,
+  team: Users,
 };
 
 export default function GallerySidebar({
