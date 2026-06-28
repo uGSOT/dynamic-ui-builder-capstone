@@ -6,6 +6,7 @@ import {
   Sparkles,
   CreditCard,
   BarChart3,
+  PanelBottom,
   Users,
 } from "lucide-react";
 
@@ -19,6 +20,7 @@ const ICONS = {
   features: Sparkles,
   stats: BarChart3,
   pricing: CreditCard,
+  footer: PanelBottom,
   team: Users,
 };
 

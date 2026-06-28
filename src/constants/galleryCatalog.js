@@ -80,7 +80,7 @@ export const GALLERY_CATALOG = [
     id: "footer",
     label: "Footer",
     description: "Site footer with links and legal",
-    available: false,
+    available: true,
     variantCount: 3,
   },
 ];

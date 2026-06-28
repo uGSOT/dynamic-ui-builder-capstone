@@ -174,7 +174,26 @@ import SplitWithCopy, {
 } from "./stats/SplitWithCopy/SplitWithCopy.jsx";
 
 // ==========================================
-// 10. Team Variant Imports
+// 10. Footer Variant Imports
+// ==========================================
+import MultiColumnFooter, {
+  defaultProps as multiColumnFooterProps,
+  defaultStyles as multiColumnFooterStyles,
+  propSchema as multiColumnFooterPropSchema,
+} from "./footer/MultiColumn/MultiColumn.jsx";
+import MinimalCenteredFooter, {
+  defaultProps as minimalCenteredFooterProps,
+  defaultStyles as minimalCenteredFooterStyles,
+  propSchema as minimalCenteredFooterPropSchema,
+} from "./footer/MinimalCentered/MinimalCentered.jsx";
+import WithNewsletterFooter, {
+  defaultProps as withNewsletterFooterProps,
+  defaultStyles as withNewsletterFooterStyles,
+  propSchema as withNewsletterFooterPropSchema,
+} from "./footer/WithNewsletter/WithNewsletter.jsx";
+
+// ==========================================
+// 11. Team Variant Imports
 // ==========================================
 import GridLayout, {
   defaultProps as gridLayoutProps,
@@ -192,9 +211,8 @@ import ShowcaseRow, {
   propSchema as showcaseRowPropSchema,
 } from "./team/ShowcaseRow/ShowcaseRow.jsx";
 
-
 // ==========================================
-// 11. Variant Maps Definition
+// 12. Variant Maps Definition
 // ==========================================
 export const FAQ_VARIANTS = {
   "accordion-single": {
@@ -475,6 +493,36 @@ export const TESTIMONIAL_VARIANTS = {
   },
 };
 
+export const FOOTER_VARIANTS = {
+  "multi-column": {
+    id: "multi-column",
+    name: "Multi Column",
+    description: "Logo + tagline, 3–4 link columns, social icons, copyright",
+    component: MultiColumnFooter,
+    defaultProps: multiColumnFooterProps,
+    defaultStyles: multiColumnFooterStyles,
+    propSchema: multiColumnFooterPropSchema,
+  },
+  "minimal-centered": {
+    id: "minimal-centered",
+    name: "Minimal Centered",
+    description: "Logo, single row of links, copyright centered",
+    component: MinimalCenteredFooter,
+    defaultProps: minimalCenteredFooterProps,
+    defaultStyles: minimalCenteredFooterStyles,
+    propSchema: minimalCenteredFooterPropSchema,
+  },
+  "with-newsletter": {
+    id: "with-newsletter",
+    name: "With Newsletter",
+    description: "Multi-column links plus email signup row (display-only)",
+    component: WithNewsletterFooter,
+    defaultProps: withNewsletterFooterProps,
+    defaultStyles: withNewsletterFooterStyles,
+    propSchema: withNewsletterFooterPropSchema,
+  },
+};
+
 export const TEAM_VARIANTS = {
   "grid-simple": {
     id: "grid-simple",
@@ -506,7 +554,7 @@ export const TEAM_VARIANTS = {
 };
 
 // ==========================================
-// 12. Centralized Component Registry Map
+// 13. Centralized Component Registry Map
 // ==========================================
 export const COMPONENT_REGISTRY = {
   faq: {
@@ -528,11 +576,11 @@ export const COMPONENT_REGISTRY = {
     variants: LOGO_CLOUD_VARIANTS,
   },
   stats: {
-  type: "stats",
-  label: "Stats",
-  description: "Key metrics and statistics to build credibility",
-  variants: STATS_VARIANTS,
-},
+    type: "stats",
+    label: "Stats",
+    description: "Key metrics and statistics to build credibility",
+    variants: STATS_VARIANTS,
+  },
   hero: {
     type: "hero",
     label: "Hero",
@@ -563,6 +611,12 @@ export const COMPONENT_REGISTRY = {
     description: "Customer quotes and social proof from real users",
     variants: TESTIMONIAL_VARIANTS,
   },
+  footer: {
+    type: "footer",
+    label: "Footer",
+    description: "Site footer with links, legal, and optional newsletter—closes every page",
+    variants: FOOTER_VARIANTS,
+  },
   team: {
     type: "team",
     label: "Team",
@@ -572,7 +626,7 @@ export const COMPONENT_REGISTRY = {
 };
 
 // ==========================================
-// 13. Schema Helper Builders
+// 14. Schema Helper Builders
 // ==========================================
 export function buildSectionConfig(type, variantId, sectionId) {
   const component = COMPONENT_REGISTRY[type];
