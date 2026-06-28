@@ -54,6 +54,7 @@ import LogoGrid, {
   defaultStyles as logoGridStyles,
   propSchema as logoGridPropSchema,
 } from "./logo-cloud/LogoGrid/LogoGrid.jsx";
+
 // ==========================================
 // 4. Hero Variant Imports
 // ==========================================
@@ -136,7 +137,26 @@ import SinglePlanFocus, {
 } from "./pricing/SinglePlanFocus/SinglePlanFocus.jsx";
 
 // ==========================================
-// 8. Testimonials Variant Imports
+// 8. CTA Variant Imports
+// ==========================================
+import FullWidthCentered, {
+  defaultProps as ctaCenteredProps,
+  defaultStyles as ctaCenteredStyles,
+  propSchema as ctaCenteredPropSchema,
+} from "./cta/FullWidthCentered/FullWidthCentered.jsx";
+import SplitWithImage, {
+  defaultProps as ctaSplitProps,
+  defaultStyles as ctaSplitStyles,
+  propSchema as ctaSplitPropSchema,
+} from "./cta/SplitWithImage/SplitWithImage.jsx";
+import NewsletterSignup, {
+  defaultProps as ctaNewsletterProps,
+  defaultStyles as ctaNewsletterStyles,
+  propSchema as ctaNewsletterPropSchema,
+} from "./cta/NewsletterSignup/NewsletterSignup.jsx";
+
+// ==========================================
+// 9. Testimonials Variant Imports
 // ==========================================
 import CardGrid, {
   defaultProps as cardGridProps,
@@ -154,9 +174,9 @@ import Carousel, {
   propSchema as carouselPropSchema,
 } from "./testimonials/Carousel/Carousel.jsx";
 
-//==========================================
-// 9. Stats Variants Imports
-//==========================================
+// ==========================================
+// 10. Stats Variant Imports
+// ==========================================
 import InlineRow, {
   defaultProps as inlineRowProps,
   defaultStyles as inlineRowStyles,
@@ -463,6 +483,36 @@ export const PRICING_VARIANTS = {
   },
 };
 
+export const CTA_VARIANTS = {
+  "full-width-centered": {
+    id: "full-width-centered",
+    name: "Full-Width Centered",
+    description: "Centered high-impact call to action banner",
+    component: FullWidthCentered,
+    defaultProps: ctaCenteredProps,
+    defaultStyles: ctaCenteredStyles,
+    propSchema: ctaCenteredPropSchema,
+  },
+  "split-with-image": {
+    id: "split-with-image",
+    name: "Split With Image",
+    description: "Side-by-side split banner accented with a graphic asset panel",
+    component: SplitWithImage,
+    defaultProps: ctaSplitProps,
+    defaultStyles: ctaSplitStyles,
+    propSchema: ctaSplitPropSchema,
+  },
+  "newsletter-signup": {
+    id: "newsletter-signup",
+    name: "Newsletter Signup",
+    description: "Subscription card containing user input layout nodes (Display-Only)",
+    component: NewsletterSignup,
+    defaultProps: ctaNewsletterProps,
+    defaultStyles: ctaNewsletterStyles,
+    propSchema: ctaNewsletterPropSchema,
+  },
+};
+
 export const TESTIMONIAL_VARIANTS = {
   "card-grid": {
     id: "card-grid",
@@ -604,6 +654,12 @@ export const COMPONENT_REGISTRY = {
     label: "Pricing",
     description: "Pricing tables and plans subscription options",
     variants: PRICING_VARIANTS,
+  },
+  cta: {
+    type: "cta",
+    label: "CTA Banner",
+    description: "Call to Action banners to direct users to specific actions or conversions",
+    variants: CTA_VARIANTS,
   },
   testimonials: {
     type: "testimonials",

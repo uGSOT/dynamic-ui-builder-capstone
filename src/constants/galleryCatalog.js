@@ -66,7 +66,7 @@ export const GALLERY_CATALOG = [
     id: "cta",
     label: "CTA Banner",
     description: "Conversion-focused call to action",
-    available: false,
+    available: true,
     variantCount: 3,
   },
   {
