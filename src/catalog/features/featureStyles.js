@@ -133,7 +133,7 @@ export const FEATURE_STYLE_PROP_SCHEMA = [
     name: "accentColor",
     type: "string",
     default: "indigo",
-    allowedValues: '"indigo" | "violet" | "emerald" | "rose" | "blue"',
+    allowedValues: '"indigo" | "violet" | "emerald" | "rose" | "blue" | "brand"',
     description: "Accent colour used for icons, tags, and highlights",
   },
 ];
@@ -206,6 +206,13 @@ const ACCENT_MAP = {
     tagBg: "bg-rose-50",
     border: "border-rose-100",
   },
+  brand: {
+    iconBg: "bg-brand-muted",
+    iconText: "text-brand",
+    tagText: "text-brand",
+    tagBg: "bg-brand-muted",
+    border: "border-brand/20",
+  },
   blue: {
     iconBg: "bg-blue-50",
     iconText: "text-blue-600",
@@ -215,13 +222,21 @@ const ACCENT_MAP = {
   },
 };
 
+const PADDING_Y = {
+  4: "py-8 sm:py-10",
+  6: "py-10 sm:py-12",
+  8: "py-12 sm:py-16",
+  10: "py-16 sm:py-20",
+  12: "py-20 sm:py-24",
+};
+
 export function resolveFeatureStyles(styles = {}) {
   const s = { ...FEATURE_STYLE_DEFAULTS, ...styles };
 
   const inverted = s.background === "navy";
 
   const sectionBgClass = BG_MAP[s.background] ?? BG_MAP.surface;
-  const sectionClass = `${sectionBgClass} py-${s.paddingY}`;
+  const sectionClass = `${sectionBgClass} ${PADDING_Y[s.paddingY] ?? PADDING_Y[6]}`;
 
   const headingAutoColor = inverted ? "text-text-primary" : "text-gray-900";
   const headingColorClass = s.headingColor ? "" : headingAutoColor;
