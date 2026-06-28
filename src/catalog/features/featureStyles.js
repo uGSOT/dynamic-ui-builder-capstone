@@ -20,7 +20,7 @@ export const FEATURE_STYLE_DEFAULTS = {
   descSize: "sm",
   descColor: "",
 
-  accentColor: "indigo",
+  accentColor: "red",
 };
 
 export const FEATURE_STYLE_PROP_SCHEMA = [
@@ -132,8 +132,8 @@ export const FEATURE_STYLE_PROP_SCHEMA = [
   {
     name: "accentColor",
     type: "string",
-    default: "indigo",
-    allowedValues: '"indigo" | "violet" | "emerald" | "rose" | "blue" | "brand"',
+    default: "red",
+    allowedValues: '"indigo" | "violet" | "emerald" | "rose" | "blue" | "brand" | "red',
     description: "Accent colour used for icons, tags, and highlights",
   },
 ];
@@ -220,6 +220,13 @@ const ACCENT_MAP = {
     tagBg: "bg-blue-50",
     border: "border-blue-100",
   },
+  red: {
+  iconBg: "bg-red-50",
+  iconText: "text-red-600",
+  tagText: "text-red-600",
+  tagBg: "bg-red-50",
+  border: "border-red-100",
+ }
 };
 
 const PADDING_Y = {
