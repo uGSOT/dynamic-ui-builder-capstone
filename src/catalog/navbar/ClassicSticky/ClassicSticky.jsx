@@ -79,25 +79,26 @@ export default function ClassicSticky({
   return (
     <header className={`${positionClass} ${nav.headerClass}`}>
       <div
-        className={`grid grid-cols-[1fr_auto_1fr] items-center ${nav.innerClass}`}
+        className={`flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center ${nav.innerClass}`}
       >
         <NavbarLogo
           logo={logo}
           preventNavigation={preventNavigation}
           inverted={nav.inverted}
           logoSize={nav.logoSize}
+          className="shrink-0"
         />
 
         <NavbarNavLinks
           links={navLinks}
-          className="hidden justify-self-center lg:block"
+          className="hidden lg:block lg:justify-self-center"
           onNavigate={onNavigate}
           activeLabel={activeLabel}
           inverted={nav.inverted}
           linkSize={nav.linkSize}
         />
 
-        <div className="flex items-center justify-end gap-2">
+        <div className="flex shrink-0 items-center justify-end gap-2 lg:col-start-3">
           <NavbarCta
             ctaButton={ctaButton}
             className="hidden lg:inline-flex"

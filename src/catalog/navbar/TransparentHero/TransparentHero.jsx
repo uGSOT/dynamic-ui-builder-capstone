@@ -112,25 +112,26 @@ export default function TransparentHero({
         className={`${positionClass} ${nav.headerClass} transition-colors duration-300`}
       >
         <div
-          className={`grid grid-cols-[1fr_auto_1fr] items-center ${nav.innerClass}`}
+          className={`flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center ${nav.innerClass}`}
         >
           <NavbarLogo
             logo={logo}
             inverted={nav.inverted}
             preventNavigation={preventNavigation}
             logoSize={nav.logoSize}
+            className="shrink-0"
           />
 
           <NavbarNavLinks
             links={navLinks}
-            className="hidden justify-self-center lg:block"
+            className="hidden lg:block lg:justify-self-center"
             inverted={nav.inverted}
             onNavigate={onNavigate}
             activeLabel={activeLabel}
             linkSize={nav.linkSize}
           />
 
-          <div className="flex items-center justify-end gap-2">
+          <div className="flex shrink-0 items-center justify-end gap-2 lg:col-start-3">
             <NavbarCta
               ctaButton={ctaButton}
               inverted={nav.inverted}

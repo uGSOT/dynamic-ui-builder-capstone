@@ -65,25 +65,36 @@ export default function StepsHorizontal(componentData) {
     cardTitleWeight = "font-bold"
   } = activeStyles || {};
 
-  const bgSectionClass = background === "navy" ? "bg-navy text-white" : background === "muted" ? "bg-surface-muted" : "bg-surface";
+  const PADDING_Y = {
+    8: "py-8 sm:py-10",
+    12: "py-12 sm:py-14",
+    16: "py-12 sm:py-16",
+    20: "py-16 sm:py-20",
+  };
+
+  const isNavy = background === "navy";
+  const bgSectionClass = isNavy ? "bg-navy text-white" : background === "muted" ? "bg-surface-muted" : "bg-surface";
+  const paddingClass = PADDING_Y[paddingY] ?? PADDING_Y[16];
+  const resolvedHeadingColor = isNavy ? "text-ink-inverse" : headingColor;
+  const resolvedSubheadingColor = isNavy ? "text-ink-inverse-muted" : subheadingColor;
 
   return (
-    <div className={`px-6 py-${paddingY} ${bgSectionClass} transition-all`}>
+    <div className={`px-4 sm:px-6 ${paddingClass} ${bgSectionClass} transition-all`}>
       <div className="mx-auto max-w-5xl text-center">
-        {heading && <h2 className={`${headingSize} ${headingWeight} ${headingColor} tracking-tight`}>{heading}</h2>}
-        {subheading && <p className={`mt-4 max-w-xl mx-auto ${subheadingSize} ${subheadingWeight} ${subheadingColor}`}>{subheading}</p>}
+        {heading && <h2 className={`${headingSize} ${headingWeight} ${resolvedHeadingColor} tracking-tight`}>{heading}</h2>}
+        {subheading && <p className={`mt-4 max-w-xl mx-auto ${subheadingSize} ${subheadingWeight} ${resolvedSubheadingColor}`}>{subheading}</p>}
         
-        <div className="grid gap-8 sm:grid-cols-3 mt-14 relative">
+        <div className="mt-10 grid gap-6 sm:mt-14 sm:grid-cols-3 sm:gap-8 relative">
           {items.map((item, idx) => (
-            <div key={idx} className={`relative flex flex-col items-center group p-6 rounded-xl ${background === "navy" ? "bg-navy-elevated" : cardBg}`}>
+            <div key={idx} className={`relative flex flex-col items-center group p-5 sm:p-6 rounded-xl ${isNavy ? "bg-navy-elevated" : cardBg}`}>
               {idx < items.length - 1 && (
                 <div className="hidden sm:block absolute top-12 left-[70%] right-[-30%] h-[2px] bg-border/40" />
               )}
               <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-brand text-white font-bold text-base shadow-sm mb-4">
                 {item.step || `0${idx + 1}`}
               </div>
-              <h3 className={`text-lg ${cardTitleWeight} ${background === "navy" ? "text-white" : cardTextColor}`}>{item.title}</h3>
-              <p className="mt-2 text-sm opacity-80">{item.description}</p>
+              <h3 className={`text-lg ${cardTitleWeight} ${isNavy ? "text-ink-inverse" : cardTextColor}`}>{item.title}</h3>
+              <p className={`mt-2 text-sm ${isNavy ? "text-ink-inverse-muted" : "text-ink-muted"}`}>{item.description}</p>
             </div>
           ))}
         </div>
