@@ -1,1 +1,1 @@
-// delete this file 
+export { FOOTER_VARIANTS, COMPONENT_REGISTRY, buildSectionConfig, getVariantEntry } from "../registry.js";
