@@ -1,26 +1,27 @@
 export default function FaqSectionHeader({
   heading,
   subheading,
-  inverted = false,
+  align = "center",
+  headingClass = "text-3xl font-bold tracking-tight text-gray-900",
+  subheadingClass = "text-base leading-relaxed text-gray-500",
 }) {
   if (!heading && !subheading) return null;
 
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
-  const subtitleClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
+  const alignClass = align === "center"
+    ? "text-center mx-auto"
+    : align === "right"
+    ? "text-right ml-auto"
+    : "text-left";
 
   return (
-    <div className="mb-8 text-center sm:mb-10">
+    <div className={`mb-8 max-w-2xl sm:mb-10 ${alignClass}`}>
       {heading && (
-        <h2
-          className={`text-2xl font-bold tracking-tight sm:text-3xl ${titleClass}`}
-        >
+        <h2 className={headingClass}>
           {heading}
         </h2>
       )}
       {subheading && (
-        <p
-          className={`mx-auto mt-3 max-w-2xl text-sm leading-relaxed sm:text-base ${subtitleClass}`}
-        >
+        <p className={`mt-3 ${subheadingClass}`}>
           {subheading}
         </p>
       )}

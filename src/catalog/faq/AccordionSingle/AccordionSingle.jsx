@@ -52,23 +52,37 @@ export const propSchema = {
 };
 
 export default function AccordionSingle({
-  heading = defaultProps.heading,
-  subheading = defaultProps.subheading,
-  items = defaultProps.items,
+  heading          = defaultProps.heading,
+  subheading       = defaultProps.subheading,
+  items            = defaultProps.items,
   defaultOpenIndex = defaultProps.defaultOpenIndex,
-  styles = defaultStyles,
+  styles           = defaultStyles,
 }) {
   const [openIndex, setOpenIndex] = useState(defaultOpenIndex);
-  const { className, inverted } = resolveFaqStyles(styles);
+
+  const {
+    sectionClass,
+    headingAlign,
+    headingClass,
+    subheadingClass,
+    questionClass,
+    answerClass,
+    borderClass,
+    accentClass,
+  } = resolveFaqStyles(styles);
 
   return (
-    <section className={className}>
+    <section className={sectionClass}>
       <div className="mx-auto w-full max-w-3xl px-4 sm:px-6">
+
         <FaqSectionHeader
           heading={heading}
           subheading={subheading}
-          inverted={inverted}
+          align={headingAlign}
+          headingClass={headingClass}
+          subheadingClass={subheadingClass}
         />
+
         <div>
           {items.map((item, index) => (
             <FaqAccordionItem
@@ -79,10 +93,14 @@ export default function AccordionSingle({
               onToggle={() =>
                 setOpenIndex((current) => (current === index ? -1 : index))
               }
-              inverted={inverted}
+              questionClass={questionClass}
+              answerClass={answerClass}
+              borderClass={borderClass}
+              accentClass={accentClass}
             />
           ))}
         </div>
+
       </div>
     </section>
   );

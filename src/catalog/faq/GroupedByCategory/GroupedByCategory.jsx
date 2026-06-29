@@ -10,8 +10,7 @@ import { SAMPLE_FAQ_CATEGORIES } from "../defaultProps";
 
 export const defaultProps = {
   heading: "Frequently asked questions",
-  subheading:
-    "Organized by topic for enterprise and compliance-focused products.",
+  subheading: "Organized by topic for enterprise and compliance-focused products.",
   categories: SAMPLE_FAQ_CATEGORIES,
   defaultOpenKey: "0-0",
 };
@@ -38,16 +37,14 @@ export const propSchema = {
       name: "categories",
       type: "Array<{ name: string, items: Array<{ question: string, answer: string }> }>",
       default: defaultProps.categories,
-      allowedValues:
-        "Array of category groups, each with a name and items array",
+      allowedValues: "Array of category groups, each with a name and items array",
       description: "FAQ content grouped under category headings",
     },
     {
       name: "defaultOpenKey",
       type: "string",
       default: defaultProps.defaultOpenKey,
-      allowedValues:
-        '"{categoryIndex}-{itemIndex}" (e.g. "0-0"), or "" for all closed',
+      allowedValues: '"{categoryIndex}-{itemIndex}" (e.g. "0-0"), or "" for all closed',
       description: "Key of the accordion item open on first render",
     },
   ],
@@ -55,34 +52,47 @@ export const propSchema = {
 };
 
 export default function GroupedByCategory({
-  heading = defaultProps.heading,
-  subheading = defaultProps.subheading,
-  categories = defaultProps.categories,
+  heading        = defaultProps.heading,
+  subheading     = defaultProps.subheading,
+  categories     = defaultProps.categories,
   defaultOpenKey = defaultProps.defaultOpenKey,
-  styles = defaultStyles,
+  styles         = defaultStyles,
 }) {
   const [openKey, setOpenKey] = useState(defaultOpenKey);
-  const { className, inverted } = resolveFaqStyles(styles);
 
-  const categoryTitleClass = inverted ? "text-ink-inverse" : "text-ink";
-  const categoryBorderClass = inverted ? "border-border-dark" : "border-border";
+  const {
+    sectionClass,
+    headingAlign,
+    headingClass,
+    subheadingClass,
+    questionClass,
+    answerClass,
+    borderClass,
+    accentClass,
+    categoryClass,
+    categoryBorderClass,
+  } = resolveFaqStyles(styles);
 
   return (
-    <section className={className}>
+    <section className={sectionClass}>
       <div className="mx-auto w-full max-w-4xl px-4 sm:px-6">
+
         <FaqSectionHeader
           heading={heading}
           subheading={subheading}
-          inverted={inverted}
+          align={headingAlign}
+          headingClass={headingClass}
+          subheadingClass={subheadingClass}
         />
+
         <div className="space-y-10">
           {categories.map((category, categoryIndex) => (
             <div key={category.name}>
-              <h3
-                className={`mb-4 border-b pb-3 text-sm font-bold uppercase tracking-widest ${categoryTitleClass} ${categoryBorderClass}`}
-              >
+
+              <h3 className={`mb-4 border-b pb-3 ${categoryClass} ${categoryBorderClass}`}>
                 {category.name}
               </h3>
+
               <div>
                 {category.items.map((item, itemIndex) => {
                   const key = `${categoryIndex}-${itemIndex}`;
@@ -95,14 +105,19 @@ export default function GroupedByCategory({
                       onToggle={() =>
                         setOpenKey((current) => (current === key ? "" : key))
                       }
-                      inverted={inverted}
+                      questionClass={questionClass}
+                      answerClass={answerClass}
+                      borderClass={borderClass}
+                      accentClass={accentClass}
                     />
                   );
                 })}
               </div>
+
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

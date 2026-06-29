@@ -37,8 +37,7 @@ export const propSchema = {
       name: "items",
       type: "Array<{ question: string, answer: string }>",
       default: defaultProps.items,
-      allowedValues:
-        "Array of question/answer objects (split evenly across columns)",
+      allowedValues: "Array of question/answer objects (split evenly across columns)",
       description: "FAQ entries distributed between left and right columns",
     },
     {
@@ -52,7 +51,16 @@ export const propSchema = {
   styles: FAQ_STYLE_PROP_SCHEMA,
 };
 
-function AccordionColumn({ items, startIndex, openIndex, onToggle, inverted }) {
+function AccordionColumn({
+  items,
+  startIndex,
+  openIndex,
+  onToggle,
+  questionClass,
+  answerClass,
+  borderClass,
+  accentClass,
+}) {
   return (
     <div>
       {items.map((item, index) => {
@@ -64,7 +72,10 @@ function AccordionColumn({ items, startIndex, openIndex, onToggle, inverted }) {
             answer={item.answer}
             isOpen={openIndex === globalIndex}
             onToggle={() => onToggle(globalIndex)}
-            inverted={inverted}
+            questionClass={questionClass}
+            answerClass={answerClass}
+            borderClass={borderClass}
+            accentClass={accentClass}
           />
         );
       })}
@@ -73,16 +84,27 @@ function AccordionColumn({ items, startIndex, openIndex, onToggle, inverted }) {
 }
 
 export default function AccordionTwoColumn({
-  heading = defaultProps.heading,
-  subheading = defaultProps.subheading,
-  items = defaultProps.items,
+  heading          = defaultProps.heading,
+  subheading       = defaultProps.subheading,
+  items            = defaultProps.items,
   defaultOpenIndex = defaultProps.defaultOpenIndex,
-  styles = defaultStyles,
+  styles           = defaultStyles,
 }) {
   const [openIndex, setOpenIndex] = useState(defaultOpenIndex);
-  const { className, inverted } = resolveFaqStyles(styles);
-  const midpoint = Math.ceil(items.length / 2);
-  const leftItems = items.slice(0, midpoint);
+
+  const {
+    sectionClass,
+    headingAlign,
+    headingClass,
+    subheadingClass,
+    questionClass,
+    answerClass,
+    borderClass,
+    accentClass,
+  } = resolveFaqStyles(styles);
+
+  const midpoint   = Math.ceil(items.length / 2);
+  const leftItems  = items.slice(0, midpoint);
   const rightItems = items.slice(midpoint);
 
   const handleToggle = (globalIndex) => {
@@ -90,29 +112,40 @@ export default function AccordionTwoColumn({
   };
 
   return (
-    <section className={className}>
+    <section className={sectionClass}>
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+
         <FaqSectionHeader
           heading={heading}
           subheading={subheading}
-          inverted={inverted}
+          align={headingAlign}
+          headingClass={headingClass}
+          subheadingClass={subheadingClass}
         />
+
         <div className="grid gap-8 md:grid-cols-2 md:gap-12">
           <AccordionColumn
             items={leftItems}
             startIndex={0}
             openIndex={openIndex}
             onToggle={handleToggle}
-            inverted={inverted}
+            questionClass={questionClass}
+            answerClass={answerClass}
+            borderClass={borderClass}
+            accentClass={accentClass}
           />
           <AccordionColumn
             items={rightItems}
             startIndex={midpoint}
             openIndex={openIndex}
             onToggle={handleToggle}
-            inverted={inverted}
+            questionClass={questionClass}
+            answerClass={answerClass}
+            borderClass={borderClass}
+            accentClass={accentClass}
           />
         </div>
+
       </div>
     </section>
   );
