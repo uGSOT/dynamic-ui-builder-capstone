@@ -1,16 +1,16 @@
 import React from "react";
 import { DEFAULT_CENTERED_HERO_PROPS } from "../defaultProps";
 import {
-  HERO_STYLE_DEFAULTS,
-  HERO_STYLE_PROP_SCHEMA,
-  resolveHeroStyles,
-} from "../heroStyles";
+  STYLE_DEFAULTS,
+  STYLE_PROP_SCHEMA,
+  resolveStyles,
+} from "../../../utils/resolveStyles";
 
 export const defaultProps = {
   ...DEFAULT_CENTERED_HERO_PROPS,
 };
 
-export const defaultStyles = { ...HERO_STYLE_DEFAULTS };
+export const defaultStyles = { ...STYLE_DEFAULTS };
 
 export const propSchema = {
   props: [
@@ -57,7 +57,7 @@ export const propSchema = {
       description: "Optional product screenshot or feature image",
     },
   ],
-  styles: HERO_STYLE_PROP_SCHEMA,
+  styles: STYLE_PROP_SCHEMA,
 };
 
 function Centered({
@@ -69,28 +69,25 @@ function Centered({
   badge = defaultProps.badge,
   styles = defaultStyles,
 }) {
-  const { className, inverted } = resolveHeroStyles(styles);
+  const {
+    sectionClass,
+    headingClass,
+    subheadingClass,
+    accent
+  } = resolveStyles(styles);
 
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
-  const subtitleClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
-  const badgeClass = inverted ? "text-ink-inverse-muted" : "text-ink-subtle";
-
-  const primaryBtnClass = inverted
-    ? "bg-brand text-ink-inverse hover:bg-brand-light"
-    : "bg-brand text-ink-inverse hover:bg-brand-dark";
-  const secondaryBtnClass = inverted
-    ? "border border-border-dark text-ink-inverse hover:bg-navy-elevated"
-    : "border border-border text-ink hover:bg-surface-muted";
+  const primaryBtnClass = `${accent.bg} text-white hover:opacity-90`;
+  const secondaryBtnClass = `border ${accent.border} ${accent.text} hover:opacity-90`;
 
   return (
-    <section className={`text-center transition-colors duration-200 ${className}`}>
+    <section className={`text-center transition-colors duration-200 ${sectionClass}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-3xl">
-          <h1 className={`text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl ${titleClass}`}>
+          <h1 className={headingClass}>
             {headline}
           </h1>
           {subtext && (
-            <p className={`mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg ${subtitleClass}`}>
+            <p className={`mx-auto mt-6 max-w-2xl ${subheadingClass}`}>
               {subtext}
             </p>
           )}
@@ -117,13 +114,13 @@ function Centered({
           )}
 
           {badge && (
-            <p className={`mt-5 text-xs font-medium tracking-wide sm:text-sm ${badgeClass}`}>
+            <p className={`mt-5 text-xs font-medium tracking-wide sm:text-sm ${accent.text}`}>
               {badge}
             </p>
           )}
 
           {imageUrl && (
-            <div className="mt-12 overflow-hidden rounded-xl border border-border/10 bg-surface shadow-card">
+            <div className="mt-12 overflow-hidden rounded-xl border border-border/10 bg-white shadow-md">
               <img
                 src={imageUrl}
                 alt=""

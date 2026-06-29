@@ -1,16 +1,16 @@
 import React from "react";
 import { DEFAULT_SPLIT_HERO_PROPS } from "../defaultProps";
 import {
-  HERO_STYLE_DEFAULTS,
-  HERO_STYLE_PROP_SCHEMA,
-  resolveHeroStyles,
-} from "../heroStyles";
+  STYLE_DEFAULTS,
+  STYLE_PROP_SCHEMA,
+  resolveStyles,
+} from "../../../utils/resolveStyles";
 
 export const defaultProps = {
   ...DEFAULT_SPLIT_HERO_PROPS,
 };
 
-export const defaultStyles = { ...HERO_STYLE_DEFAULTS };
+export const defaultStyles = { ...STYLE_DEFAULTS };
 
 export const propSchema = {
   props: [
@@ -57,7 +57,7 @@ export const propSchema = {
       description: "Product screenshot or feature image to render on the right",
     },
   ],
-  styles: HERO_STYLE_PROP_SCHEMA,
+  styles: STYLE_PROP_SCHEMA,
 };
 
 function SplitImageRight({
@@ -69,21 +69,20 @@ function SplitImageRight({
   badge = defaultProps.badge,
   styles = defaultStyles,
 }) {
-  const { className, inverted } = resolveHeroStyles(styles);
+  const {
+    sectionClass,
+    headingClass,
+    subheadingClass,
+    accent
+  } = resolveStyles(styles);
 
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
-  const subtitleClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
-  const badgeTextClass = inverted ? "text-brand-light bg-brand-muted/10" : "text-brand bg-brand-muted";
+  const badgeTextClass = `${accent.text} ${accent.bg}/10`;
 
-  const primaryBtnClass = inverted
-    ? "bg-brand text-ink-inverse hover:bg-brand-light"
-    : "bg-brand text-ink-inverse hover:bg-brand-dark";
-  const secondaryBtnClass = inverted
-    ? "border border-border-dark text-ink-inverse hover:bg-navy-elevated"
-    : "border border-border text-ink hover:bg-surface-muted";
+  const primaryBtnClass = `${accent.bg} text-white hover:opacity-90`;
+  const secondaryBtnClass = `border ${accent.border} ${accent.text} hover:opacity-90`;
 
   return (
-    <section className={`transition-colors duration-200 ${className}`}>
+    <section className={`transition-colors duration-200 ${sectionClass}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column: Content */}
@@ -93,11 +92,11 @@ function SplitImageRight({
                 {badge}
               </span>
             )}
-            <h1 className={`mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl ${titleClass}`}>
+            <h1 className={`mt-6 ${headingClass}`}>
               {headline}
             </h1>
             {subtext && (
-              <p className={`mt-6 text-base leading-relaxed sm:text-lg ${subtitleClass}`}>
+              <p className={`mt-6 ${subheadingClass}`}>
                 {subtext}
               </p>
             )}
@@ -127,7 +126,7 @@ function SplitImageRight({
           {/* Right Column: Image */}
           {imageUrl && (
             <div className="relative">
-              <div className="overflow-hidden rounded-2xl border border-border/10 bg-surface shadow-card transition-transform duration-300 hover:scale-[1.01]">
+              <div className="overflow-hidden rounded-2xl border border-border/10 bg-white shadow-md transition-transform duration-300 hover:scale-[1.01]">
                 <img
                   src={imageUrl}
                   alt="Product screenshot"
