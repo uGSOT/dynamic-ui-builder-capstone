@@ -13,14 +13,14 @@ export const defaultProps = {
 export const defaultStyles = {
   background: "surface",
   paddingY: 16,
-  headingColor: "text-ink",
+  headingColor: "text-text",
   headingSize: "text-3xl",
   headingWeight: "font-bold",
   subheadingColor: "text-ink-muted",
   subheadingSize: "text-base",
   subheadingWeight: "font-normal",
   cardBg: "bg-transparent",
-  cardTextColor: "text-ink",
+  cardTextColor: "text-text",
   cardTitleWeight: "font-bold"
 };
 
@@ -53,18 +53,18 @@ export default function StepsVertical(componentData) {
   const {
     background = "surface",
     paddingY = 16,
-    headingColor = "text-ink",
+    headingColor = "text-text",
     headingSize = "text-3xl",
     headingWeight = "font-bold",
     subheadingColor = "text-ink-muted",
     subheadingSize = "text-base",
     subheadingWeight = "font-normal",
     cardBg = "bg-transparent",
-    cardTextColor = "text-ink",
+    cardTextColor = "text-text",
     cardTitleWeight = "font-bold"
   } = activeStyles || {};
 
-  const bgSectionClass = background === "navy" ? "bg-navy text-white" : background === "muted" ? "bg-surface-muted" : "bg-surface";
+  const bgSectionClass = background === "navy" ? "bg-secondary text-white" : background === "muted" ? "bg-muted" : "bg-surface";
 
   return (
     <div className={`px-6 py-${paddingY} ${bgSectionClass} transition-all`}>
@@ -77,7 +77,7 @@ export default function StepsVertical(componentData) {
         <div className="max-w-2xl mx-auto space-y-6 relative before:absolute before:inset-0 before:left-[27px] before:w-[2px] before:bg-border/40">
           {items.map((item, idx) => (
             <div key={idx} className={`flex gap-6 relative p-4 rounded-xl ${background === "navy" ? "bg-navy-elevated/40" : cardBg}`}>
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-muted text-brand font-bold text-lg border border-brand/20 relative z-10 bg-surface">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-muted text-primary font-bold text-lg border border-primary/20 relative z-10 bg-surface">
                 {item.step || `0${idx + 1}`}
               </div>
               <div className="pt-2 text-left">

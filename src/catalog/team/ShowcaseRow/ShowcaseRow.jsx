@@ -69,7 +69,7 @@ export default function CompactRow({
               key={`${member.name}-${index}`}
               className="flex flex-col items-center text-center"
             >
-              <div className="w-20 h-20 mb-3 rounded-full overflow-hidden bg-surface-muted shrink-0 ring-2 ring-border/20 transition-all hover:ring-brand/30 hover:shadow-md">
+              <div className="w-20 h-20 mb-3 rounded-full overflow-hidden bg-muted shrink-0 ring-2 ring-border/20 transition-all hover:ring-primary/30 hover:shadow-md">
                 <img
                   src={member.avatar}
                   alt={member.name}

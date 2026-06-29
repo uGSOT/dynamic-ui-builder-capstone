@@ -71,16 +71,16 @@ function SplitImageLeft({
 }) {
   const { className, inverted } = resolveHeroStyles(styles);
 
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
+  const titleClass = inverted ? "text-ink-inverse" : "text-text";
   const subtitleClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
-  const badgeTextClass = inverted ? "text-brand-light bg-brand-muted/10" : "text-brand bg-brand-muted";
+  const badgeTextClass = inverted ? "text-brand-light bg-brand-muted/10" : "text-primary bg-brand-muted";
 
   const primaryBtnClass = inverted
-    ? "bg-brand text-ink-inverse hover:bg-brand-light"
-    : "bg-brand text-ink-inverse hover:bg-brand-dark";
+    ? "bg-primary text-ink-inverse hover:bg-brand-light"
+    : "bg-primary text-ink-inverse hover:bg-primary-dark";
   const secondaryBtnClass = inverted
     ? "border border-border-dark text-ink-inverse hover:bg-navy-elevated"
-    : "border border-border text-ink hover:bg-surface-muted";
+    : "border border-border text-text hover:bg-muted";
 
   return (
     <section className={`transition-colors duration-200 ${className}`}>
@@ -120,7 +120,7 @@ function SplitImageLeft({
                 {primaryAction?.label && (
                   <a
                     href={primaryAction.href || "#"}
-                    className={`inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 ${primaryBtnClass}`}
+                    className={`inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${primaryBtnClass}`}
                   >
                     {primaryAction.label}
                   </a>
@@ -128,7 +128,7 @@ function SplitImageLeft({
                 {secondaryAction?.label && (
                   <a
                     href={secondaryAction.href || "#"}
-                    className={`inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 ${secondaryBtnClass}`}
+                    className={`inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${secondaryBtnClass}`}
                   >
                     {secondaryAction.label}
                   </a>

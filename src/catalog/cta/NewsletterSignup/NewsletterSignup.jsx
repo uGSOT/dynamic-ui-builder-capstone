@@ -10,7 +10,7 @@ export const defaultProps = {
 export const defaultStyles = {
   background: "muted",
   paddingY: 12,
-  headingColor: "text-ink",
+  headingColor: "text-text",
   headingSize: "text-2xl",
   headingWeight: "font-bold",
   subheadingColor: "text-ink-muted",
@@ -38,20 +38,20 @@ export default function NewsletterSignup(componentData) {
   const {
     background = "muted",
     paddingY = 12,
-    headingColor = "text-ink",
+    headingColor = "text-text",
     headingSize = "text-2xl",
     headingWeight = "font-bold",
     subheadingColor = "text-ink-muted",
     subheadingSize = "text-sm"
   } = activeStyles || {};
 
-  const bgSectionClass = background === "navy" ? "bg-navy text-white" : background === "muted" ? "bg-surface-muted" : "bg-surface";
+  const bgSectionClass = background === "navy" ? "bg-secondary text-white" : background === "muted" ? "bg-muted" : "bg-surface";
 
   return (
     <div className={`px-6 py-${paddingY} ${bgSectionClass} transition-all`}>
       <div className="mx-auto max-w-4xl grid gap-8 items-center lg:grid-cols-3 p-8 border border-border/20 rounded-2xl bg-surface shadow-card">
         <div className="text-left lg:col-span-2 space-y-2">
-          {heading && <h3 className={`${headingSize} ${headingWeight} text-ink tracking-tight`}>{heading}</h3>}
+          {heading && <h3 className={`${headingSize} ${headingWeight} text-text tracking-tight`}>{heading}</h3>}
           {subheading && <p className={`${subheadingSize} ${subheadingColor}`}>{subheading}</p>}
         </div>
         <div>
@@ -61,12 +61,12 @@ export default function NewsletterSignup(componentData) {
               type="email" 
               disabled 
               placeholder={placeholderText} 
-              className="min-w-0 flex-1 rounded-xl border border-border px-3.5 py-2 text-sm shadow-sm placeholder:text-ink-subtle bg-surface-muted cursor-not-allowed" 
+              className="min-w-0 flex-1 rounded-xl border border-border px-3.5 py-2 text-sm shadow-sm placeholder:text-ink-subtle bg-muted cursor-not-allowed" 
             />
             <button 
               type="button" 
               disabled 
-              className="rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-brand-dark transition-all pointer-events-none opacity-90"
+              className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-dark transition-all pointer-events-none opacity-90"
             >
               {buttonLabel}
             </button>

@@ -10,7 +10,7 @@ export const defaultProps = {
 export const defaultStyles = {
   background: "surface",
   paddingY: 16,
-  headingColor: "text-ink",
+  headingColor: "text-text",
   headingSize: "text-3xl",
   headingWeight: "font-bold",
   subheadingColor: "text-ink-muted",
@@ -41,7 +41,7 @@ export default function SplitWithImage(componentData) {
   const {
     background = "surface",
     paddingY = 16,
-    headingColor = "text-ink",
+    headingColor = "text-text",
     headingSize = "text-3xl",
     headingWeight = "font-bold",
     subheadingColor = "text-ink-muted",
@@ -49,7 +49,7 @@ export default function SplitWithImage(componentData) {
     imagePosition = "right"
   } = activeStyles || {};
 
-  const bgSectionClass = background === "navy" ? "bg-navy text-white" : background === "muted" ? "bg-surface-muted" : "bg-surface";
+  const bgSectionClass = background === "navy" ? "bg-secondary text-white" : background === "muted" ? "bg-muted" : "bg-surface";
   const textContainerOrder = imagePosition === "left" ? "lg:order-last" : "";
 
   return (
@@ -60,14 +60,14 @@ export default function SplitWithImage(componentData) {
           {subheading && <p className={`${subheadingSize} ${subheadingColor} leading-relaxed`}>{subheading}</p>}
           {primaryAction?.label && (
             <div>
-              <a href={primaryAction.href || "#"} className="inline-block px-6 py-3 rounded-xl bg-brand text-white font-semibold text-sm shadow-sm hover:bg-brand-dark transition-all">
+              <a href={primaryAction.href || "#"} className="inline-block px-6 py-3 rounded-xl bg-primary text-white font-semibold text-sm shadow-sm hover:bg-primary-dark transition-all">
                 {primaryAction.label}
               </a>
             </div>
           )}
         </div>
         {imageUrl && (
-          <div className="overflow-hidden rounded-2xl border border-border/10 shadow-card bg-surface-muted aspect-[4/3]">
+          <div className="overflow-hidden rounded-2xl border border-border/10 shadow-card bg-muted aspect-[4/3]">
             <img src={imageUrl} alt="" className="h-full w-full object-cover" />
           </div>
         )}

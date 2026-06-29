@@ -38,7 +38,7 @@ import SplitWithImage from "@/catalog/split/SplitWithImage";
 |-----|------|---------|-----------------|-------------|
 | `background` | `string` | `"surface"` | `"surface"`, `"muted"`, `"navy"` | Section background token |
 | `paddingY` | `number` | `16` | `8`, `12`, `16`, `20` | Vertical section padding scale |
-| `headingColor` | `string` | `"text-ink"` | Any text color token | Color applied to the heading |
+| `headingColor` | `string` | `"text-text"` | Any text color token | Color applied to the heading |
 | `headingSize` | `string` | `"text-3xl"` | `"text-2xl"`, `"text-3xl"`, `"text-4xl"` | Font size of the heading |
 | `headingWeight` | `string` | `"font-bold"` | Any font weight token | Font weight of the heading |
 | `subheadingColor` | `string` | `"text-ink-muted"` | Any text color token | Color applied to the subheading |

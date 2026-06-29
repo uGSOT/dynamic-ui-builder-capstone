@@ -7,23 +7,23 @@ const PADDING_Y = {
 
 const BACKGROUND = {
   surface: "bg-surface",
-  muted: "bg-surface-muted",
-  navy: "bg-navy",
+  muted: "bg-muted",
+  navy: "bg-secondary",
 };
 
 const FONT_COLORS = {
   default: {
-    heading: "text-ink",
+    heading: "text-text",
     subheading: "text-ink-muted",
-    name: "text-ink",
-    role: "text-brand",
+    name: "text-text",
+    role: "text-primary",
     bio: "text-ink-muted",
   },
   ink: {
-    heading: "text-ink",
+    heading: "text-text",
     subheading: "text-ink-muted",
-    name: "text-ink",
-    role: "text-brand",
+    name: "text-text",
+    role: "text-primary",
     bio: "text-ink-muted",
   },
   inverse: {
@@ -34,11 +34,11 @@ const FONT_COLORS = {
     bio: "text-ink-inverse-muted",
   },
   brand: {
-    heading: "text-brand",
-    subheading: "text-brand/80",
-    name: "text-brand",
-    role: "text-brand/60",
-    bio: "text-brand/70",
+    heading: "text-primary",
+    subheading: "text-primary/80",
+    name: "text-primary",
+    role: "text-primary/60",
+    bio: "text-primary/70",
   },
 };
 
@@ -52,9 +52,9 @@ const FONT_WEIGHTS = {
 const CARD_COLORS = {
   none: "",
   surface: "bg-surface",
-  muted: "bg-surface-muted",
-  navy: "bg-navy/10",
-  brand: "bg-brand/5",
+  muted: "bg-muted",
+  navy: "bg-secondary/10",
+  brand: "bg-primary/5",
 };
 
 const CARD_BORDERS = {

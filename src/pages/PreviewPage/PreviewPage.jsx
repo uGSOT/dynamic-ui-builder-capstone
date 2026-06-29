@@ -49,14 +49,14 @@ export default function PreviewPage() {
   if (!siteConfig) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-surface px-6 text-center">
-        <p className="text-lg font-semibold text-ink">No site to preview</p>
+        <p className="text-lg font-semibold text-text">No site to preview</p>
         <p className="max-w-md text-sm text-ink-muted">
           Open the builder, load a template or paste valid JSON, then use{" "}
           <strong>Open clean site</strong>.
         </p>
         <Link
           to="/builder"
-          className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-ink-inverse hover:bg-brand-dark"
+          className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-ink-inverse hover:bg-primary-dark"
         >
           <ArrowLeft size={16} />
           Back to Builder

@@ -64,7 +64,7 @@ export default function GroupedByCategory({
   const [openKey, setOpenKey] = useState(defaultOpenKey);
   const { className, inverted } = resolveFaqStyles(styles);
 
-  const categoryTitleClass = inverted ? "text-ink-inverse" : "text-ink";
+  const categoryTitleClass = inverted ? "text-ink-inverse" : "text-text";
   const categoryBorderClass = inverted ? "border-border-dark" : "border-border";
 
   return (

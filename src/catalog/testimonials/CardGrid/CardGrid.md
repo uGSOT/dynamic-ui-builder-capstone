@@ -154,13 +154,15 @@ The component resolves design tokens automatically.
 
 | Token | CSS Variable |
 |--------|--------------|
-| ink | --color-ink |
+| text | --color-text |
+| ink | --color-text (alias) |
 | ink-muted | --color-ink-muted |
 | ink-subtle | --color-ink-subtle |
 | ink-inverse | --color-ink-inverse |
 | ink-inverse-muted | --color-ink-inverse-muted |
-| brand | --color-brand |
-| brand-dark | --color-brand-dark |
+| primary | --color-primary |
+| brand | --color-primary (alias) |
+| primary-dark | --color-primary-dark |
 | brand-light | --color-brand-light |
 
 You can also provide any valid CSS color:

@@ -71,7 +71,7 @@ export default function GridWithBio({
               className={`rounded-lg p-6 transition-all hover:shadow-lg ${cardColorClass} ${cardBorderClass}`}
             >
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-16 h-16 rounded-full overflow-hidden bg-surface-muted shrink-0 ring-2 ring-border/20">
+                <div className="w-16 h-16 rounded-full overflow-hidden bg-muted shrink-0 ring-2 ring-border/20">
                   <img
                     src={member.avatar}
                     alt={member.name}
@@ -96,7 +96,7 @@ export default function GridWithBio({
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`inline-flex h-7 w-7 items-center justify-center rounded transition-colors hover:bg-brand/10`}
+                      className={`inline-flex h-7 w-7 items-center justify-center rounded transition-colors hover:bg-primary/10`}
                       title={link.type}
                     >
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">

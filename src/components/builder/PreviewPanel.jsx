@@ -29,10 +29,10 @@ export default function PreviewPanel() {
   return (
     <section className="flex min-h-0 flex-1 flex-col border-b border-border lg:border-b-0 lg:border-l">
       <div className="flex flex-wrap items-center gap-2 border-b border-border bg-surface px-4 py-2.5 sm:px-6">
-        <Eye size={15} className="shrink-0 text-brand" />
-        <h3 className="text-sm font-semibold text-ink">Live Preview</h3>
+        <Eye size={15} className="shrink-0 text-primary" />
+        <h3 className="text-sm font-semibold text-text">Live Preview</h3>
 
-        <div className="flex items-center gap-1 rounded-lg border border-border bg-surface-muted p-0.5">
+        <div className="flex items-center gap-1 rounded-lg border border-border bg-muted p-0.5">
           {PRESET_BUTTONS.map(({ id, icon: Icon }) => (
             <button
               key={id}
@@ -41,8 +41,8 @@ export default function PreviewPanel() {
               onClick={() => dispatch(setViewport(id))}
               className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium transition-colors ${
                 viewport === id
-                  ? "bg-surface text-brand shadow-sm"
-                  : "text-ink-muted hover:text-ink"
+                  ? "bg-surface text-primary shadow-sm"
+                  : "text-ink-muted hover:text-text"
               }`}
             >
               <Icon size={13} />
@@ -51,7 +51,7 @@ export default function PreviewPanel() {
           ))}
         </div>
 
-        <span className="rounded bg-surface-muted px-2 py-0.5 text-xs font-medium text-ink-muted">
+        <span className="rounded bg-muted px-2 py-0.5 text-xs font-medium text-ink-muted">
           {preset.width}×{preset.height}
         </span>
 
@@ -59,14 +59,14 @@ export default function PreviewPanel() {
           type="button"
           onClick={handleOpenInNewTab}
           disabled={!isValid || !siteConfig}
-          className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-ink-muted transition-colors hover:bg-surface-muted hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
+          className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-ink-muted transition-colors hover:bg-muted hover:text-text disabled:cursor-not-allowed disabled:opacity-40"
         >
           <ExternalLink size={13} />
           Open clean site
         </button>
 
         {!isValid && (
-          <span className="w-full text-xs text-brand sm:w-auto">
+          <span className="w-full text-xs text-primary sm:w-auto">
             fix validation errors to preview
           </span>
         )}

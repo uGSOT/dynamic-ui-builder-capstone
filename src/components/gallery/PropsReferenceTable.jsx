@@ -33,11 +33,11 @@ function PropTable({ title, rows }) {
       <div className="overflow-x-auto rounded-lg border border-border">
         <table className="w-full min-w-[32rem] text-left text-xs">
           <thead>
-            <tr className="border-b border-border bg-surface-muted">
-              <th className="px-3 py-2 font-semibold text-ink">Prop</th>
-              <th className="px-3 py-2 font-semibold text-ink">Type</th>
-              <th className="px-3 py-2 font-semibold text-ink">Default</th>
-              <th className="px-3 py-2 font-semibold text-ink">Allowed values</th>
+            <tr className="border-b border-border bg-muted">
+              <th className="px-3 py-2 font-semibold text-text">Prop</th>
+              <th className="px-3 py-2 font-semibold text-text">Type</th>
+              <th className="px-3 py-2 font-semibold text-text">Default</th>
+              <th className="px-3 py-2 font-semibold text-text">Allowed values</th>
             </tr>
           </thead>
           <tbody>
@@ -46,7 +46,7 @@ function PropTable({ title, rows }) {
                 key={row.name}
                 className="border-b border-border last:border-b-0"
               >
-                <td className="px-3 py-2 align-top font-mono font-medium text-brand">
+                <td className="px-3 py-2 align-top font-mono font-medium text-primary">
                   {row.name}
                 </td>
                 <td className="px-3 py-2 align-top font-mono text-ink-muted">
@@ -72,7 +72,7 @@ export default function PropsReferenceTable({ propSchema }) {
 
   return (
     <div className="bg-surface px-4 py-4 sm:px-6 sm:py-6">
-      <h3 className="mb-3 text-sm font-semibold text-ink">Supported props</h3>
+      <h3 className="mb-3 text-sm font-semibold text-text">Supported props</h3>
       <div className="space-y-4">
         <PropTable title="props" rows={propSchema.props} />
         <PropTable title="styles" rows={propSchema.styles} />

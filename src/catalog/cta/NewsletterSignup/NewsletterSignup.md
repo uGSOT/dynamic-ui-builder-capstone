@@ -40,7 +40,7 @@ import NewsletterSignup from "@/catalog/newsletter/NewsletterSignup";
 |-----|------|---------|-----------------|-------------|
 | `background` | `string` | `"muted"` | `"surface"`, `"muted"`, `"navy"` | Outer section background token |
 | `paddingY` | `number` | `12` | `8`, `12`, `16`, `20` | Vertical section padding scale |
-| `headingColor` | `string` | `"text-ink"` | Any text color token | Color applied to the heading |
+| `headingColor` | `string` | `"text-text"` | Any text color token | Color applied to the heading |
 | `headingSize` | `string` | `"text-2xl"` | Any text size token | Font size of the heading |
 | `headingWeight` | `string` | `"font-bold"` | Any font weight token | Font weight of the heading |
 | `subheadingColor` | `string` | `"text-ink-muted"` | Any text color token | Color applied to the subheading |

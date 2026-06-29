@@ -43,7 +43,7 @@ export default function SplitWithCopy({ heading = defaultProps.heading, body = d
     iconWrapperClass,
     iconTextClass,
   } = resolveStatsStyles(styles);
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
+  const titleClass = inverted ? "text-ink-inverse" : "text-text";
   const bodyClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
 
   return (

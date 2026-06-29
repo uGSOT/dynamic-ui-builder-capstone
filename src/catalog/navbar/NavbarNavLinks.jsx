@@ -60,8 +60,8 @@ export default function NavbarNavLinks({
               : "text-ink-inverse-muted hover:bg-white/10 hover:text-ink-inverse";
           } else {
             stateClass = active
-              ? "bg-brand-muted text-brand"
-              : "text-ink-muted hover:bg-surface-muted hover:text-ink";
+              ? "bg-brand-muted text-primary"
+              : "text-ink-muted hover:bg-muted hover:text-text";
           }
 
           return (
@@ -87,7 +87,7 @@ export function NavbarMobileToggle({
   onToggle,
   inverted = false,
 }) {
-  const iconClass = inverted ? "text-ink-inverse" : "text-ink";
+  const iconClass = inverted ? "text-ink-inverse" : "text-text";
 
   return (
     <button

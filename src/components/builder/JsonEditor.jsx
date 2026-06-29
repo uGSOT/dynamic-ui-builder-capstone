@@ -59,14 +59,14 @@ export default function JsonEditor() {
         <button
           type="button"
           onClick={handleFormat}
-          className="rounded-md border border-border-dark px-3 py-1.5 text-xs font-medium text-ink-inverse-muted transition-colors hover:border-brand/40 hover:text-ink-inverse"
+          className="rounded-md border border-border-dark px-3 py-1.5 text-xs font-medium text-ink-inverse-muted transition-colors hover:border-primary/40 hover:text-ink-inverse"
         >
           Format
         </button>
       </div>
 
       {parseError && (
-        <div className="border-b border-brand/30 bg-brand/10 px-4 py-2 text-xs text-brand-light sm:px-6">
+        <div className="border-b border-primary/30 bg-primary/10 px-4 py-2 text-xs text-brand-light sm:px-6">
           {parseError}
         </div>
       )}

@@ -4,13 +4,15 @@ function resolveColor(value, fallback) {
     if (!value) return fallback;
     if (value.startsWith("#") || value.startsWith("rgb")) return value;
     const tokenMap = {
-      "ink": "var(--color-ink)",
+      text: "var(--color-text)",
+      ink: "var(--color-text)",
+      primary: "var(--color-primary)",
+      brand: "var(--color-primary)",
       "ink-muted": "var(--color-ink-muted)",
       "ink-subtle": "var(--color-ink-subtle)",
       "ink-inverse": "var(--color-ink-inverse)",
       "ink-inverse-muted": "var(--color-ink-inverse-muted)",
-      "brand": "var(--color-brand)",
-      "brand-dark": "var(--color-brand-dark)",
+      "primary-dark": "var(--color-primary-dark)",
       "brand-light": "var(--color-brand-light)",
     };
     return tokenMap[value] ?? fallback;
@@ -42,9 +44,9 @@ function resolveColor(value, fallback) {
     // structural classes stay as Tailwind tokens — these never change at runtime
     const sectionBg = {
       surface: "bg-surface",
-      "surface-muted": "bg-surface-muted",
+      "surface-muted": "bg-muted",
       "surface-subtle": "bg-surface-subtle",
-      navy: "bg-navy",
+      navy: "bg-secondary",
       "navy-elevated": "bg-navy-elevated",
       "navy-muted": "bg-navy-muted",
     }[styles.sectionBackground] ?? "bg-surface";
@@ -63,9 +65,9 @@ function resolveColor(value, fallback) {
   
     const cardBg = {
       surface: "bg-surface",
-      "surface-muted": "bg-surface-muted",
+      "surface-muted": "bg-muted",
       "surface-subtle": "bg-surface-subtle",
-      navy: "bg-navy",
+      navy: "bg-secondary",
       "navy-elevated": "bg-navy-elevated",
       "navy-muted": "bg-navy-muted",
     }[styles.cardBackground] ?? "bg-surface";
@@ -73,7 +75,8 @@ function resolveColor(value, fallback) {
     const cardBorderColor = {
       border: "border-border",
       "border-dark": "border-border-dark",
-      brand: "border-brand",
+      brand: "border-primary",
+      primary: "border-primary",
       none: "border-transparent",
     }[styles.cardBorderColor] ?? "border-border";
   
@@ -116,14 +119,14 @@ function resolveColor(value, fallback) {
             {eyebrow && (
               <p
                 className={`text-xs uppercase tracking-widest mb-2 ${weightMap[eyebrowWeight] ?? "font-bold"}`}
-                style={{ color: resolveColor(eyebrowColor, "var(--color-brand)") }}
+                style={{ color: resolveColor(eyebrowColor, "var(--color-primary)") }}
               >
                 {eyebrow}
               </p>
             )}
             <HeadingTag
               className={`${sizeMap[headingSize] ?? "text-3xl"} ${weightMap[headingWeight] ?? "font-bold"}`}
-              style={{ color: resolveColor(headingColor, "var(--color-ink)") }}
+              style={{ color: resolveColor(headingColor, "var(--color-text)") }}
             >
               {heading}
             </HeadingTag>
@@ -147,13 +150,13 @@ function resolveColor(value, fallback) {
               >
                 <span
                   className="text-4xl font-serif leading-none"
-                  style={{ color: resolveColor(accentColor, "var(--color-brand)") }}
+                  style={{ color: resolveColor(accentColor, "var(--color-primary)") }}
                 >
                   "
                 </span>
                 <p
                   className={`leading-relaxed ${sizeMap[quoteSize] ?? "text-sm"} ${weightMap[quoteWeight] ?? "font-normal"}`}
-                  style={{ color: resolveColor(quoteColor, "var(--color-ink)") }}
+                  style={{ color: resolveColor(quoteColor, "var(--color-text)") }}
                 >
                   {t.quote}
                 </p>
@@ -166,7 +169,7 @@ function resolveColor(value, fallback) {
                   <div>
                     <p
                       className={`text-sm ${weightMap[nameWeight] ?? "font-semibold"}`}
-                      style={{ color: resolveColor(nameColor, "var(--color-ink)") }}
+                      style={{ color: resolveColor(nameColor, "var(--color-text)") }}
                     >
                       {t.name}
                     </p>
@@ -196,23 +199,23 @@ function resolveColor(value, fallback) {
   
   export const defaultProps = {
     eyebrow: "Testimonials",
-    eyebrowColor: "brand",
+    eyebrowColor: "primary",
     eyebrowWeight: "bold",
     heading: "Trusted by startup teams",
-    headingColor: "ink",
+    headingColor: "text",
     headingWeight: "bold",
     headingSize: "3xl",
     subheading: "See what founders and operators say about working with us.",
     subheadingColor: "ink-muted",
     subheadingWeight: "normal",
-    quoteColor: "ink",
+    quoteColor: "text",
     quoteWeight: "normal",
     quoteSize: "sm",
-    nameColor: "ink",
+    nameColor: "text",
     nameWeight: "semibold",
     roleColor: "ink-muted",
     roleWeight: "normal",
-    accentColor: "brand",
+    accentColor: "primary",
     testimonials: [
       {
         quote: "This product has become indispensable to our daily workflow. It's simple, powerful, and saves us hours every week.",
@@ -257,23 +260,23 @@ function resolveColor(value, fallback) {
   export const propSchema = {
     props: [
       { name: "eyebrow", type: "string", default: "Testimonials", allowedValues: "Any string or null" },
-      { name: "eyebrowColor", type: "string", default: "brand", allowedValues: "Token name OR any hex e.g. #e50913" },
+      { name: "eyebrowColor", type: "string", default: "primary", allowedValues: "Token name OR any hex e.g. #e50913" },
       { name: "eyebrowWeight", type: "string", default: "bold", allowedValues: "normal | medium | semibold | bold" },
       { name: "heading", type: "string", default: "Trusted by startup teams", allowedValues: "Any string" },
-      { name: "headingColor", type: "string", default: "ink", allowedValues: "Token name OR any hex e.g. #0f0f14" },
+      { name: "headingColor", type: "string", default: "text", allowedValues: "Token name OR any hex e.g. #0f0f14" },
       { name: "headingWeight", type: "string", default: "bold", allowedValues: "normal | medium | semibold | bold" },
       { name: "headingSize", type: "string", default: "3xl", allowedValues: "xl | 2xl | 3xl | 4xl" },
       { name: "subheading", type: "string", default: "...", allowedValues: "Any string or null" },
       { name: "subheadingColor", type: "string", default: "ink-muted", allowedValues: "Token name OR any hex" },
       { name: "subheadingWeight", type: "string", default: "normal", allowedValues: "normal | medium | semibold | bold" },
-      { name: "quoteColor", type: "string", default: "ink", allowedValues: "Token name OR any hex" },
+      { name: "quoteColor", type: "string", default: "text", allowedValues: "Token name OR any hex" },
       { name: "quoteWeight", type: "string", default: "normal", allowedValues: "normal | medium | semibold | bold" },
       { name: "quoteSize", type: "string", default: "sm", allowedValues: "sm | base | lg" },
-      { name: "nameColor", type: "string", default: "ink", allowedValues: "Token name OR any hex" },
+      { name: "nameColor", type: "string", default: "text", allowedValues: "Token name OR any hex" },
       { name: "nameWeight", type: "string", default: "semibold", allowedValues: "normal | medium | semibold | bold" },
       { name: "roleColor", type: "string", default: "ink-muted", allowedValues: "Token name OR any hex" },
       { name: "roleWeight", type: "string", default: "normal", allowedValues: "normal | medium | semibold | bold" },
-      { name: "accentColor", type: "string", default: "brand", allowedValues: "Token name OR any hex" },
+      { name: "accentColor", type: "string", default: "primary", allowedValues: "Token name OR any hex" },
       { name: "testimonials", type: "Array<{ quote, name, role, avatar, company, companyLogo }>", default: "[3 items]", allowedValues: "Array of testimonial objects" },
     ],
     styles: [
@@ -282,7 +285,7 @@ function resolveColor(value, fallback) {
       { name: "headingAlign", type: "string", default: "center", allowedValues: "center | left" },
       { name: "headingTag", type: "string", default: "h2", allowedValues: "h2 | h3" },
       { name: "cardBackground", type: "string", default: "surface", allowedValues: "surface | surface-muted | surface-subtle | navy | navy-elevated | navy-muted" },
-      { name: "cardBorderColor", type: "string", default: "border", allowedValues: "border | border-dark | brand | none" },
+      { name: "cardBorderColor", type: "string", default: "border", allowedValues: "border | border-dark | primary | brand | none" },
       { name: "cardRadius", type: "string", default: "xl", allowedValues: "none | sm | md | lg | xl | 2xl" },
       { name: "avatarSize", type: "string", default: "md", allowedValues: "sm | md | lg" },
       { name: "logoHeight", type: "string", default: "md", allowedValues: "sm | md | lg" },

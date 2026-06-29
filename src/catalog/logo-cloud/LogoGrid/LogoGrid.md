@@ -88,4 +88,4 @@ Logos arranged in a structured card grid. Each logo sits in its own rounded box 
 - `columns: 3` gives a 3 column grid on tablet and above, 2 columns on mobile
 - `columns: 4` gives a 4 column grid on tablet and above, 2 columns on mobile
 - `grayscale` defaults to `false` here unlike SimpleRow and WithHeading — the grid style looks better with color logos
-- Card hover uses `hover:bg-surface-muted` from your design token system
+- Card hover uses `hover:bg-muted` from your design token system

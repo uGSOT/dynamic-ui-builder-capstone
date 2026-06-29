@@ -3,13 +3,15 @@ function resolveColor(value, fallback) {
   if (!value) return fallback;
   if (value.startsWith("#") || value.startsWith("rgb")) return value;
   const tokenMap = {
-    "ink": "var(--color-ink)",
+    text: "var(--color-text)",
+    ink: "var(--color-text)",
+    primary: "var(--color-primary)",
+    brand: "var(--color-primary)",
     "ink-muted": "var(--color-ink-muted)",
     "ink-subtle": "var(--color-ink-subtle)",
     "ink-inverse": "var(--color-ink-inverse)",
     "ink-inverse-muted": "var(--color-ink-inverse-muted)",
-    "brand": "var(--color-brand)",
-    "brand-dark": "var(--color-brand-dark)",
+    "primary-dark": "var(--color-primary-dark)",
     "brand-light": "var(--color-brand-light)",
   };
   return tokenMap[value] ?? fallback;
@@ -36,12 +38,12 @@ export default function FeaturedSingle({
   // structural classes — stay as Tailwind tokens
   const sectionBg = {
     surface: "bg-surface",
-    "surface-muted": "bg-surface-muted",
+    "surface-muted": "bg-muted",
     "surface-subtle": "bg-surface-subtle",
-    navy: "bg-navy",
+    navy: "bg-secondary",
     "navy-elevated": "bg-navy-elevated",
     "navy-muted": "bg-navy-muted",
-  }[styles.sectionBackground] ?? "bg-surface-muted";
+  }[styles.sectionBackground] ?? "bg-muted";
 
   const paddingY = {
     8: "py-8", 10: "py-10", 12: "py-12",
@@ -84,7 +86,7 @@ export default function FeaturedSingle({
         {/* Big decorative quote mark — color from accentColor */}
         <span
           className="text-8xl font-serif leading-none opacity-20"
-          style={{ color: resolveColor(accentColor, "var(--color-brand)") }}
+          style={{ color: resolveColor(accentColor, "var(--color-primary)") }}
         >
           "
         </span>
@@ -92,7 +94,7 @@ export default function FeaturedSingle({
         {/* Quote text */}
         <blockquote
           className={`-mt-10 leading-snug ${sizeMap[quoteSize] ?? "text-3xl"} ${weightMap[quoteWeight] ?? "font-semibold"}`}
-          style={{ color: resolveColor(quoteColor, "var(--color-ink)") }}
+          style={{ color: resolveColor(quoteColor, "var(--color-text)") }}
         >
           "{quote}"
         </blockquote>
@@ -107,7 +109,7 @@ export default function FeaturedSingle({
           <div className="text-left">
             <p
               className={`${weightMap[nameWeight] ?? "font-semibold"}`}
-              style={{ color: resolveColor(nameColor, "var(--color-ink)") }}
+              style={{ color: resolveColor(nameColor, "var(--color-text)") }}
             >
               {name}
             </p>
@@ -134,11 +136,11 @@ export default function FeaturedSingle({
 
 export const defaultProps = {
   quote: "This product has completely changed the way we work. Our team is more aligned and moving faster than ever.",
-  quoteColor: "ink",
+  quoteColor: "text",
   quoteWeight: "semibold",
   quoteSize: "3xl",
   name: "Jessica Park",
-  nameColor: "ink",
+  nameColor: "text",
   nameWeight: "semibold",
   role: "Head of Operations",
   roleColor: "ink-muted",
@@ -146,7 +148,7 @@ export const defaultProps = {
   avatar: "/assets/images/avatar1.jpg",
   company: "Acme",
   companyLogo: "/assets/logos/figma.svg",
-  accentColor: "brand",
+  accentColor: "primary",
 };
 
 export const defaultStyles = {
@@ -161,11 +163,11 @@ export const defaultStyles = {
 export const propSchema = {
   props: [
     { name: "quote", type: "string", default: "...", allowedValues: "Any string" },
-    { name: "quoteColor", type: "string", default: "ink", allowedValues: "Token name OR any hex e.g. #0f0f14" },
+    { name: "quoteColor", type: "string", default: "text", allowedValues: "Token name OR any hex e.g. #0f0f14" },
     { name: "quoteWeight", type: "string", default: "semibold", allowedValues: "normal | medium | semibold | bold" },
     { name: "quoteSize", type: "string", default: "3xl", allowedValues: "lg | xl | 2xl | 3xl | 4xl" },
     { name: "name", type: "string", default: "Jessica Park", allowedValues: "Any string" },
-    { name: "nameColor", type: "string", default: "ink", allowedValues: "Token name OR any hex" },
+    { name: "nameColor", type: "string", default: "text", allowedValues: "Token name OR any hex" },
     { name: "nameWeight", type: "string", default: "semibold", allowedValues: "normal | medium | semibold | bold" },
     { name: "role", type: "string", default: "Head of Operations", allowedValues: "Any string" },
     { name: "roleColor", type: "string", default: "ink-muted", allowedValues: "Token name OR any hex" },
@@ -173,7 +175,7 @@ export const propSchema = {
     { name: "avatar", type: "string", default: "/assets/images/avatar1.jpg", allowedValues: "Image path" },
     { name: "company", type: "string", default: "Acme", allowedValues: "Any string" },
     { name: "companyLogo", type: "string", default: "/assets/logos/figma.svg", allowedValues: "SVG path or null" },
-    { name: "accentColor", type: "string", default: "brand", allowedValues: "Token name OR any hex" },
+    { name: "accentColor", type: "string", default: "primary", allowedValues: "Token name OR any hex" },
   ],
   styles: [
     { name: "paddingY", type: "number", default: "20", allowedValues: "8 | 10 | 12 | 16 | 20 | 24" },

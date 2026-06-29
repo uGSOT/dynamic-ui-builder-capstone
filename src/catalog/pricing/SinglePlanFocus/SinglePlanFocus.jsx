@@ -60,13 +60,13 @@ export default function SinglePlanFocus({
 
   const plan = plans[0] || DEFAULT_SINGLE_PLAN[0];
 
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
+  const titleClass = inverted ? "text-ink-inverse" : "text-text";
   const subtitleClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
   const toggleTextClass = (active) =>
     active
       ? inverted
         ? "font-semibold text-ink-inverse"
-        : "font-semibold text-ink"
+        : "font-semibold text-text"
       : inverted
         ? "text-ink-inverse-muted"
         : "text-ink-muted";
@@ -114,11 +114,11 @@ export default function SinglePlanFocus({
               <button
                 type="button"
                 onClick={() => setBillingPeriod((p) => (p === "monthly" ? "annually" : "monthly"))}
-                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 ${toggleTrackClass}`}
+                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${toggleTrackClass}`}
                 aria-label="Toggle billing period"
               >
                 <span
-                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-brand shadow ring-0 transition duration-200 ease-in-out ${
+                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-primary shadow ring-0 transition duration-200 ease-in-out ${
                     billingPeriod === "annually" ? "translate-x-5" : "translate-x-0"
                   }`}
                 />
@@ -131,12 +131,12 @@ export default function SinglePlanFocus({
         </div>
 
         {/* Centered Single Plan Card */}
-        <div className={`relative max-w-3xl mx-auto mt-16 rounded-3xl p-8 md:p-12 border shadow-xl ${cardBg} border-brand/20`}>
+        <div className={`relative max-w-3xl mx-auto mt-16 rounded-3xl p-8 md:p-12 border shadow-xl ${cardBg} border-primary/20`}>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
             {/* Left side: Plan Info */}
             <div className="md:col-span-5 flex flex-col h-full justify-between">
               <div>
-                <span className="inline-block rounded-full bg-brand/10 text-brand px-3 py-1 text-xs font-semibold tracking-wide uppercase mb-4">
+                <span className="inline-block rounded-full bg-primary/10 text-primary px-3 py-1 text-xs font-semibold tracking-wide uppercase mb-4">
                   Featured Plan
                 </span>
                 <h3 className={`text-xl font-bold ${titleClass}`}>
@@ -161,7 +161,7 @@ export default function SinglePlanFocus({
                 <div className="mt-8">
                   <a
                     href={plan.cta.href || "#"}
-                    className="inline-flex w-full items-center justify-center rounded-lg bg-brand px-6 py-3.5 text-sm font-semibold text-ink-inverse shadow-glow transition-all hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2"
+                    className="inline-flex w-full items-center justify-center rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-ink-inverse shadow-glow transition-all hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   >
                     {plan.cta.label}
                   </a>
@@ -182,7 +182,7 @@ export default function SinglePlanFocus({
                   >
                     <Check
                       size={18}
-                      className="text-brand shrink-0 mt-0.5"
+                      className="text-primary shrink-0 mt-0.5"
                     />
                     <span className={subtitleClass}>
                       {feature}

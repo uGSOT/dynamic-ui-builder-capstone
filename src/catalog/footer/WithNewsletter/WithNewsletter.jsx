@@ -85,15 +85,15 @@ export default function WithNewsletter({
   const [subscribed, setSubscribed] = useState(false);
 
   // Dynamic Theme Styling
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
+  const titleClass = inverted ? "text-ink-inverse" : "text-text";
   const descClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
   const linkClass = inverted
     ? "text-ink-inverse-muted hover:text-ink-inverse"
-    : "text-ink-muted hover:text-ink";
+    : "text-ink-muted hover:text-text";
   const borderClass = inverted ? "border-border-dark" : "border-border";
   const iconClass = inverted
     ? "text-ink-inverse-muted hover:text-ink-inverse hover:bg-navy-elevated"
-    : "text-ink-muted hover:text-ink hover:bg-surface-subtle";
+    : "text-ink-muted hover:text-text hover:bg-surface-subtle";
 
   const handleScrollTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -120,7 +120,7 @@ export default function WithNewsletter({
     }
     return (
       <div className="flex items-center gap-2.5">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand shadow-sm shadow-brand/10">
+        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary shadow-sm shadow-primary/10">
           <Icon name={logo?.icon ?? "Layers"} size={18} className="text-white" />
         </div>
         <span className={`font-extrabold text-lg tracking-tight ${titleClass}`}>
@@ -162,12 +162,12 @@ export default function WithNewsletter({
                   placeholder={newsletter.placeholder ?? "Enter your email"}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`flex-1 min-w-0 rounded-xl border ${borderClass} bg-transparent px-4 py-3 text-sm placeholder-gray-400 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand ${titleClass}`}
+                  className={`flex-1 min-w-0 rounded-xl border ${borderClass} bg-transparent px-4 py-3 text-sm placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary ${titleClass}`}
                   disabled={subscribed}
                 />
                 <button
                   type="submit"
-                  className={`inline-flex items-center justify-center rounded-xl bg-brand hover:bg-brand-dark px-5 py-3 text-sm font-semibold text-white shadow-sm focus:outline-none cursor-pointer transition-all active:scale-[0.98] ${subscribed ? "bg-emerald-600 hover:bg-emerald-600" : ""}`}
+                  className={`inline-flex items-center justify-center rounded-xl bg-primary hover:bg-primary-dark px-5 py-3 text-sm font-semibold text-white shadow-sm focus:outline-none cursor-pointer transition-all active:scale-[0.98] ${subscribed ? "bg-emerald-600 hover:bg-emerald-600" : ""}`}
                   disabled={subscribed}
                 >
                   {subscribed ? (

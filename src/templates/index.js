@@ -85,7 +85,7 @@ export const SAAS_LANDING_TEMPLATE = buildSite(
         subheading:
           "A complete component system purpose-built for startup marketing sites.",
       };
-      s.styles = { ...s.styles, background: "surface", paddingY: 8, accentColor: "brand" };
+      s.styles = { ...s.styles, background: "surface", paddingY: 8, accentColor: "primary" };
       return s;
     }),
     section("how-it-works", "steps-horizontal", "hiw-1", (s) => {
@@ -209,7 +209,7 @@ export const DEV_TOOL_LAUNCH_TEMPLATE = buildSite(
         heading: "Powerful building blocks",
         subheading: "Composable sections with consistent upGrad design tokens.",
       };
-      s.styles = { ...s.styles, background: "surface", paddingY: 8, accentColor: "brand" };
+      s.styles = { ...s.styles, background: "surface", paddingY: 8, accentColor: "primary" };
       return s;
     }),
     section("stats", "inline-row", "stats-1", (s) => {
@@ -272,7 +272,7 @@ export const AI_WAITLIST_TEMPLATE = buildSite(
         heading: "Designed for pre-launch teams",
         subheading: "Capture interest with polished sections before you ship v1.",
       };
-      s.styles = { ...s.styles, background: "muted", paddingY: 8, accentColor: "brand" };
+      s.styles = { ...s.styles, background: "muted", paddingY: 8, accentColor: "primary" };
       return s;
     }),
     section("stats", "stat-cards", "stats-1", (s) => {

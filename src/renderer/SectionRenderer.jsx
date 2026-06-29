@@ -12,9 +12,9 @@ export default function SectionRenderer({
 
   if (!variantEntry) {
     return (
-      <div className="flex min-h-[120px] items-center justify-center border border-dashed border-border bg-surface-muted p-6 text-center text-sm text-ink-muted">
+      <div className="flex min-h-[120px] items-center justify-center border border-dashed border-border bg-muted p-6 text-center text-sm text-ink-muted">
         <div>
-          <p className="font-medium text-ink">
+          <p className="font-medium text-text">
             Unknown section: {resolved.type} / {resolved.variant}
           </p>
           <p className="mt-1 text-xs">

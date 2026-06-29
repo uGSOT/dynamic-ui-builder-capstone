@@ -14,14 +14,14 @@ export const defaultProps = {
 export const defaultStyles = {
   background: "surface",
   paddingY: 16,
-  headingColor: "text-ink",
+  headingColor: "text-text",
   headingSize: "text-3xl",
   headingWeight: "font-bold",
   subheadingColor: "text-ink-muted",
   subheadingSize: "text-base",
   subheadingWeight: "font-normal",
   cardBg: "bg-surface",
-  cardTextColor: "text-ink",
+  cardTextColor: "text-text",
   cardTitleWeight: "font-bold"
 };
 
@@ -54,18 +54,18 @@ export default function IconCards(componentData) {
   const {
     background = "surface",
     paddingY = 16,
-    headingColor = "text-ink",
+    headingColor = "text-text",
     headingSize = "text-3xl",
     headingWeight = "font-bold",
     subheadingColor = "text-ink-muted",
     subheadingSize = "text-base",
     subheadingWeight = "font-normal",
     cardBg = "bg-surface",
-    cardTextColor = "text-ink",
+    cardTextColor = "text-text",
     cardTitleWeight = "font-bold"
   } = activeStyles || {};
 
-  const bgSectionClass = background === "navy" ? "bg-navy text-white" : background === "muted" ? "bg-surface-muted" : "bg-surface";
+  const bgSectionClass = background === "navy" ? "bg-secondary text-white" : background === "muted" ? "bg-muted" : "bg-surface";
 
   return (
     <div className={`px-6 py-${paddingY} ${bgSectionClass} transition-all`}>
@@ -79,10 +79,10 @@ export default function IconCards(componentData) {
             
             return (
               <div key={idx} className={`flex flex-col items-start text-left rounded-2xl border border-border p-6 shadow-card transition-all ${background === "navy" ? "bg-navy-elevated border-border-dark" : cardBg}`}>
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-muted text-brand mb-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-muted text-primary mb-4">
                   <IconComponent size={20} />
                 </div>
-                <span className="text-xs font-bold uppercase text-brand tracking-widest">Step {item.step || `0${idx + 1}`}</span>
+                <span className="text-xs font-bold uppercase text-primary tracking-widest">Step {item.step || `0${idx + 1}`}</span>
                 <h3 className={`text-lg mt-1 ${cardTitleWeight} ${background === "navy" ? "text-white" : cardTextColor}`}>{item.title}</h3>
                 <p className="mt-2 text-sm opacity-80">{item.description}</p>
               </div>

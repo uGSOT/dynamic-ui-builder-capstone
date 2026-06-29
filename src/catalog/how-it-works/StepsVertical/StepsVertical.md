@@ -40,14 +40,14 @@ import StepsVertical from "@/catalog/steps/StepsVertical";
 |-----|------|---------|-----------------|-------------|
 | `background` | `string` | `"surface"` | `"surface"`, `"muted"`, `"navy"` | Section background token |
 | `paddingY` | `number` | `16` | `8`, `12`, `16`, `20` | Vertical section padding scale |
-| `headingColor` | `string` | `"text-ink"` | Any text color token | Color applied to the section heading |
+| `headingColor` | `string` | `"text-text"` | Any text color token | Color applied to the section heading |
 | `headingSize` | `string` | `"text-3xl"` | Any text size token | Font size of the section heading |
 | `headingWeight` | `string` | `"font-bold"` | Any font weight token | Font weight of the section heading |
 | `subheadingColor` | `string` | `"text-ink-muted"` | Any text color token | Color applied to the subheading |
 | `subheadingSize` | `string` | `"text-base"` | Any text size token | Font size of the subheading |
 | `subheadingWeight` | `string` | `"font-normal"` | Any font weight token | Font weight of the subheading |
 | `cardBg` | `string` | `"bg-transparent"` | Any background token | Row background color (ignored when `background` is `"navy"`) |
-| `cardTextColor` | `string` | `"text-ink"` | Any text color token | Step title color (ignored when `background` is `"navy"`) |
+| `cardTextColor` | `string` | `"text-text"` | Any text color token | Step title color (ignored when `background` is `"navy"`) |
 | `cardTitleWeight` | `string` | `"font-bold"` | Any font weight token | Font weight of each step's title |
 
 ## JSON example

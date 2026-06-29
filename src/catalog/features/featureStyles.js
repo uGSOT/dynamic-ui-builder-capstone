@@ -208,10 +208,10 @@ const ACCENT_MAP = {
   },
   brand: {
     iconBg: "bg-brand-muted",
-    iconText: "text-brand",
-    tagText: "text-brand",
+    iconText: "text-primary",
+    tagText: "text-primary",
     tagBg: "bg-brand-muted",
-    border: "border-brand/20",
+    border: "border-primary/20",
   },
   blue: {
     iconBg: "bg-blue-50",

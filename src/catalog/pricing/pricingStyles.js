@@ -7,8 +7,8 @@ const PADDING_Y = {
 
 const BACKGROUND = {
   surface: "bg-surface",
-  muted: "bg-surface-muted",
-  navy: "bg-navy",
+  muted: "bg-muted",
+  navy: "bg-secondary",
 };
 
 export function resolvePricingStyles(styles = {}) {

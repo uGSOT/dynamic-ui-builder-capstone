@@ -105,7 +105,7 @@ function MiniSitePreview({ site }) {
     >
       <div className="rounded-lg border border-white/10 bg-navy-elevated/90 p-3 shadow-card backdrop-blur-sm">
         <div className="mb-3 flex items-center gap-1.5">
-          <div className="h-2 w-2 rounded-full bg-brand" />
+          <div className="h-2 w-2 rounded-full bg-primary" />
           <div className="h-2 w-2 rounded-full bg-white/20" />
           <div className="h-2 w-2 rounded-full bg-white/20" />
         </div>
@@ -128,7 +128,7 @@ export default function HomePage() {
   return (
     <div className="overflow-hidden">
       {/* Announcement bar — uGSoT-style top banner */}
-      <div className="bg-brand px-4 py-2.5 text-center text-sm font-medium text-ink-inverse">
+      <div className="bg-primary px-4 py-2.5 text-center text-sm font-medium text-ink-inverse">
         <span className="inline-flex items-center gap-2">
           <Sparkles size={14} className="shrink-0" />
           Dynamic UI Builder Studio — design startup sites with JSON, no backend
@@ -137,12 +137,12 @@ export default function HomePage() {
       </div>
 
       {/* Hero */}
-      <section className="relative bg-navy px-6 pb-24 pt-16 text-ink-inverse sm:pb-32 sm:pt-20">
+      <section className="relative bg-secondary px-6 pb-24 pt-16 text-ink-inverse sm:pb-32 sm:pt-20">
         <div
           className="pointer-events-none absolute inset-0 opacity-40"
           aria-hidden
         >
-          <div className="absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-brand blur-[120px]" />
+          <div className="absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-primary blur-[120px]" />
           <div className="absolute bottom-0 right-0 h-64 w-64 rounded-full bg-brand-light/30 blur-[100px]" />
         </div>
 
@@ -167,7 +167,7 @@ export default function HomePage() {
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               to="/gallery"
-              className="inline-flex items-center gap-2 rounded-lg bg-brand px-6 py-3.5 text-sm font-semibold text-ink-inverse shadow-glow transition-all hover:bg-brand-dark hover:shadow-lg"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-ink-inverse shadow-glow transition-all hover:bg-primary-dark hover:shadow-lg"
             >
               <LayoutGrid size={18} />
               Open Component Gallery
@@ -175,7 +175,7 @@ export default function HomePage() {
             </Link>
             <Link
               to="/builder"
-              className="inline-flex items-center gap-2 rounded-lg border border-border-dark bg-navy-muted/50 px-6 py-3.5 text-sm font-semibold text-ink-inverse transition-all hover:border-brand/50 hover:bg-navy-muted"
+              className="inline-flex items-center gap-2 rounded-lg border border-border-dark bg-navy-muted/50 px-6 py-3.5 text-sm font-semibold text-ink-inverse transition-all hover:border-primary/50 hover:bg-navy-muted"
             >
               <Wrench size={18} />
               Launch Website Builder
@@ -189,11 +189,11 @@ export default function HomePage() {
       </section>
 
       {/* Stats strip */}
-      <section className="border-y border-border bg-surface-muted px-6 py-10">
+      <section className="border-y border-border bg-muted px-6 py-10">
         <div className="mx-auto grid max-w-4xl grid-cols-2 gap-8 sm:grid-cols-4">
           {STATS.map(({ value, label }) => (
             <div key={label} className="text-center">
-              <p className="text-3xl font-extrabold text-brand sm:text-4xl">
+              <p className="text-3xl font-extrabold text-primary sm:text-4xl">
                 {value}
               </p>
               <p className="mt-1 text-sm font-medium text-ink-muted">{label}</p>
@@ -206,7 +206,7 @@ export default function HomePage() {
       <section className="px-6 py-20 sm:py-28">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-text sm:text-4xl">
               Gallery → JSON → Builder
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-ink-muted">
@@ -220,13 +220,13 @@ export default function HomePage() {
                 key={step}
                 className="group relative rounded-2xl border border-border bg-surface p-6 shadow-card transition-shadow hover:shadow-card-hover"
               >
-                <span className="text-xs font-bold uppercase tracking-widest text-brand">
+                <span className="text-xs font-bold uppercase tracking-widest text-primary">
                   Step {step}
                 </span>
-                <div className="mt-4 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-muted text-brand transition-colors group-hover:bg-brand group-hover:text-ink-inverse">
+                <div className="mt-4 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-muted text-primary transition-colors group-hover:bg-primary group-hover:text-ink-inverse">
                   <Icon size={20} />
                 </div>
-                <h3 className="mt-4 text-lg font-bold text-ink">{title}</h3>
+                <h3 className="mt-4 text-lg font-bold text-text">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">
                   {description}
                 </p>
@@ -237,7 +237,7 @@ export default function HomePage() {
       </section>
 
       {/* Example sites */}
-      <section className="bg-navy px-6 py-20 text-ink-inverse sm:py-28">
+      <section className="bg-secondary px-6 py-20 text-ink-inverse sm:py-28">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -295,7 +295,7 @@ export default function HomePage() {
       <section className="px-6 py-20 sm:py-28">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-text sm:text-4xl">
               Built for speed and consistency
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-ink-muted">
@@ -310,11 +310,11 @@ export default function HomePage() {
                 key={title}
                 className="flex gap-4 rounded-2xl border border-border bg-surface p-6 shadow-card"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-muted text-brand">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-muted text-primary">
                   <Icon size={20} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-ink">{title}</h3>
+                  <h3 className="font-bold text-text">{title}</h3>
                   <p className="mt-1 text-sm leading-relaxed text-ink-muted">
                     {description}
                   </p>
@@ -327,7 +327,7 @@ export default function HomePage() {
 
       {/* Final CTA */}
       <section className="px-6 pb-24">
-        <div className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl bg-brand px-8 py-14 text-center text-ink-inverse sm:px-16 sm:py-16">
+        <div className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl bg-primary px-8 py-14 text-center text-ink-inverse sm:px-16 sm:py-16">
           <div
             className="pointer-events-none absolute inset-0 opacity-20"
             aria-hidden
@@ -347,7 +347,7 @@ export default function HomePage() {
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 to="/gallery"
-                className="inline-flex items-center gap-2 rounded-lg bg-ink-inverse px-6 py-3.5 text-sm font-semibold text-brand transition-colors hover:bg-surface-muted"
+                className="inline-flex items-center gap-2 rounded-lg bg-ink-inverse px-6 py-3.5 text-sm font-semibold text-primary transition-colors hover:bg-muted"
               >
                 <LayoutGrid size={18} />
                 Explore Gallery

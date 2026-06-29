@@ -54,10 +54,10 @@ export default function GallerySidebar({
                   onClick={() => onSelectType(component.id)}
                   className={`flex w-44 items-start gap-2.5 rounded-lg px-3 py-2.5 text-left transition-colors sm:w-48 lg:w-full ${
                     isSelected
-                      ? "bg-brand-muted text-brand border border-brand/10"
+                      ? "bg-brand-muted text-primary border border-primary/10"
                       : isDisabled
                         ? "cursor-not-allowed text-ink-subtle opacity-40"
-                        : "text-ink-muted hover:bg-surface-muted hover:text-ink"
+                        : "text-ink-muted hover:bg-muted hover:text-text"
                   }`}
                 >
                   <Icon size={16} className="mt-0.5 shrink-0" />

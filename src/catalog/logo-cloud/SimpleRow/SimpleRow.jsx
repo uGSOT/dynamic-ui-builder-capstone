@@ -7,8 +7,8 @@ export default function SimpleRow({
 
   const backgroundClass = {
     surface: "bg-surface",
-    muted: "bg-surface-muted",
-    navy: "bg-navy",
+    muted: "bg-muted",
+    navy: "bg-secondary",
   }[styles.background] ?? "bg-surface";
 
   const paddingClass = {

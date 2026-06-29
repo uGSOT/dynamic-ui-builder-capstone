@@ -5,7 +5,7 @@ export default function StatsSectionHeader({
 }) {
   if (!heading && !subheading) return null;
 
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
+  const titleClass = inverted ? "text-ink-inverse" : "text-text";
   const subtitleClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
 
   return (

@@ -69,7 +69,7 @@ export default function GridSimple({
               key={`${member.name}-${index}`}
               className={`flex flex-col items-center text-center rounded-lg p-6 transition-all hover:shadow-md ${cardColorClass} ${cardBorderClass}`}
             >
-              <div className="w-24 h-24 mb-4 rounded-full overflow-hidden bg-surface-muted shrink-0 ring-2 ring-border/20">
+              <div className="w-24 h-24 mb-4 rounded-full overflow-hidden bg-muted shrink-0 ring-2 ring-border/20">
                 <img
                   src={member.avatar}
                   alt={member.name}

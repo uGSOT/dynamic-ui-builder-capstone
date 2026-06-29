@@ -24,8 +24,8 @@ const LOGO_SIZES = {
 
 const BACKGROUND = {
   surface: "bg-surface",
-  muted: "bg-surface-muted",
-  navy: "bg-navy",
+  muted: "bg-muted",
+  navy: "bg-secondary",
   transparent: "bg-transparent",
   blur: "bg-surface/90 backdrop-blur-md",
 };

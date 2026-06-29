@@ -23,7 +23,7 @@ export default function PreviewFrame({ width, height, children }) {
       if (!doc) return;
 
       syncIframeStyles(doc);
-      doc.body.className = "bg-surface text-ink antialiased";
+      doc.body.className = "bg-surface text-text antialiased";
       doc.body.style.margin = "0";
       doc.body.style.padding = "0";
       doc.body.style.overflowX = "hidden";

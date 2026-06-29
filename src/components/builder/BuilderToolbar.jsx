@@ -39,7 +39,7 @@ export default function BuilderToolbar() {
   return (
     <div className="flex flex-wrap items-center gap-2 border-b border-border bg-surface px-4 py-3 sm:px-6">
       <select
-        className="rounded-lg border border-border bg-surface px-3 py-2 text-xs font-medium text-ink"
+        className="rounded-lg border border-border bg-surface px-3 py-2 text-xs font-medium text-text"
         defaultValue=""
         onChange={(event) => {
           const template = TEMPLATES.find((item) => item.id === event.target.value);
@@ -62,7 +62,7 @@ export default function BuilderToolbar() {
       <div className="ml-auto flex flex-wrap items-center gap-2">
         <Link
           to="/gallery"
-          className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-medium text-ink-muted transition-colors hover:bg-surface-muted hover:text-ink"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-medium text-ink-muted transition-colors hover:bg-muted hover:text-text"
         >
           <LayoutGrid size={14} />
           Gallery
@@ -71,7 +71,7 @@ export default function BuilderToolbar() {
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-medium text-ink-muted transition-colors hover:bg-surface-muted hover:text-ink"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-medium text-ink-muted transition-colors hover:bg-muted hover:text-text"
         >
           <Upload size={14} />
           Import
@@ -87,7 +87,7 @@ export default function BuilderToolbar() {
         <button
           type="button"
           onClick={handleExport}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-medium text-ink-muted transition-colors hover:bg-surface-muted hover:text-ink"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-medium text-ink-muted transition-colors hover:bg-muted hover:text-text"
         >
           <Download size={14} />
           Export
@@ -96,7 +96,7 @@ export default function BuilderToolbar() {
         <button
           type="button"
           onClick={() => dispatch(resetBuilder())}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-medium text-ink-muted transition-colors hover:bg-surface-muted hover:text-ink"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-medium text-ink-muted transition-colors hover:bg-muted hover:text-text"
         >
           <RotateCcw size={14} />
           Reset
@@ -105,7 +105,7 @@ export default function BuilderToolbar() {
         <button
           type="button"
           onClick={() => dispatch(clearDraft())}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-brand/30 bg-brand-muted px-3 py-2 text-xs font-medium text-brand transition-colors hover:bg-brand/10"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-primary/30 bg-brand-muted px-3 py-2 text-xs font-medium text-primary transition-colors hover:bg-primary/10"
         >
           <Trash2 size={14} />
           Clear

@@ -13,14 +13,14 @@ export const defaultProps = {
 export const defaultStyles = {
   background: "surface",
   paddingY: 16,
-  headingColor: "text-ink",
+  headingColor: "text-text",
   headingSize: "text-3xl",
   headingWeight: "font-bold",
   subheadingColor: "text-ink-muted",
   subheadingSize: "text-base",
   subheadingWeight: "font-normal",
-  cardBg: "bg-surface-muted",
-  cardTextColor: "text-ink",
+  cardBg: "bg-muted",
+  cardTextColor: "text-text",
   cardTitleWeight: "font-bold"
 };
 
@@ -54,14 +54,14 @@ export default function StepsHorizontal(componentData) {
   const {
     background = "surface",
     paddingY = 16,
-    headingColor = "text-ink",
+    headingColor = "text-text",
     headingSize = "text-3xl",
     headingWeight = "font-bold",
     subheadingColor = "text-ink-muted",
     subheadingSize = "text-base",
     subheadingWeight = "font-normal",
-    cardBg = "bg-surface-muted",
-    cardTextColor = "text-ink",
+    cardBg = "bg-muted",
+    cardTextColor = "text-text",
     cardTitleWeight = "font-bold"
   } = activeStyles || {};
 
@@ -73,7 +73,7 @@ export default function StepsHorizontal(componentData) {
   };
 
   const isNavy = background === "navy";
-  const bgSectionClass = isNavy ? "bg-navy text-white" : background === "muted" ? "bg-surface-muted" : "bg-surface";
+  const bgSectionClass = isNavy ? "bg-secondary text-white" : background === "muted" ? "bg-muted" : "bg-surface";
   const paddingClass = PADDING_Y[paddingY] ?? PADDING_Y[16];
   const resolvedHeadingColor = isNavy ? "text-ink-inverse" : headingColor;
   const resolvedSubheadingColor = isNavy ? "text-ink-inverse-muted" : subheadingColor;
@@ -90,7 +90,7 @@ export default function StepsHorizontal(componentData) {
               {idx < items.length - 1 && (
                 <div className="hidden sm:block absolute top-12 left-[70%] right-[-30%] h-[2px] bg-border/40" />
               )}
-              <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-brand text-white font-bold text-base shadow-sm mb-4">
+              <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white font-bold text-base shadow-sm mb-4">
                 {item.step || `0${idx + 1}`}
               </div>
               <h3 className={`text-lg ${cardTitleWeight} ${isNavy ? "text-ink-inverse" : cardTextColor}`}>{item.title}</h3>

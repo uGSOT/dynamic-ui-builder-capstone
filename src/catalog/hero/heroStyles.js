@@ -20,8 +20,8 @@ const NAVBAR_OFFSET = {
 
 const BACKGROUND = {
   surface: "bg-surface",
-  muted: "bg-surface-muted",
-  navy: "bg-navy",
+  muted: "bg-muted",
+  navy: "bg-secondary",
 };
 
 export function resolveHeroStyles(styles = {}) {

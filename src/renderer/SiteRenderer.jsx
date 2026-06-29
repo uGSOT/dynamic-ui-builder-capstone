@@ -86,7 +86,7 @@ export default function SiteRenderer({ siteConfig, viewport = "desktop" }) {
   if (sections.length === 0) {
     return (
       <div className="flex min-h-[320px] flex-col items-center justify-center gap-2 p-8 text-center text-sm text-ink-muted">
-        <p className="font-medium text-ink">No sections yet</p>
+        <p className="font-medium text-text">No sections yet</p>
         <p className="max-w-sm text-xs">
           Paste section JSON from the Gallery into pages[0].sections[] to build
           your page.

@@ -1,12 +1,12 @@
 const CTA_STYLES = {
-  brand: "bg-brand text-ink-inverse hover:bg-brand-dark",
+  brand: "bg-primary text-ink-inverse hover:bg-primary-dark",
   outline:
-    "border border-border bg-transparent text-ink hover:bg-surface-muted",
-  ghost: "bg-transparent text-ink-muted hover:bg-surface-muted hover:text-ink",
+    "border border-border bg-transparent text-text hover:bg-muted",
+  ghost: "bg-transparent text-ink-muted hover:bg-muted hover:text-text",
 };
 
 const CTA_STYLES_INVERSE = {
-  brand: "bg-surface text-ink hover:bg-surface-muted",
+  brand: "bg-surface text-text hover:bg-muted",
   outline:
     "border border-border-dark bg-transparent text-ink-inverse hover:bg-white/10",
   ghost:

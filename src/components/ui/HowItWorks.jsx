@@ -9,9 +9,9 @@ export default function HowItWorks({ sectionConfig }) {
 
   // Background and Padding classes based on design system tokens
   const bgClasses = {
-    surface: "bg-surface text-ink",
-    muted: "bg-surface-muted text-ink",
-    navy: "bg-navy text-ink-inverse",
+    surface: "bg-surface text-text",
+    muted: "bg-muted text-text",
+    navy: "bg-secondary text-ink-inverse",
   };
 
   const padClasses = {
@@ -47,7 +47,7 @@ export default function HowItWorks({ sectionConfig }) {
                 {index < items.length - 1 && (
                   <div className="hidden sm:block absolute top-7 left-[60%] right-[-40%] h-[2px] bg-border/60 z-0" />
                 )}
-                <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-brand text-ink-inverse font-bold text-lg shadow-md mb-4">
+                <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-ink-inverse font-bold text-lg shadow-md mb-4">
                   {item.step || `0${index + 1}`}
                 </div>
                 <h3 className="text-lg font-bold">{item.title}</h3>
@@ -64,7 +64,7 @@ export default function HowItWorks({ sectionConfig }) {
           <div className="max-w-3xl mx-auto space-y-8 relative before:absolute before:inset-0 before:left-[27px] before:w-[2px] before:bg-border/40">
             {items.map((item, index) => (
               <div key={index} className="flex gap-6 relative group">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-muted text-brand font-bold text-lg border border-brand/20 relative z-10 bg-surface">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-muted text-primary font-bold text-lg border border-primary/20 relative z-10 bg-surface">
                   {item.step || `0${index + 1}`}
                 </div>
                 <div className="pt-2">
@@ -88,10 +88,10 @@ export default function HowItWorks({ sectionConfig }) {
                   background === "navy" ? "border-border-dark bg-navy-elevated" : "border-border bg-surface"
                 }`}
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-muted text-brand group-hover:bg-brand group-hover:text-ink-inverse transition-colors duration-200">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-muted text-primary group-hover:bg-primary group-hover:text-ink-inverse transition-colors duration-200">
                   <DynamicIcon name={item.icon || "Sparkles"} size={22} />
                 </div>
-                <span className="mt-4 block text-xs font-bold uppercase tracking-widest text-brand">
+                <span className="mt-4 block text-xs font-bold uppercase tracking-widest text-primary">
                   Step {item.step || `0${index + 1}`}
                 </span>
                 <h3 className="mt-2 text-lg font-bold">{item.title}</h3>

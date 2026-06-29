@@ -52,9 +52,9 @@ export default function FullWidthCentered(componentData) {
     subheadingSize = "text-lg",
   } = activeStyles || {};
 
-  const bgSectionClass = background === "navy" ? "bg-navy text-white" : background === "muted" ? "bg-surface-muted" : "bg-surface";
-  const primaryBtnClass = background === "navy" ? "bg-brand text-white hover:bg-brand/90" : "bg-brand text-white hover:bg-brand-dark";
-  const secondaryBtnClass = background === "navy" ? "border border-white/20 text-white hover:bg-white/10" : "border border-border text-ink hover:bg-surface-muted";
+  const bgSectionClass = background === "navy" ? "bg-secondary text-white" : background === "muted" ? "bg-muted" : "bg-surface";
+  const primaryBtnClass = background === "navy" ? "bg-primary text-white hover:bg-primary/90" : "bg-primary text-white hover:bg-primary-dark";
+  const secondaryBtnClass = background === "navy" ? "border border-white/20 text-white hover:bg-white/10" : "border border-border text-text hover:bg-muted";
 
   return (
     <div className={`px-6 py-${paddingY} ${bgSectionClass} text-center transition-all`}>

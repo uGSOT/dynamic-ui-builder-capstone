@@ -58,13 +58,13 @@ export default function TwoTierHighlight({
   const [billingPeriod, setBillingPeriod] = useState("monthly");
   const { className, inverted } = resolvePricingStyles(styles);
 
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
+  const titleClass = inverted ? "text-ink-inverse" : "text-text";
   const subtitleClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
   const toggleTextClass = (active) =>
     active
       ? inverted
         ? "font-semibold text-ink-inverse"
-        : "font-semibold text-ink"
+        : "font-semibold text-text"
       : inverted
         ? "text-ink-inverse-muted"
         : "text-ink-muted";
@@ -108,11 +108,11 @@ export default function TwoTierHighlight({
               <button
                 type="button"
                 onClick={() => setBillingPeriod((p) => (p === "monthly" ? "annually" : "monthly"))}
-                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 ${toggleTrackClass}`}
+                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${toggleTrackClass}`}
                 aria-label="Toggle billing period"
               >
                 <span
-                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-brand shadow ring-0 transition duration-200 ease-in-out ${
+                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-primary shadow ring-0 transition duration-200 ease-in-out ${
                     billingPeriod === "annually" ? "translate-x-5" : "translate-x-0"
                   }`}
                 />
@@ -132,14 +132,14 @@ export default function TwoTierHighlight({
               : "bg-surface border-border";
 
             const highlightBorder = plan.highlighted
-              ? "border-brand border-2 scale-[1.02] shadow-xl md:z-10"
+              ? "border-primary border-2 scale-[1.02] shadow-xl md:z-10"
               : "border";
 
             const btnClass = plan.highlighted
-              ? "bg-brand text-ink-inverse hover:bg-brand-dark focus:ring-brand"
+              ? "bg-primary text-ink-inverse hover:bg-primary-dark focus:ring-primary"
               : inverted
-                ? "border border-border-dark text-ink-inverse hover:bg-navy-elevated focus:ring-brand"
-                : "border border-border text-ink hover:bg-surface-muted focus:ring-brand";
+                ? "border border-border-dark text-ink-inverse hover:bg-navy-elevated focus:ring-primary"
+                : "border border-border text-text hover:bg-muted focus:ring-primary";
 
             return (
               <div
@@ -148,7 +148,7 @@ export default function TwoTierHighlight({
               >
                 {/* Popular Plan Badge */}
                 {plan.highlighted && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand px-3 py-0.5 text-xs font-semibold text-ink-inverse tracking-wide uppercase">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-0.5 text-xs font-semibold text-ink-inverse tracking-wide uppercase">
                     Most Popular
                   </span>
                 )}
@@ -182,7 +182,7 @@ export default function TwoTierHighlight({
                     >
                       <Check
                         size={18}
-                        className="text-brand shrink-0 mt-0.5"
+                        className="text-primary shrink-0 mt-0.5"
                       />
                       <span className={subtitleClass}>
                         {feature}

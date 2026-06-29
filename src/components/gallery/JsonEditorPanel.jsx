@@ -44,7 +44,7 @@ export default function JsonEditorPanel({ sectionConfig, onConfigChange }) {
         <button
           type="button"
           onClick={handleCopy}
-          className="inline-flex items-center gap-1.5 rounded-md bg-brand px-3 py-1.5 text-xs font-semibold text-ink-inverse transition-colors hover:bg-brand-dark"
+          className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-semibold text-ink-inverse transition-colors hover:bg-primary-dark"
         >
           {copied ? <Check size={14} /> : <Copy size={14} />}
           {copied ? "Copied" : "Copy JSON"}
@@ -52,7 +52,7 @@ export default function JsonEditorPanel({ sectionConfig, onConfigChange }) {
       </div>
 
       {parseError && (
-        <div className="flex items-center gap-2 border-b border-brand/30 bg-brand/10 px-4 py-2 text-xs text-brand-light sm:px-6">
+        <div className="flex items-center gap-2 border-b border-primary/30 bg-primary/10 px-4 py-2 text-xs text-brand-light sm:px-6">
           <AlertCircle size={14} className="shrink-0" />
           {parseError}
         </div>

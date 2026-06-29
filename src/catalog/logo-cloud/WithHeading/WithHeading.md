@@ -85,5 +85,5 @@ A logo row with a large bold heading above and an optional badge below. More pro
 - `badge` is fully optional — if not passed the badge section simply does not render
 - `heading` is also optional — if not passed the component renders just the logo row and badge
 - The badge uses the `Users` icon from lucide-react
-- Badge colors use `text-brand` and `bg-surface-muted` from your design token system
+- Badge colors use `text-primary` and `bg-muted` from your design token system
 - `grayscale` uses inline CSS filter because it is a dynamic runtime value

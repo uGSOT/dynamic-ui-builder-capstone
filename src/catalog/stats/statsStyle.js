@@ -7,20 +7,20 @@ const PADDING_Y = {
 
 const BACKGROUND = {
   surface: "bg-surface",
-  muted: "bg-surface-muted",
-  navy: "bg-navy",
+  muted: "bg-muted",
+  navy: "bg-secondary",
 };
 
 const FONT_COLORS = {
   default: {
-    value: "text-brand",
+    value: "text-primary",
     label: "text-ink-muted",
-    icon: "text-brand",
+    icon: "text-primary",
   },
   ink: {
-    value: "text-ink",
+    value: "text-text",
     label: "text-ink-muted",
-    icon: "text-ink",
+    icon: "text-text",
   },
   inverse: {
     value: "text-ink-inverse",
@@ -33,9 +33,9 @@ const FONT_COLORS = {
     icon: "text-ink-muted",
   },
   brand: {
-    value: "text-brand",
-    label: "text-brand",
-    icon: "text-brand",
+    value: "text-primary",
+    label: "text-primary",
+    icon: "text-primary",
   },
   white: {
     value: "text-white",
@@ -61,9 +61,9 @@ const FONT_SIZES = {
 const CARD_COLORS = {
   none: "",
   surface: "bg-surface",
-  muted: "bg-surface-muted",
-  navy: "bg-navy",
-  brand: "bg-brand/10",
+  muted: "bg-muted",
+  navy: "bg-secondary",
+  brand: "bg-primary/10",
 };
 
 const CARD_SIZES = {
@@ -74,8 +74,8 @@ const CARD_SIZES = {
 };
 
 const ICON_COLORS = {
-  brand: { wrapper: "bg-brand/10 text-brand", text: "text-brand" },
-  ink: { wrapper: "bg-ink/10 text-ink", text: "text-ink" },
+  brand: { wrapper: "bg-primary/10 text-primary", text: "text-primary" },
+  ink: { wrapper: "bg-text/10 text-text", text: "text-text" },
   muted: { wrapper: "bg-ink-muted/10 text-ink-muted", text: "text-ink-muted" },
   inverse: { wrapper: "bg-white/10 text-ink-inverse", text: "text-ink-inverse" },
   white: { wrapper: "bg-white/10 text-white", text: "text-white" },

@@ -8,7 +8,7 @@ export default function FaqAccordionItem({
   inverted = false,
 }) {
   const borderClass = inverted ? "border-border-dark" : "border-border";
-  const questionClass = inverted ? "text-ink-inverse" : "text-ink";
+  const questionClass = inverted ? "text-ink-inverse" : "text-text";
   const answerClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
   const iconClass = inverted ? "text-ink-inverse-muted" : "text-ink-subtle";
 

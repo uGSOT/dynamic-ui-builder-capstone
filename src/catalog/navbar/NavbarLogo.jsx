@@ -37,7 +37,7 @@ export default function NavbarLogo({
     );
   }
 
-  const textClass = inverted ? "text-ink-inverse" : "text-ink";
+  const textClass = inverted ? "text-ink-inverse" : "text-text";
   const Icon = useMemo(() => resolveNavbarIcon(logo?.icon), [logo?.icon]);
 
   return (
@@ -47,7 +47,7 @@ export default function NavbarLogo({
       className={`group flex items-center gap-2 ${className}`}
     >
       <div
-        className={`flex ${size.logoBox} items-center justify-center rounded-md bg-brand transition-colors group-hover:bg-brand-dark`}
+        className={`flex ${size.logoBox} items-center justify-center rounded-md bg-primary transition-colors group-hover:bg-primary-dark`}
       >
         <Icon size={size.logoIcon} className="text-ink-inverse" />
       </div>

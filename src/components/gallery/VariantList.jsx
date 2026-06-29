@@ -4,7 +4,7 @@ export default function VariantList({
   onSelectVariant,
 }) {
   return (
-    <div className="border-b border-border bg-surface-muted/50 px-4 py-4 sm:px-6">
+    <div className="border-b border-border bg-muted/50 px-4 py-4 sm:px-6">
       <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-ink-subtle">
         Variants
       </h3>
@@ -18,12 +18,12 @@ export default function VariantList({
               onClick={() => onSelectVariant(variant.id)}
               className={`rounded-lg border px-3 py-2.5 text-left transition-all ${
                 isSelected
-                  ? "border-brand bg-brand-muted shadow-sm"
-                  : "border-border bg-surface hover:border-brand/40 hover:shadow-card"
+                  ? "border-primary bg-brand-muted shadow-sm"
+                  : "border-border bg-surface hover:border-primary/40 hover:shadow-card"
               }`}
             >
               <span
-                className={`block text-sm font-semibold ${isSelected ? "text-brand" : "text-ink"}`}
+                className={`block text-sm font-semibold ${isSelected ? "text-primary" : "text-text"}`}
               >
                 {variant.name}
               </span>

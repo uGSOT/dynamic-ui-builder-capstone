@@ -36,7 +36,7 @@ export default function StatCards({ heading = defaultProps.heading, stats = defa
     iconWrapperClass,
     iconTextClass,
   } = resolveStatsStyles(styles);
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
+  const titleClass = inverted ? "text-ink-inverse" : "text-text";
 
   return (
     <section className={className}>

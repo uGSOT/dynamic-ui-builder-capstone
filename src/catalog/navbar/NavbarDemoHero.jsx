@@ -4,7 +4,7 @@ export default function NavbarDemoHero({
   background = "muted",
 }) {
   const paddingTop = overlay ? "pt-24 sm:pt-28" : "";
-  const solidBg = background === "white" ? "bg-surface" : "bg-surface-muted";
+  const solidBg = background === "white" ? "bg-surface" : "bg-muted";
 
   if (overlay) {
     return (
@@ -16,7 +16,7 @@ export default function NavbarDemoHero({
           aria-hidden="true"
         />
         <div
-          className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand/10 blur-3xl"
+          className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-primary/10 blur-3xl"
           aria-hidden="true"
         />
         <div
@@ -28,7 +28,7 @@ export default function NavbarDemoHero({
           <p className="text-xs font-medium uppercase tracking-widest text-ink-muted">
             Section
           </p>
-          <h1 className="mt-1.5 text-xl font-semibold tracking-tight text-ink sm:text-2xl">
+          <h1 className="mt-1.5 text-xl font-semibold tracking-tight text-text sm:text-2xl">
             {activeLabel}
           </h1>
         </div>
@@ -44,7 +44,7 @@ export default function NavbarDemoHero({
         <p className="text-xs font-medium uppercase tracking-widest text-ink-muted">
           Section
         </p>
-        <h1 className="mt-1.5 text-sm font-semibold tracking-tight text-ink sm:text-md">
+        <h1 className="mt-1.5 text-sm font-semibold tracking-tight text-text sm:text-md">
           {activeLabel}
         </h1>
       </div>

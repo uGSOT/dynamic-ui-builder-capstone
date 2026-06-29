@@ -67,15 +67,15 @@ export default function MinimalCentered({
   const { className, inverted } = resolveFooterStyles(styles);
 
   // Dynamic Theme Styling
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
+  const titleClass = inverted ? "text-ink-inverse" : "text-text";
   const descClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
   const linkClass = inverted
     ? "text-ink-inverse-muted hover:text-ink-inverse"
-    : "text-ink-muted hover:text-ink";
+    : "text-ink-muted hover:text-text";
   const borderClass = inverted ? "border-border-dark" : "border-border";
   const iconClass = inverted
     ? "text-ink-inverse-muted hover:text-ink-inverse hover:bg-navy-elevated"
-    : "text-ink-muted hover:text-ink hover:bg-surface-subtle";
+    : "text-ink-muted hover:text-text hover:bg-surface-subtle";
 
   const handleScrollTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -92,7 +92,7 @@ export default function MinimalCentered({
     }
     return (
       <div className="flex items-center justify-center gap-2.5">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand shadow-sm shadow-brand/10">
+        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary shadow-sm shadow-primary/10">
           <Icon name={logo?.icon ?? "Layers"} size={18} className="text-white" />
         </div>
         <span className={`font-extrabold text-lg tracking-tight ${titleClass}`}>
