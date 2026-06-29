@@ -1,311 +1,205 @@
 export const FEATURE_STYLE_DEFAULTS = {
-  paddingY: 6,
-
-  background: "surface",
-
-  headingAlign: "left",
-  headingSize: "4xl",
-  headingColor: "",
-
-  subheadingSize: "lg",
-  subheadingColor: "",
-
-  cardBg: "default",
-  customCardBgColor: "",
-  cardBorder: true,
-  cardShadow: "sm",
-
-  titleSize: "base",
-  titleColor: "",
-  descSize: "sm",
-  descColor: "",
-
-  accentColor: "red",
+  paddingY:        6,
+  background:      "white",
+  headingColor:    "surface",
+  headingSize:     "4xl",
+  headingWeight:   "bold",
+  headingAlign:    "left",
+  subheadingColor: "muted",
+  subheadingSize:  "lg",
+  subheadingWeight:"normal",
+  cardBg:          "white",
+  cardBorder:      "sm",
+  cardBorderColor: "subtle",
+  cardRadius:      "2xl",
+  cardShadow:      "none",
+  cardPaddingY:    6,
+  cardPaddingX:    6,
+  titleColor:      "surface",
+  titleSize:       "base",
+  titleWeight:     "semibold",
+  descColor:       "muted",
+  descSize:        "sm",
+  descWeight:      "normal",
+  iconColor:       "primary",
+  iconBg:          "primaryMuted",
+  iconSize:        "md",
+  iconRadius:      "lg",
+  accentColor:     "primary",
 };
+
+const COLOR_VALUES = '"primary" | "surface" | "muted" | "subtle" | "white"';
 
 export const FEATURE_STYLE_PROP_SCHEMA = [
-  {
-    name: "paddingY",
-    type: "number",
-    default: 6,
-    allowedValues: "1 – 12",
-    description: "Vertical padding of the section (maps to Tailwind py-*)",
-  },
-  {
-    name: "background",
-    type: "string",
-    default: "surface",
-    allowedValues: '"surface" | "muted" | "navy" | "transparent" | "blur"',
-    description: "Section background using design tokens",
-  },
-  {
-    name: "headingAlign",
-    type: "string",
-    default: "left",
-    allowedValues: '"left" | "center"',
-    description: "Alignment of the section heading and subheading",
-  },
-  {
-    name: "headingSize",
-    type: "string",
-    default: "4xl",
-    allowedValues: '"3xl" | "4xl" | "5xl"',
-    description: "Heading font size",
-  },
-  {
-    name: "headingColor",
-    type: "string",
-    default: "",
-    allowedValues: 'Any CSS color e.g. "#ffffff", or "" for auto',
-    description: "Heading text color override. Leave empty to use theme default.",
-  },
-  {
-    name: "subheadingSize",
-    type: "string",
-    default: "lg",
-    allowedValues: '"base" | "lg" | "xl"',
-    description: "Subheading font size",
-  },
-  {
-    name: "subheadingColor",
-    type: "string",
-    default: "",
-    allowedValues: 'Any CSS color e.g. "#9693b0", or "" for auto',
-    description: "Subheading text color override. Leave empty to use theme default.",
-  },
-  {
-    name: "cardBg",
-    type: "string",
-    default: "default",
-    allowedValues: '"default" | "transparent" | "custom"',
-    description: "Card background preset",
-  },
-  {
-    name: "customCardBgColor",
-    type: "string",
-    default: "",
-    allowedValues: 'Any CSS color e.g. "#18181c"',
-    description: "Custom card background color — only used when cardBg is custom",
-  },
-  {
-    name: "cardBorder",
-    type: "boolean",
-    default: true,
-    allowedValues: "true | false",
-    description: "Show or hide card border",
-  },
-  {
-    name: "cardShadow",
-    type: "string",
-    default: "sm",
-    allowedValues: '"none" | "sm" | "md" | "lg"',
-    description: "Card drop shadow size",
-  },
-  {
-    name: "titleSize",
-    type: "string",
-    default: "base",
-    allowedValues: '"sm" | "base" | "lg"',
-    description: "Feature title font size inside each card",
-  },
-  {
-    name: "titleColor",
-    type: "string",
-    default: "",
-    allowedValues: 'Any CSS color e.g. "#f0eff8", or "" for auto',
-    description: "Feature title color override. Leave empty to use theme default.",
-  },
-  {
-    name: "descSize",
-    type: "string",
-    default: "sm",
-    allowedValues: '"xs" | "sm" | "base"',
-    description: "Feature description font size inside each card",
-  },
-  {
-    name: "descColor",
-    type: "string",
-    default: "",
-    allowedValues: 'Any CSS color e.g. "#9693b0", or "" for auto',
-    description: "Feature description color override. Leave empty to use theme default.",
-  },
-  {
-    name: "accentColor",
-    type: "string",
-    default: "red",
-    allowedValues: '"indigo" | "violet" | "emerald" | "rose" | "blue" | "brand" | "red',
-    description: "Accent colour used for icons, tags, and highlights",
-  },
+  { name: "paddingY",         type: "number",  default: 6,          allowedValues: "4 | 6 | 8 | 10 | 12",                                                    description: "Vertical section padding" },
+  { name: "background",       type: "string",  default: "white",    allowedValues: COLOR_VALUES,                                                               description: "Section background color token" },
+  { name: "headingColor",     type: "string",  default: "surface",  allowedValues: COLOR_VALUES,                                                               description: "Heading text color token" },
+  { name: "headingSize",      type: "string",  default: "4xl",      allowedValues: '"2xl" | "3xl" | "4xl" | "5xl" | "6xl"',                                   description: "Heading font size" },
+  { name: "headingWeight",    type: "string",  default: "bold",     allowedValues: '"normal" | "medium" | "semibold" | "bold" | "extrabold"',                  description: "Heading font weight" },
+  { name: "headingAlign",     type: "string",  default: "left",     allowedValues: '"left" | "center" | "right"',                                             description: "Heading alignment" },
+  { name: "subheadingColor",  type: "string",  default: "muted",    allowedValues: COLOR_VALUES,                                                               description: "Subheading text color token" },
+  { name: "subheadingSize",   type: "string",  default: "lg",       allowedValues: '"sm" | "base" | "lg" | "xl"',                                             description: "Subheading font size" },
+  { name: "subheadingWeight", type: "string",  default: "normal",   allowedValues: '"normal" | "medium" | "semibold" | "bold"',                               description: "Subheading font weight" },
+  { name: "cardBg",           type: "string",  default: "white",    allowedValues: COLOR_VALUES,                                                               description: "Card background color token" },
+  { name: "cardBorder",       type: "string",  default: "sm",       allowedValues: '"none" | "sm" | "md" | "lg"',                                             description: "Card border thickness" },
+  { name: "cardBorderColor",  type: "string",  default: "subtle",   allowedValues: COLOR_VALUES,                                                               description: "Card border color token" },
+  { name: "cardRadius",       type: "string",  default: "2xl",      allowedValues: '"none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full"',                    description: "Card border radius" },
+  { name: "cardShadow",       type: "string",  default: "none",     allowedValues: '"none" | "sm" | "md" | "lg" | "xl"',                                      description: "Card shadow" },
+  { name: "cardPaddingY",     type: "number",  default: 6,          allowedValues: "4 | 6 | 8 | 10",                                                          description: "Card vertical padding" },
+  { name: "cardPaddingX",     type: "number",  default: 6,          allowedValues: "4 | 6 | 8 | 10",                                                          description: "Card horizontal padding" },
+  { name: "titleColor",       type: "string",  default: "surface",  allowedValues: COLOR_VALUES,                                                               description: "Card title color token" },
+  { name: "titleSize",        type: "string",  default: "base",     allowedValues: '"sm" | "base" | "lg" | "xl"',                                             description: "Card title font size" },
+  { name: "titleWeight",      type: "string",  default: "semibold", allowedValues: '"normal" | "medium" | "semibold" | "bold"',                               description: "Card title font weight" },
+  { name: "descColor",        type: "string",  default: "muted",    allowedValues: COLOR_VALUES,                                                               description: "Card description color token" },
+  { name: "descSize",         type: "string",  default: "sm",       allowedValues: '"xs" | "sm" | "base"',                                                    description: "Card description font size" },
+  { name: "descWeight",       type: "string",  default: "normal",   allowedValues: '"normal" | "medium" | "semibold"',                                        description: "Card description font weight" },
+  { name: "iconColor",        type: "string",  default: "primary",  allowedValues: '"primary" | "primaryMuted" | "surface" | "muted" | "subtle" | "white"',  description: "Icon color token" },
+  { name: "iconBg",           type: "string",  default: "primaryMuted", allowedValues: '"primary" | "primaryMuted" | "surface" | "muted" | "subtle" | "white"', description: "Icon container background" },
+  { name: "iconSize",         type: "string",  default: "md",       allowedValues: '"sm" | "md" | "lg" | "xl"',                                               description: "Icon size" },
+  { name: "iconRadius",       type: "string",  default: "lg",       allowedValues: '"none" | "sm" | "md" | "lg" | "xl" | "full"',                            description: "Icon container radius" },
+  { name: "accentColor",      type: "string",  default: "primary",  allowedValues: COLOR_VALUES,                                                               description: "Accent color for tags, bullets, highlights" },
 ];
 
-const BG_MAP = {
-  surface: "bg-surface",
-  muted: "bg-surface-secondary",
-  navy: "bg-surface-tertiary",
-  transparent: "bg-transparent",
-  blur: "bg-surface/80 backdrop-blur-md",
-};
-
-const SHADOW_MAP = {
-  none: "",
-  sm: "shadow-sm",
-  md: "shadow-md",
-  lg: "shadow-lg",
+const COLOR_MAP = {
+  primary:      { text: "text-[#e50913]", bg: "bg-[#e50913]", border: "border-[#e50913]" },
+  primaryMuted: { text: "text-[#e50913]", bg: "bg-[#fdecea]", border: "border-[#fca5a5]" },
+  surface:      { text: "text-gray-900",  bg: "bg-white",     border: "border-gray-900"  },
+  muted:        { text: "text-gray-500",  bg: "bg-gray-50",   border: "border-gray-200"  },
+  subtle:       { text: "text-gray-400",  bg: "bg-gray-100",  border: "border-gray-100"  },
+  white:        { text: "text-white",     bg: "bg-white",     border: "border-white"     },
 };
 
 const HEADING_SIZE_MAP = {
+  "2xl": "text-2xl",
   "3xl": "text-3xl sm:text-4xl",
   "4xl": "text-4xl sm:text-5xl",
   "5xl": "text-5xl sm:text-6xl",
+  "6xl": "text-6xl sm:text-7xl",
 };
 
-const SUBHEADING_SIZE_MAP = {
-  base: "text-base",
-  lg: "text-lg",
-  xl: "text-xl",
+const BODY_SIZE_MAP = {
+  xs: "text-xs", sm: "text-sm", base: "text-base", lg: "text-lg", xl: "text-xl",
 };
 
-const TITLE_SIZE_MAP = {
-  sm: "text-sm",
-  base: "text-base",
-  lg: "text-lg",
+const WEIGHT_MAP = {
+  normal: "font-normal", medium: "font-medium", semibold: "font-semibold",
+  bold: "font-bold", extrabold: "font-extrabold",
 };
 
-const DESC_SIZE_MAP = {
-  xs: "text-xs",
-  sm: "text-sm",
-  base: "text-base",
+const BORDER_MAP = {
+  none: "", sm: "border", md: "border-2", lg: "border-4",
 };
 
-const ACCENT_MAP = {
-  indigo: {
-    iconBg: "bg-indigo-50",
-    iconText: "text-indigo-600",
-    tagText: "text-indigo-600",
-    tagBg: "bg-indigo-50",
-    border: "border-indigo-100",
-  },
-  violet: {
-    iconBg: "bg-violet-50",
-    iconText: "text-violet-600",
-    tagText: "text-violet-600",
-    tagBg: "bg-violet-50",
-    border: "border-violet-100",
-  },
-  emerald: {
-    iconBg: "bg-emerald-50",
-    iconText: "text-emerald-600",
-    tagText: "text-emerald-600",
-    tagBg: "bg-emerald-50",
-    border: "border-emerald-100",
-  },
-  rose: {
-    iconBg: "bg-rose-50",
-    iconText: "text-rose-600",
-    tagText: "text-rose-600",
-    tagBg: "bg-rose-50",
-    border: "border-rose-100",
-  },
-  brand: {
-    iconBg: "bg-brand-muted",
-    iconText: "text-brand",
-    tagText: "text-brand",
-    tagBg: "bg-brand-muted",
-    border: "border-brand/20",
-  },
-  blue: {
-    iconBg: "bg-blue-50",
-    iconText: "text-blue-600",
-    tagText: "text-blue-600",
-    tagBg: "bg-blue-50",
-    border: "border-blue-100",
-  },
-  red: {
-  iconBg: "bg-red-50",
-  iconText: "text-red-600",
-  tagText: "text-red-600",
-  tagBg: "bg-red-50",
-  border: "border-red-100",
- }
+const RADIUS_MAP = {
+  none: "rounded-none", sm: "rounded-sm", md: "rounded-md", lg: "rounded-lg",
+  xl: "rounded-xl", "2xl": "rounded-2xl", full: "rounded-full",
 };
 
-const PADDING_Y = {
-  4: "py-8 sm:py-10",
-  6: "py-10 sm:py-12",
-  8: "py-12 sm:py-16",
-  10: "py-16 sm:py-20",
-  12: "py-20 sm:py-24",
+const SHADOW_MAP = {
+  none: "", sm: "shadow-sm", md: "shadow-md", lg: "shadow-lg", xl: "shadow-xl",
 };
+
+const ICON_SIZE_MAP = {
+  sm: { container: "h-8 w-8",   px: 14 },
+  md: { container: "h-10 w-10", px: 18 },
+  lg: { container: "h-12 w-12", px: 22 },
+  xl: { container: "h-14 w-14", px: 28 },
+};
+
+const PADDING_Y_MAP = {
+  4: "py-8 sm:py-10", 6: "py-10 sm:py-12",
+  8: "py-12 sm:py-16", 10: "py-16 sm:py-20", 12: "py-20 sm:py-24",
+};
+
+const CARD_PADDING_MAP = {
+  4: { y: "py-4", x: "px-4" }, 6: { y: "py-6", x: "px-6" },
+  8: { y: "py-8", x: "px-8" }, 10: { y: "py-10", x: "px-10" },
+};
+
+
+function c(token, type) {
+  return COLOR_MAP[token]?.[type] ?? COLOR_MAP.surface[type];
+}
 
 export function resolveFeatureStyles(styles = {}) {
   const s = { ...FEATURE_STYLE_DEFAULTS, ...styles };
 
-  const inverted = s.background === "navy";
+  const sectionClass = `${c(s.background, "bg")} ${PADDING_Y_MAP[s.paddingY] ?? PADDING_Y_MAP[6]}`;
 
-  const sectionBgClass = BG_MAP[s.background] ?? BG_MAP.surface;
-  const sectionClass = `${sectionBgClass} ${PADDING_Y[s.paddingY] ?? PADDING_Y[6]}`;
+  const headingClass = [
+    HEADING_SIZE_MAP[s.headingSize] ?? HEADING_SIZE_MAP["4xl"],
+    WEIGHT_MAP[s.headingWeight]     ?? WEIGHT_MAP.bold,
+    "tracking-tight",
+    c(s.headingColor, "text"),
+  ].join(" ");
 
-  const headingAutoColor = inverted ? "text-text-primary" : "text-gray-900";
-  const headingColorClass = s.headingColor ? "" : headingAutoColor;
-  const headingColorStyle = s.headingColor ? { color: s.headingColor } : {};
-  const headingClass = `font-bold tracking-tight ${HEADING_SIZE_MAP[s.headingSize] ?? HEADING_SIZE_MAP["4xl"]} ${headingColorClass}`;
+  const subheadingClass = [
+    BODY_SIZE_MAP[s.subheadingSize]  ?? BODY_SIZE_MAP.lg,
+    WEIGHT_MAP[s.subheadingWeight]   ?? WEIGHT_MAP.normal,
+    "leading-relaxed",
+    c(s.subheadingColor, "text"),
+  ].join(" ");
 
-  const subheadingAutoColor = inverted ? "text-text-secondary" : "text-gray-500";
-  const subheadingColorClass = s.subheadingColor ? "" : subheadingAutoColor;
-  const subheadingColorStyle = s.subheadingColor ? { color: s.subheadingColor } : {};
-  const subheadingClass = `leading-relaxed ${SUBHEADING_SIZE_MAP[s.subheadingSize] ?? SUBHEADING_SIZE_MAP.lg} ${subheadingColorClass}`;
+  const cp = CARD_PADDING_MAP[s.cardPaddingY] ?? CARD_PADDING_MAP[6];
+  const cx = CARD_PADDING_MAP[s.cardPaddingX]?.x ?? "px-6";
+  const cardClass = [
+    c(s.cardBg, "bg"),
+    BORDER_MAP[s.cardBorder]        ?? BORDER_MAP.sm,
+    c(s.cardBorderColor, "border"),
+    RADIUS_MAP[s.cardRadius]        ?? RADIUS_MAP["2xl"],
+    SHADOW_MAP[s.cardShadow]        ?? SHADOW_MAP.none,
+    cp.y, cx,
+  ].filter(Boolean).join(" ");
 
-  const cardBgClass =
-    s.cardBg === "custom" && s.customCardBgColor
-      ? ""
-      : s.cardBg === "transparent"
-      ? "bg-transparent"
-      : inverted
-      ? "bg-surface-secondary"
-      : "bg-white";
+  const titleClass = [
+    BODY_SIZE_MAP[s.titleSize]      ?? BODY_SIZE_MAP.base,
+    WEIGHT_MAP[s.titleWeight]       ?? WEIGHT_MAP.semibold,
+    c(s.titleColor, "text"),
+  ].join(" ");
 
-  const cardBgStyle =
-    s.cardBg === "custom" && s.customCardBgColor
-      ? { backgroundColor: s.customCardBgColor }
-      : {};
+  const descClass = [
+    BODY_SIZE_MAP[s.descSize]       ?? BODY_SIZE_MAP.sm,
+    WEIGHT_MAP[s.descWeight]        ?? WEIGHT_MAP.normal,
+    "leading-relaxed",
+    c(s.descColor, "text"),
+  ].join(" ");
 
-  const cardBorderClass = s.cardBorder
-    ? inverted
-      ? "border border-surface-border"
-      : "border border-gray-100"
-    : "";
+  const iconTokens = ICON_SIZE_MAP[s.iconSize] ?? ICON_SIZE_MAP.md;
+  const iconContainerClass = [
+    iconTokens.container,
+    RADIUS_MAP[s.iconRadius]        ?? RADIUS_MAP.lg,
+    c(s.iconBg, "bg"),
+  ].join(" ");
 
-  const cardShadowClass = SHADOW_MAP[s.cardShadow] ?? SHADOW_MAP.sm;
-  const cardClass = `${cardBgClass} ${cardBorderClass} ${cardShadowClass}`.trim();
+  const accentBg = s.accentColor === "primary"
+    ? c("primaryMuted", "bg")
+    : c(s.accentColor, "bg");
 
-  const titleColorClass = s.titleColor ? "" : "text-gray-900";
-  const titleColorStyle = s.titleColor ? { color: s.titleColor } : {};
-  const titleClass = `font-semibold ${TITLE_SIZE_MAP[s.titleSize] ?? TITLE_SIZE_MAP.base} ${titleColorClass}`;
-
-  const descAutoColor = inverted ? "text-text-secondary" : "text-gray-500";
-  const descColorClass = s.descColor ? "" : descAutoColor;
-  const descColorStyle = s.descColor ? { color: s.descColor } : {};
-  const descClass = `leading-relaxed ${DESC_SIZE_MAP[s.descSize] ?? DESC_SIZE_MAP.sm} ${descColorClass}`;
+  const accent = {
+    iconBg:   c(s.iconBg, "bg"),
+    iconText: c(s.iconColor, "text"),
+    tagBg:    accentBg,
+    tagText:  c(s.accentColor, "text"),
+    border:   c(s.accentColor, "border"),
+  };
 
   return {
     sectionClass,
-
-    inverted,
-    headingAlign: s.headingAlign ?? "left",
+    headingAlign:     s.headingAlign ?? "left",
     headingClass,
-    headingStyle: headingColorStyle,
-
+    headingStyle:     {},
     subheadingClass,
-    subheadingStyle: subheadingColorStyle,
-
+    subheadingStyle:  {},
     cardClass,
-    cardStyle: cardBgStyle,
-
+    cardStyle:        {},
     titleClass,
-    titleStyle: titleColorStyle,
+    titleStyle:       {},
     descClass,
-    descStyle: descColorStyle,
-
-    accent: ACCENT_MAP[s.accentColor] ?? ACCENT_MAP.indigo,
+    descStyle:        {},
+    iconContainerClass,
+    iconClass:        c(s.iconColor, "text"),
+    iconPixelSize:    iconTokens.px,
+    accent,
+    inverted:         false,
   };
 }
