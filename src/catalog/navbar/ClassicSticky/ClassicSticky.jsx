@@ -89,6 +89,7 @@ export default function ClassicSticky({
           logoTextClass={nav.logoTextClass}
           logoIconBoxClass={nav.logoIconBoxClass}
           logoIconClass={nav.logoIconClass}
+          logoImageStyle={nav.logoImageStyle}
           className="shrink-0"
         />
 

@@ -108,6 +108,7 @@ export default function CenteredLogo({
             logoTextClass={nav.logoTextClass}
             logoIconBoxClass={nav.logoIconBoxClass}
             logoIconClass={nav.logoIconClass}
+            logoImageStyle={nav.logoImageStyle}
           />
         </div>
 
