@@ -1,8 +1,12 @@
 import { COMPACT_ROW_DEFAULT_PROPS } from "../defaultProps";
-import { resolveTeamStyles, TEAM_STYLE_DEFAULTS, TEAM_STYLE_PROP_SCHEMA } from "../teamStyles";
+import {
+  resolveTeamStyles,
+  TEAM_COMPACT_STYLE_PROP_SCHEMA,
+  TEAM_STYLE_DEFAULTS,
+} from "../teamStyles";
 
 export const defaultProps = { ...COMPACT_ROW_DEFAULT_PROPS };
-export const defaultStyles = { ...TEAM_STYLE_DEFAULTS };
+export const defaultStyles = { ...TEAM_STYLE_DEFAULTS, titleSize: "sm" };
 
 export const propSchema = {
   props: [
@@ -28,7 +32,7 @@ export const propSchema = {
       description: "Team members shown in a compact grid layout (6 members recommended)",
     },
   ],
-  styles: TEAM_STYLE_PROP_SCHEMA,
+  styles: TEAM_COMPACT_STYLE_PROP_SCHEMA,
 };
 
 export default function CompactRow({
@@ -37,47 +41,36 @@ export default function CompactRow({
   members = defaultProps.members,
   styles = defaultStyles,
 }) {
-  const { 
-    className, 
-    headingClass, 
+  const {
+    sectionClass,
+    headingClass,
     subheadingClass,
     nameClass,
     roleClass,
-    cardColorClass,
-    cardBorderClass,
   } = resolveTeamStyles(styles);
 
   return (
-    <section className={className}>
+    <section className={sectionClass}>
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         {heading || subheading ? (
-          <div className="text-center mb-10">
-            {heading ? (
-              <h2 className={`text-3xl font-bold tracking-tight sm:text-4xl ${headingClass}`}>
-                {heading}
-              </h2>
-            ) : null}
-            {subheading ? (
-              <p className={`mt-4 text-lg ${subheadingClass}`}>{subheading}</p>
-            ) : null}
+          <div className="mb-10 text-center">
+            {heading ? <h2 className={headingClass}>{heading}</h2> : null}
+            {subheading ? <p className={subheadingClass}>{subheading}</p> : null}
           </div>
         ) : null}
 
         <div className="flex flex-wrap justify-center gap-6">
           {members.map((member, index) => (
-            <div
-              key={`${member.name}-${index}`}
-              className="flex flex-col items-center text-center"
-            >
-              <div className="w-20 h-20 mb-3 rounded-full overflow-hidden bg-surface-muted shrink-0 ring-2 ring-border/20 transition-all hover:ring-brand/30 hover:shadow-md">
+            <div key={`${member.name}-${index}`} className="flex flex-col items-center text-center">
+              <div className="mb-3 h-20 w-20 shrink-0 overflow-hidden rounded-full bg-surface-muted ring-2 ring-border/20 transition-all hover:shadow-md hover:ring-brand/30">
                 <img
                   src={member.avatar}
                   alt={member.name}
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                 />
               </div>
-              <h3 className={`text-sm font-semibold ${nameClass}`}>{member.name}</h3>
-              <p className={`text-xs mt-0.5 ${roleClass}`}>{member.role}</p>
+              <h3 className={nameClass}>{member.name}</h3>
+              <p className={`mt-0.5 text-xs ${roleClass}`}>{member.role}</p>
             </div>
           ))}
         </div>
