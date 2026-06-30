@@ -1,104 +1,63 @@
 import React from "react";
+import { STEPS_HORIZONTAL_PROPS } from "../defaultProps";
+import {
+  HOW_IT_WORKS_STYLE_DEFAULTS,
+  HOW_IT_WORKS_STYLE_PROP_SCHEMA,
+  resolveHowItWorksStyles,
+} from "../defaultStyles";
 
-export const defaultProps = {
-  heading: "Gallery → JSON → Builder",
-  subheading: "A connected workflow so you never write component JSON from scratch.",
-  items: [
-    { step: "01", title: "Explore the Gallery", description: "Browse component layout variants across section types." },
-    { step: "02", title: "Copy component JSON", description: "Every tweak syncs to a live JSON data layout panel." },
-    { step: "03", title: "Assemble in Builder", description: "Drop configurations into your application layout structure." }
-  ]
-};
-
-export const defaultStyles = {
-  background: "surface",
-  paddingY: 16,
-  headingColor: "text-ink",
-  headingSize: "text-3xl",
-  headingWeight: "font-bold",
-  subheadingColor: "text-ink-muted",
-  subheadingSize: "text-base",
-  subheadingWeight: "font-normal",
-  cardBg: "bg-surface-muted",
-  cardTextColor: "text-ink",
-  cardTitleWeight: "font-bold"
-};
+export const defaultProps = STEPS_HORIZONTAL_PROPS;
+export const defaultStyles = { ...HOW_IT_WORKS_STYLE_DEFAULTS };
 
 export const propSchema = {
-  // 💡 Mapped to exact array of schema objects layout
   props: [
     { name: "heading", type: "string", default: defaultProps.heading, allowedValues: "Any string", description: "Main section title text" },
-    { name: "subheading", type: "string", default: defaultProps.subheading, allowedValues: "Any string (optional)", description: "Supporting structural description subtext" },
-    { name: "items", type: "Array", default: "[3 steps layout]", allowedValues: "Array of step data objects containing step, title, and description", description: "Workflow process steps to map across columns" }
+    { name: "subheading", type: "string", default: defaultProps.subheading, allowedValues: 'Any string (use "" to hide)', description: "Supporting text below the heading" },
+    { name: "items", type: "Array<{ step, title, description }>", default: defaultProps.items, allowedValues: "Array of step/title/description objects", description: "Steps rendered left-to-right with a connector line" },
   ],
-  styles: [
-    { name: "background", type: "string", default: defaultStyles.background, allowedValues: "surface | muted | navy", description: "Outer frame background design token selector" },
-    { name: "paddingY", type: "number", default: defaultStyles.paddingY, allowedValues: "8 | 12 | 16 | 20", description: "Vertical section height spacing scale" },
-    { name: "headingColor", type: "string", default: defaultStyles.headingColor, allowedValues: "Tailwind text class name", description: "Color assignment class rule for the heading" },
-    { name: "headingSize", type: "string", default: defaultStyles.headingSize, allowedValues: "text-2xl | text-3xl | text-4xl | text-5xl", description: "Font size scale for main title element" },
-    { name: "headingWeight", type: "string", default: defaultStyles.headingWeight, allowedValues: "font-normal | font-medium | font-bold", description: "Font weight class config assignment" },
-    { name: "subheadingColor", type: "string", default: defaultStyles.subheadingColor, allowedValues: "Tailwind text class name", description: "Color utility class for description paragraph" },
-    { name: "subheadingSize", type: "string", default: defaultStyles.subheadingSize, allowedValues: "text-xs | text-sm | text-base | text-lg", description: "Font size token layout descriptor for subtext" },
-    { name: "subheadingWeight", type: "string", default: defaultStyles.subheadingWeight, allowedValues: "font-light | font-normal | font-medium", description: "Font structural weight configuration alignment" },
-    { name: "cardBg", type: "string", default: defaultStyles.cardBg, allowedValues: "Tailwind background class name", description: "Background theme container background utility token for step blocks" },
-    { name: "cardTextColor", type: "string", default: defaultStyles.cardTextColor, allowedValues: "Tailwind text color utility", description: "Text color variable selector inside step block nodes" },
-    { name: "cardTitleWeight", type: "string", default: defaultStyles.cardTitleWeight, allowedValues: "font-medium | font-semibold | font-bold", description: "Weight design rule applied onto step titles" }
-  ]
+  styles: HOW_IT_WORKS_STYLE_PROP_SCHEMA,
 };
 
-export default function StepsHorizontal(componentData) {
-  const activeProps = componentData?.props || componentData;
-  const activeStyles = componentData?.styles || {};
-
-  const { heading = "", subheading = "", items = [] } = activeProps || {};
+export default function StepsHorizontal({
+  heading    = defaultProps.heading,
+  subheading = defaultProps.subheading,
+  items      = defaultProps.items,
+  styles     = defaultStyles,
+}) {
   const {
-    background = "surface",
-    paddingY = 16,
-    headingColor = "text-ink",
-    headingSize = "text-3xl",
-    headingWeight = "font-bold",
-    subheadingColor = "text-ink-muted",
-    subheadingSize = "text-base",
-    subheadingWeight = "font-normal",
-    cardBg = "bg-surface-muted",
-    cardTextColor = "text-ink",
-    cardTitleWeight = "font-bold"
-  } = activeStyles || {};
+    sectionClass,
+    headingAlign,
+    headingClass,
+    subheadingClass,
+    cardClass,
+    titleClass,
+    descClass,
+    accentBgClass,
+  } = resolveHowItWorksStyles(styles);
 
-  const PADDING_Y = {
-    8: "py-8 sm:py-10",
-    12: "py-12 sm:py-14",
-    16: "py-12 sm:py-16",
-    20: "py-16 sm:py-20",
-  };
-
-  const isNavy = background === "navy";
-  const bgSectionClass = isNavy ? "bg-navy text-white" : background === "muted" ? "bg-surface-muted" : "bg-surface";
-  const paddingClass = PADDING_Y[paddingY] ?? PADDING_Y[16];
-  const resolvedHeadingColor = isNavy ? "text-ink-inverse" : headingColor;
-  const resolvedSubheadingColor = isNavy ? "text-ink-inverse-muted" : subheadingColor;
+  const alignClass = headingAlign === "left" ? "text-left" : headingAlign === "right" ? "text-right" : "text-center";
 
   return (
-    <div className={`px-4 sm:px-6 ${paddingClass} ${bgSectionClass} transition-all`}>
-      <div className="mx-auto max-w-5xl text-center">
-        {heading && <h2 className={`${headingSize} ${headingWeight} ${resolvedHeadingColor} tracking-tight`}>{heading}</h2>}
-        {subheading && <p className={`mt-4 max-w-xl mx-auto ${subheadingSize} ${subheadingWeight} ${resolvedSubheadingColor}`}>{subheading}</p>}
-        
-        <div className="mt-10 grid gap-6 sm:mt-14 sm:grid-cols-3 sm:gap-8 relative">
+    <section className={sectionClass}>
+      <div className={`mx-auto max-w-5xl ${alignClass}`}>
+        {heading && <h2 className={headingClass}>{heading}</h2>}
+        {subheading && <p className={`mt-4 max-w-xl mx-auto ${subheadingClass}`}>{subheading}</p>}
+
+        <div className="mt-10 sm:mt-14 grid gap-6 sm:grid-cols-3 sm:gap-8 relative text-center">
           {items.map((item, idx) => (
-            <div key={idx} className={`relative flex flex-col items-center group p-5 sm:p-6 rounded-xl ${isNavy ? "bg-navy-elevated" : cardBg}`}>
+            <div key={`${item.title}-${idx}`} className={`relative flex flex-col items-center ${cardClass}`}>
               {idx < items.length - 1 && (
-                <div className="hidden sm:block absolute top-12 left-[70%] right-[-30%] h-[2px] bg-border/40" />
+                <div className="hidden sm:block absolute top-12 left-[70%] right-[-30%] h-[2px] bg-surface-border/40" />
               )}
-              <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-brand text-white font-bold text-base shadow-sm mb-4">
+              <div className={`relative z-10 flex h-12 w-12 items-center justify-center rounded-full text-white font-bold text-base shadow-sm mb-4 ${accentBgClass}`}>
                 {item.step || `0${idx + 1}`}
               </div>
-              <h3 className={`text-lg ${cardTitleWeight} ${isNavy ? "text-ink-inverse" : cardTextColor}`}>{item.title}</h3>
-              <p className={`mt-2 text-sm ${isNavy ? "text-ink-inverse-muted" : "text-ink-muted"}`}>{item.description}</p>
+              <h3 className={titleClass}>{item.title}</h3>
+              <p className={`mt-2 ${descClass}`}>{item.description}</p>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
