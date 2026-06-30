@@ -4,7 +4,7 @@ import NavbarNavLinks, { NavbarMobileToggle } from "../NavbarNavLinks";
 import NavbarCta from "../NavbarCta";
 import {
   NAVBAR_STYLE_DEFAULTS,
-  NAVBAR_STYLE_PROP_SCHEMA,
+  NAVBAR_TRANSPARENT_STYLE_PROP_SCHEMA,
   resolveNavbarStyles,
 } from "../navbarStyles";
 import {
@@ -75,7 +75,7 @@ export const propSchema = {
       description: "Whether the navbar sticks to the top on scroll",
     },
   ],
-  styles: NAVBAR_STYLE_PROP_SCHEMA,
+  styles: NAVBAR_TRANSPARENT_STYLE_PROP_SCHEMA,
 };
 
 export default function TransparentHero({
@@ -119,6 +119,9 @@ export default function TransparentHero({
             inverted={nav.inverted}
             preventNavigation={preventNavigation}
             logoSize={nav.logoSize}
+            logoTextClass={nav.logoTextClass}
+            logoIconBoxClass={nav.logoIconBoxClass}
+            logoIconClass={nav.logoIconClass}
             className="shrink-0"
           />
 

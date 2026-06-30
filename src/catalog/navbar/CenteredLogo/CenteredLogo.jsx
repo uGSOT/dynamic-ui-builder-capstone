@@ -105,6 +105,9 @@ export default function CenteredLogo({
             preventNavigation={preventNavigation}
             inverted={nav.inverted}
             logoSize={nav.logoSize}
+            logoTextClass={nav.logoTextClass}
+            logoIconBoxClass={nav.logoIconBoxClass}
+            logoIconClass={nav.logoIconClass}
           />
         </div>
 
