@@ -10,6 +10,7 @@ export default function NavbarLogo({
   logoTextClass,
   logoIconBoxClass,
   logoIconClass,
+  logoImageStyle,
 }) {
   const logoHref = preventNavigation ? "#" : "/";
 
@@ -34,7 +35,8 @@ export default function NavbarLogo({
         <img
           src={logo.src}
           alt={logo.alt ?? ""}
-          className={`${size.logoImage} w-auto`}
+          className={`${size.logoImage} w-auto object-contain`}
+          style={logoImageStyle}
         />
       </a>
     );

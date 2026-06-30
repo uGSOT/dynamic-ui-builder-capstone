@@ -196,7 +196,14 @@ export const NAVBAR_STYLE_PROP_SCHEMA = [
     type: "string",
     default: NAVBAR_STYLE_DEFAULTS.logoColor,
     allowedValues: '"primary" | "surface" | "muted" | "subtle" | "white"',
-    description: "Logo text tint color",
+    description: "Logo text or image tint color",
+  },
+  {
+    name: "logoOpacity",
+    type: "string",
+    default: NAVBAR_STYLE_DEFAULTS.logoOpacity,
+    allowedValues: '"50" | "60" | "75" | "100"',
+    description: "Logo image opacity",
   },
   {
     name: "iconColor",
@@ -275,6 +282,35 @@ function resolveInverted(background, options = {}) {
   return ["navy", "blur"].includes(background);
 }
 
+const LOGO_TEXT_INVERTED = {
+  primary: "text-brand",
+  surface: "text-ink-inverse",
+  muted: "text-ink-inverse-muted",
+  subtle: "text-ink-inverse-muted",
+  white: "text-white",
+};
+
+const LOGO_OPACITY = {
+  50: 0.5,
+  60: 0.6,
+  75: 0.75,
+  100: 1,
+};
+
+function resolveLogoTextClass(logoColor, inverted) {
+  if (inverted) {
+    return LOGO_TEXT_INVERTED[logoColor] ?? resolveColorText(logoColor, "white");
+  }
+  return resolveColorText(logoColor, "surface");
+}
+
+function resolveLogoImageStyle(logoColor, logoOpacity) {
+  return {
+    opacity: LOGO_OPACITY[logoOpacity] ?? 1,
+    filter: logoColor === "muted" || logoColor === "subtle" ? "grayscale(100%)" : "none",
+  };
+}
+
 export function resolveNavbarStyles(styles = {}, options = {}) {
   const normalized = normalizeLegacyStyles(styles);
   const merged = { ...NAVBAR_STYLE_DEFAULTS, ...normalized };
@@ -293,9 +329,7 @@ export function resolveNavbarStyles(styles = {}, options = {}) {
   const backgroundClass = resolveNavbarBackground(effectiveBackground);
   const borderClass = resolveNavbarBorder(merged.navbarBorder);
 
-  const logoTextClass = inverted
-    ? "text-ink-inverse"
-    : resolveColorText(merged.logoColor, "surface");
+  const logoTextClass = resolveLogoTextClass(merged.logoColor, inverted);
 
   const logoIconBoxClass = [
     resolveColorBg(merged.accentColor, "primary"),
@@ -304,6 +338,7 @@ export function resolveNavbarStyles(styles = {}, options = {}) {
     merged.accentColor === "primary" ? "group-hover:bg-brand-dark" : "group-hover:opacity-90",
   ].join(" ");
   const logoIconClass = resolveColorText(merged.iconColor, "white");
+  const logoImageStyle = resolveLogoImageStyle(merged.logoColor, merged.logoOpacity);
 
   const mobileMenuClass =
     effectiveBackground === "navy"
@@ -321,6 +356,7 @@ export function resolveNavbarStyles(styles = {}, options = {}) {
     logoTextClass,
     logoIconBoxClass,
     logoIconClass,
+    logoImageStyle,
     accentTextClass: tokens.accentTextClass,
     accentBgClass: tokens.accentBgClass,
     linkTextClass: `${linkSize.text} font-medium ${resolveColorText(merged.descColor, "muted")}`,
