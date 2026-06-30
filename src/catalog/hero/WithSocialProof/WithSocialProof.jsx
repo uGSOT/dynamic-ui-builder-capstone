@@ -5,26 +5,30 @@ import {
   HERO_STYLE_PROP_SCHEMA,
   resolveHeroStyles,
 } from "../heroStyles";
+import HeroSectionHeader from "../HeroSectionHeader";
 
 export const defaultProps = {
   ...DEFAULT_SOCIAL_PROOF_HERO_PROPS,
 };
 
-export const defaultStyles = { ...HERO_STYLE_DEFAULTS };
+export const defaultStyles = { 
+  ...HERO_STYLE_DEFAULTS,
+  headingAlign: "center",
+};
 
 export const propSchema = {
   props: [
     {
-      name: "headline",
+      name: "heading",
       type: "string",
-      default: defaultProps.headline,
+      default: defaultProps.heading,
       allowedValues: "Any string",
       description: "Main title text",
     },
     {
-      name: "subtext",
+      name: "subheading",
       type: "string",
-      default: defaultProps.subtext,
+      default: defaultProps.subheading,
       allowedValues: "Any string",
       description: "Supporting description text",
     },
@@ -75,8 +79,8 @@ export const propSchema = {
 };
 
 function WithSocialProof({
-  headline = defaultProps.headline,
-  subtext = defaultProps.subtext,
+  heading = defaultProps.heading,
+  subheading = defaultProps.subheading,
   primaryAction = defaultProps.primaryAction,
   secondaryAction = defaultProps.secondaryAction,
   imageUrl = defaultProps.imageUrl,
@@ -85,32 +89,29 @@ function WithSocialProof({
   socialProofAvatars = defaultProps.socialProofAvatars,
   styles = defaultStyles,
 }) {
-  const { className, inverted } = resolveHeroStyles(styles);
+  const {
+    sectionClass,
+    headingClass,
+    subheadingClass,
+    accent
+  } = resolveHeroStyles(styles);
 
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
-  const subtitleClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
-  const badgeClass = inverted ? "text-ink-inverse-muted" : "text-ink-subtle";
-  const ringClass = inverted ? "ring-navy" : "ring-surface";
+  const ringClass = "ring-white";
 
-  const primaryBtnClass = inverted
-    ? "bg-brand text-ink-inverse hover:bg-brand-light"
-    : "bg-brand text-ink-inverse hover:bg-brand-dark";
-  const secondaryBtnClass = inverted
-    ? "border border-border-dark text-ink-inverse hover:bg-navy-elevated"
-    : "border border-border text-ink hover:bg-surface-muted";
+  const primaryBtnClass = `${accent.bg} text-white hover:opacity-90`;
+  const secondaryBtnClass = `border ${accent.border} ${accent.text} hover:opacity-90`;
 
   return (
-    <section className={`text-center transition-colors duration-200 ${className}`}>
+    <section className={`text-center transition-colors duration-200 ${sectionClass}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-3xl">
-          <h1 className={`text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl ${titleClass}`}>
-            {headline}
-          </h1>
-          {subtext && (
-            <p className={`mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg ${subtitleClass}`}>
-              {subtext}
-            </p>
-          )}
+          <HeroSectionHeader
+            heading={heading}
+            subheading={subheading}
+            headingClass={headingClass}
+            subheadingClass={subheadingClass}
+            subheadingWrapperClass="mx-auto mt-6 max-w-2xl"
+          />
 
           {(primaryAction?.label || secondaryAction?.label) && (
             <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -149,7 +150,7 @@ function WithSocialProof({
                 </div>
               )}
               {socialProofText && (
-                <p className={`text-sm font-medium ${subtitleClass}`}>
+                <p className={`text-sm font-medium ${accent.text}`}>
                   {socialProofText}
                 </p>
               )}
@@ -157,13 +158,13 @@ function WithSocialProof({
           )}
 
           {badge && (
-            <p className={`mt-5 text-xs font-medium tracking-wide sm:text-sm ${badgeClass}`}>
+            <p className={`mt-5 text-xs font-medium tracking-wide sm:text-sm ${accent.text}`}>
               {badge}
             </p>
           )}
 
           {imageUrl && (
-            <div className="mt-12 overflow-hidden rounded-xl border border-border/10 bg-surface shadow-card">
+            <div className="mt-12 overflow-hidden rounded-xl border border-border/10 bg-white shadow-md">
               <img
                 src={imageUrl}
                 alt=""

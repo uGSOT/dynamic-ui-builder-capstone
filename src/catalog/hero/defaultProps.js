@@ -1,6 +1,6 @@
 export const DEFAULT_CENTERED_HERO_PROPS = {
-  headline: "Ship faster. Grow smarter.",
-  subtext: "The all-in-one platform for modern teams to plan, build, and scale software that drives real impact.",
+  heading: "Ship faster. Grow smarter.",
+  subheading: "The all-in-one platform for modern teams to plan, build, and scale software that drives real impact.",
   primaryAction: { label: "Start free trial", href: "#" },
   secondaryAction: { label: "Book a demo", href: "#" },
   badge: "No credit card required • Cancel anytime",
@@ -8,8 +8,8 @@ export const DEFAULT_CENTERED_HERO_PROPS = {
 };
 
 export const DEFAULT_SPLIT_HERO_PROPS = {
-  headline: "The operating system for modern business",
-  subtext: "Connect your tools, automate your workflows, and scale your growth with a single declarative platform designed for fast-moving teams.",
+  heading: "The operating system for modern business",
+  subheading: "Connect your tools, automate your workflows, and scale your growth with a single declarative platform designed for fast-moving teams.",
   primaryAction: { label: "Get started free", href: "#" },
   secondaryAction: { label: "Watch interactive demo", href: "#" },
   badge: "New: Version 2.0 is now live",
@@ -17,8 +17,8 @@ export const DEFAULT_SPLIT_HERO_PROPS = {
 };
 
 export const DEFAULT_SOCIAL_PROOF_HERO_PROPS = {
-  headline: "Build the future of your company",
-  subtext: "Collaborate seamlessly across engineering, product, and design to ship beautiful products that customers love.",
+  heading: "Build the future of your company",
+  subheading: "Collaborate seamlessly across engineering, product, and design to ship beautiful products that customers love.",
   primaryAction: { label: "Start building today", href: "#" },
   secondaryAction: { label: "Talk to product expert", href: "#" },
   badge: "Trusted by top engineering organizations",

@@ -5,6 +5,7 @@ import {
   HERO_STYLE_PROP_SCHEMA,
   resolveHeroStyles,
 } from "../heroStyles";
+import HeroSectionHeader from "../HeroSectionHeader";
 
 export const defaultProps = {
   ...DEFAULT_SPLIT_HERO_PROPS,
@@ -15,16 +16,16 @@ export const defaultStyles = { ...HERO_STYLE_DEFAULTS };
 export const propSchema = {
   props: [
     {
-      name: "headline",
+      name: "heading",
       type: "string",
-      default: defaultProps.headline,
+      default: defaultProps.heading,
       allowedValues: "Any string",
       description: "Main title text",
     },
     {
-      name: "subtext",
+      name: "subheading",
       type: "string",
-      default: defaultProps.subtext,
+      default: defaultProps.subheading,
       allowedValues: "Any string",
       description: "Supporting description text",
     },
@@ -61,35 +62,34 @@ export const propSchema = {
 };
 
 function SplitImageLeft({
-  headline = defaultProps.headline,
-  subtext = defaultProps.subtext,
+  heading = defaultProps.heading,
+  subheading = defaultProps.subheading,
   primaryAction = defaultProps.primaryAction,
   secondaryAction = defaultProps.secondaryAction,
   imageUrl = defaultProps.imageUrl,
   badge = defaultProps.badge,
   styles = defaultStyles,
 }) {
-  const { className, inverted } = resolveHeroStyles(styles);
+  const {
+    sectionClass,
+    headingClass,
+    subheadingClass,
+    accent
+  } = resolveHeroStyles(styles);
 
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
-  const subtitleClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
-  const badgeTextClass = inverted ? "text-brand-light bg-brand-muted/10" : "text-brand bg-brand-muted";
+  const badgeTextClass = `${accent.text} ${accent.bg}/10`;
 
-  const primaryBtnClass = inverted
-    ? "bg-brand text-ink-inverse hover:bg-brand-light"
-    : "bg-brand text-ink-inverse hover:bg-brand-dark";
-  const secondaryBtnClass = inverted
-    ? "border border-border-dark text-ink-inverse hover:bg-navy-elevated"
-    : "border border-border text-ink hover:bg-surface-muted";
+  const primaryBtnClass = `${accent.bg} text-white hover:opacity-90`;
+  const secondaryBtnClass = `border ${accent.border} ${accent.text} hover:opacity-90`;
 
   return (
-    <section className={`transition-colors duration-200 ${className}`}>
+    <section className={`transition-colors duration-200 ${sectionClass}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column: Image on Desktop, Stacked second on Mobile */}
           {imageUrl && (
             <div className="relative order-2 lg:order-1">
-              <div className="overflow-hidden rounded-2xl border border-border/10 bg-surface shadow-card transition-transform duration-300 hover:scale-[1.01]">
+              <div className="overflow-hidden rounded-2xl border border-border/10 bg-white shadow-md transition-transform duration-300 hover:scale-[1.01]">
                 <img
                   src={imageUrl}
                   alt="Product screenshot"
@@ -106,14 +106,13 @@ function SplitImageLeft({
                 {badge}
               </span>
             )}
-            <h1 className={`mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl ${titleClass}`}>
-              {headline}
-            </h1>
-            {subtext && (
-              <p className={`mt-6 text-base leading-relaxed sm:text-lg ${subtitleClass}`}>
-                {subtext}
-              </p>
-            )}
+            <HeroSectionHeader
+              heading={heading}
+              subheading={subheading}
+              headingClass={headingClass}
+              subheadingClass={subheadingClass}
+              headingWrapperClass="mt-6"
+            />
 
             {(primaryAction?.label || secondaryAction?.label) && (
               <div className={`mt-8 flex flex-wrap gap-4 ${!imageUrl ? "justify-center" : ""}`}>
