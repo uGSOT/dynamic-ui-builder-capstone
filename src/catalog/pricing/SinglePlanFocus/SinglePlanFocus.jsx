@@ -49,33 +49,33 @@ export const propSchema = {
 };
 
 export default function SinglePlanFocus({
-  heading = defaultProps.heading,
-  subheading = defaultProps.subheading,
-  plans = defaultProps.plans,
+  heading       = defaultProps.heading,
+  subheading    = defaultProps.subheading,
+  plans         = defaultProps.plans,
   billingToggle = defaultProps.billingToggle,
-  styles = defaultStyles,
+  styles        = defaultStyles,
 }) {
   const [billingPeriod, setBillingPeriod] = useState("monthly");
-  const { className, inverted } = resolvePricingStyles(styles);
+
+  const {
+    sectionClass,
+    headingAlign,
+    headingClass,
+    subheadingClass,
+    cardClass,
+    titleClass,
+    descClass,
+    accentTextClass,
+    accentBgClass,
+    accentBorderClass,
+  } = resolvePricingStyles(styles);
 
   const plan = plans[0] || DEFAULT_SINGLE_PLAN[0];
 
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
-  const subtitleClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
-  const toggleTextClass = (active) =>
-    active
-      ? inverted
-        ? "font-semibold text-ink-inverse"
-        : "font-semibold text-ink"
-      : inverted
-        ? "text-ink-inverse-muted"
-        : "text-ink-muted";
-
-  const toggleTrackClass = inverted ? "bg-navy-muted" : "bg-surface-subtle";
-
-  const cardBg = inverted
-    ? "bg-navy-elevated border-border-dark"
-    : "bg-surface border-border";
+  const alignClass =
+    headingAlign === "center" ? "text-center mx-auto"
+    : headingAlign === "right" ? "text-right ml-auto"
+    : "text-left";
 
   const getPriceDisplay = (price) => {
     if (billingPeriod === "monthly") return price;
@@ -90,40 +90,41 @@ export default function SinglePlanFocus({
   };
 
   return (
-    <section className={`transition-colors duration-200 ${className}`}>
+    <section className={sectionClass}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto">
+        <div className={`max-w-3xl ${alignClass}`}>
           {heading && (
-            <h2 className={`text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl ${titleClass}`}>
+            <h2 className={headingClass}>
               {heading}
             </h2>
           )}
           {subheading && (
-            <p className={`mt-4 text-base leading-relaxed sm:text-lg ${subtitleClass}`}>
+            <p className={`mt-4 ${subheadingClass}`}>
               {subheading}
             </p>
           )}
 
           {/* Billing Toggle */}
           {billingToggle?.enabled && (
-            <div className="flex justify-center items-center gap-3 mt-8">
-              <span className={`text-sm transition-colors ${toggleTextClass(billingPeriod === "monthly")}`}>
+            <div className={`flex items-center gap-3 mt-8 ${headingAlign === "center" ? "justify-center" : headingAlign === "right" ? "justify-end" : "justify-start"}`}>
+              <span className={`text-sm transition-colors ${billingPeriod === "monthly" ? `font-semibold ${titleClass}` : descClass}`}>
                 {billingToggle.monthlyLabel}
               </span>
               <button
                 type="button"
                 onClick={() => setBillingPeriod((p) => (p === "monthly" ? "annually" : "monthly"))}
-                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 ${toggleTrackClass}`}
+                className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 bg-surface-subtle"
                 aria-label="Toggle billing period"
               >
                 <span
-                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-brand shadow ring-0 transition duration-200 ease-in-out ${
+                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full shadow ring-0 transition duration-200 ease-in-out ${accentBgClass} ${
                     billingPeriod === "annually" ? "translate-x-5" : "translate-x-0"
                   }`}
                 />
               </button>
-              <span className={`text-sm transition-colors ${toggleTextClass(billingPeriod === "annually")}`}>
+              <span className={`text-sm transition-colors ${billingPeriod === "annually" ? `font-semibold ${titleClass}` : descClass}`}>
                 {billingToggle.annualLabel}
               </span>
             </div>
@@ -131,19 +132,20 @@ export default function SinglePlanFocus({
         </div>
 
         {/* Centered Single Plan Card */}
-        <div className={`relative max-w-3xl mx-auto mt-16 rounded-3xl p-8 md:p-12 border shadow-xl ${cardBg} border-brand/20`}>
+        <div className={`relative max-w-3xl mx-auto mt-16 ${cardClass}`}>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+
             {/* Left side: Plan Info */}
             <div className="md:col-span-5 flex flex-col h-full justify-between">
               <div>
-                <span className="inline-block rounded-full bg-brand/10 text-brand px-3 py-1 text-xs font-semibold tracking-wide uppercase mb-4">
+                <span className={`inline-block rounded-full px-3 py-1 text-xs font-semibold tracking-wide uppercase mb-4 bg-brand/10 text-brand`}>
                   Featured Plan
                 </span>
-                <h3 className={`text-xl font-bold ${titleClass}`}>
+                <h3 className={`text-xl ${titleClass}`}>
                   {plan.name}
                 </h3>
                 {plan.description && (
-                  <p className={`mt-3 text-sm leading-relaxed ${subtitleClass}`}>
+                  <p className={`mt-3 ${descClass}`}>
                     {plan.description}
                   </p>
                 )}
@@ -151,7 +153,7 @@ export default function SinglePlanFocus({
                   <span className={`text-5xl font-extrabold tracking-tight ${titleClass}`}>
                     {getPriceDisplay(plan.price)}
                   </span>
-                  <span className={`ml-2 text-sm font-semibold ${subtitleClass}`}>
+                  <span className={`ml-2 text-sm font-semibold ${descClass}`}>
                     {getPeriodDisplay(plan.period)}
                   </span>
                 </div>
@@ -161,7 +163,7 @@ export default function SinglePlanFocus({
                 <div className="mt-8">
                   <a
                     href={plan.cta.href || "#"}
-                    className="inline-flex w-full items-center justify-center rounded-lg bg-brand px-6 py-3.5 text-sm font-semibold text-ink-inverse shadow-glow transition-all hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2"
+                    className={`inline-flex w-full items-center justify-center rounded-lg px-6 py-3.5 text-sm font-semibold shadow transition-all hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 ${accentBgClass} text-white`}
                   >
                     {plan.cta.label}
                   </a>
@@ -170,8 +172,8 @@ export default function SinglePlanFocus({
             </div>
 
             {/* Right side: Features Checklist */}
-            <div className="md:col-span-7 border-t border-border/10 md:border-t-0 md:border-l md:pl-8 pt-8 md:pt-0">
-              <h4 className={`text-xs font-bold uppercase tracking-wider ${subtitleClass} mb-4`}>
+            <div className="md:col-span-7 border-t border-opacity-10 md:border-t-0 md:border-l md:pl-8 pt-8 md:pt-0">
+              <h4 className={`text-xs font-bold uppercase tracking-wider mb-4 ${descClass}`}>
                 Everything Included
               </h4>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -182,17 +184,19 @@ export default function SinglePlanFocus({
                   >
                     <Check
                       size={18}
-                      className="text-brand shrink-0 mt-0.5"
+                      className={`shrink-0 mt-0.5 ${accentTextClass}`}
                     />
-                    <span className={subtitleClass}>
+                    <span className={descClass}>
                       {feature}
                     </span>
                   </li>
                 ))}
               </ul>
             </div>
+
           </div>
         </div>
+
       </div>
     </section>
   );
