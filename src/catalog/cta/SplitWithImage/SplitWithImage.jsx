@@ -1,6 +1,15 @@
 import React from "react";
 import { SPLIT_WITH_IMAGE_PROPS } from "../defaultProps";
-import { PROMO_STYLE_DEFAULTS, PROMO_STYLE_PROP_SCHEMA, resolvePromoStyles } from "../defaultStyles";
+import { PROMO_STYLE_DEFAULTS, pickStyleSchema, resolvePromoStyles } from "../defaultStyles";
+
+// Only the keys this component's resolver output actually uses.
+const STYLE_KEYS = [
+  "background", "paddingY", "paddingX",
+  "headingColor", "headingSize", "headingWeight",
+  "subheadingColor", "subheadingSize", "subheadingWeight",
+  "primaryButtonColor",
+  "imagePosition", "imageRadius",
+];
 
 export const defaultProps = SPLIT_WITH_IMAGE_PROPS;
 export const defaultStyles = { ...PROMO_STYLE_DEFAULTS, background: "white" };
@@ -12,7 +21,7 @@ export const propSchema = {
     { name: "primaryAction", type: "object", default: defaultProps.primaryAction, allowedValues: "{ label: string, href: string }", description: "Primary CTA button" },
     { name: "imageUrl", type: "string", default: defaultProps.imageUrl, allowedValues: "Valid image URL", description: "Image shown in the split panel" },
   ],
-  styles: PROMO_STYLE_PROP_SCHEMA,
+  styles: pickStyleSchema(STYLE_KEYS),
 };
 
 export default function SplitWithImage({

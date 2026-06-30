@@ -20,7 +20,7 @@ export const PROMO_STYLE_DEFAULTS = {
   subheadingSize:      "lg",
   subheadingWeight:   "normal",
 
-  // Card (NewsletterSignup box, SplitWithImage frame)
+  // Card (NewsletterSignup box only)
   cardBg:             "white",
   cardBorder:         "sm",
   cardBorderColor:    "subtle",
@@ -31,15 +31,15 @@ export const PROMO_STYLE_DEFAULTS = {
   primaryButtonColor:   "primary",
   secondaryButtonColor: "surface",
 
-  // Image
+  // Image (SplitWithImage only)
   imagePosition:       "right",
   imageRadius:         "2xl",
-
-  // Accent
-  accentColor:        "primary",
 };
 
 // ─── Schema ───────────────────────────────────────────────────────────────────
+// Full superset of style keys this family can use. Each component filters this
+// down via pickStyleSchema() to only the keys its own resolver output actually
+// consumes — no component should expose a style prop it silently ignores.
 
 const COLOR_VALUES = '"primary" | "surface" | "muted" | "subtle" | "white"';
 
@@ -56,20 +56,24 @@ export const PROMO_STYLE_PROP_SCHEMA = [
   { name: "subheadingSize",      type: "string", default: "lg",      allowedValues: '"sm" | "base" | "lg" | "xl"',          description: "Subheading font size" },
   { name: "subheadingWeight",    type: "string", default: "normal",  allowedValues: '"normal" | "medium" | "semibold" | "bold"', description: "Subheading font weight" },
 
-  { name: "cardBg",              type: "string", default: "white",   allowedValues: COLOR_VALUES,                           description: "Card/frame background color token (NewsletterSignup, SplitWithImage)" },
-  { name: "cardBorder",          type: "string", default: "sm",      allowedValues: '"none" | "sm" | "md" | "lg"',          description: "Card border thickness" },
-  { name: "cardBorderColor",     type: "string", default: "subtle",  allowedValues: COLOR_VALUES,                           description: "Card border color token" },
-  { name: "cardRadius",          type: "string", default: "2xl",     allowedValues: '"none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full"', description: "Card border radius" },
-  { name: "cardShadow",          type: "string", default: "sm",      allowedValues: '"none" | "sm" | "md" | "lg" | "xl"',   description: "Card drop shadow" },
+  { name: "cardBg",              type: "string", default: "white",   allowedValues: COLOR_VALUES,                           description: "Card background color token (NewsletterSignup only)" },
+  { name: "cardBorder",          type: "string", default: "sm",      allowedValues: '"none" | "sm" | "md" | "lg"',          description: "Card border thickness (NewsletterSignup only)" },
+  { name: "cardBorderColor",     type: "string", default: "subtle",  allowedValues: COLOR_VALUES,                           description: "Card border color token (NewsletterSignup only)" },
+  { name: "cardRadius",          type: "string", default: "2xl",     allowedValues: '"none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full"', description: "Card border radius (NewsletterSignup only)" },
+  { name: "cardShadow",          type: "string", default: "sm",      allowedValues: '"none" | "sm" | "md" | "lg" | "xl"',   description: "Card drop shadow (NewsletterSignup only)" },
 
   { name: "primaryButtonColor",  type: "string", default: "primary", allowedValues: COLOR_VALUES,                           description: "Primary CTA button background color token" },
-  { name: "secondaryButtonColor",type: "string", default: "surface", allowedValues: COLOR_VALUES,                           description: "Secondary CTA button border/text color token" },
+  { name: "secondaryButtonColor",type: "string", default: "surface", allowedValues: COLOR_VALUES,                           description: "Secondary CTA button border/text color token (FullWidthCentered only)" },
 
-  { name: "imagePosition",       type: "string", default: "right",   allowedValues: '"left" | "right"',                     description: "Image side in SplitWithImage" },
-  { name: "imageRadius",         type: "string", default: "2xl",     allowedValues: '"none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full"', description: "Image frame border radius" },
-
-  { name: "accentColor",         type: "string", default: "primary", allowedValues: COLOR_VALUES,                           description: "Global accent color" },
+  { name: "imagePosition",       type: "string", default: "right",   allowedValues: '"left" | "right"',                     description: "Image side (SplitWithImage only)" },
+  { name: "imageRadius",         type: "string", default: "2xl",     allowedValues: '"none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full"', description: "Image frame border radius (SplitWithImage only)" },
 ];
+
+// Helper: each component imports this with its own key list so propSchema.styles
+// never lists a prop the component doesn't actually render.
+export function pickStyleSchema(keys) {
+  return PROMO_STYLE_PROP_SCHEMA.filter((entry) => keys.includes(entry.name));
+}
 
 // ─── Maps — resolved to REAL Tailwind classes (verified against faqStyles.js) ──
 // primary = #e50913 (UpGrad red)

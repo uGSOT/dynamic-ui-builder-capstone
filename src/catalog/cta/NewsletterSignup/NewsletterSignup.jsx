@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { NEWSLETTER_SIGNUP_PROPS } from "../defaultProps";
-import { PROMO_STYLE_DEFAULTS, PROMO_STYLE_PROP_SCHEMA, resolvePromoStyles } from "../defaultStyles";
+import { PROMO_STYLE_DEFAULTS, pickStyleSchema, resolvePromoStyles } from "../defaultStyles";
+
+// Only the keys this component's resolver output actually uses.
+const STYLE_KEYS = [
+  "background", "paddingY", "paddingX",
+  "headingColor", "headingSize", "headingWeight",
+  "subheadingColor", "subheadingSize", "subheadingWeight",
+  "cardBg", "cardBorder", "cardBorderColor", "cardRadius", "cardShadow",
+  "primaryButtonColor",
+];
 
 export const defaultProps = NEWSLETTER_SIGNUP_PROPS;
 export const defaultStyles = { ...PROMO_STYLE_DEFAULTS, background: "muted", paddingY: 12 };
@@ -12,7 +21,7 @@ export const propSchema = {
     { name: "buttonLabel", type: "string", default: defaultProps.buttonLabel, allowedValues: "Any string", description: "Submit button label" },
     { name: "placeholderText", type: "string", default: defaultProps.placeholderText, allowedValues: "Any string", description: "Email input placeholder" },
   ],
-  styles: PROMO_STYLE_PROP_SCHEMA,
+  styles: pickStyleSchema(STYLE_KEYS),
 };
 
 export default function NewsletterSignup({

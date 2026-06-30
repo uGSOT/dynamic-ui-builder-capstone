@@ -1,6 +1,14 @@
 import React from "react";
 import { FULL_WIDTH_CENTERED_PROPS } from "../defaultProps";
-import { PROMO_STYLE_DEFAULTS, PROMO_STYLE_PROP_SCHEMA, resolvePromoStyles } from "../defaultStyles";
+import { PROMO_STYLE_DEFAULTS, pickStyleSchema, resolvePromoStyles } from "../defaultStyles";
+
+// Only the keys this component's resolver output actually uses.
+const STYLE_KEYS = [
+  "background", "paddingY", "paddingX",
+  "headingColor", "headingSize", "headingWeight",
+  "subheadingColor", "subheadingSize", "subheadingWeight",
+  "primaryButtonColor", "secondaryButtonColor",
+];
 
 export const defaultProps = FULL_WIDTH_CENTERED_PROPS;
 export const defaultStyles = { ...PROMO_STYLE_DEFAULTS, background: "muted", headingColor: "surface", subheadingColor: "muted" };
@@ -12,7 +20,7 @@ export const propSchema = {
     { name: "primaryAction", type: "object", default: defaultProps.primaryAction, allowedValues: "{ label: string, href: string }", description: "Primary CTA button" },
     { name: "secondaryAction", type: "object", default: defaultProps.secondaryAction, allowedValues: "{ label: string, href: string }", description: "Secondary CTA button" },
   ],
-  styles: PROMO_STYLE_PROP_SCHEMA,
+  styles: pickStyleSchema(STYLE_KEYS),
 };
 
 export default function FullWidthCentered({
