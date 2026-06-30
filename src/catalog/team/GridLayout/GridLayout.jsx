@@ -1,5 +1,9 @@
 import { GRID_SIMPLE_DEFAULT_PROPS } from "../defaultProps";
-import { resolveTeamStyles, TEAM_STYLE_DEFAULTS, TEAM_STYLE_PROP_SCHEMA } from "../teamStyles";
+import {
+  resolveTeamStyles,
+  TEAM_GRID_STYLE_PROP_SCHEMA,
+  TEAM_STYLE_DEFAULTS,
+} from "../teamStyles";
 
 export const defaultProps = { ...GRID_SIMPLE_DEFAULT_PROPS };
 export const defaultStyles = { ...TEAM_STYLE_DEFAULTS };
@@ -28,7 +32,7 @@ export const propSchema = {
       description: "Team members shown in a responsive grid with name and role",
     },
   ],
-  styles: TEAM_STYLE_PROP_SCHEMA,
+  styles: TEAM_GRID_STYLE_PROP_SCHEMA,
 };
 
 export default function GridSimple({
@@ -37,29 +41,22 @@ export default function GridSimple({
   members = defaultProps.members,
   styles = defaultStyles,
 }) {
-  const { 
-    className, 
-    headingClass, 
+  const {
+    sectionClass,
+    headingClass,
     subheadingClass,
     nameClass,
     roleClass,
-    cardColorClass,
-    cardBorderClass,
+    cardClass,
   } = resolveTeamStyles(styles);
 
   return (
-    <section className={className}>
+    <section className={sectionClass}>
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         {heading || subheading ? (
-          <div className="text-center mb-12">
-            {heading ? (
-              <h2 className={`text-3xl font-bold tracking-tight sm:text-4xl ${headingClass}`}>
-                {heading}
-              </h2>
-            ) : null}
-            {subheading ? (
-              <p className={`mt-4 text-lg ${subheadingClass}`}>{subheading}</p>
-            ) : null}
+          <div className="mb-12 text-center">
+            {heading ? <h2 className={headingClass}>{heading}</h2> : null}
+            {subheading ? <p className={subheadingClass}>{subheading}</p> : null}
           </div>
         ) : null}
 
@@ -67,17 +64,17 @@ export default function GridSimple({
           {members.map((member, index) => (
             <div
               key={`${member.name}-${index}`}
-              className={`flex flex-col items-center text-center rounded-lg p-6 transition-all hover:shadow-md ${cardColorClass} ${cardBorderClass}`}
+              className={`flex flex-col items-center p-6 text-center transition-all hover:shadow-md ${cardClass}`}
             >
-              <div className="w-24 h-24 mb-4 rounded-full overflow-hidden bg-surface-muted shrink-0 ring-2 ring-border/20">
+              <div className="mb-4 h-24 w-24 shrink-0 overflow-hidden rounded-full bg-surface-muted ring-2 ring-border/20">
                 <img
                   src={member.avatar}
                   alt={member.name}
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                 />
               </div>
-              <h3 className={`text-base font-semibold ${nameClass}`}>{member.name}</h3>
-              <p className={`text-sm mt-1 ${roleClass}`}>{member.role}</p>
+              <h3 className={nameClass}>{member.name}</h3>
+              <p className={`mt-1 ${roleClass}`}>{member.role}</p>
             </div>
           ))}
         </div>
