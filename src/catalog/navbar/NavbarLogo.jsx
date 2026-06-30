@@ -7,6 +7,9 @@ export default function NavbarLogo({
   inverted = false,
   preventNavigation = false,
   logoSize,
+  logoTextClass,
+  logoIconBoxClass,
+  logoIconClass,
 }) {
   const logoHref = preventNavigation ? "#" : "/";
 
@@ -37,7 +40,12 @@ export default function NavbarLogo({
     );
   }
 
-  const textClass = inverted ? "text-ink-inverse" : "text-ink";
+  const textClass =
+    logoTextClass ?? (inverted ? "text-ink-inverse" : "text-ink");
+  const iconBoxClass =
+    logoIconBoxClass ??
+    "rounded-md bg-brand transition-colors group-hover:bg-brand-dark";
+  const iconClass = logoIconClass ?? "text-ink-inverse";
   const Icon = useMemo(() => resolveNavbarIcon(logo?.icon), [logo?.icon]);
 
   return (
@@ -47,9 +55,9 @@ export default function NavbarLogo({
       className={`group flex items-center gap-2 ${className}`}
     >
       <div
-        className={`flex ${size.logoBox} items-center justify-center rounded-md bg-brand transition-colors group-hover:bg-brand-dark`}
+        className={`flex ${size.logoBox} items-center justify-center transition-colors group-hover:opacity-90 ${iconBoxClass}`}
       >
-        <Icon size={size.logoIcon} className="text-ink-inverse" />
+        <Icon size={size.logoIcon} className={iconClass} />
       </div>
       <span className={`${size.logoText} font-semibold tracking-tight ${textClass}`}>
         {logo?.text ?? "UI Builder"}
