@@ -55,20 +55,26 @@ export default function ThreeTier({
   styles = defaultStyles,
 }) {
   const [billingPeriod, setBillingPeriod] = useState("monthly");
-  const { className, inverted } = resolvePricingStyles(styles);
 
-  const titleClass = inverted ? "text-ink-inverse" : "text-ink";
-  const subtitleClass = inverted ? "text-ink-inverse-muted" : "text-ink-muted";
-  const toggleTextClass = (active) =>
-    active
-      ? inverted
-        ? "font-semibold text-ink-inverse"
-        : "font-semibold text-ink"
-      : inverted
-        ? "text-ink-inverse-muted"
-        : "text-ink-muted";
-
-  const toggleTrackClass = inverted ? "bg-navy-muted" : "bg-surface-subtle";
+  const {
+    className,
+    headerClass,
+    headingClass,
+    subheadingClass,
+    planTitleClass,
+    priceClass,
+    descClass,
+    metaClass,
+    cardClass,
+    highlightClass,
+    badgeClass,
+    checkClass,
+    primaryButtonClass,
+    secondaryButtonClass,
+    toggleActiveClass,
+    toggleInactiveClass,
+    toggleTrackClass,
+  } = resolvePricingStyles(styles);
 
   const getPriceDisplay = (price) => {
     if (billingPeriod === "monthly") return price;
@@ -85,23 +91,20 @@ export default function ThreeTier({
   return (
     <section className={`transition-colors duration-200 ${className}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto">
+        <div className={headerClass}>
           {heading && (
-            <h2 className={`text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl ${titleClass}`}>
-              {heading}
-            </h2>
+            <h2 className={headingClass}>{heading}</h2>
           )}
           {subheading && (
-            <p className={`mt-4 text-base leading-relaxed sm:text-lg ${subtitleClass}`}>
-              {subheading}
-            </p>
+            <p className={`mt-4 ${subheadingClass}`}>{subheading}</p>
           )}
 
           {/* Billing Toggle */}
           {billingToggle?.enabled && (
             <div className="flex justify-center items-center gap-3 mt-8">
-              <span className={`text-sm transition-colors ${toggleTextClass(billingPeriod === "monthly")}`}>
+              <span className={`text-sm transition-colors ${billingPeriod === "monthly" ? toggleActiveClass : toggleInactiveClass}`}>
                 {billingToggle.monthlyLabel}
               </span>
               <button
@@ -116,7 +119,7 @@ export default function ThreeTier({
                   }`}
                 />
               </button>
-              <span className={`text-sm transition-colors ${toggleTextClass(billingPeriod === "annually")}`}>
+              <span className={`text-sm transition-colors ${billingPeriod === "annually" ? toggleActiveClass : toggleInactiveClass}`}>
                 {billingToggle.annualLabel}
               </span>
             </div>
@@ -126,66 +129,43 @@ export default function ThreeTier({
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mt-16 max-w-5xl mx-auto">
           {plans.map((plan, index) => {
-            const cardBg = inverted
-              ? "bg-navy-elevated border-border-dark"
-              : "bg-surface border-border";
-
-            const highlightBorder = plan.highlighted
-              ? "border-brand border-2 scale-[1.02] shadow-xl md:z-10"
-              : "border";
-
-            const btnClass = plan.highlighted
-              ? "bg-brand text-ink-inverse hover:bg-brand-dark focus:ring-brand"
-              : inverted
-                ? "border border-border-dark text-ink-inverse hover:bg-navy-elevated focus:ring-brand"
-                : "border border-border text-ink hover:bg-surface-muted focus:ring-brand";
+            const isHighlighted = plan.highlighted;
+            const cardCombinedClass = isHighlighted
+              ? `${cardClass} ${highlightClass}`
+              : cardClass;
 
             return (
-              <div
-                key={`${plan.name}-${index}`}
-                className={`relative flex flex-col p-8 rounded-2xl transition-all duration-300 ${cardBg} ${highlightBorder}`}
-              >
-                {/* Popular Plan Badge */}
-                {plan.highlighted && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand px-3 py-0.5 text-xs font-semibold text-ink-inverse tracking-wide uppercase">
+              <div key={`${plan.name}-${index}`} className={cardCombinedClass}>
+
+                {/* Most Popular Badge */}
+                {isHighlighted && (
+                  <span className={`absolute -top-3 left-1/2 -translate-x-1/2 ${badgeClass}`}>
                     Most Popular
                   </span>
                 )}
 
                 {/* Plan Info */}
                 <div className="mb-6">
-                  <h3 className={`text-lg font-bold ${titleClass}`}>
-                    {plan.name}
-                  </h3>
+                  <h3 className={planTitleClass}>{plan.name}</h3>
                   <div className="mt-4 flex items-baseline">
-                    <span className={`text-4xl font-extrabold tracking-tight ${titleClass}`}>
+                    <span className={priceClass}>
                       {getPriceDisplay(plan.price)}
                     </span>
-                    <span className={`ml-1 text-sm font-semibold ${subtitleClass}`}>
+                    <span className={`ml-1 ${metaClass}`}>
                       {getPeriodDisplay(plan.period)}
                     </span>
                   </div>
                   {plan.description && (
-                    <p className={`mt-3 text-sm leading-relaxed ${subtitleClass}`}>
-                      {plan.description}
-                    </p>
+                    <p className={`mt-3 ${descClass}`}>{plan.description}</p>
                   )}
                 </div>
 
                 {/* Features Checklist */}
                 <ul className="space-y-4 mb-8 flex-1">
                   {plan.features?.map((feature, featureIndex) => (
-                    <li
-                      key={featureIndex}
-                      className="flex items-start gap-3 text-sm"
-                    >
-                      <Check
-                        size={18}
-                        className="text-brand shrink-0 mt-0.5"
-                      />
-                      <span className={subtitleClass}>
-                        {feature}
-                      </span>
+                    <li key={featureIndex} className="flex items-start gap-3 text-sm">
+                      <Check size={18} className={checkClass} />
+                      <span className={descClass}>{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -194,7 +174,9 @@ export default function ThreeTier({
                 {plan.cta?.label && (
                   <a
                     href={plan.cta.href || "#"}
-                    className={`inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 ${btnClass}`}
+                    className={`inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                      isHighlighted ? primaryButtonClass : secondaryButtonClass
+                    }`}
                   >
                     {plan.cta.label}
                   </a>
