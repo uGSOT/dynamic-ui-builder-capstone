@@ -1,34 +1,28 @@
+import { resolveStyles, LOGO_SIZE_MAP, PADDING_MAP, COLOR_MAP } from "../../../utils/resolveStyles";
+
 export default function SimpleRow({
   styles = {},
   logos = defaultProps.logos,
   grayscale = defaultProps.grayscale,
-  logoFilter = defaultProps.logoFilter,
 }) {
+  const s = resolveStyles(styles);
 
-  const backgroundClass = {
-    surface: "bg-surface",
-    muted: "bg-surface-muted",
-    navy: "bg-navy",
-  }[styles.background] ?? "bg-surface";
+  // logo size from token
+  const logoHeight = LOGO_SIZE_MAP[styles.logoSize ?? "md"];
 
-  const paddingClass = {
-    4: "py-4",
-    6: "py-6",
-    8: "py-8",
-    10: "py-10",
-    12: "py-12",
-    16: "py-16",
-  }[styles.paddingY] ?? "py-10";
+  // logo opacity from token
+  const opacityMap = {
+    "50": 0.5, "60": 0.6, "75": 0.75, "100": 1,
+  };
+  const logoOpacity = grayscale
+    ? opacityMap[styles.logoOpacity ?? "75"]
+    : opacityMap[styles.logoOpacity ?? "100"];
 
-  // grayscale takes priority over logoFilter
-  const computedFilter = grayscale
-    ? "grayscale(100%)"
-    : logoFilter || "none";
-
-  const logoOpacity = grayscale ? 0.5 : 1;
+  // logo filter
+  const logoFilter = grayscale ? "grayscale(100%)" : "none";
 
   return (
-    <section className={`w-full border-y border-border ${backgroundClass} ${paddingClass}`}>
+    <section className={`w-full border-y border-gray-100 ${s.sectionClass}`}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
           {logos.map((logo, i) => (
@@ -36,9 +30,9 @@ export default function SimpleRow({
               key={i}
               src={logo.image}
               alt={logo.alt}
-              className="h-6 md:h-8 w-auto object-contain transition-opacity duration-200 hover:opacity-80"
+              className={`${logoHeight} w-auto object-contain transition-opacity duration-200 hover:opacity-80`}
               style={{
-                filter: computedFilter,
+                filter: logoFilter,
                 opacity: logoOpacity,
               }}
             />
@@ -58,12 +52,14 @@ export const defaultProps = {
     { image: "/assets/logos/figma.svg", alt: "Figma" },
   ],
   grayscale: true,
-  logoFilter: null,
 };
 
 export const defaultStyles = {
-  paddingY: 10,
-  background: "surface",
+  paddingY: 6,
+  background: "white",
+  logoSize: "md",
+  logoOpacity: "75",
+  logoColor: "muted",
 };
 
 export const propSchema = {
@@ -80,25 +76,37 @@ export const propSchema = {
       default: "true",
       allowedValues: "true | false",
     },
-    {
-      name: "logoFilter",
-      type: "string",
-      default: "null",
-      allowedValues: "brightness(0) | invert(1) | opacity(0.3) | none",
-    },
   ],
   styles: [
     {
       name: "paddingY",
       type: "number",
-      default: "10",
+      default: "6",
       allowedValues: "4 | 6 | 8 | 10 | 12",
     },
     {
       name: "background",
       type: "string",
-      default: "surface",
-      allowedValues: "surface | muted | navy",
+      default: "white",
+      allowedValues: "primary | surface | muted | subtle | white",
+    },
+    {
+      name: "logoSize",
+      type: "string",
+      default: "md",
+      allowedValues: "sm | md | lg | xl",
+    },
+    {
+      name: "logoOpacity",
+      type: "string",
+      default: "75",
+      allowedValues: "50 | 60 | 75 | 100",
+    },
+    {
+      name: "logoColor",
+      type: "string",
+      default: "muted",
+      allowedValues: "primary | surface | muted | subtle | white",
     },
   ],
 };

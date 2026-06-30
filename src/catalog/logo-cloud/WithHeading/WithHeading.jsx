@@ -1,63 +1,56 @@
 import * as LucideIcons from "lucide-react";
+import {
+  resolveStyles,
+  LOGO_SIZE_MAP,
+  HEADING_SIZE_MAP,
+  BODY_SIZE_MAP,
+  WEIGHT_MAP,
+  COLOR_MAP,
+} from "../../../utils/resolveStyles";
 
 export default function WithHeading({
   styles = {},
   heading = defaultProps.heading,
-  headingColor = defaultProps.headingColor,
-  headingWeight = defaultProps.headingWeight,
   logos = defaultProps.logos,
   grayscale = defaultProps.grayscale,
-  logoFilter = defaultProps.logoFilter,
   badge = defaultProps.badge,
 }) {
+  const s = resolveStyles(styles);
 
-  const backgroundClass = {
-    surface: "bg-surface",
-    muted: "bg-surface-muted",
-    navy: "bg-navy",
-  }[styles.background] ?? "bg-surface";
+  // heading
+  const headingClass = [
+    HEADING_SIZE_MAP[styles.headingSize ?? "4xl"],
+    WEIGHT_MAP[styles.headingWeight ?? "bold"],
+    COLOR_MAP[styles.headingColor ?? "surface"]?.text,
+    "tracking-tight",
+  ].join(" ");
 
-  const paddingClass = {
-    4: "py-4",
-    6: "py-6",
-    8: "py-8",
-    10: "py-10",
-    12: "py-12",
-    16: "py-16",
-  }[styles.paddingY] ?? "py-16";
+  // logo
+  const logoHeight = LOGO_SIZE_MAP[styles.logoSize ?? "md"];
+  const opacityMap = { "50": 0.5, "60": 0.6, "75": 0.75, "100": 1 };
+  const logoOpacity = grayscale
+    ? opacityMap[styles.logoOpacity ?? "75"]
+    : opacityMap[styles.logoOpacity ?? "100"];
+  const logoFilter = grayscale ? "grayscale(100%)" : "none";
 
-  // font weight map
-  const fontWeightClass = {
-    normal: "font-normal",
-    medium: "font-medium",
-    semibold: "font-semibold",
-    bold: "font-bold",
-    extrabold: "font-extrabold",
-  }[headingWeight] ?? "font-bold";
+  // badge colors from styles
+  const badgeBgClass = COLOR_MAP[styles.badgeBg ?? "primaryMuted"]?.bg ?? "bg-[#fdecea]";
+  const badgeIconClass = COLOR_MAP[styles.badgeIconColor ?? "primary"]?.text ?? "text-[#e50913]";
+  const badgeTextClass = COLOR_MAP[styles.badgeTextColor ?? "primary"]?.text ?? "text-[#e50913]";
+  const badgeSubtextClass = COLOR_MAP[styles.badgeSubtextColor ?? "muted"]?.text ?? "text-gray-500";
 
-  // grayscale takes priority over logoFilter
-  const computedFilter = grayscale
-    ? "grayscale(100%)"
-    : logoFilter || "none";
-
-  const logoOpacity = grayscale ? 0.5 : 1;
-
-  // dynamic lucide icon — user passes icon name as string
-  // e.g. "Users", "Star", "Heart"
+  // dynamic lucide icon
   const BadgeIcon = badge?.icon
     ? (LucideIcons[badge.icon] ?? LucideIcons.Users)
     : LucideIcons.Users;
 
   return (
-    <section className={`w-full ${backgroundClass} ${paddingClass}`}>
+    <section className={`w-full ${s.sectionClass}`}>
       <div className="max-w-5xl mx-auto px-6 text-center">
 
-        {/* Heading — color and weight from props */}
+        {/* Heading */}
         {heading && (
-          <h2
-            className={`text-3xl md:text-5xl tracking-tight mb-10 ${fontWeightClass}`}
-            style={{ color: headingColor || undefined }}
-          >
+          <h2 className={`mb-10 ${headingClass}`}>
             {heading}
           </h2>
         )}
@@ -69,39 +62,24 @@ export default function WithHeading({
               key={i}
               src={logo.image}
               alt={logo.alt}
-              className="h-6 md:h-8 w-auto object-contain transition-opacity duration-200 hover:opacity-80"
+              className={`${logoHeight} w-auto object-contain transition-opacity duration-200 hover:opacity-80`}
               style={{
-                filter: computedFilter,
+                filter: logoFilter,
                 opacity: logoOpacity,
               }}
             />
           ))}
         </div>
 
-        {/* Badge — fully controlled from props */}
+        {/* Badge */}
         {badge && (
-          <div
-            className="inline-flex items-center gap-3 rounded-xl px-5 py-3"
-            style={{
-              backgroundColor: badge.backgroundColor || "#fce8e9",
-            }}
-          >
-            <BadgeIcon
-              size={20}
-              className="shrink-0"
-              style={{ color: badge.iconColor || "#e50913" }}
-            />
+          <div className={`inline-flex items-center gap-3 rounded-xl px-5 py-3 ${badgeBgClass}`}>
+            <BadgeIcon size={20} className={`shrink-0 ${badgeIconClass}`} />
             <div className="text-left">
-              <p
-                className="text-sm font-semibold"
-                style={{ color: badge.textColor || "#e50913" }}
-              >
+              <p className={`text-sm font-semibold ${badgeTextClass}`}>
                 {badge.text}
               </p>
-              <p
-                className="text-xs"
-                style={{ color: badge.subtextColor || "#5c5c6f" }}
-              >
+              <p className={`text-xs ${badgeSubtextClass}`}>
                 {badge.subtext}
               </p>
             </div>
@@ -115,8 +93,6 @@ export default function WithHeading({
 
 export const defaultProps = {
   heading: "trusted by teams at",
-  headingColor: "#0f0f14",
-  headingWeight: "bold",
   logos: [
     { image: "/assets/logos/slack.svg", alt: "Slack" },
     { image: "/assets/logos/notion.svg", alt: "Notion" },
@@ -126,21 +102,25 @@ export const defaultProps = {
     { image: "/assets/logos/stripe.svg", alt: "Stripe" },
   ],
   grayscale: true,
-  logoFilter: null,
   badge: {
-    icon: "Users",
     text: "10,000+ teams",
     subtext: "from startups to enterprises",
-    textColor: "#e50913",
-    subtextColor: "#5c5c6f",
-    iconColor: "#e50913",
-    backgroundColor: "#fce8e9",
+    icon: "Users",
   },
 };
 
 export const defaultStyles = {
-  paddingY: 16,
-  background: "surface",
+  paddingY: 6,
+  background: "white",
+  headingColor: "surface",
+  headingSize: "4xl",
+  headingWeight: "bold",
+  logoSize: "md",
+  logoOpacity: "75",
+  badgeTextColor: "primary",
+  badgeSubtextColor: "muted",
+  badgeIconColor: "primary",
+  badgeBg: "primaryMuted",
 };
 
 export const propSchema = {
@@ -150,18 +130,6 @@ export const propSchema = {
       type: "string",
       default: '"trusted by teams at"',
       allowedValues: "Any string",
-    },
-    {
-      name: "headingColor",
-      type: "string",
-      default: "#0f0f14",
-      allowedValues: "Any hex color e.g. #0f0f14",
-    },
-    {
-      name: "headingWeight",
-      type: "string",
-      default: "bold",
-      allowedValues: "normal | medium | semibold | bold | extrabold",
     },
     {
       name: "logos",
@@ -176,18 +144,6 @@ export const propSchema = {
       allowedValues: "true | false",
     },
     {
-      name: "logoFilter",
-      type: "string",
-      default: "null",
-      allowedValues: "brightness(0) | invert(1) | opacity(0.3) | none",
-    },
-    {
-      name: "badge.icon",
-      type: "string",
-      default: "Users",
-      allowedValues: "Any lucide icon name e.g. Users | Star | Heart",
-    },
-    {
       name: "badge.text",
       type: "string",
       default: '"10,000+ teams"',
@@ -200,42 +156,78 @@ export const propSchema = {
       allowedValues: "Any string",
     },
     {
-      name: "badge.textColor",
+      name: "badge.icon",
       type: "string",
-      default: "#e50913",
-      allowedValues: "Any hex color",
-    },
-    {
-      name: "badge.subtextColor",
-      type: "string",
-      default: "#5c5c6f",
-      allowedValues: "Any hex color",
-    },
-    {
-      name: "badge.iconColor",
-      type: "string",
-      default: "#e50913",
-      allowedValues: "Any hex color",
-    },
-    {
-      name: "badge.backgroundColor",
-      type: "string",
-      default: "#fce8e9",
-      allowedValues: "Any hex color",
+      default: "Users",
+      allowedValues: "Any lucide icon name e.g. Users | Star | Heart",
     },
   ],
   styles: [
     {
       name: "paddingY",
       type: "number",
-      default: "16",
-      allowedValues: "4 | 6 | 8 | 10 | 16",
+      default: "6",
+      allowedValues: "4 | 6 | 8 | 10 | 12",
     },
     {
       name: "background",
       type: "string",
+      default: "white",
+      allowedValues: "primary | surface | muted | subtle | white",
+    },
+    {
+      name: "headingColor",
+      type: "string",
       default: "surface",
-      allowedValues: "surface | muted | navy",
+      allowedValues: "primary | surface | muted | subtle | white",
+    },
+    {
+      name: "headingSize",
+      type: "string",
+      default: "4xl",
+      allowedValues: "2xl | 3xl | 4xl | 5xl | 6xl",
+    },
+    {
+      name: "headingWeight",
+      type: "string",
+      default: "bold",
+      allowedValues: "normal | medium | semibold | bold | extrabold",
+    },
+    {
+      name: "logoSize",
+      type: "string",
+      default: "md",
+      allowedValues: "sm | md | lg | xl",
+    },
+    {
+      name: "logoOpacity",
+      type: "string",
+      default: "75",
+      allowedValues: "50 | 60 | 75 | 100",
+    },
+    {
+      name: "badgeBg",
+      type: "string",
+      default: "primaryMuted",
+      allowedValues: "primary | primaryMuted | surface | muted | subtle | white",
+    },
+    {
+      name: "badgeTextColor",
+      type: "string",
+      default: "primary",
+      allowedValues: "primary | surface | muted | subtle | white",
+    },
+    {
+      name: "badgeSubtextColor",
+      type: "string",
+      default: "muted",
+      allowedValues: "primary | surface | muted | subtle | white",
+    },
+    {
+      name: "badgeIconColor",
+      type: "string",
+      default: "primary",
+      allowedValues: "primary | surface | muted | subtle | white",
     },
   ],
 };
