@@ -1,30 +1,34 @@
 import React from "react";
 import { DEFAULT_SOCIAL_PROOF_HERO_PROPS } from "../defaultProps";
 import {
-  STYLE_DEFAULTS,
-  STYLE_PROP_SCHEMA,
-  resolveStyles,
-} from "../../../utils/resolveStyles";
+  HERO_STYLE_DEFAULTS,
+  HERO_STYLE_PROP_SCHEMA,
+  resolveHeroStyles,
+} from "../heroStyles";
+import HeroSectionHeader from "../HeroSectionHeader";
 
 export const defaultProps = {
   ...DEFAULT_SOCIAL_PROOF_HERO_PROPS,
 };
 
-export const defaultStyles = { ...STYLE_DEFAULTS };
+export const defaultStyles = { 
+  ...HERO_STYLE_DEFAULTS,
+  headingAlign: "center",
+};
 
 export const propSchema = {
   props: [
     {
-      name: "headline",
+      name: "heading",
       type: "string",
-      default: defaultProps.headline,
+      default: defaultProps.heading,
       allowedValues: "Any string",
       description: "Main title text",
     },
     {
-      name: "subtext",
+      name: "subheading",
       type: "string",
-      default: defaultProps.subtext,
+      default: defaultProps.subheading,
       allowedValues: "Any string",
       description: "Supporting description text",
     },
@@ -71,12 +75,12 @@ export const propSchema = {
       description: "Overlapping user avatars to show social proof",
     },
   ],
-  styles: STYLE_PROP_SCHEMA,
+  styles: HERO_STYLE_PROP_SCHEMA,
 };
 
 function WithSocialProof({
-  headline = defaultProps.headline,
-  subtext = defaultProps.subtext,
+  heading = defaultProps.heading,
+  subheading = defaultProps.subheading,
   primaryAction = defaultProps.primaryAction,
   secondaryAction = defaultProps.secondaryAction,
   imageUrl = defaultProps.imageUrl,
@@ -90,7 +94,7 @@ function WithSocialProof({
     headingClass,
     subheadingClass,
     accent
-  } = resolveStyles(styles);
+  } = resolveHeroStyles(styles);
 
   const ringClass = "ring-white";
 
@@ -101,14 +105,13 @@ function WithSocialProof({
     <section className={`text-center transition-colors duration-200 ${sectionClass}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-3xl">
-          <h1 className={headingClass}>
-            {headline}
-          </h1>
-          {subtext && (
-            <p className={`mx-auto mt-6 max-w-2xl ${subheadingClass}`}>
-              {subtext}
-            </p>
-          )}
+          <HeroSectionHeader
+            heading={heading}
+            subheading={subheading}
+            headingClass={headingClass}
+            subheadingClass={subheadingClass}
+            subheadingWrapperClass="mx-auto mt-6 max-w-2xl"
+          />
 
           {(primaryAction?.label || secondaryAction?.label) && (
             <div className="mt-8 flex flex-wrap justify-center gap-4">

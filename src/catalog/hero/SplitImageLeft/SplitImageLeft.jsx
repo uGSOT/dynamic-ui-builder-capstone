@@ -1,30 +1,31 @@
 import React from "react";
 import { DEFAULT_SPLIT_HERO_PROPS } from "../defaultProps";
 import {
-  STYLE_DEFAULTS,
-  STYLE_PROP_SCHEMA,
-  resolveStyles,
-} from "../../../utils/resolveStyles";
+  HERO_STYLE_DEFAULTS,
+  HERO_STYLE_PROP_SCHEMA,
+  resolveHeroStyles,
+} from "../heroStyles";
+import HeroSectionHeader from "../HeroSectionHeader";
 
 export const defaultProps = {
   ...DEFAULT_SPLIT_HERO_PROPS,
 };
 
-export const defaultStyles = { ...STYLE_DEFAULTS };
+export const defaultStyles = { ...HERO_STYLE_DEFAULTS };
 
 export const propSchema = {
   props: [
     {
-      name: "headline",
+      name: "heading",
       type: "string",
-      default: defaultProps.headline,
+      default: defaultProps.heading,
       allowedValues: "Any string",
       description: "Main title text",
     },
     {
-      name: "subtext",
+      name: "subheading",
       type: "string",
-      default: defaultProps.subtext,
+      default: defaultProps.subheading,
       allowedValues: "Any string",
       description: "Supporting description text",
     },
@@ -57,12 +58,12 @@ export const propSchema = {
       description: "Product screenshot or feature image to render on the left",
     },
   ],
-  styles: STYLE_PROP_SCHEMA,
+  styles: HERO_STYLE_PROP_SCHEMA,
 };
 
 function SplitImageLeft({
-  headline = defaultProps.headline,
-  subtext = defaultProps.subtext,
+  heading = defaultProps.heading,
+  subheading = defaultProps.subheading,
   primaryAction = defaultProps.primaryAction,
   secondaryAction = defaultProps.secondaryAction,
   imageUrl = defaultProps.imageUrl,
@@ -74,7 +75,7 @@ function SplitImageLeft({
     headingClass,
     subheadingClass,
     accent
-  } = resolveStyles(styles);
+  } = resolveHeroStyles(styles);
 
   const badgeTextClass = `${accent.text} ${accent.bg}/10`;
 
@@ -105,14 +106,13 @@ function SplitImageLeft({
                 {badge}
               </span>
             )}
-            <h1 className={`mt-6 ${headingClass}`}>
-              {headline}
-            </h1>
-            {subtext && (
-              <p className={`mt-6 ${subheadingClass}`}>
-                {subtext}
-              </p>
-            )}
+            <HeroSectionHeader
+              heading={heading}
+              subheading={subheading}
+              headingClass={headingClass}
+              subheadingClass={subheadingClass}
+              headingWrapperClass="mt-6"
+            />
 
             {(primaryAction?.label || secondaryAction?.label) && (
               <div className={`mt-8 flex flex-wrap gap-4 ${!imageUrl ? "justify-center" : ""}`}>
