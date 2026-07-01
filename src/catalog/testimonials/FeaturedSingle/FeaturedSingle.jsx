@@ -1,52 +1,27 @@
-// resolveColor helper — same as CardGrid and Carousel
-function resolveColor(value, fallback) {
-  if (!value) return fallback;
-  if (value.startsWith("#") || value.startsWith("rgb")) return value;
-  const tokenMap = {
-    "ink": "var(--color-ink)",
-    "ink-muted": "var(--color-ink-muted)",
-    "ink-subtle": "var(--color-ink-subtle)",
-    "ink-inverse": "var(--color-ink-inverse)",
-    "ink-inverse-muted": "var(--color-ink-inverse-muted)",
-    "brand": "var(--color-brand)",
-    "brand-dark": "var(--color-brand-dark)",
-    "brand-light": "var(--color-brand-light)",
-  };
-  return tokenMap[value] ?? fallback;
-}
+import {
+  resolveStyles,
+  WEIGHT_MAP,
+  COLOR_MAP,
+} from "../../../utils/resolveStyles";
 
 export default function FeaturedSingle({
   styles = {},
   quote = defaultProps.quote,
-  quoteColor = defaultProps.quoteColor,
-  quoteWeight = defaultProps.quoteWeight,
-  quoteSize = defaultProps.quoteSize,
   name = defaultProps.name,
-  nameColor = defaultProps.nameColor,
-  nameWeight = defaultProps.nameWeight,
   role = defaultProps.role,
-  roleColor = defaultProps.roleColor,
-  roleWeight = defaultProps.roleWeight,
   avatar = defaultProps.avatar,
   company = defaultProps.company,
   companyLogo = defaultProps.companyLogo,
-  accentColor = defaultProps.accentColor,
 }) {
+  const s = resolveStyles(styles);
 
   // structural classes — stay as Tailwind tokens
-  const sectionBg = {
-    surface: "bg-surface",
-    "surface-muted": "bg-surface-muted",
-    "surface-subtle": "bg-surface-subtle",
-    navy: "bg-navy",
-    "navy-elevated": "bg-navy-elevated",
-    "navy-muted": "bg-navy-muted",
-  }[styles.sectionBackground] ?? "bg-surface-muted";
+  const sectionBgClass = COLOR_MAP[styles.background ?? "muted"]?.bg ?? "bg-gray-50";
 
-  const paddingY = {
-    8: "py-8", 10: "py-10", 12: "py-12",
-    16: "py-16", 20: "py-20", 24: "py-24",
-  }[styles.paddingY] ?? "py-20";
+  const paddingClass = {
+    4: "py-8 sm:py-10", 6: "py-10 sm:py-12", 8: "py-12 sm:py-16",
+    10: "py-16 sm:py-20", 12: "py-20 sm:py-24",
+  }[styles.paddingY ?? 10] ?? "py-16 sm:py-20";
 
   const align = {
     center: "text-center items-center",
@@ -60,40 +35,51 @@ export default function FeaturedSingle({
 
   const avatarSize = {
     sm: "w-10 h-10", md: "w-14 h-14", lg: "w-20 h-20",
-  }[styles.avatarSize] ?? "w-14 h-14";
+  }[styles.avatarSize ?? "md"];
 
   const logoHeight = {
     sm: "h-4", md: "h-6", lg: "h-8",
-  }[styles.logoHeight] ?? "h-6";
-
-  // font weight stays Tailwind — structural not color
-  const weightMap = {
-    normal: "font-normal", medium: "font-medium",
-    semibold: "font-semibold", bold: "font-bold",
-  };
+  }[styles.logoHeight ?? "md"];
 
   const sizeMap = {
     lg: "text-lg", xl: "text-xl", "2xl": "text-2xl",
     "3xl": "text-3xl", "4xl": "text-4xl",
   };
 
+  // quote
+  const quoteClass = [
+    sizeMap[styles.quoteSize ?? "3xl"],
+    WEIGHT_MAP[styles.quoteWeight ?? "semibold"],
+    COLOR_MAP[styles.quoteColor ?? "surface"]?.text,
+    "leading-snug",
+  ].join(" ");
+
+  // name / role
+  const nameClass = [
+    WEIGHT_MAP[styles.nameWeight ?? "semibold"],
+    COLOR_MAP[styles.nameColor ?? "surface"]?.text,
+  ].join(" ");
+
+  const roleClass = [
+    "text-sm",
+    WEIGHT_MAP[styles.roleWeight ?? "normal"],
+    COLOR_MAP[styles.roleColor ?? "muted"]?.text,
+  ].join(" ");
+
+  // accent (decorative quote mark)
+  const accentClass = COLOR_MAP[styles.accentColor ?? "primary"]?.text;
+
   return (
-    <section className={`w-full ${sectionBg} ${paddingY}`}>
+    <section className={`w-full ${sectionBgClass} ${paddingClass}`}>
       <div className={`${maxWidth} mx-auto px-6 flex flex-col gap-8 ${align}`}>
 
-        {/* Big decorative quote mark — color from accentColor */}
-        <span
-          className="text-8xl font-serif leading-none opacity-20"
-          style={{ color: resolveColor(accentColor, "var(--color-brand)") }}
-        >
+        {/* Big decorative quote mark */}
+        <span className={`text-8xl font-serif leading-none opacity-20 ${accentClass}`}>
           "
         </span>
 
         {/* Quote text */}
-        <blockquote
-          className={`-mt-10 leading-snug ${sizeMap[quoteSize] ?? "text-3xl"} ${weightMap[quoteWeight] ?? "font-semibold"}`}
-          style={{ color: resolveColor(quoteColor, "var(--color-ink)") }}
-        >
+        <blockquote className={`-mt-10 ${quoteClass}`}>
           "{quote}"
         </blockquote>
 
@@ -105,18 +91,8 @@ export default function FeaturedSingle({
             className={`${avatarSize} rounded-full object-cover`}
           />
           <div className="text-left">
-            <p
-              className={`${weightMap[nameWeight] ?? "font-semibold"}`}
-              style={{ color: resolveColor(nameColor, "var(--color-ink)") }}
-            >
-              {name}
-            </p>
-            <p
-              className={`text-sm ${weightMap[roleWeight] ?? "font-normal"}`}
-              style={{ color: resolveColor(roleColor, "var(--color-ink-muted)") }}
-            >
-              {role}
-            </p>
+            <p className={nameClass}>{name}</p>
+            <p className={roleClass}>{role}</p>
           </div>
           {companyLogo && (
             <img
@@ -134,53 +110,53 @@ export default function FeaturedSingle({
 
 export const defaultProps = {
   quote: "This product has completely changed the way we work. Our team is more aligned and moving faster than ever.",
-  quoteColor: "ink",
-  quoteWeight: "semibold",
-  quoteSize: "3xl",
   name: "Jessica Park",
-  nameColor: "ink",
-  nameWeight: "semibold",
   role: "Head of Operations",
-  roleColor: "ink-muted",
-  roleWeight: "normal",
   avatar: "/assets/images/avatar1.jpg",
   company: "Acme",
   companyLogo: "/assets/logos/figma.svg",
-  accentColor: "brand",
 };
 
 export const defaultStyles = {
-  paddingY: 20,
-  sectionBackground: "surface-muted",
+  paddingY: 10,
+  background: "muted",
   align: "center",
   maxWidth: "lg",
   avatarSize: "md",
   logoHeight: "md",
+  quoteColor: "surface",
+  quoteWeight: "semibold",
+  quoteSize: "3xl",
+  nameColor: "surface",
+  nameWeight: "semibold",
+  roleColor: "muted",
+  roleWeight: "normal",
+  accentColor: "primary",
 };
 
 export const propSchema = {
   props: [
-    { name: "quote", type: "string", default: "...", allowedValues: "Any string" },
-    { name: "quoteColor", type: "string", default: "ink", allowedValues: "Token name OR any hex e.g. #0f0f14" },
-    { name: "quoteWeight", type: "string", default: "semibold", allowedValues: "normal | medium | semibold | bold" },
-    { name: "quoteSize", type: "string", default: "3xl", allowedValues: "lg | xl | 2xl | 3xl | 4xl" },
-    { name: "name", type: "string", default: "Jessica Park", allowedValues: "Any string" },
-    { name: "nameColor", type: "string", default: "ink", allowedValues: "Token name OR any hex" },
-    { name: "nameWeight", type: "string", default: "semibold", allowedValues: "normal | medium | semibold | bold" },
-    { name: "role", type: "string", default: "Head of Operations", allowedValues: "Any string" },
-    { name: "roleColor", type: "string", default: "ink-muted", allowedValues: "Token name OR any hex" },
-    { name: "roleWeight", type: "string", default: "normal", allowedValues: "normal | medium | semibold | bold" },
-    { name: "avatar", type: "string", default: "/assets/images/avatar1.jpg", allowedValues: "Image path" },
-    { name: "company", type: "string", default: "Acme", allowedValues: "Any string" },
-    { name: "companyLogo", type: "string", default: "/assets/logos/figma.svg", allowedValues: "SVG path or null" },
-    { name: "accentColor", type: "string", default: "brand", allowedValues: "Token name OR any hex" },
+    { name: "quote", type: "string", default: '"This product has completely changed..."', allowedValues: "Any string" },
+    { name: "name", type: "string", default: '"Jessica Park"', allowedValues: "Any string" },
+    { name: "role", type: "string", default: '"Head of Operations"', allowedValues: "Any string" },
+    { name: "avatar", type: "string", default: '"/assets/images/avatar1.jpg"', allowedValues: "Image path" },
+    { name: "company", type: "string", default: '"Acme"', allowedValues: "Any string" },
+    { name: "companyLogo", type: "string", default: '"/assets/logos/figma.svg"', allowedValues: "SVG path or null" },
   ],
   styles: [
-    { name: "paddingY", type: "number", default: "20", allowedValues: "8 | 10 | 12 | 16 | 20 | 24" },
-    { name: "sectionBackground", type: "string", default: "surface-muted", allowedValues: "surface | surface-muted | surface-subtle | navy | navy-elevated | navy-muted" },
+    { name: "paddingY", type: "number", default: "10", allowedValues: "4 | 6 | 8 | 10 | 12" },
+    { name: "background", type: "string", default: "muted", allowedValues: "primary | surface | muted | subtle | white" },
     { name: "align", type: "string", default: "center", allowedValues: "center | left" },
     { name: "maxWidth", type: "string", default: "lg", allowedValues: "sm | md | lg | xl" },
     { name: "avatarSize", type: "string", default: "md", allowedValues: "sm | md | lg" },
     { name: "logoHeight", type: "string", default: "md", allowedValues: "sm | md | lg" },
+    { name: "quoteColor", type: "string", default: "surface", allowedValues: "primary | surface | muted | subtle | white" },
+    { name: "quoteWeight", type: "string", default: "semibold", allowedValues: "normal | medium | semibold | bold" },
+    { name: "quoteSize", type: "string", default: "3xl", allowedValues: "lg | xl | 2xl | 3xl | 4xl" },
+    { name: "nameColor", type: "string", default: "surface", allowedValues: "primary | surface | muted | subtle | white" },
+    { name: "nameWeight", type: "string", default: "semibold", allowedValues: "normal | medium | semibold | bold" },
+    { name: "roleColor", type: "string", default: "muted", allowedValues: "primary | surface | muted | subtle | white" },
+    { name: "roleWeight", type: "string", default: "normal", allowedValues: "normal | medium | semibold | bold" },
+    { name: "accentColor", type: "string", default: "primary", allowedValues: "primary | surface | muted | subtle | white" },
   ],
 };

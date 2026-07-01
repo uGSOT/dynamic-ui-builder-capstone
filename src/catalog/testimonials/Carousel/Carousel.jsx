@@ -1,153 +1,115 @@
 import { useState } from "react";
-
-// resolves token name OR any hex/rgb color
-function resolveColor(value, fallback) {
-  if (!value) return fallback;
-  if (value.startsWith("#") || value.startsWith("rgb")) return value;
-  const tokenMap = {
-    "ink": "var(--color-ink)",
-    "ink-muted": "var(--color-ink-muted)",
-    "ink-subtle": "var(--color-ink-subtle)",
-    "ink-inverse": "var(--color-ink-inverse)",
-    "ink-inverse-muted": "var(--color-ink-inverse-muted)",
-    "brand": "var(--color-brand)",
-    "brand-dark": "var(--color-brand-dark)",
-    "brand-light": "var(--color-brand-light)",
-  };
-  return tokenMap[value] ?? fallback;
-}
+import {
+  resolveStyles,
+  HEADING_SIZE_MAP,
+  BODY_SIZE_MAP,
+  WEIGHT_MAP,
+  RADIUS_MAP,
+  SHADOW_MAP,
+  PADDING_MAP,
+  COLOR_MAP,
+} from "../../../utils/resolveStyles";
 
 export default function Carousel({
   styles = {},
   heading = defaultProps.heading,
-  headingColor = defaultProps.headingColor,
-  headingWeight = defaultProps.headingWeight,
-  headingSize = defaultProps.headingSize,
   subheading = defaultProps.subheading,
-  subheadingColor = defaultProps.subheadingColor,
-  subheadingWeight = defaultProps.subheadingWeight,
   eyebrow = defaultProps.eyebrow,
-  eyebrowColor = defaultProps.eyebrowColor,
-  eyebrowWeight = defaultProps.eyebrowWeight,
-  quoteColor = defaultProps.quoteColor,
-  quoteWeight = defaultProps.quoteWeight,
-  quoteSize = defaultProps.quoteSize,
-  nameColor = defaultProps.nameColor,
-  nameWeight = defaultProps.nameWeight,
-  roleColor = defaultProps.roleColor,
-  roleWeight = defaultProps.roleWeight,
-  accentColor = defaultProps.accentColor,
   testimonials = defaultProps.testimonials,
 }) {
   const [current, setCurrent] = useState(0);
   const total = testimonials.length;
   const visibleCount = styles.visibleCards ?? 3;
 
-  // background and structural classes stay as Tailwind tokens
-  const sectionBg = {
-    surface: "bg-surface",
-    "surface-muted": "bg-surface-muted",
-    "surface-subtle": "bg-surface-subtle",
-    navy: "bg-navy",
-    "navy-elevated": "bg-navy-elevated",
-    "navy-muted": "bg-navy-muted",
-  }[styles.sectionBackground] ?? "bg-surface-muted";
+  const s = resolveStyles(styles);
 
-  const paddingY = {
-    8: "py-8", 10: "py-10", 12: "py-12",
-    16: "py-16", 20: "py-20", 24: "py-24",
-  }[styles.paddingY] ?? "py-16";
+  // eyebrow
+  const eyebrowClass = [
+    BODY_SIZE_MAP[styles.eyebrowSize ?? "xs"],
+    WEIGHT_MAP[styles.eyebrowWeight ?? "bold"],
+    COLOR_MAP[styles.eyebrowColor ?? "primary"]?.text,
+    "uppercase tracking-widest",
+  ].join(" ");
 
-  const headingAlign = {
-    center: "text-center items-center",
-    left: "text-left items-start",
-  }[styles.headingAlign] ?? "text-center items-center";
-
+  // heading
+  const headingAlign = styles.headingAlign === "left" ? "text-left items-start" : "text-center items-center";
   const HeadingTag = styles.headingTag === "h3" ? "h3" : "h2";
+  const headingClass = [
+    HEADING_SIZE_MAP[styles.headingSize ?? "3xl"],
+    WEIGHT_MAP[styles.headingWeight ?? "bold"],
+    COLOR_MAP[styles.headingColor ?? "surface"]?.text,
+    "tracking-tight",
+  ].join(" ");
 
-  const cardBg = {
-    surface: "bg-surface",
-    "surface-muted": "bg-surface-muted",
-    "surface-subtle": "bg-surface-subtle",
-    navy: "bg-navy",
-    "navy-elevated": "bg-navy-elevated",
-    "navy-muted": "bg-navy-muted",
-  }[styles.cardBackground] ?? "bg-surface";
+  // subheading
+  const subheadingClass = [
+    BODY_SIZE_MAP[styles.subheadingSize ?? "sm"],
+    WEIGHT_MAP[styles.subheadingWeight ?? "normal"],
+    COLOR_MAP[styles.subheadingColor ?? "muted"]?.text,
+    "leading-relaxed",
+  ].join(" ");
 
-  const cardBorderColor = {
-    border: "border-border",
-    "border-dark": "border-border-dark",
-    brand: "border-brand",
-    none: "border-transparent",
-  }[styles.cardBorderColor] ?? "border-border";
+  // card
+  const cardBgClass = COLOR_MAP[styles.cardBg ?? "white"]?.bg ?? "bg-white";
+  const cardBorderClass = COLOR_MAP[styles.cardBorderColor ?? "subtle"]?.border ?? "border-gray-100";
+  const cardRadiusClass = RADIUS_MAP[styles.cardRadius ?? "xl"];
+  const cardShadowClass = SHADOW_MAP[styles.cardShadow ?? "none"];
+  const cardPaddingClass = PADDING_MAP[styles.cardPaddingY ?? 6]?.p ?? "p-6";
 
-  const cardRadius = {
-    none: "rounded-none", sm: "rounded-sm", md: "rounded-md",
-    lg: "rounded-lg", xl: "rounded-xl", "2xl": "rounded-2xl",
-  }[styles.cardRadius] ?? "rounded-xl";
+  // quote
+  const quoteClass = [
+    BODY_SIZE_MAP[styles.quoteSize ?? "sm"],
+    WEIGHT_MAP[styles.quoteWeight ?? "normal"],
+    COLOR_MAP[styles.quoteColor ?? "surface"]?.text,
+    "leading-relaxed",
+  ].join(" ");
 
-  const avatarSize = {
-    sm: "w-8 h-8", md: "w-10 h-10", lg: "w-14 h-14",
-  }[styles.avatarSize] ?? "w-10 h-10";
+  // name / role
+  const nameClass = [
+    BODY_SIZE_MAP[styles.nameSize ?? "sm"],
+    WEIGHT_MAP[styles.nameWeight ?? "semibold"],
+    COLOR_MAP[styles.nameColor ?? "surface"]?.text,
+  ].join(" ");
 
-  const logoHeight = {
-    sm: "h-4", md: "h-5", lg: "h-6",
-  }[styles.logoHeight] ?? "h-5";
+  const roleClass = [
+    BODY_SIZE_MAP[styles.roleSize ?? "xs"],
+    WEIGHT_MAP[styles.roleWeight ?? "normal"],
+    COLOR_MAP[styles.roleColor ?? "muted"]?.text,
+  ].join(" ");
+
+  // accent (quote mark)
+  const accentClass = COLOR_MAP[styles.accentColor ?? "primary"]?.text;
+
+  // avatar / logo
+  const avatarSize = { sm: "w-8 h-8", md: "w-10 h-10", lg: "w-14 h-14" }[styles.avatarSize ?? "md"];
+  const logoHeight = { sm: "h-4", md: "h-5", lg: "h-6" }[styles.logoHeight ?? "md"];
 
   const columnsClass = {
     2: "md:grid-cols-2", 3: "md:grid-cols-3", 4: "md:grid-cols-4",
   }[visibleCount] ?? "md:grid-cols-3";
 
-  const dotActiveColor = {
-    brand: "bg-brand", ink: "bg-ink", "ink-inverse": "bg-ink-inverse",
-  }[styles.dotActiveColor] ?? "bg-brand";
+  // dots — remapped to canonical tokens
+  const dotActiveClass = COLOR_MAP[styles.dotActiveColor ?? "primary"]?.bg ?? "bg-[#e50913]";
+  const dotInactiveClass = COLOR_MAP[styles.dotInactiveColor ?? "subtle"]?.bg ?? "bg-gray-100";
 
-  const dotInactiveColor = {
-    border: "bg-border", "border-dark": "bg-border-dark", "ink-subtle": "bg-ink-subtle",
-  }[styles.dotInactiveColor] ?? "bg-border";
-
-  const weightMap = {
-    normal: "font-normal", medium: "font-medium",
-    semibold: "font-semibold", bold: "font-bold",
-  };
-
-  const sizeMap = {
-    sm: "text-sm", base: "text-base", lg: "text-lg",
-    xl: "text-xl", "2xl": "text-2xl", "3xl": "text-3xl", "4xl": "text-4xl",
-  };
+  // arrow buttons — use muted/surface tokens for icon + border
+  const arrowBorderClass = COLOR_MAP[styles.cardBorderColor ?? "subtle"]?.border ?? "border-gray-100";
+  const arrowTextClass = COLOR_MAP[styles.subheadingColor ?? "muted"]?.text ?? "text-gray-500";
+  const arrowHoverTextClass = COLOR_MAP[styles.headingColor ?? "surface"]?.text ?? "text-gray-900";
 
   const visible = Array.from({ length: visibleCount }, (_, offset) =>
     testimonials[(current + offset) % total]
   );
 
   return (
-    <section className={`w-full ${sectionBg} ${paddingY}`}>
+    <section className={`w-full ${s.sectionClass}`}>
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Heading block */}
         <div className={`flex flex-col mb-12 ${headingAlign}`}>
-          {eyebrow && (
-            <p
-              className={`text-xs uppercase tracking-widest mb-2 ${weightMap[eyebrowWeight] ?? "font-bold"}`}
-              style={{ color: resolveColor(eyebrowColor, "var(--color-brand)") }}
-            >
-              {eyebrow}
-            </p>
-          )}
-          <HeadingTag
-            className={`${sizeMap[headingSize] ?? "text-3xl"} ${weightMap[headingWeight] ?? "font-bold"}`}
-            style={{ color: resolveColor(headingColor, "var(--color-ink)") }}
-          >
-            {heading}
-          </HeadingTag>
-          {subheading && (
-            <p
-              className={`mt-3 max-w-xl text-sm ${weightMap[subheadingWeight] ?? "font-normal"}`}
-              style={{ color: resolveColor(subheadingColor, "var(--color-ink-muted)") }}
-            >
-              {subheading}
-            </p>
-          )}
+          {eyebrow && <p className={`mb-2 ${eyebrowClass}`}>{eyebrow}</p>}
+          <HeadingTag className={headingClass}>{heading}</HeadingTag>
+          {subheading && <p className={`mt-3 max-w-xl ${subheadingClass}`}>{subheading}</p>}
         </div>
 
         {/* Cards */}
@@ -155,47 +117,18 @@ export default function Carousel({
           {visible.map((t, i) => (
             <div
               key={i}
-              className={`${cardBg} border ${cardBorderColor} ${cardRadius} p-6 flex flex-col gap-4`}
-              style={{ boxShadow: "var(--shadow-card)" }}
+              className={`flex flex-col gap-4 border ${cardBgClass} ${cardBorderClass} ${cardRadiusClass} ${cardShadowClass} ${cardPaddingClass}`}
             >
-              <span
-                className="text-4xl font-serif leading-none"
-                style={{ color: resolveColor(accentColor, "var(--color-brand)") }}
-              >
-                "
-              </span>
-              <p
-                className={`leading-relaxed ${sizeMap[quoteSize] ?? "text-sm"} ${weightMap[quoteWeight] ?? "font-normal"}`}
-                style={{ color: resolveColor(quoteColor, "var(--color-ink)") }}
-              >
-                {t.quote}
-              </p>
+              <span className={`text-4xl font-serif leading-none ${accentClass}`}>"</span>
+              <p className={quoteClass}>{t.quote}</p>
               <div className="flex items-center gap-3 mt-auto">
-                <img
-                  src={t.avatar}
-                  alt={t.name}
-                  className={`${avatarSize} rounded-full object-cover`}
-                />
+                <img src={t.avatar} alt={t.name} className={`${avatarSize} rounded-full object-cover`} />
                 <div>
-                  <p
-                    className={`text-sm ${weightMap[nameWeight] ?? "font-semibold"}`}
-                    style={{ color: resolveColor(nameColor, "var(--color-ink)") }}
-                  >
-                    {t.name}
-                  </p>
-                  <p
-                    className={`text-xs ${weightMap[roleWeight] ?? "font-normal"}`}
-                    style={{ color: resolveColor(roleColor, "var(--color-ink-muted)") }}
-                  >
-                    {t.role}
-                  </p>
+                  <p className={nameClass}>{t.name}</p>
+                  <p className={roleClass}>{t.role}</p>
                 </div>
                 {t.companyLogo && (
-                  <img
-                    src={t.companyLogo}
-                    alt={t.company}
-                    className={`ml-auto ${logoHeight} w-auto object-contain`}
-                  />
+                  <img src={t.companyLogo} alt={t.company} className={`ml-auto ${logoHeight} w-auto object-contain`} />
                 )}
               </div>
             </div>
@@ -206,7 +139,7 @@ export default function Carousel({
         <div className="flex items-center justify-center gap-4 mt-10">
           <button
             onClick={() => setCurrent((current - 1 + total) % total)}
-            className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-ink-muted hover:text-ink transition"
+            className={`w-8 h-8 rounded-full border flex items-center justify-center transition ${arrowBorderClass} ${arrowTextClass} hover:${arrowHoverTextClass}`}
           >
             ‹
           </button>
@@ -215,13 +148,13 @@ export default function Carousel({
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`w-2 h-2 rounded-full transition ${i === current ? dotActiveColor : dotInactiveColor}`}
+                className={`w-2 h-2 rounded-full transition ${i === current ? dotActiveClass : dotInactiveClass}`}
               />
             ))}
           </div>
           <button
             onClick={() => setCurrent((current + 1) % total)}
-            className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-ink-muted hover:text-ink transition"
+            className={`w-8 h-8 rounded-full border flex items-center justify-center transition ${arrowBorderClass} ${arrowTextClass} hover:${arrowHoverTextClass}`}
           >
             ›
           </button>
@@ -234,23 +167,8 @@ export default function Carousel({
 
 export const defaultProps = {
   eyebrow: "Testimonials",
-  eyebrowColor: "brand",
-  eyebrowWeight: "bold",
   heading: "Loved by founders and teams",
-  headingColor: "ink",
-  headingWeight: "bold",
-  headingSize: "3xl",
   subheading: "Hear from startups using our platform to build, ship, and grow faster.",
-  subheadingColor: "ink-muted",
-  subheadingWeight: "normal",
-  quoteColor: "ink",
-  quoteWeight: "normal",
-  quoteSize: "sm",
-  nameColor: "ink",
-  nameWeight: "semibold",
-  roleColor: "ink-muted",
-  roleWeight: "normal",
-  accentColor: "brand",
   testimonials: [
     {
       quote: "This platform eliminated so much busywork for us. We ship features faster and our users love the experience.",
@@ -288,54 +206,81 @@ export const defaultProps = {
 };
 
 export const defaultStyles = {
-  paddingY: 16,
-  sectionBackground: "surface-muted",
+  paddingY: 8,
+  background: "muted",
   headingAlign: "center",
   headingTag: "h2",
-  cardBackground: "surface",
-  cardBorderColor: "border",
+  headingColor: "surface",
+  headingSize: "3xl",
+  headingWeight: "bold",
+  subheadingColor: "muted",
+  subheadingSize: "sm",
+  subheadingWeight: "normal",
+  eyebrowColor: "primary",
+  eyebrowSize: "xs",
+  eyebrowWeight: "bold",
+  cardBg: "white",
+  cardBorderColor: "subtle",
   cardRadius: "xl",
+  cardShadow: "none",
+  cardPaddingY: 6,
+  quoteColor: "surface",
+  quoteSize: "sm",
+  quoteWeight: "normal",
+  nameColor: "surface",
+  nameSize: "sm",
+  nameWeight: "semibold",
+  roleColor: "muted",
+  roleSize: "xs",
+  roleWeight: "normal",
+  accentColor: "primary",
   avatarSize: "md",
   logoHeight: "md",
   visibleCards: 3,
-  dotActiveColor: "brand",
-  dotInactiveColor: "border",
+  dotActiveColor: "primary",
+  dotInactiveColor: "subtle",
 };
 
 export const propSchema = {
   props: [
-    { name: "eyebrow", type: "string", default: "Testimonials", allowedValues: "Any string or null" },
-    { name: "eyebrowColor", type: "string", default: "brand", allowedValues: "Token name (ink | brand etc) OR any hex e.g. #e50913" },
-    { name: "eyebrowWeight", type: "string", default: "bold", allowedValues: "normal | medium | semibold | bold" },
-    { name: "heading", type: "string", default: "Loved by founders and teams", allowedValues: "Any string" },
-    { name: "headingColor", type: "string", default: "ink", allowedValues: "Token name (ink | brand etc) OR any hex e.g. #0f0f14" },
-    { name: "headingWeight", type: "string", default: "bold", allowedValues: "normal | medium | semibold | bold" },
-    { name: "headingSize", type: "string", default: "3xl", allowedValues: "xl | 2xl | 3xl | 4xl" },
-    { name: "subheading", type: "string", default: "...", allowedValues: "Any string or null" },
-    { name: "subheadingColor", type: "string", default: "ink-muted", allowedValues: "Token name OR any hex" },
-    { name: "subheadingWeight", type: "string", default: "normal", allowedValues: "normal | medium | semibold | bold" },
-    { name: "quoteColor", type: "string", default: "ink", allowedValues: "Token name OR any hex" },
-    { name: "quoteWeight", type: "string", default: "normal", allowedValues: "normal | medium | semibold | bold" },
-    { name: "quoteSize", type: "string", default: "sm", allowedValues: "sm | base | lg" },
-    { name: "nameColor", type: "string", default: "ink", allowedValues: "Token name OR any hex" },
-    { name: "nameWeight", type: "string", default: "semibold", allowedValues: "normal | medium | semibold | bold" },
-    { name: "roleColor", type: "string", default: "ink-muted", allowedValues: "Token name OR any hex" },
-    { name: "roleWeight", type: "string", default: "normal", allowedValues: "normal | medium | semibold | bold" },
-    { name: "accentColor", type: "string", default: "brand", allowedValues: "Token name OR any hex" },
+    { name: "eyebrow", type: "string", default: '"Testimonials"', allowedValues: "Any string or null" },
+    { name: "heading", type: "string", default: '"Loved by founders and teams"', allowedValues: "Any string" },
+    { name: "subheading", type: "string", default: '"Hear from startups..."', allowedValues: "Any string or null" },
     { name: "testimonials", type: "Array<{ quote, name, role, avatar, company, companyLogo }>", default: "[4 items]", allowedValues: "Array of testimonial objects" },
   ],
   styles: [
-    { name: "paddingY", type: "number", default: "16", allowedValues: "8 | 10 | 12 | 16 | 20 | 24" },
-    { name: "sectionBackground", type: "string", default: "surface-muted", allowedValues: "surface | surface-muted | surface-subtle | navy | navy-elevated | navy-muted" },
+    { name: "paddingY", type: "number", default: "8", allowedValues: "4 | 6 | 8 | 10 | 12" },
+    { name: "background", type: "string", default: "muted", allowedValues: "primary | surface | muted | subtle | white" },
     { name: "headingAlign", type: "string", default: "center", allowedValues: "center | left" },
     { name: "headingTag", type: "string", default: "h2", allowedValues: "h2 | h3" },
-    { name: "cardBackground", type: "string", default: "surface", allowedValues: "surface | surface-muted | surface-subtle | navy | navy-elevated | navy-muted" },
-    { name: "cardBorderColor", type: "string", default: "border", allowedValues: "border | border-dark | brand | none" },
-    { name: "cardRadius", type: "string", default: "xl", allowedValues: "none | sm | md | lg | xl | 2xl" },
+    { name: "headingColor", type: "string", default: "surface", allowedValues: "primary | surface | muted | subtle | white" },
+    { name: "headingSize", type: "string", default: "3xl", allowedValues: "2xl | 3xl | 4xl | 5xl | 6xl" },
+    { name: "headingWeight", type: "string", default: "bold", allowedValues: "normal | medium | semibold | bold | extrabold" },
+    { name: "subheadingColor", type: "string", default: "muted", allowedValues: "primary | surface | muted | subtle | white" },
+    { name: "subheadingSize", type: "string", default: "sm", allowedValues: "sm | base | lg | xl" },
+    { name: "subheadingWeight", type: "string", default: "normal", allowedValues: "normal | medium | semibold | bold" },
+    { name: "eyebrowColor", type: "string", default: "primary", allowedValues: "primary | surface | muted | subtle | white" },
+    { name: "eyebrowSize", type: "string", default: "xs", allowedValues: "xs | sm | base" },
+    { name: "eyebrowWeight", type: "string", default: "bold", allowedValues: "normal | medium | semibold | bold" },
+    { name: "cardBg", type: "string", default: "white", allowedValues: "primary | surface | muted | subtle | white" },
+    { name: "cardBorderColor", type: "string", default: "subtle", allowedValues: "primary | surface | muted | subtle | white" },
+    { name: "cardRadius", type: "string", default: "xl", allowedValues: "none | sm | md | lg | xl | 2xl | full" },
+    { name: "cardShadow", type: "string", default: "none", allowedValues: "none | sm | md | lg | xl" },
+    { name: "cardPaddingY", type: "number", default: "6", allowedValues: "4 | 6 | 8 | 10" },
+    { name: "quoteColor", type: "string", default: "surface", allowedValues: "primary | surface | muted | subtle | white" },
+    { name: "quoteSize", type: "string", default: "sm", allowedValues: "sm | base | lg" },
+    { name: "quoteWeight", type: "string", default: "normal", allowedValues: "normal | medium | semibold | bold" },
+    { name: "nameColor", type: "string", default: "surface", allowedValues: "primary | surface | muted | subtle | white" },
+    { name: "nameSize", type: "string", default: "sm", allowedValues: "xs | sm | base" },
+    { name: "nameWeight", type: "string", default: "semibold", allowedValues: "normal | medium | semibold | bold" },
+    { name: "roleColor", type: "string", default: "muted", allowedValues: "primary | surface | muted | subtle | white" },
+    { name: "roleSize", type: "string", default: "xs", allowedValues: "xs | sm | base" },
+    { name: "roleWeight", type: "string", default: "normal", allowedValues: "normal | medium | semibold | bold" },
+    { name: "accentColor", type: "string", default: "primary", allowedValues: "primary | surface | muted | subtle | white" },
     { name: "avatarSize", type: "string", default: "md", allowedValues: "sm | md | lg" },
     { name: "logoHeight", type: "string", default: "md", allowedValues: "sm | md | lg" },
     { name: "visibleCards", type: "number", default: "3", allowedValues: "2 | 3 | 4" },
-    { name: "dotActiveColor", type: "string", default: "brand", allowedValues: "brand | ink | ink-inverse" },
-    { name: "dotInactiveColor", type: "string", default: "border", allowedValues: "border | border-dark | ink-subtle" },
+    { name: "dotActiveColor", type: "string", default: "primary", allowedValues: "primary | surface | muted | subtle | white" },
+    { name: "dotInactiveColor", type: "string", default: "subtle", allowedValues: "primary | surface | muted | subtle | white" },
   ],
 };
