@@ -1,8 +1,8 @@
 import React from "react";
 import { FULL_WIDTH_CENTERED_PROPS } from "../defaultProps";
-import { PROMO_STYLE_DEFAULTS, pickStyleSchema, resolvePromoStyles } from "../defaultStyles";
+import { pickStyleSchema, resolvePromoStyles } from "../defaultStyles";
 
-// Only the keys this component's resolver output actually uses.
+// Keys this component's resolver output actually consumes.
 const STYLE_KEYS = [
   "background", "paddingY", "paddingX",
   "headingColor", "headingSize", "headingWeight",
@@ -10,17 +10,33 @@ const STYLE_KEYS = [
   "primaryButtonColor", "secondaryButtonColor",
 ];
 
+// Only the keys this component uses — no unused keys from PROMO_STYLE_DEFAULTS.
+export const defaultStyles = {
+  background:          "muted",
+  paddingY:             12,
+  paddingX:              6,
+  headingColor:         "surface",
+  headingSize:          "3xl",
+  headingWeight:        "extrabold",
+  subheadingColor:      "muted",
+  subheadingSize:        "lg",
+  subheadingWeight:     "normal",
+  primaryButtonColor:   "primary",
+  secondaryButtonColor: "surface",
+};
+
 export const defaultProps = FULL_WIDTH_CENTERED_PROPS;
-export const defaultStyles = { ...PROMO_STYLE_DEFAULTS, background: "muted", headingColor: "surface", subheadingColor: "muted" };
 
 export const propSchema = {
   props: [
-    { name: "heading", type: "string", default: defaultProps.heading, allowedValues: "Any string", description: "Main promotional title text" },
-    { name: "subheading", type: "string", default: defaultProps.subheading, allowedValues: 'Any string (use "" to hide)', description: "Supporting description below the heading" },
-    { name: "primaryAction", type: "object", default: defaultProps.primaryAction, allowedValues: "{ label: string, href: string }", description: "Primary CTA button" },
-    { name: "secondaryAction", type: "object", default: defaultProps.secondaryAction, allowedValues: "{ label: string, href: string }", description: "Secondary CTA button" },
+    { name: "heading",         type: "string", default: defaultProps.heading,         allowedValues: "Any string",                       description: "Main promotional title text" },
+    { name: "subheading",      type: "string", default: defaultProps.subheading,      allowedValues: 'Any string (use "" to hide)',       description: "Supporting description below the heading" },
+    { name: "primaryAction",   type: "object", default: defaultProps.primaryAction,   allowedValues: "{ label: string, href: string }",  description: "Primary CTA button" },
+    { name: "secondaryAction", type: "object", default: defaultProps.secondaryAction, allowedValues: "{ label: string, href: string }",  description: "Secondary CTA button" },
   ],
-  styles: pickStyleSchema(STYLE_KEYS),
+  // pickStyleSchema filters to STYLE_KEYS and stamps each entry's default
+  // with this component's actual value, not the global fallback.
+  styles: pickStyleSchema(STYLE_KEYS, defaultStyles),
 };
 
 export default function FullWidthCentered({

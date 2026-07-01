@@ -1,8 +1,8 @@
 import React from "react";
 import { SPLIT_WITH_IMAGE_PROPS } from "../defaultProps";
-import { PROMO_STYLE_DEFAULTS, pickStyleSchema, resolvePromoStyles } from "../defaultStyles";
+import { pickStyleSchema, resolvePromoStyles } from "../defaultStyles";
 
-// Only the keys this component's resolver output actually uses.
+// Keys this component's resolver output actually consumes.
 const STYLE_KEYS = [
   "background", "paddingY", "paddingX",
   "headingColor", "headingSize", "headingWeight",
@@ -11,17 +11,32 @@ const STYLE_KEYS = [
   "imagePosition", "imageRadius",
 ];
 
+// Only the keys this component uses — no unused keys from PROMO_STYLE_DEFAULTS.
+export const defaultStyles = {
+  background:         "white",
+  paddingY:            12,
+  paddingX:             6,
+  headingColor:        "surface",
+  headingSize:         "3xl",
+  headingWeight:       "extrabold",
+  subheadingColor:     "muted",
+  subheadingSize:       "lg",
+  subheadingWeight:    "normal",
+  primaryButtonColor:  "primary",
+  imagePosition:       "right",
+  imageRadius:         "2xl",
+};
+
 export const defaultProps = SPLIT_WITH_IMAGE_PROPS;
-export const defaultStyles = { ...PROMO_STYLE_DEFAULTS, background: "white" };
 
 export const propSchema = {
   props: [
-    { name: "heading", type: "string", default: defaultProps.heading, allowedValues: "Any string", description: "Main headline text" },
-    { name: "subheading", type: "string", default: defaultProps.subheading, allowedValues: "Any string", description: "Supporting description text" },
+    { name: "heading",       type: "string", default: defaultProps.heading,       allowedValues: "Any string",                      description: "Main headline text" },
+    { name: "subheading",    type: "string", default: defaultProps.subheading,    allowedValues: "Any string",                      description: "Supporting description text" },
     { name: "primaryAction", type: "object", default: defaultProps.primaryAction, allowedValues: "{ label: string, href: string }", description: "Primary CTA button" },
-    { name: "imageUrl", type: "string", default: defaultProps.imageUrl, allowedValues: "Valid image URL", description: "Image shown in the split panel" },
+    { name: "imageUrl",      type: "string", default: defaultProps.imageUrl,      allowedValues: "Valid image URL",                 description: "Image shown in the split panel" },
   ],
-  styles: pickStyleSchema(STYLE_KEYS),
+  styles: pickStyleSchema(STYLE_KEYS, defaultStyles),
 };
 
 export default function SplitWithImage({

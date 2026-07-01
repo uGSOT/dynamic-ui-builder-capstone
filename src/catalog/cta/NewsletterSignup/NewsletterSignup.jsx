@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { NEWSLETTER_SIGNUP_PROPS } from "../defaultProps";
-import { PROMO_STYLE_DEFAULTS, pickStyleSchema, resolvePromoStyles } from "../defaultStyles";
+import { pickStyleSchema, resolvePromoStyles } from "../defaultStyles";
 
-// Only the keys this component's resolver output actually uses.
+// Keys this component's resolver output actually consumes.
 const STYLE_KEYS = [
   "background", "paddingY", "paddingX",
   "headingColor", "headingSize", "headingWeight",
@@ -11,17 +11,35 @@ const STYLE_KEYS = [
   "primaryButtonColor",
 ];
 
+// Only the keys this component uses — no unused keys from PROMO_STYLE_DEFAULTS.
+export const defaultStyles = {
+  background:       "muted",
+  paddingY:          12,
+  paddingX:           6,
+  headingColor:      "surface",
+  headingSize:       "3xl",
+  headingWeight:     "extrabold",
+  subheadingColor:   "muted",
+  subheadingSize:     "lg",
+  subheadingWeight:  "normal",
+  cardBg:            "white",
+  cardBorder:        "sm",
+  cardBorderColor:   "subtle",
+  cardRadius:        "2xl",
+  cardShadow:        "sm",
+  primaryButtonColor: "primary",
+};
+
 export const defaultProps = NEWSLETTER_SIGNUP_PROPS;
-export const defaultStyles = { ...PROMO_STYLE_DEFAULTS, background: "muted", paddingY: 12 };
 
 export const propSchema = {
   props: [
-    { name: "heading", type: "string", default: defaultProps.heading, allowedValues: "Any string", description: "Header text" },
-    { name: "subheading", type: "string", default: defaultProps.subheading, allowedValues: "Any string", description: "Supporting description text" },
-    { name: "buttonLabel", type: "string", default: defaultProps.buttonLabel, allowedValues: "Any string", description: "Submit button label" },
+    { name: "heading",         type: "string", default: defaultProps.heading,         allowedValues: "Any string", description: "Header text" },
+    { name: "subheading",      type: "string", default: defaultProps.subheading,      allowedValues: "Any string", description: "Supporting description text" },
+    { name: "buttonLabel",     type: "string", default: defaultProps.buttonLabel,     allowedValues: "Any string", description: "Submit button label" },
     { name: "placeholderText", type: "string", default: defaultProps.placeholderText, allowedValues: "Any string", description: "Email input placeholder" },
   ],
-  styles: pickStyleSchema(STYLE_KEYS),
+  styles: pickStyleSchema(STYLE_KEYS, defaultStyles),
 };
 
 export default function NewsletterSignup({
